@@ -1,13 +1,13 @@
 # T3A2 Part A | Alex Leybourne, Ben Ulcoq, Santiago Chamon
 
 ## Purpose
-Operational lookaheads are used throughout construction and other industries. Although the specific nature of the operations/tasks they describe may change depending on the sector, the purpose of these simple ‘on-the-ground’ planning tools remains the same: to give all the stakeholders in the operational team a common perspective on what the next 6-7 days of the overall construction project entails-most lookaheads are developed as simple spreadsheets.
+Operational lookaheads are used throughout construction and other industries. Although the specific nature of the operations/tasks they describe may change depending on the sector, the purpose of these simple ‘on-the-ground’ planning tools remain the same: to give all the stakeholders in the operational team a common perspective on what the next 6-7 days of the overall construction project entails - most lookaheads are developed as simple spreadsheets.
 
 The aim of this project is to develop a Single Page Application (SPA) using the MERN stack that serves to replace and improve on the functionality of a spreadsheet for creating and managing lookaheads.
 
 
 ## Functionality / features
-In order to build an application that successfully works as an improvement  on spreadsheet based lookaheads, there are a number of key features that need to be implemented.  These features are as follows:
+In order to build an application that successfully works as an improvement on spreadsheet based lookaheads, there are a number of key features that need to be implemented.  These features are as follows:
 * **Project Lookahead CRUD** - Individual ‘lookaheads’ will be able to be created for specific projects. Within these projects, a user can scroll through days and weeks and observe tasks for each day. Projects can also be deleted. The project name can updated and user permissions can be changed - both in terms of accessibility and user roles.
 * **Task Cards CRUD** - Within a project, tasks cards can be assigned to given days, times and a task name can assigned. Tasks can be deleted, names can be edited and times and dates can be changed as outlined below.
 * **Task Cards Drag n Drop/Expand** - In order to change the time and date of tasks, users will be able to Drag n Drop tasks around days and times. Task length can be expanded by dragging the frame of the task card. This functionality is key to building an application that improves on the spreadsheet capabilities.
@@ -30,7 +30,7 @@ The MERN stack is made up of four key components.
 * **Heroku??**
 * **Github** -  [Github](https://github.com/)  is a company that provides free remote repository hosting utilising the Git version control system.
 Git tracks changes in the application source code in order to manage project development and smooth developer collaboration by automatically handling merges and updates to the code base.
-* **Trello** - Used for project management, Trello allows for the creation of Kansan-Style boards.
+* **Trello** - Used for project management, Trello allows for the creation of Kanban-Style boards.
 
 ## Data Flow Diagram
 ![Data Flow Diagram](docs/data_flow_diagram.png)
