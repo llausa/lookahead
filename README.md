@@ -1,6 +1,6 @@
 # T3A2 Part A | Alex Leybourne, Ben Ulcoq, Santiago Chamon
 
-Purpose
+## Purpose
 Operational lookaheads are used throughout construction and other industries. Although the specific nature of the operations/tasks they describe may change depending on the sector, the purpose of these simple ‘on-the-ground’ planning tools remains the same: to give all the stakeholders in the operational team a common perspective on what the next 6-7 days of the overall construction project entails-most lookaheads are developed as simple spreadsheets.
 
 The aim of this project is to develop a Single Page Application (SPA) using the MERN stack that serves to replace and improve on the functionality of a spreadsheet for creating and managing lookaheads. 
@@ -43,4 +43,3 @@ Git tracks changes in the application source code in order to manage project dev
   ![Trello Board Day 1](./docs/trello_history/trello-day1.png?raw=true)
   
 </details>
-
