@@ -30,4 +30,16 @@ The MERN stack is made up of four key components.
 * **Heroku??** 
 * **Github** -  [Github](https://github.com/)  is a company that provides free remote repository hosting utilising the Git version control system.
 Git tracks changes in the application source code in order to manage project development and smooth developer collaboration by automatically handling merges and updates to the code base.
-* **Trello** - Used for project management, Trello allows for the creation of Kanban-Style boards.
+* **Trello** - Used for project management, Trello allows for the creation of Kansan-Style boards.
+
+## Dataflow Diagram
+## Application Architecture Diagram
+## User Stories
+## Wireframes
+## Trello Screenshots of Project
+<details>
+  <summary>Trello Day 1</summary>
+  
+  ![Trello Board Day 1](./docs/trello_history/trello-day1.png?raw=true)
+  
+</details>
