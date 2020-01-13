@@ -37,3 +37,10 @@ Git tracks changes in the application source code in order to manage project dev
 ## User Stories
 ## Wireframes
 ## Trello Screenshots of Project
+<details>
+  <summary>Trello Day 1</summary>
+  
+  ![Trello Board Day 1](./docs/trello_history/trello-day1.png?raw=true)
+  
+</details>
+
