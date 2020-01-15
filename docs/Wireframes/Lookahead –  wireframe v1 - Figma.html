@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<!-- saved from url=(0073)https://www.figma.com/file/XjnDBsczGMZrKEuaDKpse7/Lookahead?node-id=0%3A1 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+
+    <script>
+      if (function() {
+        try { eval('class Foo {}') } catch (e) { return true }
+        try { eval('for (const x in []) {}') } catch (e) { return true } // Firefox bug, fixed in 51
+        if (!window.fetch) return true
+        return false
+      }()) {
+        location.href = '/unsupported_browser'
+      }
+    </script>
+
+
+
+    <script>
+  (function() {
+    if (!window.INITIAL_OPTIONS) {
+      window.INITIAL_OPTIONS = {};
+    }
+
+    window.INITIAL_OPTIONS.feature_flags = {"api_components_v3":true,"assets_panel_improvements":true,"auto_layout":true,"auto_layout_instance_update_fix":true,"chrome_resize_bug":true,"comments_sort_filter":true,"community_hub_likes":true,"defer_invisible_children":true,"defer_update_default_style":true,"desktop_drop_mac_10_9":true,"desktop_no_auth":true,"disable_local_server_iframe":true,"dsa_frontend":true,"dsa_track_user_action_rates":true,"enable_public_plugins_new_orgs":true,"fix_constraint_import":true,"font_weights_relax":true,"frame_properties_migration":true,"generic_saml":true,"library_search_worker":true,"livegraph_darklaunch":true,"multi_select_in_presets_dropdown":true,"nodes_link_to_root_styles":true,"paste_image_as_fill":true,"prevent_instance_style_dirty":true,"server_side_search_live_launch":true,"set_file_thumbnail":true,"sss_team_library_live_launch":true,"tooltip_perf_fix":true,"use_server_side_images":true,"viewer_cap_viewport_tile_count":true,"viewer_current_bounds":true,"viewer_embed_api":true,"viewer_no_tile_grids_in_blurs":true,"viewer_transition_perf_metrics":true,"windows_touch_focus_fix":true,"zendesk_sync":true,"zendesk_web_widget":true};
+    window.INITIAL_OPTIONS.tracking_session_id = "RjwN4dKBmY0mdNuR";
+    window.INITIAL_OPTIONS.cluster_name = "prod";
+    window.INITIAL_OPTIONS.error_dashboard_url = "https://errors.figma.com/api";
+
+    window.INITIAL_OPTIONS.flash = {
+      error: null,
+      warn: null,
+      success: null
+    }
+
+      window.INITIAL_OPTIONS.user_flags = [{"id":97016873,"user_id":768641469004550304,"name":"autolayout_onboarded","created_at":"2020-01-12T23:41:43.932Z"},{"id":80846125,"user_id":768641469004550304,"name":"coco_onboarded","created_at":"2019-10-23T01:07:13.772Z"},{"id":80846124,"user_id":768641469004550304,"name":"community_hub_onboarded","created_at":"2019-10-23T01:07:13.768Z"},{"id":80846122,"user_id":768641469004550304,"name":"create_team_onboarded","created_at":"2019-10-23T01:07:13.760Z"},{"id":80846355,"user_id":768641469004550304,"name":"editor_onboarded","created_at":"2019-10-23T01:09:45.849Z"},{"id":80846123,"user_id":768641469004550304,"name":"file_browser_onboarded","created_at":"2019-10-23T01:07:13.764Z"},{"id":80846363,"user_id":768641469004550304,"name":"gifs_onboarded","created_at":"2019-10-23T01:09:45.893Z"},{"id":80846336,"user_id":768641469004550304,"name":"import_file_onboarded","created_at":"2019-10-23T01:09:29.376Z"},{"id":80846354,"user_id":768641469004550304,"name":"library_modal_onboarded","created_at":"2019-10-23T01:09:45.843Z"},{"id":80846362,"user_id":768641469004550304,"name":"line_height_update_onboarded","created_at":"2019-10-23T01:09:45.888Z"},{"id":80846364,"user_id":768641469004550304,"name":"opentype_onboarded","created_at":"2019-10-23T01:09:45.899Z"},{"id":80846359,"user_id":768641469004550304,"name":"pdf_onboarded","created_at":"2019-10-23T01:09:45.874Z"},{"id":80846356,"user_id":768641469004550304,"name":"shared_component_library_onboarded","created_at":"2019-10-23T01:09:45.855Z"},{"id":80846357,"user_id":768641469004550304,"name":"shared_component_publish_onboarded","created_at":"2019-10-23T01:09:45.861Z"},{"id":80846365,"user_id":768641469004550304,"name":"smart_animate_onboarded","created_at":"2019-10-23T01:09:45.905Z"},{"id":88303174,"user_id":768641469004550304,"name":"smart_selection_onboarded","created_at":"2019-11-25T02:50:05.470Z"},{"id":80846358,"user_id":768641469004550304,"name":"styles_onboarded","created_at":"2019-10-23T01:09:45.868Z"},{"id":80846058,"user_id":768641469004550304,"name":"use_numbers_for_opacity","created_at":"2019-10-23T01:06:46.887Z"},{"id":80846121,"user_id":768641469004550304,"name":"welcome_onboarded","created_at":"2019-10-23T01:07:13.755Z"}]
+      window.INITIAL_OPTIONS.user_data = {"id":"768641469004550304","name":"Alex Leybourne","email":"leybs02@gmail.com","handle":"Alex Leybourne","img_url":"https://www.gravatar.com/avatar/8e6572a10181b861116c7f93a1cc4132?size=240\u0026default=https%3A%2F%2Fs3-alpha.figma.com%2Fstatic%2Fuser_a_v2.png","created_at":"2019-10-23T01:06:46.879Z","email_validated_at":"2019-10-23T01:32:44.650Z","unsubscribed_at":null,"utc_offset":null,"profile":{"job_title":"developer"},"teams":[],"phone_number":null,"student_validated_at":null,"description":null,"dev_tokens":[],"oauth_tokens":[{"client_id":"tmhDo4V12I3fEiQ9OG8EHh","granted_at":"2019-11-25T13:25:03.439Z","name":"Haiku Animator","logo":"https://s3-alpha.figma.com/oauth_img/edfc3391-3266-459d-8a2d-6be2913957ed","website":"https://www.haikuforteams.com/"}],"realtime_token":"/me-768641469004550304:1579040949:1:a7cbd8a458f8bf5ed8c5d50d1588779e83a1f92a","two_factor_enabled":false,"two_factor_app_enabled":false,"preferences":{"create_team_onboarded":true,"editor_onboarded":true,"file_browser_onboarded":true,"gifs_onboarded":true,"import_file_onboarded":true,"library_modal_onboarded":true,"line_height_update_onboarded":true,"opentype_onboarded":true,"pdf_onboarded":true,"shared_component_library_onboarded":true,"shared_component_publish_onboarded":true,"smart_animate_onboarded":true,"smart_selection_onboarded":true,"styles_onboarded":true,"use_numbers_for_opacity":true},"google_sso_only":false,"saml_sso_only":false};
+      window.INITIAL_OPTIONS.smart_token = "768641469004550304-0f51feb8ad81506bb43816c1696b740f5101e6d270759fc2b35e456c133e099c-1578872475";
+      window.wootricSettings = {
+        email: window.INITIAL_OPTIONS.user_data.email,
+        created_at: Math.floor(new Date(window.INITIAL_OPTIONS.user_data.created_at).getTime() / 1000),
+        account_token: "NPS-8d7627ca",
+        product_name: 'Figma',
+      };
+
+      var _initial_options = {"resource_type":null,"email":"leybs02@gmail.com","user_ip":"124.191.200.127","redirect_url":null,"email_token":null,"access_code":null,"existing_session":true,"editing_file":{"creator_id":"768641469004550304","key":"XjnDBsczGMZrKEuaDKpse7","name":"Lookahead","description":null,"creator":{"id":"768641469004550304","handle":"Alex Leybourne","img_url":"https:\/\/www.gravatar.com\/avatar\/8e6572a10181b861116c7f93a1cc4132?size=240\u0026default=https%3A%2F%2Fs3-alpha.figma.com%2Fstatic%2Fuser_a_v2.png"},"folder_id":"4498883","scheme":null,"track_tags":null,"team_id":null,"link_access":"view","trashed_user_id":null,"client_meta":"{\"background_color\":{\"r\":0.89803922176361084,\"g\":0.89803922176361084,\"b\":0.89803922176361084,\"a\":1.0},\"thumbnail_size\":{\"width\":800,\"height\":634},\"render_coordinates\":{\"x\":-205.0,\"y\":-972.129394531250,\"width\":3399.0,\"height\":2695.629394531250}}","license":null,"parent_org_id":null,"org_browsable":null,"thumbnail_url_override":null,"thumbnail_guid":null,"proto_link_access":null,"url":"https:\/\/www.figma.com\/file\/XjnDBsczGMZrKEuaDKpse7\/Lookahead","edit_url":"https:\/\/www.figma.com\/file\/XjnDBsczGMZrKEuaDKpse7\/Lookahead","prototype_url":"https:\/\/www.figma.com\/proto\/XjnDBsczGMZrKEuaDKpse7\/Lookahead","checkpoint_key":"MwGzBke4Z4M6Qw37Y8wBPK","canvas_path":"checkpoints\/MwG\/zBk\/e4Z4M6Qw37Y8wBPK\/VpI62F4uH5OADA8FBIYtAT.fig","viewer_export_restricted":false,"canvas_url":"\/file\/XjnDBsczGMZrKEuaDKpse7\/canvas?ver=MwGzBke4Z4M6Qw37Y8wBPK","thumbnail_url":"\/file\/XjnDBsczGMZrKEuaDKpse7\/thumbnail?ver=thumbnails\/4b74f334-21fa-4b95-bcd0-8574940e222d","created_at":"2020-01-14T01:39:39.670059Z","touched_at":"2020-01-14T06:19:29.575273Z","deleted_at":null,"trashed_at":null},"created_file_count":4,"zeplin_plugin_id":"745330164019088593","org_id":null}
+      for (var key in _initial_options) {
+        window.INITIAL_OPTIONS[key] = _initial_options[key]
+      }
+
+    window.startUserStateXHR = function() {
+      var stateArgs = ""
+      if (window.INITIAL_OPTIONS.org_id) {
+        stateArgs = "?org_id=" + window.INITIAL_OPTIONS.org_id
+      }
+      var userStateXHR = new XMLHttpRequest
+      userStateXHR.open('GET', '/api/user/state' + stateArgs)
+      userStateXHR.send()
+      window.userStateXHR = userStateXHR
+
+      var userStateXHRStartMs = window.performance ? window.performance.now() : -1
+      userStateXHR.addEventListener('load', function () {
+        window['userStateXHRDuration'] = window.performance ? window.performance.now() - userStateXHRStartMs : -1
+      }, false)
+    };
+    if (location.pathname !== '/preload-editor' && location.pathname !== '/file/new') {
+      window.startUserStateXHR();
+    }
+
+      window.INITIAL_OPTIONS.user_notifications_bell = { bell: {"0":false} }
+      window.INITIAL_OPTIONS.promo = null
+
+      window.Fig = window.Fig || {};
+      var _figOptions = {"importShimURL":"https://static.figma.com/fullscreen/7be8ccd24f3c7a3ac4b0c79ed159146757130c27/import.shim.js.br","importWorkerURL":"https://static.figma.com/fullscreen/7be8ccd24f3c7a3ac4b0c79ed159146757130c27/import.worker.js.br","figMigratorURL":"https://static.figma.com/fullscreen/7be8ccd24f3c7a3ac4b0c79ed159146757130c27/fig_migrator.js.br","fullscreenURLs":{"compiled_wasm.js":"https://static.figma.com/fullscreen/f2c6480893491800ae5e40f9813c8dad266e1e2f/compiled_wasm.js.br","compiled_wasm.wasm":"https://static.figma.com/fullscreen/f2c6480893491800ae5e40f9813c8dad266e1e2f/compiled_wasm.wasm.br"},"jsvmCppURLs":{"jsvm-cpp.js":"https://static.figma.com/fullscreen/3dd3768586d72719c11e876eef4b2bca155a75bb/jsvm-cpp.js.br","jsvm-cpp.wasm":"https://static.figma.com/fullscreen/3dd3768586d72719c11e876eef4b2bca155a75bb/jsvm-cpp.wasm.br"},"fullscreenScriptHash":"3debdcad946faa393ae7793c097893f2d574c50b","librarySearchWorkerURL":"/figbuild/symlinks/library_search_worker.94f57fd412af82cffe86e51119874785.min.js","viewerScriptURL":"https://static.figma.com/fullscreen/1f5ca7d45821db84285cd8c9d3b0bc6c83c271a1/viewer.js.br","viewerWorkerURL":"https://static.figma.com/fullscreen/1f5ca7d45821db84285cd8c9d3b0bc6c83c271a1/imagedecoder.js.br"};
+      for (var key in _figOptions) {
+        Fig[key] = _figOptions[key]
+      }
+
+
+      window.INITIAL_OPTIONS.segment_web_key = "6Zhdn0wK1GLYzCsb0LIK0oQplS5TXcB2"
+
+      window.INITIAL_OPTIONS.segment_fullscreen_key = "6uxDivlUmLf95lHRk0R8bZvr8zDxbX5E"
+
+    window.INITIAL_OPTIONS.helpscout_beacon_id = "bb58c9f1-37d7-46d9-80aa-d5308d20ee3f"
+
+      window.INITIAL_OPTIONS.zendesk_web_key_public = "8f3196e1-a5a9-4a39-9b1c-6ab81db7fe17"
+
+      window.INITIAL_OPTIONS.stripe_api_public = "pk_live_LKZ0RKjSZG2D2pwdtwrAhkiJ"
+
+      window.INITIAL_OPTIONS.release_manifest_hash = "3d86988574134e0199397dab6b57fd5b"
+      console.log('release_manifest_hash:', window.INITIAL_OPTIONS.release_manifest_hash)
+
+      window.INITIAL_OPTIONS.release_git_commit = "7b9e528a3283d2701216ddff687707e4bd69cb30"
+      console.log('release_git_commit:', window.INITIAL_OPTIONS.release_git_commit)
+      window.INITIAL_OPTIONS.release_git_tag = "release-129"
+      console.log('release_git_tag:', window.INITIAL_OPTIONS.release_git_tag)
+  })();
+</script>
+
+
+    <meta name="google" content="notranslate">
+
+    <title>Lookahead – Figma</title>
+
+      <style type="text/css">
+  #filebrowser-loading-page {
+    opacity: 1;
+    -webkit-transition: opacity .2s ease-in-out;
+    display: flex;
+    flex-wrap: wrap;
+
+    /* Make sure the loading page is flush with the edges of the page so
+       our layout isnt affected by browser default margins/paddings */
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  #filebrowser-loading-page.fadeOut {
+    opacity: 0;
+  }
+
+  #filebrowser-loading-page.hidden {
+    display: none;
+    opacity: 0;
+  }
+
+  #filebrowser-loading-page .row {
+    background-color: #f0f0f0;
+    border-radius: 3px;
+    height: 16px;
+  }
+
+  #filebrowser-loading-page .circle {
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    width: 22px;
+    height: 22px;
+  }
+
+  #filebrowser-loading-page .row .circle {
+    position: relative;
+    top: -3px;
+    left: -35px;
+  }
+
+  #filebrowser-loading-page .sidebar {
+    flex: 0 0 208px;
+    background-color: white;
+    padding-top: 8px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #filebrowser-loading-page .sidebar .row {
+    width: 85px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-left: 48px;
+  }
+
+  #filebrowser-loading-page .sidebar .row .circle {
+    position: relative;
+    top: -3px;
+    left: -35px;
+  }
+
+  #filebrowser-loading-page .divider {
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.1);
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+
+  #filebrowser-loading-page .sidebar .row:nth-child(2) { width: 40px; }
+  #filebrowser-loading-page .sidebar .row:nth-child(3) { width: 58px; }
+  #filebrowser-loading-page .sidebar .row:nth-child(4) { width: 58px; }
+  #filebrowser-loading-page .sidebar .row:nth-child(7) { width: 60px; }
+  #filebrowser-loading-page .sidebar .row:nth-child(8) { margin-left: 16px; margin-right: 16px; }
+  #filebrowser-loading-page .sidebar .row:nth-child(9) { width: 60px; }
+  #filebrowser-loading-page .sidebar .row:nth-child(10) { width: 46px; opacity: .8; }
+  #filebrowser-loading-page .sidebar .row:nth-child(11) { width: 65px; opacity: .4; }
+
+  #filebrowser-loading-page .page {
+    flex: 1 1;
+    box-sizing: border-box;
+    border-left: 1px #e5e5e5 solid;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #filebrowser-loading-page .toolbar {
+    border-bottom: 1px #e5e5e5 solid;
+    height: 48px;
+  }
+
+  #filebrowser-loading-page .toolbar .item {
+    background-color: #f0f0f0;
+    border-radius: 3px;
+    width: 85px;
+    height: 16px;
+    margin-left: 32px;
+    margin-top: 16px;
+  }
+
+  #filebrowser-loading-page .columns {
+    flex: 1 1;
+    display: flex;
+    flex-direction: row;
+  }
+
+  @media (max-width: 849px) {
+    #filebrowser-loading-page .columns {
+      flex-direction: column-reverse;
+    }
+
+    #filebrowser-loading-page .right-column {
+      padding-left: 16px;
+    }
+  }
+
+  #filebrowser-loading-page .content {
+    flex: 1 1;
+  }
+
+  #filebrowser-loading-page .sort-dropdown {
+    background-color: #f0f0f0;
+    border-radius: 3px;
+    width: 72px;
+    height: 16px;
+    margin: 24px 32px;
+  }
+
+  #filebrowser-loading-page .file-grid {
+    width: 100%;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-gap: 20px;
+    padding: 0 32px;
+  }
+
+  #filebrowser-loading-page .file-grid .tile {
+    height: 221px;
+    box-sizing: border-box;
+    position: relative;
+  }
+
+  #filebrowser-loading-page .file-grid .tile:nth-child(6) { opacity: .8; }
+  #filebrowser-loading-page .file-grid .tile:nth-child(7) { opacity: .4; }
+
+  #filebrowser-loading-page .file-grid .tile .inner {
+    position: absolute;
+    top: 2px;
+    bottom: 2px;
+    left: 2px;
+    right: 2px;
+    border: 1px solid #f0f0f0;
+    border-radius: 6px;
+    background-color: #f0f0f0;
+  }
+
+  #filebrowser-loading-page .file-grid .tile .inner .lower {
+    height: 54px;
+    background-color: white;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    border-radius: 0 0 6px 6px;
+  }
+
+  #filebrowser-loading-page .team-grid {
+    width: 100%;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(264px, 1fr));
+    grid-gap: 32px 32px;
+    padding: 32px;
+    align-content: start;
+  }
+
+  #filebrowser-loading-page .team-grid .tile {
+    border: 1px solid rgba(0, 0, 0, .1);
+    border-radius: 6px;
+    position: relative;
+    padding: 16px;
+  }
+
+  #filebrowser-loading-page .team-grid .tile:nth-child(6) { opacity: .8; }
+  #filebrowser-loading-page .team-grid .tile:nth-child(7) { opacity: .4; }
+
+  #filebrowser-loading-page .team-grid .tile .row {
+    margin-top: 0;
+    margin-left: 0;
+    margin-bottom: 0;
+  }
+
+  #filebrowser-loading-page .team-grid .tile .row:nth-child(1) {
+    width: 32px;
+    height: 32px;
+  }
+
+  #filebrowser-loading-page .team-grid .tile .row:nth-child(2) {
+    width: 65px;
+    height: 30px;
+    position: absolute;
+    top: 17px;
+    right: 16px;
+    margin-top: 0;
+  }
+
+  #filebrowser-loading-page .team-grid .tile .row:nth-child(3) {
+    width: 120px;
+    margin-top: 20px;
+  }
+  #filebrowser-loading-page .team-grid .tile .row:nth-child(4) {
+    width: 232px;
+    margin-top: 12px;
+  }
+  #filebrowser-loading-page .team-grid .tile .row:nth-child(5) {
+    width: 174px;
+    margin-top: 8px;
+  }
+
+  #filebrowser-loading-page .team-grid .tile .circles {
+    display: flex;
+    flex-direction: row;
+  }
+
+  #filebrowser-loading-page .team-grid .tile .circle {
+    top: 0;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    margin-top: 22px;
+  }
+
+  #filebrowser-loading-page .profile-header {
+    background-color: #f0f0f0;
+    width: 100%;
+    height: 64px;
+  }
+
+  #filebrowser-loading-page .profile-grid {
+    padding: 32px;
+    display: grid;
+    grid-template-columns: 1fr 24px 1fr .75fr;
+    align-items: end;
+  }
+
+  #filebrowser-loading-page .profile-grid .row {
+    margin-top: 24px;
+  }
+
+  #filebrowser-loading-page .profile-grid div:nth-child(4n+1) { width: 148px; }
+  #filebrowser-loading-page .profile-grid div:nth-child(4n+3) { width: 56px; }
+  #filebrowser-loading-page .profile-grid div:nth-child(4n+4) { width: 99px; }
+
+  #filebrowser-loading-page .profile-grid div:nth-child(1) { width: 61px; margin-top: 0; }
+
+  #filebrowser-loading-page .profile-grid div:nth-child(5) { width: 61px; margin-top: 32px; }
+  #filebrowser-loading-page .profile-grid div:nth-child(7) { width: 69px; }
+  #filebrowser-loading-page .profile-grid div:nth-child(8) { width: 51px; }
+
+  #filebrowser-loading-page .profile-grid div:nth-child(9) { margin-top: 36px; }
+  #filebrowser-loading-page .profile-grid div:nth-child(11) { width: 69px; }
+  #filebrowser-loading-page .profile-grid div:nth-child(12) { width: 72px; }
+
+  #filebrowser-loading-page .profile-grid div:nth-child(25),
+  #filebrowser-loading-page .profile-grid div:nth-child(27),
+  #filebrowser-loading-page .profile-grid div:nth-child(28) { opacity: .8; }
+
+  #filebrowser-loading-page .profile-grid div:nth-child(29),
+  #filebrowser-loading-page .profile-grid div:nth-child(31),
+  #filebrowser-loading-page .profile-grid div:nth-child(32) { opacity: .4; }
+
+  @media(max-width: 1000px) {
+    #filebrowser-loading-page .profile-grid {
+      grid-template-columns: 1fr;
+    }
+
+    #filebrowser-loading-page .profile-grid div:nth-child(5),
+    #filebrowser-loading-page .profile-grid div:nth-child(6),
+    #filebrowser-loading-page .profile-grid div:nth-child(7),
+    #filebrowser-loading-page .profile-grid div:nth-child(8),
+    #filebrowser-loading-page .profile-grid div:nth-child(4n+2),
+    #filebrowser-loading-page .profile-grid div:nth-child(4n+3),
+    #filebrowser-loading-page .profile-grid div:nth-child(4n+4) { display: none; }
+  }
+
+  #filebrowser-loading-page .project-grid {
+    padding: 0 32px;
+    display: grid;
+    grid-row-gap: 22px;
+  }
+
+  #filebrowser-loading-page .project-grid .card {
+    border: 1px solid rgba(0, 0, 0, .1);
+    border-radius: 4px;
+    box-sizing: border-box;
+    height: 178px;
+    display: flex;
+  }
+
+  #filebrowser-loading-page .project-grid .card:nth-child(3) { opacity: .8; }
+  #filebrowser-loading-page .project-grid .card:nth-child(4) { opacity: .4; }
+
+  #filebrowser-loading-page .project-grid .card .left {
+    width: 196px;
+    margin: 16px;
+  }
+
+  #filebrowser-loading-page .project-grid .card .right {
+    flex: 1 1;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow: hidden;
+    margin: 16px 0;
+  }
+
+  #filebrowser-loading-page .project-grid .card .left .row:nth-child(1) { width: 107px; }
+  #filebrowser-loading-page .project-grid .card .left .row:nth-child(2) { width: 164px; margin-top: 12px; }
+  #filebrowser-loading-page .project-grid .card .left .row:nth-child(3) { width: 145px; margin-top: 8px; }
+  #filebrowser-loading-page .project-grid .card .left .row:nth-child(4) { width: 158px; margin-top: 8px; }
+
+  #filebrowser-loading-page .project-grid .card .right .row {
+    height: 100%;
+    flex: 1 1 196px;
+    margin-right: 16px;
+    border-radius: 6px;
+  }
+
+  #filebrowser-loading-page .right-column {
+    flex: 0 0 304px;
+    margin-right: 16px;
+    margin-top: 16px;
+  }
+
+  #filebrowser-loading-page .right-column .row {
+    margin-left: 16px;
+  }
+
+  #filebrowser-loading-page .right-column .row:nth-child(1) {
+    margin-top: 16px;
+    width: 120px;
+  }
+  #filebrowser-loading-page .right-column .row:nth-child(2) {
+    margin-top: 18px;
+    width: 272px;
+  }
+  #filebrowser-loading-page .right-column .row:nth-child(3) {
+    margin-top: 8px;
+    width: 248px;
+  }
+  #filebrowser-loading-page .right-column .row:nth-child(4) {
+    margin-top: 8px;
+    width: 272px;
+  }
+  #filebrowser-loading-page .right-column .row:nth-child(5) {
+    margin-top: 8px;
+    width: 256px;
+  }
+  #filebrowser-loading-page .right-column .row:nth-child(6) {
+    margin-top: 8px;
+    width: 200px;
+  }
+  #filebrowser-loading-page .right-column .row:nth-child(7) {
+    margin-top: 35px;
+    width: 88px;
+  }
+  #filebrowser-loading-page .right-column .row:nth-child(8) {
+    margin-top: 22px;
+    margin-left: 51px;
+    width: 88px;
+    opacity: .8;
+  }
+  #filebrowser-loading-page .right-column .row:nth-child(9) {
+    margin-top: 18px;
+    margin-left: 51px;
+    width: 88px;
+    opacity: .4;
+  }
+
+  /*
+  Note: Make sure any changes here are also duplicated in the fullscreen progress bar
+  (.progressBar in progress_bar.css)
+  */
+  #filebrowser-loading-progress-bar {
+    height: 5px;
+      background: #18A0FB;
+    position: absolute;
+    left: 0;
+    animation: filebrowserloadingProgressBar 10s cubic-bezier(.08,.8,.1,1) forwards;
+  }
+
+  @keyframes filebrowserloadingProgressBar {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+
+
+  @media (max-width: 645px) {
+    #filebrowser-loading-page .sidebar {
+      display: none;
+    }
+
+    #filebrowser-loading-page .page {
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+
+</style>
+
+
+      <meta name="mobile-web-app-capable" content="yes">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <meta name="twitter:card" content="player">
+    <meta name="twitter:site" content="@figmadesign">
+    <meta name="twitter:title" content="Lookahead">
+    <meta name="twitter:player" content="https://www.figma.com/embed?embed_host=twitter&amp;url=https://www.figma.com/file/XjnDBsczGMZrKEuaDKpse7/Lookahead?node-id=0%3A1">
+    <meta name="twitter:player:width" content="800">
+    <meta name="twitter:player:height" content="450">
+    <meta name="twitter:image" content="https://www.figma.com/file/XjnDBsczGMZrKEuaDKpse7/thumbnail?ver=thumbnails/4b74f334-21fa-4b95-bcd0-8574940e222d">
+
+    <meta property="og:url" content="https://www.figma.com/file/XjnDBsczGMZrKEuaDKpse7/Lookahead">
+    <meta property="og:description" content="Created with Figma">
+    <meta property="og:image" content="https://www.figma.com/file/XjnDBsczGMZrKEuaDKpse7/thumbnail?ver=thumbnails/4b74f334-21fa-4b95-bcd0-8574940e222d">
+    <meta property="og:image:width" content="800">
+    <meta property="og:image:height" content="634">
+    <meta property="og:image:user_generated" content="true">
+    <meta property="og:type" content="article">
+    <meta property="og:article:published_time" content="2020-01-14 01:39:39 UTC">
+    <meta property="og:article:modified_time" content="2020-01-14 06:19:29 UTC">
+    <meta property="og:article:section" content="Design">
+
+    <meta name="description" content="Created with Figma">
+
+    <link rel="alternate" type="application/json+oembed" href="https://www.figma.com/api/oembed?url=https://www.figma.com/file/XjnDBsczGMZrKEuaDKpse7/Lookahead?node-id=0%3A1" title="OEmbed">
+
+    <meta property="og:title" content="Figma">
+    <meta property="og:site_name" content="Figma">
+
+    
+
+
+<link rel="icon" sizes="192x192" href="https://static.figma.com/app/icon/1/icon-192.png">
+<link rel="icon" sizes="128x128" href="https://static.figma.com/app/icon/1/icon-128.png">
+
+<link rel="icon" type="image/png" href="https://static.figma.com/app/icon/1/favicon.png">
+<!--[if IE]><link rel="shortcut icon" href="https://static.figma.com/app/icon/1/favicon.ico" type="image/vnd.microsoft.icon" /><![endif]-->
+<link rel="icon" sizes="any" type="image/svg+xml" href="https://static.figma.com/app/icon/1/favicon.svg">
+
+<link rel="apple-touch-icon" sizes="76x76" href="https://static.figma.com/app/icon/1/touch-76.png">
+<link rel="apple-touch-icon" sizes="120x120" href="https://static.figma.com/app/icon/1/touch-120.png">
+<link rel="apple-touch-icon" sizes="152x152" href="https://static.figma.com/app/icon/1/touch-152.png">
+<link rel="apple-touch-icon" sizes="167x167" href="https://static.figma.com/app/icon/1/touch-167.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://static.figma.com/app/icon/1/touch-180.png">
+
+
+      <link href="./Lookahead –  wireframe v1 - Figma_files/figma_app.f250297a88f3663c272612b13f324cfe.min.css" rel="stylesheet">
+
+        <link rel="preload" href="https://static.figma.com/webfont/1/Inter-Regular.woff2?v=3.10" as="font" crossorigin="anonymous">
+        <link rel="preload" href="https://static.figma.com/webfont/1/Inter-Italic.woff2?v=3.10" as="font" crossorigin="anonymous">
+        <link rel="preload" href="https://static.figma.com/webfont/1/Inter-Medium.woff2?v=3.10" as="font" crossorigin="anonymous">
+        <link rel="preload" href="https://static.figma.com/webfont/1/Inter-MediumItalic.woff2?v=3.10" as="font" crossorigin="anonymous">
+        <link rel="preload" href="https://static.figma.com/webfont/1/Inter-SemiBold.woff2?v=3.10" as="font" crossorigin="anonymous">
+        <link rel="preload" href="https://static.figma.com/webfont/1/Inter-SemiBoldItalic.woff2?v=3.10" as="font" crossorigin="anonymous">
+  <script type="text/javascript" async="" crossorigin="anonymous" src="./Lookahead –  wireframe v1 - Figma_files/compiled_wasm.js.br"></script><script type="text/javascript" async="" crossorigin="anonymous" src="./Lookahead –  wireframe v1 - Figma_files/import.shim.js.br"></script><style>@-moz-keyframes progress-bar-animation {0.000%{transform:scaleX(0.000);}0.500%{transform:scaleX(0.066);}1.000%{transform:scaleX(0.130);}1.500%{transform:scaleX(0.192);}2.000%{transform:scaleX(0.250);}2.500%{transform:scaleX(0.305);}3.000%{transform:scaleX(0.355);}3.500%{transform:scaleX(0.402);}4.000%{transform:scaleX(0.444);}4.500%{transform:scaleX(0.482);}5.000%{transform:scaleX(0.516);}5.500%{transform:scaleX(0.548);}6.000%{transform:scaleX(0.576);}6.500%{transform:scaleX(0.602);}7.000%{transform:scaleX(0.625);}7.500%{transform:scaleX(0.646);}8.000%{transform:scaleX(0.666);}8.500%{transform:scaleX(0.683);}9.000%{transform:scaleX(0.699);}9.500%{transform:scaleX(0.714);}10.000%{transform:scaleX(0.728);}10.500%{transform:scaleX(0.741);}11.000%{transform:scaleX(0.752);}11.500%{transform:scaleX(0.763);}12.000%{transform:scaleX(0.773);}12.500%{transform:scaleX(0.783);}13.000%{transform:scaleX(0.791);}13.500%{transform:scaleX(0.800);}14.000%{transform:scaleX(0.807);}14.500%{transform:scaleX(0.815);}15.000%{transform:scaleX(0.821);}15.500%{transform:scaleX(0.828);}16.000%{transform:scaleX(0.834);}16.500%{transform:scaleX(0.839);}17.000%{transform:scaleX(0.845);}17.500%{transform:scaleX(0.850);}18.000%{transform:scaleX(0.855);}18.500%{transform:scaleX(0.859);}19.000%{transform:scaleX(0.864);}19.500%{transform:scaleX(0.868);}20.000%{transform:scaleX(0.872);}20.500%{transform:scaleX(0.876);}21.000%{transform:scaleX(0.879);}21.500%{transform:scaleX(0.883);}22.000%{transform:scaleX(0.886);}22.500%{transform:scaleX(0.889);}23.000%{transform:scaleX(0.892);}23.500%{transform:scaleX(0.895);}24.000%{transform:scaleX(0.898);}24.500%{transform:scaleX(0.900);}25.000%{transform:scaleX(0.903);}25.500%{transform:scaleX(0.906);}26.000%{transform:scaleX(0.908);}26.500%{transform:scaleX(0.910);}27.000%{transform:scaleX(0.912);}27.500%{transform:scaleX(0.915);}28.000%{transform:scaleX(0.917);}28.500%{transform:scaleX(0.919);}29.000%{transform:scaleX(0.921);}29.500%{transform:scaleX(0.922);}30.000%{transform:scaleX(0.924);}30.500%{transform:scaleX(0.926);}31.000%{transform:scaleX(0.928);}31.500%{transform:scaleX(0.929);}32.000%{transform:scaleX(0.931);}32.500%{transform:scaleX(0.932);}33.000%{transform:scaleX(0.934);}33.500%{transform:scaleX(0.935);}34.000%{transform:scaleX(0.937);}34.500%{transform:scaleX(0.938);}35.000%{transform:scaleX(0.940);}35.500%{transform:scaleX(0.941);}36.000%{transform:scaleX(0.942);}36.500%{transform:scaleX(0.943);}37.000%{transform:scaleX(0.945);}37.500%{transform:scaleX(0.946);}38.000%{transform:scaleX(0.947);}38.500%{transform:scaleX(0.948);}39.000%{transform:scaleX(0.949);}39.500%{transform:scaleX(0.950);}40.000%{transform:scaleX(0.951);}40.500%{transform:scaleX(0.952);}41.000%{transform:scaleX(0.953);}41.500%{transform:scaleX(0.954);}42.000%{transform:scaleX(0.955);}42.500%{transform:scaleX(0.956);}43.000%{transform:scaleX(0.957);}43.500%{transform:scaleX(0.958);}44.000%{transform:scaleX(0.958);}44.500%{transform:scaleX(0.959);}45.000%{transform:scaleX(0.960);}45.500%{transform:scaleX(0.961);}46.000%{transform:scaleX(0.962);}46.500%{transform:scaleX(0.962);}47.000%{transform:scaleX(0.963);}47.500%{transform:scaleX(0.964);}48.000%{transform:scaleX(0.965);}48.500%{transform:scaleX(0.965);}49.000%{transform:scaleX(0.966);}49.500%{transform:scaleX(0.967);}50.000%{transform:scaleX(0.967);}50.500%{transform:scaleX(0.968);}51.000%{transform:scaleX(0.969);}51.500%{transform:scaleX(0.969);}52.000%{transform:scaleX(0.970);}52.500%{transform:scaleX(0.970);}53.000%{transform:scaleX(0.971);}53.500%{transform:scaleX(0.972);}54.000%{transform:scaleX(0.972);}54.500%{transform:scaleX(0.973);}55.000%{transform:scaleX(0.973);}55.500%{transform:scaleX(0.974);}56.000%{transform:scaleX(0.974);}56.500%{transform:scaleX(0.975);}57.000%{transform:scaleX(0.975);}57.500%{transform:scaleX(0.976);}58.000%{transform:scaleX(0.976);}58.500%{transform:scaleX(0.977);}59.000%{transform:scaleX(0.977);}59.500%{transform:scaleX(0.978);}60.000%{transform:scaleX(0.978);}60.500%{transform:scaleX(0.979);}61.000%{transform:scaleX(0.979);}61.500%{transform:scaleX(0.980);}62.000%{transform:scaleX(0.980);}62.500%{transform:scaleX(0.980);}63.000%{transform:scaleX(0.981);}63.500%{transform:scaleX(0.981);}64.000%{transform:scaleX(0.982);}64.500%{transform:scaleX(0.982);}65.000%{transform:scaleX(0.982);}65.500%{transform:scaleX(0.983);}66.000%{transform:scaleX(0.983);}66.500%{transform:scaleX(0.984);}67.000%{transform:scaleX(0.984);}67.500%{transform:scaleX(0.984);}68.000%{transform:scaleX(0.985);}68.500%{transform:scaleX(0.985);}69.000%{transform:scaleX(0.985);}69.500%{transform:scaleX(0.986);}70.000%{transform:scaleX(0.986);}70.500%{transform:scaleX(0.986);}71.000%{transform:scaleX(0.987);}71.500%{transform:scaleX(0.987);}72.000%{transform:scaleX(0.987);}72.500%{transform:scaleX(0.988);}73.000%{transform:scaleX(0.988);}73.500%{transform:scaleX(0.988);}74.000%{transform:scaleX(0.988);}74.500%{transform:scaleX(0.989);}75.000%{transform:scaleX(0.989);}75.500%{transform:scaleX(0.989);}76.000%{transform:scaleX(0.990);}76.500%{transform:scaleX(0.990);}77.000%{transform:scaleX(0.990);}77.500%{transform:scaleX(0.990);}78.000%{transform:scaleX(0.991);}78.500%{transform:scaleX(0.991);}79.000%{transform:scaleX(0.991);}79.500%{transform:scaleX(0.992);}80.000%{transform:scaleX(0.992);}80.500%{transform:scaleX(0.992);}81.000%{transform:scaleX(0.992);}81.500%{transform:scaleX(0.993);}82.000%{transform:scaleX(0.993);}82.500%{transform:scaleX(0.993);}83.000%{transform:scaleX(0.993);}83.500%{transform:scaleX(0.994);}84.000%{transform:scaleX(0.994);}84.500%{transform:scaleX(0.994);}85.000%{transform:scaleX(0.994);}85.500%{transform:scaleX(0.994);}86.000%{transform:scaleX(0.995);}86.500%{transform:scaleX(0.995);}87.000%{transform:scaleX(0.995);}87.500%{transform:scaleX(0.995);}88.000%{transform:scaleX(0.996);}88.500%{transform:scaleX(0.996);}89.000%{transform:scaleX(0.996);}89.500%{transform:scaleX(0.996);}90.000%{transform:scaleX(0.996);}90.500%{transform:scaleX(0.997);}91.000%{transform:scaleX(0.997);}91.500%{transform:scaleX(0.997);}92.000%{transform:scaleX(0.997);}92.500%{transform:scaleX(0.997);}93.000%{transform:scaleX(0.998);}93.500%{transform:scaleX(0.998);}94.000%{transform:scaleX(0.998);}94.500%{transform:scaleX(0.998);}95.000%{transform:scaleX(0.998);}95.500%{transform:scaleX(0.998);}96.000%{transform:scaleX(0.999);}96.500%{transform:scaleX(0.999);}97.000%{transform:scaleX(0.999);}97.500%{transform:scaleX(0.999);}98.000%{transform:scaleX(0.999);}98.500%{transform:scaleX(1.000);}99.000%{transform:scaleX(1.000);}99.500%{transform:scaleX(1.000);}}@-webkit-keyframes progress-bar-animation {0.000%{transform:scaleX(0.000);}0.500%{transform:scaleX(0.066);}1.000%{transform:scaleX(0.130);}1.500%{transform:scaleX(0.192);}2.000%{transform:scaleX(0.250);}2.500%{transform:scaleX(0.305);}3.000%{transform:scaleX(0.355);}3.500%{transform:scaleX(0.402);}4.000%{transform:scaleX(0.444);}4.500%{transform:scaleX(0.482);}5.000%{transform:scaleX(0.516);}5.500%{transform:scaleX(0.548);}6.000%{transform:scaleX(0.576);}6.500%{transform:scaleX(0.602);}7.000%{transform:scaleX(0.625);}7.500%{transform:scaleX(0.646);}8.000%{transform:scaleX(0.666);}8.500%{transform:scaleX(0.683);}9.000%{transform:scaleX(0.699);}9.500%{transform:scaleX(0.714);}10.000%{transform:scaleX(0.728);}10.500%{transform:scaleX(0.741);}11.000%{transform:scaleX(0.752);}11.500%{transform:scaleX(0.763);}12.000%{transform:scaleX(0.773);}12.500%{transform:scaleX(0.783);}13.000%{transform:scaleX(0.791);}13.500%{transform:scaleX(0.800);}14.000%{transform:scaleX(0.807);}14.500%{transform:scaleX(0.815);}15.000%{transform:scaleX(0.821);}15.500%{transform:scaleX(0.828);}16.000%{transform:scaleX(0.834);}16.500%{transform:scaleX(0.839);}17.000%{transform:scaleX(0.845);}17.500%{transform:scaleX(0.850);}18.000%{transform:scaleX(0.855);}18.500%{transform:scaleX(0.859);}19.000%{transform:scaleX(0.864);}19.500%{transform:scaleX(0.868);}20.000%{transform:scaleX(0.872);}20.500%{transform:scaleX(0.876);}21.000%{transform:scaleX(0.879);}21.500%{transform:scaleX(0.883);}22.000%{transform:scaleX(0.886);}22.500%{transform:scaleX(0.889);}23.000%{transform:scaleX(0.892);}23.500%{transform:scaleX(0.895);}24.000%{transform:scaleX(0.898);}24.500%{transform:scaleX(0.900);}25.000%{transform:scaleX(0.903);}25.500%{transform:scaleX(0.906);}26.000%{transform:scaleX(0.908);}26.500%{transform:scaleX(0.910);}27.000%{transform:scaleX(0.912);}27.500%{transform:scaleX(0.915);}28.000%{transform:scaleX(0.917);}28.500%{transform:scaleX(0.919);}29.000%{transform:scaleX(0.921);}29.500%{transform:scaleX(0.922);}30.000%{transform:scaleX(0.924);}30.500%{transform:scaleX(0.926);}31.000%{transform:scaleX(0.928);}31.500%{transform:scaleX(0.929);}32.000%{transform:scaleX(0.931);}32.500%{transform:scaleX(0.932);}33.000%{transform:scaleX(0.934);}33.500%{transform:scaleX(0.935);}34.000%{transform:scaleX(0.937);}34.500%{transform:scaleX(0.938);}35.000%{transform:scaleX(0.940);}35.500%{transform:scaleX(0.941);}36.000%{transform:scaleX(0.942);}36.500%{transform:scaleX(0.943);}37.000%{transform:scaleX(0.945);}37.500%{transform:scaleX(0.946);}38.000%{transform:scaleX(0.947);}38.500%{transform:scaleX(0.948);}39.000%{transform:scaleX(0.949);}39.500%{transform:scaleX(0.950);}40.000%{transform:scaleX(0.951);}40.500%{transform:scaleX(0.952);}41.000%{transform:scaleX(0.953);}41.500%{transform:scaleX(0.954);}42.000%{transform:scaleX(0.955);}42.500%{transform:scaleX(0.956);}43.000%{transform:scaleX(0.957);}43.500%{transform:scaleX(0.958);}44.000%{transform:scaleX(0.958);}44.500%{transform:scaleX(0.959);}45.000%{transform:scaleX(0.960);}45.500%{transform:scaleX(0.961);}46.000%{transform:scaleX(0.962);}46.500%{transform:scaleX(0.962);}47.000%{transform:scaleX(0.963);}47.500%{transform:scaleX(0.964);}48.000%{transform:scaleX(0.965);}48.500%{transform:scaleX(0.965);}49.000%{transform:scaleX(0.966);}49.500%{transform:scaleX(0.967);}50.000%{transform:scaleX(0.967);}50.500%{transform:scaleX(0.968);}51.000%{transform:scaleX(0.969);}51.500%{transform:scaleX(0.969);}52.000%{transform:scaleX(0.970);}52.500%{transform:scaleX(0.970);}53.000%{transform:scaleX(0.971);}53.500%{transform:scaleX(0.972);}54.000%{transform:scaleX(0.972);}54.500%{transform:scaleX(0.973);}55.000%{transform:scaleX(0.973);}55.500%{transform:scaleX(0.974);}56.000%{transform:scaleX(0.974);}56.500%{transform:scaleX(0.975);}57.000%{transform:scaleX(0.975);}57.500%{transform:scaleX(0.976);}58.000%{transform:scaleX(0.976);}58.500%{transform:scaleX(0.977);}59.000%{transform:scaleX(0.977);}59.500%{transform:scaleX(0.978);}60.000%{transform:scaleX(0.978);}60.500%{transform:scaleX(0.979);}61.000%{transform:scaleX(0.979);}61.500%{transform:scaleX(0.980);}62.000%{transform:scaleX(0.980);}62.500%{transform:scaleX(0.980);}63.000%{transform:scaleX(0.981);}63.500%{transform:scaleX(0.981);}64.000%{transform:scaleX(0.982);}64.500%{transform:scaleX(0.982);}65.000%{transform:scaleX(0.982);}65.500%{transform:scaleX(0.983);}66.000%{transform:scaleX(0.983);}66.500%{transform:scaleX(0.984);}67.000%{transform:scaleX(0.984);}67.500%{transform:scaleX(0.984);}68.000%{transform:scaleX(0.985);}68.500%{transform:scaleX(0.985);}69.000%{transform:scaleX(0.985);}69.500%{transform:scaleX(0.986);}70.000%{transform:scaleX(0.986);}70.500%{transform:scaleX(0.986);}71.000%{transform:scaleX(0.987);}71.500%{transform:scaleX(0.987);}72.000%{transform:scaleX(0.987);}72.500%{transform:scaleX(0.988);}73.000%{transform:scaleX(0.988);}73.500%{transform:scaleX(0.988);}74.000%{transform:scaleX(0.988);}74.500%{transform:scaleX(0.989);}75.000%{transform:scaleX(0.989);}75.500%{transform:scaleX(0.989);}76.000%{transform:scaleX(0.990);}76.500%{transform:scaleX(0.990);}77.000%{transform:scaleX(0.990);}77.500%{transform:scaleX(0.990);}78.000%{transform:scaleX(0.991);}78.500%{transform:scaleX(0.991);}79.000%{transform:scaleX(0.991);}79.500%{transform:scaleX(0.992);}80.000%{transform:scaleX(0.992);}80.500%{transform:scaleX(0.992);}81.000%{transform:scaleX(0.992);}81.500%{transform:scaleX(0.993);}82.000%{transform:scaleX(0.993);}82.500%{transform:scaleX(0.993);}83.000%{transform:scaleX(0.993);}83.500%{transform:scaleX(0.994);}84.000%{transform:scaleX(0.994);}84.500%{transform:scaleX(0.994);}85.000%{transform:scaleX(0.994);}85.500%{transform:scaleX(0.994);}86.000%{transform:scaleX(0.995);}86.500%{transform:scaleX(0.995);}87.000%{transform:scaleX(0.995);}87.500%{transform:scaleX(0.995);}88.000%{transform:scaleX(0.996);}88.500%{transform:scaleX(0.996);}89.000%{transform:scaleX(0.996);}89.500%{transform:scaleX(0.996);}90.000%{transform:scaleX(0.996);}90.500%{transform:scaleX(0.997);}91.000%{transform:scaleX(0.997);}91.500%{transform:scaleX(0.997);}92.000%{transform:scaleX(0.997);}92.500%{transform:scaleX(0.997);}93.000%{transform:scaleX(0.998);}93.500%{transform:scaleX(0.998);}94.000%{transform:scaleX(0.998);}94.500%{transform:scaleX(0.998);}95.000%{transform:scaleX(0.998);}95.500%{transform:scaleX(0.998);}96.000%{transform:scaleX(0.999);}96.500%{transform:scaleX(0.999);}97.000%{transform:scaleX(0.999);}97.500%{transform:scaleX(0.999);}98.000%{transform:scaleX(0.999);}98.500%{transform:scaleX(1.000);}99.000%{transform:scaleX(1.000);}99.500%{transform:scaleX(1.000);}}</style><style>.platform_cursor_default{cursor:default!important;}</style><style>.platform_cursor_pointer{cursor:pointer!important;}</style><style>.platform_cursor_crosshair{cursor:crosshair!important;}</style><style>.platform_cursor_text{cursor:text!important;}</style><style>.platform_cursor_ew-resize{cursor:ew-resize!important;}</style><style>.platform_cursor_ns-resize{cursor:ns-resize!important;}</style><style>.platform_cursor_s-resize{cursor:s-resize!important;}</style><style>.platform_cursor_e-resize{cursor:e-resize!important;}</style><style>body._jf9ctkb4bj *, ._jf9ctkb4bj{cursor:url("data:image/png;base64,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")4 4,auto !important;cursor:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzJweCIgaGVpZ2h0PSIzMnB4Ij48aW1hZ2UgeGxpbms6aHJlZj0iZGF0YTppbWFnZS9wbmc7YmFzZTY0LGlWQk9SdzBLR2dvQUFBQU5TVWhFVWdBQUFFQUFBQUJBQ0FZQUFBQ3FhWEhlQUFBSWZFbEVRVlI0WHUxYUMweFUyUm4rYloxV1hSM2NBVXhIRkVOVVVoTEdjUkJOVk9vck8yRFVTREFZYTR3RTQ0TW9xeVZvMXhqRkI1clV3TXBMS3BTaXFlZ21WcWZFM1dsREY0bXpvRUxxQTVSSjZUSWpaRXdKajVrZEhMb01XRWVXNXJ1NVozcWxNZytFbVV2bEpDZDM3dHpuLzUzdi84Ny8vK2RPb2crOFRmckE3YWNKQUNZWThJRWpNT0VDSHpnQjNJcmdVSVlNL3I4QjVzb0Zma1JFa3h3T3gwbUpSSEtPTi93SElnSUlySTk3UElZREFQLy9HTDI3dXp0QktwV21XeXlXeitWeStaK0phSUR2QUFOOVhMZmhBTURvVHlZaXlmWHIxK2Z0MkxIajc3Q3l0N2YzaTdxNnVyelkyTmh2aWNoQlJHOTRFTWF0YXd3SEFFYi9KMFQwVXlLYTZuQTQ2aWRQbnZ3emdEQXdNR0R0NnVyNmJVaElTQzRSdmVhQkFDdkdwVnU0QWdER1R5T2k2VmFyOWZjeW1leVQzdDVlbWo1OU9rZjUvdjcrdjcxNDhTSS9JaUxpTHp3UWpBM2p5aTFjQVRDRmlENGlJdW5UcDAvVGxFcGxha2xKQ1JoQSsvZnZkL3E5eldhN1hsTlRreE1mSDI4Y2oyN2hTZ01BQUlaNzVwVXJWMkozN2RwMThjbVRKeFFkSFUzTGx5K25yS3dzaW9tSjRZQjQ4K2FOdWF1cnEzRE9uRGtYeDV0YnVKb0ZuQUNvVktyUSt2cjZxc0hCUVFvTURLU1hMMTl5aHFla3BIQkFTS1ZTYnIrdnI2KzJ0YlUxWDZGUS9IVzh1SVdyT0FBYUFCZVlTVVRCUFQwOXQ2UlM2VnkxV2sxVlZWVk9GNUJJSkpTYm0wdXBxYW5PLzdxN3U2L3FkTHFjeE1URVZyRzdoU3NBSkx3SUFvQWdnOEZ3ZnVIQ2haOGNQWHFVRy9XaGJkbXlaWlNkblUyclZxMWlidEhCdThXbElXNGhLcEYwQlFEaWdLa1FRUUJRV1ZtNVI2MVdmM3J6NWszYXRtM2JzTUhQbmoxN09DQm16Z1J1UkhhNy9WNUxTMHUrVXFtc0hNSUdVUURoTGhTR0RnQUFXV1ptNXFxTWpJeWlscFlXV3JCZ2dkdm9yNkNnZ0E0ZVBDaDBpeXRhclRZbk9UblpKSWdkV0dqdDluNWpkWUlyQUhBTU9qQ0RpRDRtb2xtRGc0TTF5QS9Dd3NMSVpJSWRycHRDb1NBQXNXYk5HdVlXYmUzdDdZWHo1czM3SFJIOW00OGtFVVQ1alEzdTZnR0lCcm1wRUVKb3NWaktnb0tDd3JkdTNVb2FqY2FkL2M3ak8zZnU1SVFTTXdqdkZ0OFlqY1k4bFVwMVYrQVdMSnIwK0w2amNhSTdBSmdRQmtBSEdoc2JUeWtVaXMzbno1K25ZOGVPZWYzOEN4Y3VVSHA2dXRBdFNqUWFUVzVLU3NvLy9lVVc3Z0JBVHNDRU1MQzh2SHhIUWtMQzBjcktTb3FMaS9NYUFGd3dmLzU4UWtTNWJ0MDY3bnFIdy9HaXM3T3pJRFEwOUxJZ2R2Q1pXN2dEQUZraGhCQTZJRXROVFkwdUxDd3NzMXF0RkJRVU5DSUEyRVdKaVlsMDZkSWxDZzRPWm01UjFkemNuTDlreVpKcVg3cUZPd0NZRUVJSE9DRjgvZnIxMXhLSjVLUEZpeGZUczJmUDNnc0VYSHp1M0RrNmZ2eTQ4ejVXcTdXb3JLd3NKejA5dmNNWGJ1RU9BTHdZaE5BWkViYTN0eGZMNVhJVjV2dkxsOEhhOTIrelo4L20zR0xqeG8zTUxWb3NGa3RKU0VoSTBaQ1FldFRyRHA0QWdJQUlhVEVuaEE4ZlB2eHM2ZEtsdnl3dUxuNHJLeHdKREhLNW5Kc2lWNjVjU1N0V3JDQ1ZTdlhXYlFZR0JwNTNkSFQ4YXU3Y3VYZjRLZE12QURBaGhBNEVYcjE2TlNFcEtTbnowYU5IaFBEWDJ3WmpJYUF3R0wrblRJSEUvTGZaN2ZZMm04MVdiemFiYXg4L2ZueDMzNzU5elh6TWdBclVxTWNMbmpBQVFzZ0NJbGw4Zkh6RTdkdTN5MUVYbURGakJnb2pMakdReVdTMFljTUdycTlldlpwQWQyRjc5ZXBWcjhsa01ob01ocVlIRHg0OHk4cktxaWVpNzRub1gveldUa1N2QkhyZ0xlWXV6L2NFQUp6REFpSk9DTzEyKzVmVHBrMExna0UxTlFnTzM5MU9uejVOcDA2ZEducndCNVBKMUdJd0dJeDFkWFhmbHBhV05yVzF0Zlh5UmdKTkdJeDkxdkVmb2thL01RQUdJQ0J5Q21GcmEydHVXRmpZeXNPSEQxTk9UczQ3cllkdjYzUTY3cGpaYkc0M0dvM1BHeG9hbWpVYXpUK3FxNnU3ZUlOZ0ZJeERiUkZiakRRTVpoMzd6UGd4aVEwOFlRQnNZSmtoSjRUMzd0MzdOQ1ltWnZlTkd6ZG8rL2J0N3dRQXhnT0Vob2FHaDFGUlVZajltVEV3aUJuTkRHZkZWV3lGdndFUU9qUGVMeUlJQTZFRExDS1U1ZWZueHgwNmRPaUMwV2lrOFBEdy93R0FVYisvdi8vNzZPam9JMDFOVFdZVWpQak9BSUJoekZoV1lrZGhsYTA3Q0l1c1k1WTFlc29Bbk1kS1pMS0lpSWpRcHFZbTVQZUVxYXl6czlNSkF1cUZ0YlcxM0g1UlVkSEZBd2NPZk0wTEdud2FJREJLdzBEV2hZc3RMQ2thTTZPRkkrWXBBTGlHbGNnZ2hNRTJtKzJQQVFFQm9aczNieWF0VnV1OEo2TitZMk5qdFZLcHpDWWlGQkI3ZUZHRGI3UFJIcnJDNUpjbE4yOEFlS3RFMXR6Yy9Kdnc4SEIxWm1hbVUrbFBuRGhCWjgrZVJYSDBaVnhjWE5yOSsvZFJFMlFBUU4xWkRZQXRxL2w5TWNVYkFONHFrVlZVVk94ZXYzNzl3WXFLQ202T2o0eU1KTDFlenpHaHRMUTBiKy9ldlY4UmtaVUhBUE02Umw5MFMybmVBTUF5UTY1RWR2TGt5VitjT1hPbTJHS3gwS3haczdncGoxZjl1MUZSVWFEK2QwVFV6ZE1mdmcvQkErMUYxYndCUUpnWnl2Z1MyVGRZUVU1TFM2Tzh2RHdzbm42M1pjdVdYOSs1Y3dlclJBREF4dnMrcU8rWGlvODd0TDBCQVBkaW1TRW5oR2F6K1EvQndjRS9adys1ZHUxYVFWSlMwbTJlK2hoOVJuMEkzNmpQNGU2TTgrUzR0d0FJUzJTQmVyMCtJekl5TWdFUDB1djFkeGN0V29RRkEvaTk2S25Qd1BFV0FHR0o3R090VnJ0dDA2Wk5HWDE5ZlozSnljbWYzYnAxNnpsdnZPaXBQMUlBbUJBaUx3ZzRjdVNJSWpzN3U3eXFxdXB6dFZyOUo5N2ZZYnpvcVQ5U0FGaG15SDAzZ043VDAvTkZRRURBYm42T1o1bWNhRlYvcUM1NDZ3SXNNMFJZakQ1VnA5UEZybDI3Rm1rZnBqbVd6V0VyU3RVZkRRRFk1ek1RUk13S0NKQ2c4Q3h6WXduT3FGZHZQRkYxYjg4WkNRT2dBOXdYWkx6eDJNSllZUlludW9Cbk9HQkdBZ0JMandFRTl5Mmg0QU1wWVl6djdXRDQ1ZnlSQW9DWHhiV3NDNU1hVVFZOG84MEF2NHpXV0R6MGZSZ3dGdS9qODN0T0FPQnp5RVgyd0FrR2lHeEFmUDQ2RXd6d09lUWllK0FFQTBRMklENS9uUWtHK0J4eWtUMXdnZ0VpR3hDZnY4NS9BRDJlV203aVI1TjFBQUFBQUVsRlRrU3VRbUNDIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiLz48L3N2Zz4=)4 4,auto !important;cursor:-webkit-image-set(url("data:image/png;base64,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")2x,url("data:image/png;base64,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")1x)4 4,auto !important;}</style></head>
+  <!-- This ARIA attribute is a workaround for a bug in Chrome. See http://crbug.com/876605 for details. -->
+  <body aria-hidden="true" class="feature_flag_api_components_v3 feature_flag_assets_panel_improvements feature_flag_auto_layout feature_flag_auto_layout_instance_update_fix feature_flag_chrome_resize_bug feature_flag_comments_sort_filter feature_flag_community_hub_likes feature_flag_defer_invisible_children feature_flag_defer_update_default_style feature_flag_desktop_drop_mac_10_9 feature_flag_desktop_no_auth feature_flag_disable_local_server_iframe feature_flag_dsa_frontend feature_flag_dsa_track_user_action_rates feature_flag_enable_public_plugins_new_orgs feature_flag_fix_constraint_import feature_flag_font_weights_relax feature_flag_frame_properties_migration feature_flag_generic_saml feature_flag_library_search_worker feature_flag_livegraph_darklaunch feature_flag_multi_select_in_presets_dropdown feature_flag_nodes_link_to_root_styles feature_flag_paste_image_as_fill feature_flag_prevent_instance_style_dirty feature_flag_server_side_search_live_launch feature_flag_set_file_thumbnail feature_flag_sss_team_library_live_launch feature_flag_tooltip_perf_fix feature_flag_use_server_side_images feature_flag_viewer_cap_viewport_tile_count feature_flag_viewer_current_bounds feature_flag_viewer_embed_api feature_flag_viewer_no_tile_grids_in_blurs feature_flag_viewer_transition_perf_metrics feature_flag_windows_touch_focus_fix feature_flag_zendesk_sync feature_flag_zendesk_web_widget" data-gr-c-s-loaded="true" id="fullscreen-body">
+    <!-- This SVG is a workaround for a bug in Chrome. See http://crbug.com/660929 for details. -->
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1px" height="1px" style="position: absolute">
+      <g transform="translate(16,179)"><path fill="#995ba5" d="m 0,8 A 8,8 0 0,1 8,0 H 15 l 6,4 3,0 6,-4 H 40 H 136.64189910888672 v 35 H 29.5 l -6,4 -3,0 -6,-4 H 8 a 8,8 0 0,1 -8,-8 z M 47.832489013671875,5 h -14.5 v 5 c 0,10 -8,-8 -8,7.5 s 8,-2.5 8,7.5 v 6 h 14.5 z M 126.64189910888672,5 h -14.5 v 5 c 0,10 -8,-8 -8,7.5 s 8,-2.5 8,7.5 v 6 h 14.5 z"></path></g>
+      <g transform="translate(16,179)"><path fill="#995ba5" d="m 0,8 A 8,8 0 0,1 8,0 H 15 l 6,4 3,0 6,-4 H 40 H 136.64189910888672 v 35 H 29.5 l -6,4 -3,0 -6,-4 H 8 a 8,8 0 0,1 -8,-8 z M 47.832489013671875,5 h -14.5 v 5 c 0,10 -8,-8 -8,7.5 s 8,-2.5 8,7.5 v 6 h 14.5 z M 126.64189910888672,5 h -14.5 v 5 c 0,10 -8,-8 -8,7.5 s 8,-2.5 8,7.5 v 6 h 14.5 z"></path></g>
+      <g transform="translate(16,179)"><path fill="#995ba5" d="m 0,8 A 8,8 0 0,1 8,0 H 15 l 6,4 3,0 6,-4 H 40 H 136.64189910888672 v 35 H 29.5 l -6,4 -3,0 -6,-4 H 8 a 8,8 0 0,1 -8,-8 z M 47.832489013671875,5 h -14.5 v 5 c 0,10 -8,-8 -8,7.5 s 8,-2.5 8,7.5 v 6 h 14.5 z M 126.64189910888672,5 h -14.5 v 5 c 0,10 -8,-8 -8,7.5 s 8,-2.5 8,7.5 v 6 h 14.5 z"></path></g>
+      <g transform="translate(16,179)"><path fill="#995ba5" d="m 0,8 A 8,8 0 0,1 8,0 H 15 l 6,4 3,0 6,-4 H 40 H 136.64189910888672 v 35 H 29.5 l -6,4 -3,0 -6,-4 H 8 a 8,8 0 0,1 -8,-8 z M 47.832489013671875,5 h -14.5 v 5 c 0,10 -8,-8 -8,7.5 s 8,-2.5 8,7.5 v 6 h 14.5 z M 126.64189910888672,5 h -14.5 v 5 c 0,10 -8,-8 -8,7.5 s 8,-2.5 8,7.5 v 6 h 14.5 z"></path></g>
+      <g transform="translate(16,179)"><path fill="#995ba5" d="m 0,8 A 8,8 0 0,1 8,0 H 15 l 6,4 3,0 6,-4 H 40 H 136.64189910888672 v 35 H 29.5 l -6,4 -3,0 -6,-4 H 8 a 8,8 0 0,1 -8,-8 z M 47.832489013671875,5 h -14.5 v 5 c 0,10 -8,-8 -8,7.5 s 8,-2.5 8,7.5 v 6 h 14.5 z M 126.64189910888672,5 h -14.5 v 5 c 0,10 -8,-8 -8,7.5 s 8,-2.5 8,7.5 v 6 h 14.5 z"></path></g>
+      <g transform="translate(16,179)"><path fill="#995ba5" d="m 0,8 A 8,8 0 0,1 8,0 H 15 l 6,4 3,0 6,-4 H 40 H 136.64189910888672 v 35 H 29.5 l -6,4 -3,0 -6,-4 H 8 a 8,8 0 0,1 -8,-8 z M 47.832489013671875,5 h -14.5 v 5 c 0,10 -8,-8 -8,7.5 s 8,-2.5 8,7.5 v 6 h 14.5 z M 126.64189910888672,5 h -14.5 v 5 c 0,10 -8,-8 -8,7.5 s 8,-2.5 8,7.5 v 6 h 14.5 z"></path></g>
+    </svg>
+
+      <div style="position: fixed; top: -1000px; left: -1000px;">
+        <div id="font-ui-400-normal">a</div>
+        <div id="font-ui-400-italic">a</div>
+        <div id="font-ui-500-normal">a</div>
+        <div id="font-ui-500-italic">a</div>
+        <div id="font-ui-600-normal">a</div>
+        <div id="font-ui-600-italic">a</div>
+
+        <div id="font-ui-400-normal-white">a</div>
+      </div>
+
+    <div id="react-page"><div class="in_app_page--app--234Z6 in_app_page--appFont--3IVZv"><div class="in_app_page--content--2V_He"><div><div></div><div><div class="fullscreen_view--banners--7O6Mv"></div><div class="fullscreen_view--page--1QuyL" data-forward-events-to-fullscreen="true" style="top: 0px;"><div><div id="fullscreen-root" style="visibility: visible;"><div class="view container-view" style="left: 0px; top: 0px; right: 0px; bottom: 0px; width: auto; height: auto; background-color: rgb(229, 229, 229);"><div class="view container-view" style="left: 0px; top: 40px; right: 240px; bottom: 0px; width: auto; height: auto;"><div class="view container-view" style="left: 241px; top: 0px; right: 0px; bottom: 0px; width: auto; height: auto;"><div class="view container-view _jf9ctkb4bj" style="left: 0px; top: 0px; right: 0px; bottom: 0px; width: auto; height: auto;"><div class="view gpu-view-content" style="display: block; left: 0px; top: 0px; right: 0px; bottom: 0px; width: auto; height: auto;"><canvas width="1660" height="1130" style="width: 830px; height: 565px;"></canvas></div></div></div><div class="view container-view" style="left: 0px; top: 0px; right: auto; bottom: 0px; width: 240px; height: auto;"></div><div class="view container-view" style="left: 240px; top: 0px; right: auto; bottom: 0px; width: 2px; height: auto;"></div></div></div><input class="focus-target" type="text"></div></div><div><div class="toolbar_view--toolbar--2396w js-fullscreen-prevent-event-capture"><a class="action--enabled--16Cku action--root--1ClVW toolbar_styles--enabledButton--2cWGq " data-tooltip="toggle-menu"><span class="svg-container"><svg class="svg" width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg"><path d="M16 13H2v1h14v-1zm0-5H2v1h14V8zm0-5H2v1h14V3z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></a><div class="toolbar_view--buttonGroup--2wM3n"><div><div class="flyout_view--flyout--1EMCu  toolbar_styles--activeButton--2RefP" data-tooltip="set-tool-default"><span class="svg-container flyout_view--flyoutButton--DXm0E"><svg class="svg" width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg"><path d="M14.872 8.859L3.646 2.072l-.98-.592.231 1.121 2.683 13 .243 1.178.664-1.003 3.038-4.59 5.22-1.417 1.127-.306-1-.604zM4.108 3.52l9.247 5.59-4.274 1.16-.182.05-.104.156-2.479 3.746L4.108 3.52z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><div class="chevron--chevronContainer--3xT09  " data-tooltip-text="Move Tools"><span class="svg-container chevron--svgChevron--ttrRg"><svg class="svg" width="8" height="7" viewBox="0 0 8 7" xmlns="http://www.w3.org/2000/svg"><path d="M3.646 5.354l-3-3 .708-.708L4 4.293l2.646-2.647.708.708-3 3L4 5.707l-.354-.353z" fill-rule="evenodd" fill-opacity="1" fill="#fff" stroke="none"></path></svg></span></div></div></div><div><div class="flyout_view--flyout--1EMCu  toolbar_styles--enabledButton--2cWGq" data-tooltip="set-tool-frame" data-onboarding-key="frame"><span class="svg-container flyout_view--flyoutButton--DXm0E"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M3 16v-3H0v-1h3V4H0V3h3V0h1v3h8V0h1v3h3v1h-3v8h3v1h-3v3h-1v-3H4v3H3zm9-4V4H4v8h8z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><div class="chevron--chevronContainer--3xT09  " data-tooltip-text="Region Tools"><span class="svg-container chevron--svgChevron--ttrRg"><svg class="svg" width="8" height="7" viewBox="0 0 8 7" xmlns="http://www.w3.org/2000/svg"><path d="M3.646 5.354l-3-3 .708-.708L4 4.293l2.646-2.647.708.708-3 3L4 5.707l-.354-.353z" fill-rule="evenodd" fill-opacity="1" fill="#fff" stroke="none"></path></svg></span></div></div></div><div><div class="flyout_view--flyout--1EMCu  toolbar_styles--enabledButton--2cWGq" data-tooltip="set-tool-rectangle"><span class="svg-container flyout_view--flyoutButton--DXm0E"><svg class="svg" width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg"><path d="M1 1h16v16H1V1zm1 1h14v14H2V2z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><div class="chevron--chevronContainer--3xT09  " data-tooltip-text="Shape Tools"><span class="svg-container chevron--svgChevron--ttrRg"><svg class="svg" width="8" height="7" viewBox="0 0 8 7" xmlns="http://www.w3.org/2000/svg"><path d="M3.646 5.354l-3-3 .708-.708L4 4.293l2.646-2.647.708.708-3 3L4 5.707l-.354-.353z" fill-rule="evenodd" fill-opacity="1" fill="#fff" stroke="none"></path></svg></span></div></div></div><div><div class="flyout_view--flyout--1EMCu  toolbar_styles--enabledButton--2cWGq" data-tooltip="set-tool-pen" data-onboarding-key="pen"><span class="svg-container flyout_view--flyoutButton--DXm0E"><svg class="svg" width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg"><path d="M3.444 2.737l6.666 1.9.012.004.011.003C12.072 5.146 13.5 6.907 13.5 9c.003.503-.063.912-.211 1.367l-.185.58.43.43 1.865 1.866-2.12 2.121-1.848-1.847-.435-.435-.585.193c-.469.157-.891.228-1.411.225-2.171 0-3.985-1.539-4.407-3.586l-.008-.037-.01-.037-1.832-6.39 4.903 4.903C7.552 8.55 7.5 8.768 7.5 9c0 .828.672 1.5 1.5 1.5.828 0 1.5-.672 1.5-1.5 0-.828-.672-1.5-1.5-1.5-.232 0-.45.052-.647.146l-4.91-4.91zm9.834 14.041l3.536-3.535-2.572-2.572c.167-.527.258-1.089.258-1.671 0-2.56-1.748-4.71-4.115-5.324L1 1l2.613 9.116C4.13 12.618 6.345 14.5 9 14.5c.602 0 1.182-.097 1.724-.276l2.554 2.554z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><div class="chevron--chevronContainer--3xT09  " data-tooltip-text="Drawing Tools"><span class="svg-container chevron--svgChevron--ttrRg"><svg class="svg" width="8" height="7" viewBox="0 0 8 7" xmlns="http://www.w3.org/2000/svg"><path d="M3.646 5.354l-3-3 .708-.708L4 4.293l2.646-2.647.708.708-3 3L4 5.707l-.354-.353z" fill-rule="evenodd" fill-opacity="1" fill="#fff" stroke="none"></path></svg></span></div></div></div><div class="toolbar_view--toolButtonContainer--1HAfB"><span class="svg-container toolbar_view--iconButton--Zxsnv toolbar_styles--enabledButton--2cWGq" data-tooltip="set-tool-type"><svg class="svg" width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg"><path d="M2 5h1V2h5v14H5v1h7v-1H9V2h5v3h1V1H2v4z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></div><div class="toolbar_view--toolButtonContainer--1HAfB"><span class="svg-container toolbar_view--iconButton--Zxsnv toolbar_styles--enabledButton--2cWGq" data-tooltip="set-tool-comments" data-onboarding-key="comment"><svg class="svg" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M1.944 16.75l1.696-2.758.287-.465-.237-.493c-.465-.951-.697-1.91-.69-3.034 0-3.866 3.134-7 7-7 3.866 0 7 3.134 7 7 0 3.866-3.134 7-7 7-1.14.007-2.112-.232-3.074-.709l-.268-.131-.296.037-4.418.552zm4.543.44c1.06.518 2.253.81 3.513.81 4.418 0 8-3.582 8-8 0-4.418-3.582-8-8-8-4.418 0-8 3.582-8 8 0 1.243.283 2.419.789 3.468l-2.117 3.44L0 18l1.272-.159 5.215-.652z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></div></div><div class="toolbar_view--flexibleSpace--X6lgG"></div><div class="toolbar_view--buttonGroup--2wM3n toolbar_view--centerButtonGroup--3K7ek"><div class="cachedSubtree" style="display: inline;"><div class="filename_view--filename--1GD6c " id="fullscreen-filename"><div class="filename_view--pageTitle--89RpN text--fontNeg14--uh3vw text--_fontBase--YWDo0 text--_whiteText--2PkdM"><div class="filename_view--folder--QARXN"><div class="filename_view--folderNameInteractive--3fkuc filename_view--folderName--2kvPt ellipsis--ellipsis--1RWY6">Drafts</div><span class="svg-container filename_view--pathSeparator--1gsv7"><svg class="svg" width="9" height="18" viewBox="0 0 9 18" xmlns="http://www.w3.org/2000/svg"><path d="M1.032 16.825l6-16 .936.35-6 16-.936-.35z" fill-rule="nonzero" fill-opacity="1" fill="#fff" stroke="none"></path></svg></span></div><span class="filename_view--titleWithToggleContainer--2D-PN filename_view--title--2tmkq ellipsis--ellipsis--1RWY6">Lookahead</span><div class="chevron--chevronContainer--3xT09  "><span class="svg-container chevron--svgChevron--ttrRg"><svg class="svg" width="8" height="7" viewBox="0 0 8 7" xmlns="http://www.w3.org/2000/svg"><path d="M3.646 5.354l-3-3 .708-.708L4 4.293l2.646-2.647.708.708-3 3L4 5.707l-.354-.353z" fill-rule="evenodd" fill-opacity="1" fill="#fff" stroke="none"></path></svg></span></div></div></div></div></div><div class="toolbar_view--buttonGroup--2wM3n"><div class="multiplayer_view--multiplayerView--19Y20"><style>
+  .multiplayer-animation-svg {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+  }
+
+  .multiplayer-animation-droplet {
+    left: 13px;
+    top: 0px;
+    height: 2px;
+    width: 14px;
+    border-radius: 0px;
+    position: absolute;
+  }
+
+  .multiplayer-animation-droplet.selected {
+    animation: droplet 0.3s ease-in forwards;
+  }
+
+  .multiplayer-animation-droplet.deselected {
+    animation: droplet-reverse 0.2s ease-out 0.4s forwards;
+    left: 16.5px;
+    top: 0px;
+    height: 0px;
+    width: 0px;
+    border-radius: 0px;
+  }
+
+  .multiplayer-animation-circle {
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+    transform-origin: center;
+    transform: rotateZ(-90deg);
+  }
+
+  .multiplayer-animation-circle.selected {
+    animation: draw-circle 0.15s ease-in 0.3s forwards;
+  }
+
+  .multiplayer-animation-circle.deselected {
+    animation: draw-circle-reverse 0.4s ease-in forwards;
+  }
+
+  @keyframes droplet {
+    0% {
+      left: 13px;
+      top: 0px;
+      height: 2px;
+      width: 14px;
+      border-radius: 0px;
+    }
+    20% {
+      left: 16.5px;
+      top: -3.5px;
+      height: 7px;
+      width: 7px;
+      border-radius: 100%;
+    }
+    66% {
+      top: -2px;
+      height: 7px;
+    }
+    99% {
+      top: 5px;
+      left: 18.5px;
+      height: 3px;
+      width: 3px;
+      border-radius: 100%;
+    }
+    100% {
+      top: 5px;
+      left: 19.5px;
+      height: 1px;
+      width: 1px;
+      border-radius: 100%;
+    }
+  }
+
+  @keyframes draw-circle {
+    0% {
+      stroke-dashoffset: 400;
+    }
+    100% {
+      stroke-dashoffset: 300;
+    }
+  }
+
+  @keyframes droplet-reverse {
+    0% {
+      left: 16.5px;
+      top: 0px;
+      height: 2px;
+      width: 2px;
+      border-radius: 0px;
+    }
+    100% {
+      left: 13px;
+      top: 0px;
+      height: 2px;
+      width: 14px;
+      border-radius: 0px;
+    }
+  }
+
+  @keyframes draw-circle-reverse {
+    0% {
+      stroke-dashoffset: 300;
+    }
+    100% {
+      stroke-dashoffset: 400;
+    }
+  }
+</style><span class="multiplayer_view--users--2LGXC"><div class="multiplayer_view--userIconView--1wivF"><div data-tooltip-text="Alex Leybourne (You)" data-tooltip-offset-y="8"><svg class="multiplayer-animation-svg" viewBox="0 0 40 40"><circle class="multiplayer-animation-circle null" cx="20" cy="20" r="14.5" fill="none" stroke="#FFC700" stroke-width="2.4"></circle></svg><div class="multiplayer-animation-droplet null" style="background-color: rgb(255, 199, 0);"></div><div class="avatar--root--2kH_E  multiplayer_view--userIconAvatar--3JhXH" style="position: relative; background: white;"><img class="avatar--root--2kH_E  multiplayer_view--userIconAvatar--3JhXH" src="./Lookahead –  wireframe v1 - Figma_files/8e6572a10181b861116c7f93a1cc4132" style="position: absolute;"></div></div></div><div class="multiplayer_view--userIconView--1wivF" data-tooltip-text="Anonymous"><svg class="multiplayer-animation-svg" viewBox="0 0 40 40"><circle class="multiplayer-animation-circle null" cx="20" cy="20" r="14.5" fill="none" stroke="#EF5533" stroke-width="2.4"></circle></svg><div class="multiplayer-animation-droplet null" style="background-color: rgb(239, 85, 51);"></div><div class="avatar--root--2kH_E  multiplayer_view--userIconAvatar--3JhXH" style="position: relative; background: rgb(242, 78, 30);"><span style="color: black; display: flex; justify-content: center;">?</span></div></div></span><div class="toolbar_view--shareButton--Q6fI7 toolbar_view--textButtonContainer--3iQPl toolbar_view--textButton--eiCIw basic_form--primaryBtn--3NqnQ basic_form--btn--3A-Ju ellipsis--ellipsis--1RWY6 text--fontPos11--RSei3 text--_fontBase--YWDo0" data-onboarding-key="share">Share</div></div><a class="action--enabled--16Cku action--root--1ClVW toolbar_styles--enabledButton--2cWGq " data-tooltip-text="Present"><span class="svg-container"><svg class="svg" width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 14.098l.765.478 8 5 .678.424-.678.424-8 5-.765.478V14.098zm1 1.804v8.196L24.557 20 18 15.902z" fill-rule="evenodd" fill-opacity="1" fill="#fff" stroke="none"></path></svg></span></a><a class="action--enabled--16Cku action--root--1ClVW toolbar_styles--enabledButton--2cWGq zoom_menu--zoomMenu--GRL4u" data-onboarding-key="zoom-menu"><div class="zoom_menu--zoomAmount--3dyBJ">19%</div><div class="zoom_menu--chevronContainer--2j64e"><div class="chevron--chevronContainer--3xT09  "><span class="svg-container chevron--svgChevron--ttrRg"><svg class="svg" width="8" height="7" viewBox="0 0 8 7" xmlns="http://www.w3.org/2000/svg"><path d="M3.646 5.354l-3-3 .708-.708L4 4.293l2.646-2.647.708.708-3 3L4 5.707l-.354-.353z" fill-rule="evenodd" fill-opacity="1" fill="#fff" stroke="none"></path></svg></span></div></div></a></div></div></div><div class="left_panel--panelContainer--1OR1n js-fullscreen-prevent-event-capture" style="width: 240px;"><div class="left_panel--content--35qKc"><div class="pages_panel--verticalFlexContainer--3d2_R pagesPanel" style="width: 240px;"><div class="pages_panel--tabsHeaderBordered--28fYc pages_panel--tabsHeader--p4Khp"><div class="pages_panel--tabActive--JOVKa pages_panel--tab--3s1Y5" data-label="Layers">Layers</div><div class="pages_panel--assetsTab--2Db-N"><div class="pages_panel--tab--3s1Y5" data-label="Assets">Assets</div></div><div class="pages_panel--pageTab--3Ohc_ false"><span class="pages_panel--pageTabText--3tl1n ellipsis--ellipsis--1RWY6" style="max-width: 85px;">Page 1</span><span class="svg-container pages_panel--chevron--1CQI-"><svg class="svg" width="8" height="8" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg"><path d="M.646 3.354l.708-.708L4 5.293l2.646-2.647.708.708L4 6.707.646 3.354z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></div></div><div class="pages_panel--resizeLineContainer--3EcNq"><div class="pages_panel--resizeLine--1ni95"></div></div><div class="pages_panel--objectPanelContent--1FJNF"><div><div class="scroll_container--clipContainer--2PG4d objects_panel--scrollContainerWithBorder--2qm9B objects_panel--scrollContainer--2bYEQ" style="width: 240px;"><div class="scroll_container--scrollContainer--1eEK2"><div class="scroll_container--innerScrollContainer--21gfN" style="width: 240px;"><div class="objects_panel--rowContainer--A7Umr" style="height: 1216px;"><div class=" object_row--row--2t1Gu object_row--topLevel--1ThUW" draggable="false" style="transform: translate3d(0px, 32px, 0px); width: 240px; height: 32px;"><span class="object_row--indents--2XlJC"><span class="object_row--indent--2n1Cf"></span></span><span class="svg-container object_row--customLayerIcon--pV50f object_row--layerIcon--LXryZ"><svg class="svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="10" height="10"><path d="M0.5 4.9775L7.025 4.9775M7.025 4.9775L7.025 7.0025L9.5 4.9775L7.025 2.9975V4.9775Z" fill="none" stroke-width="1"></path></svg></span><span class="object_row--rowText--2tEqb ellipsis--ellipsis--1RWY6">Vector 15</span><span class="object_row--rowActions--4AOul"><span class="svg-container object_row--lockIcon--cwjkx"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M10 6v1h.5c.276 0 .5.224.5.5v5c0 .276-.224.5-.5.5h-6c-.276 0-.5-.224-.5-.5v-5c0-.276.224-.5.5-.5H9V4.5C9 3.12 10.12 2 11.5 2 12.88 2 14 3.12 14 4.5V6h-1V4.5c0-.828-.672-1.5-1.5-1.5-.828 0-1.5.672-1.5 1.5V6z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="svg-container object_row--visibleIcon--1gPvn"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 10c1.105 0 2-.895 2-2 0-1.105-.895-2-2-2-1.104 0-2 .895-2 2 0 1.105.896 2 2 2z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path><path d="M8 4c2.878 0 5.378 1.621 6.635 4-1.257 2.379-3.757 4-6.635 4-2.878 0-5.377-1.621-6.635-4C2.623 5.621 5.122 4 8 4zm0 7c-2.3 0-4.322-1.194-5.478-3C3.678 6.194 5.7 5 8 5c2.3 0 4.322 1.194 5.479 3C12.322 9.806 10.3 11 8 11z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span></div><div class=" object_row--row--2t1Gu object_row--topLevel--1ThUW" draggable="false" style="transform: translate3d(0px, 0px, 0px); width: 240px; height: 32px;"><span class="object_row--indents--2XlJC"><span class="object_row--indent--2n1Cf"></span></span><span class="svg-container object_row--customLayerIcon--pV50f object_row--layerIcon--LXryZ"><svg class="svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="10" height="10"><path d="M0.5 4.99575L9.03258 4.99575M9.03258 4.99575V5.37819L9.5 4.99575L9.03258 4.62181V4.99575Z" fill="none" stroke-width="1"></path></svg></span><span class="object_row--rowText--2tEqb ellipsis--ellipsis--1RWY6">Vector 16</span><span class="object_row--rowActions--4AOul"><span class="svg-container object_row--lockIcon--cwjkx"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M10 6v1h.5c.276 0 .5.224.5.5v5c0 .276-.224.5-.5.5h-6c-.276 0-.5-.224-.5-.5v-5c0-.276.224-.5.5-.5H9V4.5C9 3.12 10.12 2 11.5 2 12.88 2 14 3.12 14 4.5V6h-1V4.5c0-.828-.672-1.5-1.5-1.5-.828 0-1.5.672-1.5 1.5V6z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="svg-container object_row--visibleIcon--1gPvn"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 10c1.105 0 2-.895 2-2 0-1.105-.895-2-2-2-1.104 0-2 .895-2 2 0 1.105.896 2 2 2z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path><path d="M8 4c2.878 0 5.378 1.621 6.635 4-1.257 2.379-3.757 4-6.635 4-2.878 0-5.377-1.621-6.635-4C2.623 5.621 5.122 4 8 4zm0 7c-2.3 0-4.322-1.194-5.478-3C3.678 6.194 5.7 5 8 5c2.3 0 4.322 1.194 5.479 3C12.322 9.806 10.3 11 8 11z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span></div><div class=" object_row--row--2t1Gu object_row--topLevel--1ThUW" draggable="false" style="transform: translate3d(0px, 64px, 0px); width: 240px; height: 32px;"><span class="object_row--indents--2XlJC"><span class="object_row--indent--2n1Cf"></span></span><span class="svg-container object_row--customLayerIcon--pV50f object_row--layerIcon--LXryZ"><svg class="svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="10" height="10"><path d="M0.5 4.9775L7.025 4.9775M7.025 4.9775L7.025 7.0025L9.5 4.9775L7.025 2.9975V4.9775Z" fill="none" stroke-width="1"></path></svg></span><span class="object_row--rowText--2tEqb ellipsis--ellipsis--1RWY6">Vector 14</span><span class="object_row--rowActions--4AOul"><span class="svg-container object_row--lockIcon--cwjkx"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M10 6v1h.5c.276 0 .5.224.5.5v5c0 .276-.224.5-.5.5h-6c-.276 0-.5-.224-.5-.5v-5c0-.276.224-.5.5-.5H9V4.5C9 3.12 10.12 2 11.5 2 12.88 2 14 3.12 14 4.5V6h-1V4.5c0-.828-.672-1.5-1.5-1.5-.828 0-1.5.672-1.5 1.5V6z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="svg-container object_row--visibleIcon--1gPvn"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 10c1.105 0 2-.895 2-2 0-1.105-.895-2-2-2-1.104 0-2 .895-2 2 0 1.105.896 2 2 2z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path><path d="M8 4c2.878 0 5.378 1.621 6.635 4-1.257 2.379-3.757 4-6.635 4-2.878 0-5.377-1.621-6.635-4C2.623 5.621 5.122 4 8 4zm0 7c-2.3 0-4.322-1.194-5.478-3C3.678 6.194 5.7 5 8 5c2.3 0 4.322 1.194 5.479 3C12.322 9.806 10.3 11 8 11z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span></div><div class=" object_row--row--2t1Gu object_row--topLevel--1ThUW" draggable="false" style="transform: translate3d(0px, 96px, 0px); width: 240px; height: 32px;"><span class="object_row--indents--2XlJC"><span class="object_row--indent--2n1Cf"></span></span><span class="svg-container object_row--customLayerIcon--pV50f object_row--layerIcon--LXryZ"><svg class="svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="10" height="10"><path d="M8.64804 2.42811L8.64804 0.5L2.28078 0.5L2.28078 9.5L1.07011 9.5M8.64804 2.42811L8.35979 2.42811L8.64804 2.78043L8.92989 2.42811L8.64804 2.42811Z" fill="none" stroke-width="1"></path></svg></span><span class="object_row--rowText--2tEqb ellipsis--ellipsis--1RWY6">Vector 11</span><span class="object_row--rowActions--4AOul"><span class="svg-container object_row--lockIcon--cwjkx"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M10 6v1h.5c.276 0 .5.224.5.5v5c0 .276-.224.5-.5.5h-6c-.276 0-.5-.224-.5-.5v-5c0-.276.224-.5.5-.5H9V4.5C9 3.12 10.12 2 11.5 2 12.88 2 14 3.12 14 4.5V6h-1V4.5c0-.828-.672-1.5-1.5-1.5-.828 0-1.5.672-1.5 1.5V6z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="svg-container object_row--visibleIcon--1gPvn"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 10c1.105 0 2-.895 2-2 0-1.105-.895-2-2-2-1.104 0-2 .895-2 2 0 1.105.896 2 2 2z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path><path d="M8 4c2.878 0 5.378 1.621 6.635 4-1.257 2.379-3.757 4-6.635 4-2.878 0-5.377-1.621-6.635-4C2.623 5.621 5.122 4 8 4zm0 7c-2.3 0-4.322-1.194-5.478-3C3.678 6.194 5.7 5 8 5c2.3 0 4.322 1.194 5.479 3C12.322 9.806 10.3 11 8 11z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span></div><div class=" object_row--row--2t1Gu object_row--topLevel--1ThUW" draggable="false" style="transform: translate3d(0px, 128px, 0px); width: 240px; height: 32px;"><span class="object_row--indents--2XlJC"><span class="object_row--indent--2n1Cf"></span></span><span class="svg-container object_row--customLayerIcon--pV50f object_row--layerIcon--LXryZ"><svg class="svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="10" height="10"><path d="M9.15239 5.09164L2.33919 5.09164H0.5L0.5 4.62395M9.15239 5.09164V5.37605L9.5 5.09164L9.15239 4.81355V5.09164Z" fill="none" stroke-width="1"></path></svg></span><span class="object_row--rowText--2tEqb ellipsis--ellipsis--1RWY6">Vector 12</span><span class="object_row--rowActions--4AOul"><span class="svg-container object_row--lockIcon--cwjkx"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M10 6v1h.5c.276 0 .5.224.5.5v5c0 .276-.224.5-.5.5h-6c-.276 0-.5-.224-.5-.5v-5c0-.276.224-.5.5-.5H9V4.5C9 3.12 10.12 2 11.5 2 12.88 2 14 3.12 14 4.5V6h-1V4.5c0-.828-.672-1.5-1.5-1.5-.828 0-1.5.672-1.5 1.5V6z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="svg-container object_row--visibleIcon--1gPvn"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 10c1.105 0 2-.895 2-2 0-1.105-.895-2-2-2-1.104 0-2 .895-2 2 0 1.105.896 2 2 2z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path><path d="M8 4c2.878 0 5.378 1.621 6.635 4-1.257 2.379-3.757 4-6.635 4-2.878 0-5.377-1.621-6.635-4C2.623 5.621 5.122 4 8 4zm0 7c-2.3 0-4.322-1.194-5.478-3C3.678 6.194 5.7 5 8 5c2.3 0 4.322 1.194 5.479 3C12.322 9.806 10.3 11 8 11z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span></div><div class=" object_row--row--2t1Gu object_row--topLevel--1ThUW" draggable="false" style="transform: translate3d(0px, 160px, 0px); width: 240px; height: 32px;"><span class="object_row--indents--2XlJC"><span class="object_row--indent--2n1Cf"></span></span><span class="svg-container object_row--customLayerIcon--pV50f object_row--layerIcon--LXryZ"><svg class="svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="10" height="10"><path d="M0.5 4.98571L7.92857 4.98571M7.92857 4.98571V6.27143L9.5 4.98571L7.92857 3.72857V4.98571Z" fill="none" stroke-width="1"></path></svg></span><span class="object_row--rowText--2tEqb ellipsis--ellipsis--1RWY6">Vector 13</span><span class="object_row--rowActions--4AOul"><span class="svg-container object_row--lockIcon--cwjkx"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M10 6v1h.5c.276 0 .5.224.5.5v5c0 .276-.224.5-.5.5h-6c-.276 0-.5-.224-.5-.5v-5c0-.276.224-.5.5-.5H9V4.5C9 3.12 10.12 2 11.5 2 12.88 2 14 3.12 14 4.5V6h-1V4.5c0-.828-.672-1.5-1.5-1.5-.828 0-1.5.672-1.5 1.5V6z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="svg-container object_row--visibleIcon--1gPvn"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 10c1.105 0 2-.895 2-2 0-1.105-.895-2-2-2-1.104 0-2 .895-2 2 0 1.105.896 2 2 2z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path><path d="M8 4c2.878 0 5.378 1.621 6.635 4-1.257 2.379-3.757 4-6.635 4-2.878 0-5.377-1.621-6.635-4C2.623 5.621 5.122 4 8 4zm0 7c-2.3 0-4.322-1.194-5.478-3C3.678 6.194 5.7 5 8 5c2.3 0 4.322 1.194 5.479 3C12.322 9.806 10.3 11 8 11z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span></div><div class=" object_row--row--2t1Gu object_row--topLevel--1ThUW" draggable="false" style="transform: translate3d(0px, 192px, 0px); width: 240px; height: 32px;"><span class="object_row--indents--2XlJC"><span class="object_row--indent--2n1Cf"></span></span><span class="svg-container object_row--customLayerIcon--pV50f object_row--layerIcon--LXryZ"><svg class="svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="10" height="10"><path d="M9.5 5.02368L3.10526 5.02368M3.10526 5.02368L3.10526 2.8921L0.5 5.02368L3.10526 7.10789L3.10526 5.02368Z" fill="none" stroke-width="1"></path></svg></span><span class="object_row--rowText--2tEqb ellipsis--ellipsis--1RWY6">Vector 20</span><span class="object_row--rowActions--4AOul"><span class="svg-container object_row--lockIcon--cwjkx"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M10 6v1h.5c.276 0 .5.224.5.5v5c0 .276-.224.5-.5.5h-6c-.276 0-.5-.224-.5-.5v-5c0-.276.224-.5.5-.5H9V4.5C9 3.12 10.12 2 11.5 2 12.88 2 14 3.12 14 4.5V6h-1V4.5c0-.828-.672-1.5-1.5-1.5-.828 0-1.5.672-1.5 1.5V6z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="svg-container object_row--visibleIcon--1gPvn"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 10c1.105 0 2-.895 2-2 0-1.105-.895-2-2-2-1.104 0-2 .895-2 2 0 1.105.896 2 2 2z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path><path d="M8 4c2.878 0 5.378 1.621 6.635 4-1.257 2.379-3.757 4-6.635 4-2.878 0-5.377-1.621-6.635-4C2.623 5.621 5.122 4 8 4zm0 7c-2.3 0-4.322-1.194-5.478-3C3.678 6.194 5.7 5 8 5c2.3 0 4.322 1.194 5.479 3C12.322 9.806 10.3 11 8 11z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span></div><div class=" object_row--row--2t1Gu object_row--topLevel--1ThUW" draggable="false" style="transform: translate3d(0px, 224px, 0px); width: 240px; height: 32px;"><span class="object_row--indents--2XlJC"><span class="object_row--indent--2n1Cf"></span></span><span class="svg-container object_row--customLayerIcon--pV50f object_row--layerIcon--LXryZ"><svg class="svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="10" height="10"><path d="M0.5 4.97632L6.89474 4.97632M6.89474 4.97632L6.89474 7.10789L9.5 4.97632L6.89474 2.89211V4.97632Z" fill="none" stroke-width="1"></path></svg></span><span class="object_row--rowText--2tEqb ellipsis--ellipsis--1RWY6">Vector 25</span><span class="object_row--rowActions--4AOul"><span class="svg-container object_row--lockIcon--cwjkx"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M10 6v1h.5c.276 0 .5.224.5.5v5c0 .276-.224.5-.5.5h-6c-.276 0-.5-.224-.5-.5v-5c0-.276.224-.5.5-.5H9V4.5C9 3.12 10.12 2 11.5 2 12.88 2 14 3.12 14 4.5V6h-1V4.5c0-.828-.672-1.5-1.5-1.5-.828 0-1.5.672-1.5 1.5V6z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="svg-container object_row--visibleIcon--1gPvn"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 10c1.105 0 2-.895 2-2 0-1.105-.895-2-2-2-1.104 0-2 .895-2 2 0 1.105.896 2 2 2z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path><path d="M8 4c2.878 0 5.378 1.621 6.635 4-1.257 2.379-3.757 4-6.635 4-2.878 0-5.377-1.621-6.635-4C2.623 5.621 5.122 4 8 4zm0 7c-2.3 0-4.322-1.194-5.478-3C3.678 6.194 5.7 5 8 5c2.3 0 4.322 1.194 5.479 3C12.322 9.806 10.3 11 8 11z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span></div><div class=" object_row--row--2t1Gu object_row--topLevel--1ThUW" draggable="false" style="transform: translate3d(0px, 256px, 0px); width: 240px; height: 32px;"><span class="object_row--indents--2XlJC"><span class="object_row--indent--2n1Cf"></span></span><span class="svg-container object_row--customLayerIcon--pV50f object_row--layerIcon--LXryZ"><svg class="svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="10" height="10"><path d="M0.5 4.97632L6.89474 4.97632M6.89474 4.97632L6.89474 7.10789L9.5 4.97632L6.89474 2.89211V4.97632Z" fill="none" stroke-width="1"></path></svg></span><span class="object_row--rowText--2tEqb ellipsis--ellipsis--1RWY6">Vector 19</span><span class="object_row--rowActions--4AOul"><span class="svg-container object_row--lockIcon--cwjkx"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M10 6v1h.5c.276 0 .5.224.5.5v5c0 .276-.224.5-.5.5h-6c-.276 0-.5-.224-.5-.5v-5c0-.276.224-.5.5-.5H9V4.5C9 3.12 10.12 2 11.5 2 12.88 2 14 3.12 14 4.5V6h-1V4.5c0-.828-.672-1.5-1.5-1.5-.828 0-1.5.672-1.5 1.5V6z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="svg-container object_row--visibleIcon--1gPvn"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 10c1.105 0 2-.895 2-2 0-1.105-.895-2-2-2-1.104 0-2 .895-2 2 0 1.105.896 2 2 2z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path><path d="M8 4c2.878 0 5.378 1.621 6.635 4-1.257 2.379-3.757 4-6.635 4-2.878 0-5.377-1.621-6.635-4C2.623 5.621 5.122 4 8 4zm0 7c-2.3 0-4.322-1.194-5.478-3C3.678 6.194 5.7 5 8 5c2.3 0 4.322 1.194 5.479 3C12.322 9.806 10.3 11 8 11z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span></div><div class=" object_row--row--2t1Gu object_row--topLevel--1ThUW" draggable="false" style="transform: translate3d(0px, 288px, 0px); width: 240px; height: 32px;"><span class="object_row--indents--2XlJC"><span class="object_row--indent--2n1Cf"></span></span><span class="svg-container object_row--customLayerIcon--pV50f object_row--layerIcon--LXryZ"><svg class="svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="10" height="10"><path d="M0.5 4.98117L7.42887 4.98117M7.42887 4.98117L7.42887 6.67573L9.5 4.98117L7.42887 3.32427V4.98117Z" fill="none" stroke-width="1"></path></svg></span><span class="object_row--rowText--2tEqb ellipsis--ellipsis--1RWY6">Vector 18</span><span class="object_row--rowActions--4AOul"><span class="svg-container object_row--lockIcon--cwjkx"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M10 6v1h.5c.276 0 .5.224.5.5v5c0 .276-.224.5-.5.5h-6c-.276 0-.5-.224-.5-.5v-5c0-.276.224-.5.5-.5H9V4.5C9 3.12 10.12 2 11.5 2 12.88 2 14 3.12 14 4.5V6h-1V4.5c0-.828-.672-1.5-1.5-1.5-.828 0-1.5.672-1.5 1.5V6z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="svg-container object_row--visibleIcon--1gPvn"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 10c1.105 0 2-.895 2-2 0-1.105-.895-2-2-2-1.104 0-2 .895-2 2 0 1.105.896 2 2 2z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path><path d="M8 4c2.878 0 5.378 1.621 6.635 4-1.257 2.379-3.757 4-6.635 4-2.878 0-5.377-1.621-6.635-4C2.623 5.621 5.122 4 8 4zm0 7c-2.3 0-4.322-1.194-5.478-3C3.678 6.194 5.7 5 8 5c2.3 0 4.322 1.194 5.479 3C12.322 9.806 10.3 11 8 11z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span></div><div class=" object_row--row--2t1Gu object_row--topLevel--1ThUW" draggable="false" style="transform: translate3d(0px, 320px, 0px); width: 240px; height: 32px;"><span class="object_row--indents--2XlJC"><span class="object_row--indent--2n1Cf"></span></span><span class="svg-container object_row--customLayerIcon--pV50f object_row--layerIcon--LXryZ"><svg class="svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="10" height="10"><path d="M0.5 4.98571L7.92857 4.98571M7.92857 4.98571V6.27143L9.5 4.98571L7.92857 3.72857V4.98571Z" fill="none" stroke-width="1"></path></svg></span><span class="object_row--rowText--2tEqb ellipsis--ellipsis--1RWY6">Vector 10</span><span class="object_row--rowActions--4AOul"><span class="svg-container object_row--lockIcon--cwjkx"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M10 6v1h.5c.276 0 .5.224.5.5v5c0 .276-.224.5-.5.5h-6c-.276 0-.5-.224-.5-.5v-5c0-.276.224-.5.5-.5H9V4.5C9 3.12 10.12 2 11.5 2 12.88 2 14 3.12 14 4.5V6h-1V4.5c0-.828-.672-1.5-1.5-1.5-.828 0-1.5.672-1.5 1.5V6z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="svg-container object_row--visibleIcon--1gPvn"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 10c1.105 0 2-.895 2-2 0-1.105-.895-2-2-2-1.104 0-2 .895-2 2 0 1.105.896 2 2 2z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path><path d="M8 4c2.878 0 5.378 1.621 6.635 4-1.257 2.379-3.757 4-6.635 4-2.878 0-5.377-1.621-6.635-4C2.623 5.621 5.122 4 8 4zm0 7c-2.3 0-4.322-1.194-5.478-3C3.678 6.194 5.7 5 8 5c2.3 0 4.322 1.194 5.479 3C12.322 9.806 10.3 11 8 11z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span></div><div class=" object_row--row--2t1Gu object_row--topLevel--1ThUW" draggable="false" style="transform: translate3d(0px, 352px, 0px); width: 240px; height: 32px;"><span class="object_row--indents--2XlJC"><span class="object_row--indent--2n1Cf"></span></span><span class="svg-container object_row--layerIcon--LXryZ"><svg class="svg" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h10v3H9V1H5.5v8H7v1H3V9h1.5V1H1v2H0V0z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="object_row--rowText--2tEqb ellipsis--ellipsis--1RWY6">Starting Page</span><span class="object_row--rowActions--4AOul"><span class="svg-container object_row--lockIcon--cwjkx"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M10 6v1h.5c.276 0 .5.224.5.5v5c0 .276-.224.5-.5.5h-6c-.276 0-.5-.224-.5-.5v-5c0-.276.224-.5.5-.5H9V4.5C9 3.12 10.12 2 11.5 2 12.88 2 14 3.12 14 4.5V6h-1V4.5c0-.828-.672-1.5-1.5-1.5-.828 0-1.5.672-1.5 1.5V6z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="svg-container object_row--visibleIcon--1gPvn"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 10c1.105 0 2-.895 2-2 0-1.105-.895-2-2-2-1.104 0-2 .895-2 2 0 1.105.896 2 2 2z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path><path d="M8 4c2.878 0 5.378 1.621 6.635 4-1.257 2.379-3.757 4-6.635 4-2.878 0-5.377-1.621-6.635-4C2.623 5.621 5.122 4 8 4zm0 7c-2.3 0-4.322-1.194-5.478-3C3.678 6.194 5.7 5 8 5c2.3 0 4.322 1.194 5.479 3C12.322 9.806 10.3 11 8 11z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span></div><div class=" object_row--row--2t1Gu object_row--topLevel--1ThUW" draggable="false" style="transform: translate3d(0px, 384px, 0px); width: 240px; height: 32px;"><span class="object_row--indents--2XlJC"><span class="object_row--indent--2n1Cf"></span></span><span class="svg-container object_row--customLayerIcon--pV50f object_row--layerIcon--LXryZ"><svg class="svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="10" height="10"><path d="M9.35735 4.56124L9.35735 4.21326L0.5 4.21326L0.5 5.78674M9.35735 4.56124L9.5 4.56124L9.35735 4.73847L9.20821 4.56124L9.35735 4.56124Z" fill="none" stroke-width="1"></path></svg></span><span class="object_row--rowText--2tEqb ellipsis--ellipsis--1RWY6">Vector 24</span><span class="object_row--rowActions--4AOul"><span class="svg-container object_row--lockIcon--cwjkx"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M10 6v1h.5c.276 0 .5.224.5.5v5c0 .276-.224.5-.5.5h-6c-.276 0-.5-.224-.5-.5v-5c0-.276.224-.5.5-.5H9V4.5C9 3.12 10.12 2 11.5 2 12.88 2 14 3.12 14 4.5V6h-1V4.5c0-.828-.672-1.5-1.5-1.5-.828 0-1.5.672-1.5 1.5V6z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="svg-container object_row--visibleIcon--1gPvn"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 10c1.105 0 2-.895 2-2 0-1.105-.895-2-2-2-1.104 0-2 .895-2 2 0 1.105.896 2 2 2z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path><path d="M8 4c2.878 0 5.378 1.621 6.635 4-1.257 2.379-3.757 4-6.635 4-2.878 0-5.377-1.621-6.635-4C2.623 5.621 5.122 4 8 4zm0 7c-2.3 0-4.322-1.194-5.478-3C3.678 6.194 5.7 5 8 5c2.3 0 4.322 1.194 5.479 3C12.322 9.806 10.3 11 8 11z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span></div><div class=" object_row--row--2t1Gu object_row--topLevel--1ThUW" draggable="false" style="transform: translate3d(0px, 416px, 0px); width: 240px; height: 32px;"><span class="object_row--indents--2XlJC"><span class="object_row--indent--2n1Cf"></span></span><span class="svg-container object_row--customLayerIcon--pV50f object_row--layerIcon--LXryZ"><svg class="svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="10" height="10"><path d="M0.643444 6.46052L0.643444 5.96498L3.14718 5.96498L9.40872 5.96498L9.40872 3.36127L9.5 3.36127M0.643444 6.46052L0.5 6.46052L0.643444 6.63873L0.793407 6.46052L0.643444 6.46052Z" fill="none" stroke-width="1"></path></svg></span><span class="object_row--rowText--2tEqb ellipsis--ellipsis--1RWY6">Vector 17</span><span class="object_row--rowActions--4AOul"><span class="svg-container object_row--lockIcon--cwjkx"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M10 6v1h.5c.276 0 .5.224.5.5v5c0 .276-.224.5-.5.5h-6c-.276 0-.5-.224-.5-.5v-5c0-.276.224-.5.5-.5H9V4.5C9 3.12 10.12 2 11.5 2 12.88 2 14 3.12 14 4.5V6h-1V4.5c0-.828-.672-1.5-1.5-1.5-.828 0-1.5.672-1.5 1.5V6z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="svg-container object_row--visibleIcon--1gPvn"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 10c1.105 0 2-.895 2-2 0-1.105-.895-2-2-2-1.104 0-2 .895-2 2 0 1.105.896 2 2 2z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path><path d="M8 4c2.878 0 5.378 1.621 6.635 4-1.257 2.379-3.757 4-6.635 4-2.878 0-5.377-1.621-6.635-4C2.623 5.621 5.122 4 8 4zm0 7c-2.3 0-4.322-1.194-5.478-3C3.678 6.194 5.7 5 8 5c2.3 0 4.322 1.194 5.479 3C12.322 9.806 10.3 11 8 11z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span></div><div class=" object_row--row--2t1Gu object_row--topLevel--1ThUW" draggable="false" style="transform: translate3d(0px, 448px, 0px); width: 240px; height: 32px;"><span class="object_row--indents--2XlJC"><span class="object_row--indent--2n1Cf"></span></span><span class="svg-container object_row--customLayerIcon--pV50f object_row--layerIcon--LXryZ"><svg class="svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="10" height="10"><path d="M0.987685 4.84483L0.987685 3.1601L9.49999 3.1601L9.5 6.8399M0.987685 4.84483L0.5 4.84483L0.987685 5.45074L1.49754 4.84483L0.987685 4.84483Z" fill="none" stroke-width="1"></path></svg></span><span class="object_row--rowText--2tEqb ellipsis--ellipsis--1RWY6">Vector 9</span><span class="object_row--rowActions--4AOul"><span class="svg-container object_row--lockIcon--cwjkx"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M10 6v1h.5c.276 0 .5.224.5.5v5c0 .276-.224.5-.5.5h-6c-.276 0-.5-.224-.5-.5v-5c0-.276.224-.5.5-.5H9V4.5C9 3.12 10.12 2 11.5 2 12.88 2 14 3.12 14 4.5V6h-1V4.5c0-.828-.672-1.5-1.5-1.5-.828 0-1.5.672-1.5 1.5V6z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="svg-container object_row--visibleIcon--1gPvn"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 10c1.105 0 2-.895 2-2 0-1.105-.895-2-2-2-1.104 0-2 .895-2 2 0 1.105.896 2 2 2z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path><path d="M8 4c2.878 0 5.378 1.621 6.635 4-1.257 2.379-3.757 4-6.635 4-2.878 0-5.377-1.621-6.635-4C2.623 5.621 5.122 4 8 4zm0 7c-2.3 0-4.322-1.194-5.478-3C3.678 6.194 5.7 5 8 5c2.3 0 4.322 1.194 5.479 3C12.322 9.806 10.3 11 8 11z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span></div><div class=" object_row--row--2t1Gu object_row--topLevel--1ThUW" draggable="false" style="transform: translate3d(0px, 480px, 0px); width: 240px; height: 32px;"><span class="object_row--indents--2XlJC"><span class="object_row--indent--2n1Cf"></span></span><span class="svg-container object_row--customLayerIcon--pV50f object_row--layerIcon--LXryZ"><svg class="svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="10" height="10"><path d="M4.98376 0.5L4.98375 8.61191M4.98375 8.61191L4.26895 8.61191L4.98375 9.5L5.73105 8.61191L4.98375 8.61191Z" fill="none" stroke-width="1"></path></svg></span><span class="object_row--rowText--2tEqb ellipsis--ellipsis--1RWY6">Vector 8</span><span class="object_row--rowActions--4AOul"><span class="svg-container object_row--lockIcon--cwjkx"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M10 6v1h.5c.276 0 .5.224.5.5v5c0 .276-.224.5-.5.5h-6c-.276 0-.5-.224-.5-.5v-5c0-.276.224-.5.5-.5H9V4.5C9 3.12 10.12 2 11.5 2 12.88 2 14 3.12 14 4.5V6h-1V4.5c0-.828-.672-1.5-1.5-1.5-.828 0-1.5.672-1.5 1.5V6z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="svg-container object_row--visibleIcon--1gPvn"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 10c1.105 0 2-.895 2-2 0-1.105-.895-2-2-2-1.104 0-2 .895-2 2 0 1.105.896 2 2 2z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path><path d="M8 4c2.878 0 5.378 1.621 6.635 4-1.257 2.379-3.757 4-6.635 4-2.878 0-5.377-1.621-6.635-4C2.623 5.621 5.122 4 8 4zm0 7c-2.3 0-4.322-1.194-5.478-3C3.678 6.194 5.7 5 8 5c2.3 0 4.322 1.194 5.479 3C12.322 9.806 10.3 11 8 11z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span></div><div class=" object_row--row--2t1Gu object_row--topLevel--1ThUW object_row--frame--Q78_7" draggable="false" style="transform: translate3d(0px, 512px, 0px); width: 240px; height: 32px;"><span class="object_row--indents--2XlJC"><span class="object_row--indent--2n1Cf"></span><span class="svg-container object_row--expandCaret--3nMet object_row--indent--2n1Cf"><svg class="svg" width="6" height="6" viewBox="0 0 6 6" xmlns="http://www.w3.org/2000/svg"><path d="M5 3L1 0v6l4-3z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span><span class="svg-container object_row--layerIcon--LXryZ"><svg class="svg" width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M4 .5V3h4V.5h1V3h2.5v1H9v4h2.5v1H9v2.5H8V9H4v2.5H3V9H.5V8H3V4H.5V3H3V.5h1zM8 8V4H4v4h4z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="object_row--rowText--2tEqb ellipsis--ellipsis--1RWY6">Home Screen</span><span class="object_row--rowActions--4AOul"><span class="svg-container object_row--lockIcon--cwjkx"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M10 6v1h.5c.276 0 .5.224.5.5v5c0 .276-.224.5-.5.5h-6c-.276 0-.5-.224-.5-.5v-5c0-.276.224-.5.5-.5H9V4.5C9 3.12 10.12 2 11.5 2 12.88 2 14 3.12 14 4.5V6h-1V4.5c0-.828-.672-1.5-1.5-1.5-.828 0-1.5.672-1.5 1.5V6z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="svg-container object_row--visibleIcon--1gPvn"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 10c1.105 0 2-.895 2-2 0-1.105-.895-2-2-2-1.104 0-2 .895-2 2 0 1.105.896 2 2 2z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path><path d="M8 4c2.878 0 5.378 1.621 6.635 4-1.257 2.379-3.757 4-6.635 4-2.878 0-5.377-1.621-6.635-4C2.623 5.621 5.122 4 8 4zm0 7c-2.3 0-4.322-1.194-5.478-3C3.678 6.194 5.7 5 8 5c2.3 0 4.322 1.194 5.479 3C12.322 9.806 10.3 11 8 11z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span></div><div class=" object_row--row--2t1Gu object_row--topLevel--1ThUW object_row--frame--Q78_7" draggable="false" style="transform: translate3d(0px, 544px, 0px); width: 240px; height: 32px;"><span class="object_row--indents--2XlJC"><span class="object_row--indent--2n1Cf"></span></span><span class="svg-container object_row--layerIcon--LXryZ"><svg class="svg" width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M4 .5V3h4V.5h1V3h2.5v1H9v4h2.5v1H9v2.5H8V9H4v2.5H3V9H.5V8H3V4H.5V3H3V.5h1zM8 8V4H4v4h4z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="object_row--rowText--2tEqb ellipsis--ellipsis--1RWY6">feather:settings</span><span class="object_row--rowActions--4AOul"><span class="svg-container object_row--lockIcon--cwjkx"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M10 6v1h.5c.276 0 .5.224.5.5v5c0 .276-.224.5-.5.5h-6c-.276 0-.5-.224-.5-.5v-5c0-.276.224-.5.5-.5H9V4.5C9 3.12 10.12 2 11.5 2 12.88 2 14 3.12 14 4.5V6h-1V4.5c0-.828-.672-1.5-1.5-1.5-.828 0-1.5.672-1.5 1.5V6z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="svg-container object_row--visibleIcon--1gPvn"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 10c1.105 0 2-.895 2-2 0-1.105-.895-2-2-2-1.104 0-2 .895-2 2 0 1.105.896 2 2 2z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path><path d="M8 4c2.878 0 5.378 1.621 6.635 4-1.257 2.379-3.757 4-6.635 4-2.878 0-5.377-1.621-6.635-4C2.623 5.621 5.122 4 8 4zm0 7c-2.3 0-4.322-1.194-5.478-3C3.678 6.194 5.7 5 8 5c2.3 0 4.322 1.194 5.479 3C12.322 9.806 10.3 11 8 11z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span></div><div class=" object_row--row--2t1Gu object_row--topLevel--1ThUW" draggable="false" style="transform: translate3d(0px, 896px, 0px); width: 240px; height: 32px;"><span class="object_row--indents--2XlJC"><span class="object_row--indent--2n1Cf"></span></span><span class="svg-container object_row--customLayerIcon--pV50f object_row--layerIcon--LXryZ"><svg class="svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="10" height="10"><path d="M0.5 4.97632L6.89474 4.97632M6.89474 4.97632L6.89474 7.10789L9.5 4.97632L6.89474 2.89211V4.97632Z" fill="none" stroke-width="1"></path></svg></span><span class="object_row--rowText--2tEqb ellipsis--ellipsis--1RWY6">Vector 23</span><span class="object_row--rowActions--4AOul"><span class="svg-container object_row--lockIcon--cwjkx"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M10 6v1h.5c.276 0 .5.224.5.5v5c0 .276-.224.5-.5.5h-6c-.276 0-.5-.224-.5-.5v-5c0-.276.224-.5.5-.5H9V4.5C9 3.12 10.12 2 11.5 2 12.88 2 14 3.12 14 4.5V6h-1V4.5c0-.828-.672-1.5-1.5-1.5-.828 0-1.5.672-1.5 1.5V6z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="svg-container object_row--visibleIcon--1gPvn"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 10c1.105 0 2-.895 2-2 0-1.105-.895-2-2-2-1.104 0-2 .895-2 2 0 1.105.896 2 2 2z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path><path d="M8 4c2.878 0 5.378 1.621 6.635 4-1.257 2.379-3.757 4-6.635 4-2.878 0-5.377-1.621-6.635-4C2.623 5.621 5.122 4 8 4zm0 7c-2.3 0-4.322-1.194-5.478-3C3.678 6.194 5.7 5 8 5c2.3 0 4.322 1.194 5.479 3C12.322 9.806 10.3 11 8 11z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span></div><div class=" object_row--row--2t1Gu object_row--topLevel--1ThUW" draggable="false" style="transform: translate3d(0px, 864px, 0px); width: 240px; height: 32px;"><span class="object_row--indents--2XlJC"><span class="object_row--indent--2n1Cf"></span></span><span class="svg-container object_row--customLayerIcon--pV50f object_row--layerIcon--LXryZ"><svg class="svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="10" height="10"><path d="M8.852 6.9872L8.852 8.7728L1.1768 8.7728L1.1768 1.2272L0.5 1.2272M8.852 6.9872L9.5 6.9872L8.852 6.1952L8.2184 6.9872L8.852 6.9872Z" fill="none" stroke-width="1"></path></svg></span><span class="object_row--rowText--2tEqb ellipsis--ellipsis--1RWY6">Vector 22</span><span class="object_row--rowActions--4AOul"><span class="svg-container object_row--lockIcon--cwjkx"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M10 6v1h.5c.276 0 .5.224.5.5v5c0 .276-.224.5-.5.5h-6c-.276 0-.5-.224-.5-.5v-5c0-.276.224-.5.5-.5H9V4.5C9 3.12 10.12 2 11.5 2 12.88 2 14 3.12 14 4.5V6h-1V4.5c0-.828-.672-1.5-1.5-1.5-.828 0-1.5.672-1.5 1.5V6z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="svg-container object_row--visibleIcon--1gPvn"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 10c1.105 0 2-.895 2-2 0-1.105-.895-2-2-2-1.104 0-2 .895-2 2 0 1.105.896 2 2 2z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path><path d="M8 4c2.878 0 5.378 1.621 6.635 4-1.257 2.379-3.757 4-6.635 4-2.878 0-5.377-1.621-6.635-4C2.623 5.621 5.122 4 8 4zm0 7c-2.3 0-4.322-1.194-5.478-3C3.678 6.194 5.7 5 8 5c2.3 0 4.322 1.194 5.479 3C12.322 9.806 10.3 11 8 11z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span></div><div class=" object_row--row--2t1Gu object_row--topLevel--1ThUW object_row--frame--Q78_7" draggable="false" style="transform: translate3d(0px, 832px, 0px); width: 240px; height: 32px;"><span class="object_row--indents--2XlJC"><span class="object_row--indent--2n1Cf"></span><span class="svg-container object_row--expandCaret--3nMet object_row--indent--2n1Cf"><svg class="svg" width="6" height="6" viewBox="0 0 6 6" xmlns="http://www.w3.org/2000/svg"><path d="M5 3L1 0v6l4-3z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span><span class="svg-container object_row--layerIcon--LXryZ"><svg class="svg" width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M4 .5V3h4V.5h1V3h2.5v1H9v4h2.5v1H9v2.5H8V9H4v2.5H3V9H.5V8H3V4H.5V3H3V.5h1zM8 8V4H4v4h4z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="object_row--rowText--2tEqb ellipsis--ellipsis--1RWY6">Your Lookaheads</span><span class="object_row--rowActions--4AOul"><span class="svg-container object_row--lockIcon--cwjkx"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M10 6v1h.5c.276 0 .5.224.5.5v5c0 .276-.224.5-.5.5h-6c-.276 0-.5-.224-.5-.5v-5c0-.276.224-.5.5-.5H9V4.5C9 3.12 10.12 2 11.5 2 12.88 2 14 3.12 14 4.5V6h-1V4.5c0-.828-.672-1.5-1.5-1.5-.828 0-1.5.672-1.5 1.5V6z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="svg-container object_row--visibleIcon--1gPvn"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 10c1.105 0 2-.895 2-2 0-1.105-.895-2-2-2-1.104 0-2 .895-2 2 0 1.105.896 2 2 2z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path><path d="M8 4c2.878 0 5.378 1.621 6.635 4-1.257 2.379-3.757 4-6.635 4-2.878 0-5.377-1.621-6.635-4C2.623 5.621 5.122 4 8 4zm0 7c-2.3 0-4.322-1.194-5.478-3C3.678 6.194 5.7 5 8 5c2.3 0 4.322 1.194 5.479 3C12.322 9.806 10.3 11 8 11z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span></div><div class=" object_row--row--2t1Gu object_row--topLevel--1ThUW object_row--frame--Q78_7" draggable="false" style="transform: translate3d(0px, 800px, 0px); width: 240px; height: 32px;"><span class="object_row--indents--2XlJC"><span class="object_row--indent--2n1Cf"></span><span class="svg-container object_row--expandCaret--3nMet object_row--indent--2n1Cf"><svg class="svg" width="6" height="6" viewBox="0 0 6 6" xmlns="http://www.w3.org/2000/svg"><path d="M5 3L1 0v6l4-3z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span><span class="svg-container object_row--layerIcon--LXryZ"><svg class="svg" width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M4 .5V3h4V.5h1V3h2.5v1H9v4h2.5v1H9v2.5H8V9H4v2.5H3V9H.5V8H3V4H.5V3H3V.5h1zM8 8V4H4v4h4z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="object_row--rowText--2tEqb ellipsis--ellipsis--1RWY6">User Settings</span><span class="object_row--rowActions--4AOul"><span class="svg-container object_row--lockIcon--cwjkx"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M10 6v1h.5c.276 0 .5.224.5.5v5c0 .276-.224.5-.5.5h-6c-.276 0-.5-.224-.5-.5v-5c0-.276.224-.5.5-.5H9V4.5C9 3.12 10.12 2 11.5 2 12.88 2 14 3.12 14 4.5V6h-1V4.5c0-.828-.672-1.5-1.5-1.5-.828 0-1.5.672-1.5 1.5V6z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="svg-container object_row--visibleIcon--1gPvn"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 10c1.105 0 2-.895 2-2 0-1.105-.895-2-2-2-1.104 0-2 .895-2 2 0 1.105.896 2 2 2z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path><path d="M8 4c2.878 0 5.378 1.621 6.635 4-1.257 2.379-3.757 4-6.635 4-2.878 0-5.377-1.621-6.635-4C2.623 5.621 5.122 4 8 4zm0 7c-2.3 0-4.322-1.194-5.478-3C3.678 6.194 5.7 5 8 5c2.3 0 4.322 1.194 5.479 3C12.322 9.806 10.3 11 8 11z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span></div><div class=" object_row--row--2t1Gu object_row--topLevel--1ThUW object_row--frame--Q78_7" draggable="false" style="transform: translate3d(0px, 768px, 0px); width: 240px; height: 32px;"><span class="object_row--indents--2XlJC"><span class="object_row--indent--2n1Cf"></span><span class="svg-container object_row--expandCaret--3nMet object_row--indent--2n1Cf"><svg class="svg" width="6" height="6" viewBox="0 0 6 6" xmlns="http://www.w3.org/2000/svg"><path d="M5 3L1 0v6l4-3z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span><span class="svg-container object_row--layerIcon--LXryZ"><svg class="svg" width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M4 .5V3h4V.5h1V3h2.5v1H9v4h2.5v1H9v2.5H8V9H4v2.5H3V9H.5V8H3V4H.5V3H3V.5h1zM8 8V4H4v4h4z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="object_row--rowText--2tEqb ellipsis--ellipsis--1RWY6">Create Lookahead</span><span class="object_row--rowActions--4AOul"><span class="svg-container object_row--lockIcon--cwjkx"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M10 6v1h.5c.276 0 .5.224.5.5v5c0 .276-.224.5-.5.5h-6c-.276 0-.5-.224-.5-.5v-5c0-.276.224-.5.5-.5H9V4.5C9 3.12 10.12 2 11.5 2 12.88 2 14 3.12 14 4.5V6h-1V4.5c0-.828-.672-1.5-1.5-1.5-.828 0-1.5.672-1.5 1.5V6z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="svg-container object_row--visibleIcon--1gPvn"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 10c1.105 0 2-.895 2-2 0-1.105-.895-2-2-2-1.104 0-2 .895-2 2 0 1.105.896 2 2 2z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path><path d="M8 4c2.878 0 5.378 1.621 6.635 4-1.257 2.379-3.757 4-6.635 4-2.878 0-5.377-1.621-6.635-4C2.623 5.621 5.122 4 8 4zm0 7c-2.3 0-4.322-1.194-5.478-3C3.678 6.194 5.7 5 8 5c2.3 0 4.322 1.194 5.479 3C12.322 9.806 10.3 11 8 11z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span></div><div class=" object_row--row--2t1Gu object_row--topLevel--1ThUW object_row--frame--Q78_7" draggable="false" style="transform: translate3d(0px, 736px, 0px); width: 240px; height: 32px;"><span class="object_row--indents--2XlJC"><span class="object_row--indent--2n1Cf"></span><span class="svg-container object_row--expandCaret--3nMet object_row--indent--2n1Cf"><svg class="svg" width="6" height="6" viewBox="0 0 6 6" xmlns="http://www.w3.org/2000/svg"><path d="M5 3L1 0v6l4-3z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span><span class="svg-container object_row--layerIcon--LXryZ"><svg class="svg" width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M4 .5V3h4V.5h1V3h2.5v1H9v4h2.5v1H9v2.5H8V9H4v2.5H3V9H.5V8H3V4H.5V3H3V.5h1zM8 8V4H4v4h4z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="object_row--rowText--2tEqb ellipsis--ellipsis--1RWY6">Lookahead Task</span><span class="object_row--rowActions--4AOul"><span class="svg-container object_row--lockIcon--cwjkx"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M10 6v1h.5c.276 0 .5.224.5.5v5c0 .276-.224.5-.5.5h-6c-.276 0-.5-.224-.5-.5v-5c0-.276.224-.5.5-.5H9V4.5C9 3.12 10.12 2 11.5 2 12.88 2 14 3.12 14 4.5V6h-1V4.5c0-.828-.672-1.5-1.5-1.5-.828 0-1.5.672-1.5 1.5V6z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="svg-container object_row--visibleIcon--1gPvn"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 10c1.105 0 2-.895 2-2 0-1.105-.895-2-2-2-1.104 0-2 .895-2 2 0 1.105.896 2 2 2z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path><path d="M8 4c2.878 0 5.378 1.621 6.635 4-1.257 2.379-3.757 4-6.635 4-2.878 0-5.377-1.621-6.635-4C2.623 5.621 5.122 4 8 4zm0 7c-2.3 0-4.322-1.194-5.478-3C3.678 6.194 5.7 5 8 5c2.3 0 4.322 1.194 5.479 3C12.322 9.806 10.3 11 8 11z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span></div><div class=" object_row--row--2t1Gu object_row--topLevel--1ThUW object_row--frame--Q78_7" draggable="false" style="transform: translate3d(0px, 704px, 0px); width: 240px; height: 32px;"><span class="object_row--indents--2XlJC"><span class="object_row--indent--2n1Cf"></span></span><span class="svg-container object_row--layerIcon--LXryZ"><svg class="svg" width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M4 .5V3h4V.5h1V3h2.5v1H9v4h2.5v1H9v2.5H8V9H4v2.5H3V9H.5V8H3V4H.5V3H3V.5h1zM8 8V4H4v4h4z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="object_row--rowText--2tEqb ellipsis--ellipsis--1RWY6">typcn:tick</span><span class="object_row--rowActions--4AOul"><span class="svg-container object_row--lockIcon--cwjkx"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M10 6v1h.5c.276 0 .5.224.5.5v5c0 .276-.224.5-.5.5h-6c-.276 0-.5-.224-.5-.5v-5c0-.276.224-.5.5-.5H9V4.5C9 3.12 10.12 2 11.5 2 12.88 2 14 3.12 14 4.5V6h-1V4.5c0-.828-.672-1.5-1.5-1.5-.828 0-1.5.672-1.5 1.5V6z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="svg-container object_row--visibleIcon--1gPvn"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 10c1.105 0 2-.895 2-2 0-1.105-.895-2-2-2-1.104 0-2 .895-2 2 0 1.105.896 2 2 2z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path><path d="M8 4c2.878 0 5.378 1.621 6.635 4-1.257 2.379-3.757 4-6.635 4-2.878 0-5.377-1.621-6.635-4C2.623 5.621 5.122 4 8 4zm0 7c-2.3 0-4.322-1.194-5.478-3C3.678 6.194 5.7 5 8 5c2.3 0 4.322 1.194 5.479 3C12.322 9.806 10.3 11 8 11z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span></div><div class=" object_row--row--2t1Gu object_row--topLevel--1ThUW object_row--frame--Q78_7" draggable="false" style="transform: translate3d(0px, 672px, 0px); width: 240px; height: 32px;"><span class="object_row--indents--2XlJC"><span class="object_row--indent--2n1Cf"></span></span><span class="svg-container object_row--layerIcon--LXryZ"><svg class="svg" width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M4 .5V3h4V.5h1V3h2.5v1H9v4h2.5v1H9v2.5H8V9H4v2.5H3V9H.5V8H3V4H.5V3H3V.5h1zM8 8V4H4v4h4z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="object_row--rowText--2tEqb ellipsis--ellipsis--1RWY6">bx:bx-edit</span><span class="object_row--rowActions--4AOul"><span class="svg-container object_row--lockIcon--cwjkx"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M10 6v1h.5c.276 0 .5.224.5.5v5c0 .276-.224.5-.5.5h-6c-.276 0-.5-.224-.5-.5v-5c0-.276.224-.5.5-.5H9V4.5C9 3.12 10.12 2 11.5 2 12.88 2 14 3.12 14 4.5V6h-1V4.5c0-.828-.672-1.5-1.5-1.5-.828 0-1.5.672-1.5 1.5V6z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="svg-container object_row--visibleIcon--1gPvn"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 10c1.105 0 2-.895 2-2 0-1.105-.895-2-2-2-1.104 0-2 .895-2 2 0 1.105.896 2 2 2z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path><path d="M8 4c2.878 0 5.378 1.621 6.635 4-1.257 2.379-3.757 4-6.635 4-2.878 0-5.377-1.621-6.635-4C2.623 5.621 5.122 4 8 4zm0 7c-2.3 0-4.322-1.194-5.478-3C3.678 6.194 5.7 5 8 5c2.3 0 4.322 1.194 5.479 3C12.322 9.806 10.3 11 8 11z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span></div><div class=" object_row--row--2t1Gu object_row--topLevel--1ThUW object_row--frame--Q78_7" draggable="false" style="transform: translate3d(0px, 640px, 0px); width: 240px; height: 32px;"><span class="object_row--indents--2XlJC"><span class="object_row--indent--2n1Cf"></span><span class="svg-container object_row--expandCaret--3nMet object_row--indent--2n1Cf"><svg class="svg" width="6" height="6" viewBox="0 0 6 6" xmlns="http://www.w3.org/2000/svg"><path d="M5 3L1 0v6l4-3z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span><span class="svg-container object_row--layerIcon--LXryZ"><svg class="svg" width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M4 .5V3h4V.5h1V3h2.5v1H9v4h2.5v1H9v2.5H8V9H4v2.5H3V9H.5V8H3V4H.5V3H3V.5h1zM8 8V4H4v4h4z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="object_row--rowText--2tEqb ellipsis--ellipsis--1RWY6">Reset Password</span><span class="object_row--rowActions--4AOul"><span class="svg-container object_row--lockIcon--cwjkx"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M10 6v1h.5c.276 0 .5.224.5.5v5c0 .276-.224.5-.5.5h-6c-.276 0-.5-.224-.5-.5v-5c0-.276.224-.5.5-.5H9V4.5C9 3.12 10.12 2 11.5 2 12.88 2 14 3.12 14 4.5V6h-1V4.5c0-.828-.672-1.5-1.5-1.5-.828 0-1.5.672-1.5 1.5V6z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="svg-container object_row--visibleIcon--1gPvn"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 10c1.105 0 2-.895 2-2 0-1.105-.895-2-2-2-1.104 0-2 .895-2 2 0 1.105.896 2 2 2z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path><path d="M8 4c2.878 0 5.378 1.621 6.635 4-1.257 2.379-3.757 4-6.635 4-2.878 0-5.377-1.621-6.635-4C2.623 5.621 5.122 4 8 4zm0 7c-2.3 0-4.322-1.194-5.478-3C3.678 6.194 5.7 5 8 5c2.3 0 4.322 1.194 5.479 3C12.322 9.806 10.3 11 8 11z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span></div><div class=" object_row--row--2t1Gu object_row--topLevel--1ThUW object_row--frame--Q78_7" draggable="false" style="transform: translate3d(0px, 608px, 0px); width: 240px; height: 32px;"><span class="object_row--indents--2XlJC"><span class="object_row--indent--2n1Cf"></span><span class="svg-container object_row--expandCaret--3nMet object_row--indent--2n1Cf"><svg class="svg" width="6" height="6" viewBox="0 0 6 6" xmlns="http://www.w3.org/2000/svg"><path d="M5 3L1 0v6l4-3z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span><span class="svg-container object_row--layerIcon--LXryZ"><svg class="svg" width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M4 .5V3h4V.5h1V3h2.5v1H9v4h2.5v1H9v2.5H8V9H4v2.5H3V9H.5V8H3V4H.5V3H3V.5h1zM8 8V4H4v4h4z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="object_row--rowText--2tEqb ellipsis--ellipsis--1RWY6">Reset Password</span><span class="object_row--rowActions--4AOul"><span class="svg-container object_row--lockIcon--cwjkx"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M10 6v1h.5c.276 0 .5.224.5.5v5c0 .276-.224.5-.5.5h-6c-.276 0-.5-.224-.5-.5v-5c0-.276.224-.5.5-.5H9V4.5C9 3.12 10.12 2 11.5 2 12.88 2 14 3.12 14 4.5V6h-1V4.5c0-.828-.672-1.5-1.5-1.5-.828 0-1.5.672-1.5 1.5V6z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="svg-container object_row--visibleIcon--1gPvn"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 10c1.105 0 2-.895 2-2 0-1.105-.895-2-2-2-1.104 0-2 .895-2 2 0 1.105.896 2 2 2z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path><path d="M8 4c2.878 0 5.378 1.621 6.635 4-1.257 2.379-3.757 4-6.635 4-2.878 0-5.377-1.621-6.635-4C2.623 5.621 5.122 4 8 4zm0 7c-2.3 0-4.322-1.194-5.478-3C3.678 6.194 5.7 5 8 5c2.3 0 4.322 1.194 5.479 3C12.322 9.806 10.3 11 8 11z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span></div><div class=" object_row--row--2t1Gu object_row--topLevel--1ThUW object_row--frame--Q78_7" draggable="false" style="transform: translate3d(0px, 576px, 0px); width: 240px; height: 32px;"><span class="object_row--indents--2XlJC"><span class="object_row--indent--2n1Cf"></span><span class="svg-container object_row--expandCaret--3nMet object_row--indent--2n1Cf"><svg class="svg" width="6" height="6" viewBox="0 0 6 6" xmlns="http://www.w3.org/2000/svg"><path d="M5 3L1 0v6l4-3z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span><span class="svg-container object_row--layerIcon--LXryZ"><svg class="svg" width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M4 .5V3h4V.5h1V3h2.5v1H9v4h2.5v1H9v2.5H8V9H4v2.5H3V9H.5V8H3V4H.5V3H3V.5h1zM8 8V4H4v4h4z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="object_row--rowText--2tEqb ellipsis--ellipsis--1RWY6">Login</span><span class="object_row--rowActions--4AOul"><span class="svg-container object_row--lockIcon--cwjkx"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M10 6v1h.5c.276 0 .5.224.5.5v5c0 .276-.224.5-.5.5h-6c-.276 0-.5-.224-.5-.5v-5c0-.276.224-.5.5-.5H9V4.5C9 3.12 10.12 2 11.5 2 12.88 2 14 3.12 14 4.5V6h-1V4.5c0-.828-.672-1.5-1.5-1.5-.828 0-1.5.672-1.5 1.5V6z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><span class="svg-container object_row--visibleIcon--1gPvn"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 10c1.105 0 2-.895 2-2 0-1.105-.895-2-2-2-1.104 0-2 .895-2 2 0 1.105.896 2 2 2z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path><path d="M8 4c2.878 0 5.378 1.621 6.635 4-1.257 2.379-3.757 4-6.635 4-2.878 0-5.377-1.621-6.635-4C2.623 5.621 5.122 4 8 4zm0 7c-2.3 0-4.322-1.194-5.478-3C3.678 6.194 5.7 5 8 5c2.3 0 4.322 1.194 5.479 3C12.322 9.806 10.3 11 8 11z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></span></div></div><div style="display: none; height: 0px;"></div></div></div><div class="scroll_container--track--b26X_"><div class="scroll_container--scrollBar--3faz-" style="transform: translate3d(0px, 0px, 0px); height: 226.665px;"></div></div></div></div></div></div></div><div class="left_panel--edge--3mQJa" style="left: 240px;"></div></div><div data-keyboard-receiver="1" name="propertiesPanel"><div name="propertiesPanelContainer" class="properties_panel--drillDownContainer--2FZAx"><div class="scroll_container--clipContainer--2PG4d properties_panel--panelContainer--p2KwC js-fullscreen-prevent-event-capture" style="width: 246px;"><div class="scroll_container--scrollContainer--1eEK2"><div class="scroll_container--innerScrollContainer--21gfN" style="width: 246px;"><div class="properties_panel--propertiesPanel--3PCth"><div class="properties_panel--tabsHeaderBordered--JO2Q6 properties_panel--tabsHeader--YEflB pages_panel--tabsHeader--p4Khp"><div class="properties_panel--tabActive--3ATzZ pages_panel--tabActive--JOVKa pages_panel--tab--3s1Y5" data-label="design">design</div><div class="properties_panel--tab--1g-EF pages_panel--tab--3s1Y5" data-label="prototype">prototype</div><div class="properties_panel--tab--1g-EF pages_panel--tab--3s1Y5" data-label="code">code</div></div><span><span tabindex="0"></span><span><div class="cachedSubtree" style="display: inline;"><div class="raw_components--panel--3IcXg "><div><div class="raw_components--singleRow--20RH7 raw_components--singleRowHeight--3PF2a raw_components--_row--73H_w "><div class="raw_components--panelTitle--7MaOu ">Background</div></div><div class="raw_components--singleRow--20RH7 raw_components--singleRowHeight--3PF2a raw_components--_row--73H_w "><div class="background_panel--colorValueContainer--3r_XR paint_panels--colorValueContainer--2qjN- raw_components--base--3TpZG raw_components--borderFocusWithin--3IG2Z raw_components--singleRowHeight--3PF2a"><div class="chit--chit--1bkYY background_panel--chit--1sifP paint_panels--chit--1AKml" tabindex="0" style="background-color: rgb(229, 229, 229);"><div class="chit--chitAlpha--HA8gA" style="opacity: 0;"></div></div><input autocomplete="new-password" spellcheck="false" class="raw_components--textInput--23_ta raw_components--base--3TpZG raw_components--input--13lRh raw_components--singleRowHeight--3PF2a background_panel--color--2TxAv paint_panels--colorInput--10RG5" value="E5E5E5"><label class="background_panel--opacity--3eevq paint_panels--opacityInputContainer--1ckND scrubbable_control--container--3kSfp"><input autocomplete="new-password" spellcheck="false" class="raw_components--textInput--23_ta raw_components--base--3TpZG raw_components--input--13lRh raw_components--singleRowHeight--3PF2a " value="100%"></label></div><span tabindex="0" class="svg-container raw_components--iconButtonEnabled--1oUUU raw_components--_iconButton--353Le background_panel--visible--2c_xW"><svg class="svg" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 10c1.105 0 2-.895 2-2 0-1.105-.895-2-2-2-1.104 0-2 .895-2 2 0 1.105.896 2 2 2z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path><path d="M8 4c2.878 0 5.378 1.621 6.635 4-1.257 2.379-3.757 4-6.635 4-2.878 0-5.377-1.621-6.635-4C2.623 5.621 5.122 4 8 4zm0 7c-2.3 0-4.322-1.194-5.478-3C3.678 6.194 5.7 5 8 5c2.3 0 4.322 1.194 5.479 3C12.322 9.806 10.3 11 8 11z" fill-rule="evenodd" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></div></div></div></div><div class="cachedSubtree" style="display: inline;"><div class="raw_components--panel--3IcXg "><div class="raw_components--singleRow--20RH7 raw_components--singleRowHeight--3PF2a raw_components--_row--73H_w "><div class="raw_components--panelTitle--7MaOu ">Local Styles</div></div><div class="raw_components--singleRow--20RH7 raw_components--singleRowHeight--3PF2a raw_components--_row--73H_w local_styles_panel--emptyState--1KEBx"><span class="svg-container local_styles_panel--emptyStateIcon--3BSuD"><svg class="svg" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg"><path d="M.5 2c0 .828.672 1.5 1.5 1.5.828 0 1.5-.672 1.5-1.5C3.5 1.172 2.828.5 2 .5 1.172.5.5 1.172.5 2zm6 0c0 .828.672 1.5 1.5 1.5.828 0 1.5-.672 1.5-1.5C9.5 1.172 8.828.5 8 .5c-.828 0-1.5.672-1.5 1.5zM8 9.5c-.828 0-1.5-.672-1.5-1.5 0-.828.672-1.5 1.5-1.5.828 0 1.5.672 1.5 1.5 0 .828-.672 1.5-1.5 1.5zM.5 8c0 .828.672 1.5 1.5 1.5.828 0 1.5-.672 1.5-1.5 0-.828-.672-1.5-1.5-1.5C1.172 6.5.5 7.172.5 8z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path></svg></span><div class="local_styles_panel--emptyStateContent--168Hx text--fontPos11--RSei3 text--_fontBase--YWDo0">To create a style, select a layer and click on the style icon in the inspector panel.</div></div></div></div><div class="cachedSubtree" style="display: inline;"><div class="raw_components--panel--3IcXg "><div data-keyboard-receiver="2" name="Draggable property list"><div class="raw_components--singleRow--20RH7 raw_components--singleRowHeight--3PF2a raw_components--_row--73H_w draggable_list--panelHeaderRowFaded--JlLHP"><div class="raw_components--panelTitleFaded--2DWvf raw_components--panelTitle--7MaOu draggable_list--panelTitle--gr5yM"><div class="draggable_list--panelTitleText--1q89R">Export</div></div><span tabindex="0" class="svg-container raw_components--iconButtonEnabled--1oUUU raw_components--_iconButton--353Le draggable_list--addButton--30aI8"><svg class="svg" width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M5.5 5.5v-5h1v5h5v1h-5v5h-1v-5h-5v-1h5z" fill-rule="nonzero" fill-opacity="1" fill="#000" stroke="none"></path></svg></span></div><div></div></div></div></div></span><span tabindex="0"></span></span></div><div style="display: none; height: 0px;"></div></div></div></div><div class="scroll_container--clipContainer--2PG4d properties_panel--editStylePanelContainerClass--VEj6f properties_panel--panelContainer--p2KwC js-fullscreen-prevent-event-capture" style="width: 246px;"><div class="scroll_container--scrollContainer--1eEK2"><div class="scroll_container--innerScrollContainer--21gfN" style="width: 246px;"><div style="display: none; height: 0px;"></div></div></div></div></div></div><div></div></div></div></div><div class="flash_view--flashes--1wuM5"></div><div></div><div class="visual_bell--base--1xST5 "><div class="visual_bell--messageContainer--3tSMR _overlayBase--_overlayBase--1sCqN text--fontNeg14--uh3vw text--_fontBase--YWDo0 text--_whiteText--2PkdM "></div></div><div class="blocked_ui_loading_indicator--base--3rACw"><div class="blocked_ui_loading_indicator--messageContainer--2KyaR _overlayBase--_overlayBase--1sCqN text--fontNeg14--uh3vw text--_fontBase--YWDo0 text--_whiteText--2PkdM "></div></div><div></div><div></div><div class="help_widget--helpWidget--22IIi text--_whiteText--2PkdM"><span class="svg-container"><svg class="svg" width="8" height="14" viewBox="0 0 8 14" xmlns="http://www.w3.org/2000/svg"><path d="M5 13H4v1h1v-1zM4 1C2.343 1 1 2.343 1 4H0c0-2.21 1.79-4 4-4 2.21 0 4 1.79 4 4 0 1.268-.59 2.398-1.51 3.13l-.083.065C5.553 7.833 5 8.852 5 10H4c0-1.424.662-2.694 1.694-3.518l.083-.064C6.519 5.87 7 4.992 7 4c0-1.657-1.343-3-3-3z" fill-rule="nonzero" fill-opacity="1" fill="#fff" stroke="none"></path></svg></span><div class="zendesk-web-widget"></div><div class="help_widget--tooltip--jXoVZ help_widget--tooltipPosition--2HJXE">Help &amp; Resources</div></div></div></div></div>
+
+      <div id="filebrowser-loading-page" class="hidden fadeOut">
+  <div class="sidebar">
+    <div class="row">
+      <div class="circle"></div>
+    </div>
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="divider"></div>
+    <div class="row">
+      <div class="circle"></div>
+    </div>
+    <div class="row"></div>
+    <div class="divider"></div>
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row"></div>
+  </div>
+
+  <div class="page">
+
+
+    <div class="columns">
+      <div class="content">
+
+
+      </div>
+
+
+    </div>
+  </div>
+
+  <div id="filebrowser-loading-progress-bar"></div>
+</div>
+
+
+    
+
+      <script>
+    window['sentryConfig'] = {
+      id: 768641469004550304,
+    }
+  </script>
+
+      <script src="./Lookahead –  wireframe v1 - Figma_files/vendor.cfd4787bcd3810c6910f99ae3d87cc61.min.js"></script>
+      <script src="./Lookahead –  wireframe v1 - Figma_files/figma_app.a29b207ee9e755d09d827dc3476e9a93.min.js"></script>
+
+  
+
+</body><span class="gr__tooltip"><span class="gr__tooltip-content"></span><i class="gr__tooltip-logo"></i><span class="gr__triangle"></span></span></html>
