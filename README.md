@@ -33,7 +33,9 @@ Git tracks changes in the application source code in order to manage project dev
 * **Trello** - Used for project management, Trello allows for the creation of Kanban-Style boards.
 
 ## Data Flow Diagram
-![Data Flow Diagram](docs/data_flow_diagram.png)
+![Data Flow Diagram](docs/lookahead_data_flow_diagram.png)
+
+This Data Flow Diagram visualises the main data flows taking place inside the Lookahead application. The main processes of the Application are the authentication of Users, the CRUD (Create, Read, Update, Delete) functionality for Lookahead projects (similar in nature to Trello Boards) and the CRUD functionality for Task Cards (think Trello cards) within Lookahead Projects.
 
 ## Application Architecture Diagram
 ## User Stories
