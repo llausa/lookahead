@@ -40,8 +40,6 @@ This Data Flow Diagram visualises the main data flows taking place inside the Lo
 ## Application Architecture Diagram
 ![Application Architecure Diagram](docs/app_architecture_diagram.png)
 
-This Data Flow Diagram visualises the main data flows taking place inside the Lookahead application. The main processes of the Application are the authentication of Users, the CRUD (Create, Read, Update, Delete) functionality for Lookahead projects (similar in nature to Trello Boards) and the CRUD functionality for Task Cards (think Trello cards) within Lookahead Projects.
-
 This Application Architecture Diagram shows how the Lookahead Application MERN components work with each other. The diagram works in a foundational manner, with the components at the bottom being necessary for the items towards the top. The data in MongoDB is hosted on MongoDB Atlas, with the App communicating with the Database through Mongoose. The Back-end has all the business logic of the application and it passes the data through an express API to the React Front-end.
 
 The client ultimately interacts with the React Front-end App. The Back-end and Front-end of this MERN application are hosted on Netlify.
