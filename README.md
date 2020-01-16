@@ -54,3 +54,21 @@ The client ultimately interacts with the React Front-end App. The Back-end and F
   ![Trello Board Day 1](./docs/trello_history/trello-day1.png?raw=true)
 
 </details>
+<details>
+  <summary>Trello Day 2</summary>
+
+  ![Trello Board Day 2](./docs/trello_history/trello-day2.png?raw=true)
+
+</details>
+<details>
+  <summary>Trello Day 3</summary>
+
+  ![Trello Board Day 3](./docs/trello_history/trello-day3.png?raw=true)
+
+</details>
+<details>
+  <summary>Trello Day 4</summary>
+
+  ![Trello Board Day 4](./docs/trello_history/trello-day4.png?raw=true)
+
+</details>
