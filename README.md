@@ -78,6 +78,7 @@ Given the fact that the development team and the client were working in differen
 
 Based on the information provided to the team by the client, preliminary research into what was expected to be achievable in the given timeframe was conducted. Features and functionality were broken down at a high level to help with prioritisation and time management. Once the team had agreed on a MVP functionality, the client was consulted for feedback. The client was happy to proceed with how features had been scoped, and so the team set about planning the project.
 
+
 ### Project Timeline
 
 <details>
@@ -172,6 +173,8 @@ Ben finalised breaking down User stories and planning sprints. Github Repository
 The team conducted a final review of all aspects of the documentation that each team member had completed and finalised each component as a group.
 
 </details>
+
+Trello Board can be found here: https://trello.com/b/lCfavHOS/sprint-board
 
 ## Wireframes
 
