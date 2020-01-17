@@ -64,7 +64,7 @@ This diagram shows the data flow for authenticating a User. It includes Logging 
 
 This Application Architecture Diagram shows how the Lookahead Application MERN components work with each other. The diagram works in a foundational manner, with the components at the bottom being necessary for the items towards the top. The data in MongoDB is hosted on MongoDB Atlas, with the Back-end communicating with the Database through Mongoose. The Back-end has all the business logic of the application and it passes the data through an Express API to the React Front-end App. 
 
-The Back-end is the server side of the application and it will be hosted on Heroku.The client ultimately interacts with the React Front-end App. The React App will be hosted on Netlify.
+The Back-end is the server side of the application and it will be hosted on Heroku. The Back-end will serve the data to the React App through a series of requests between the Express API and the Front-end App. The user ultimately interacts with the React Front-end App and this React App will be hosted on Netlify.
 
 
 ## User Stories
