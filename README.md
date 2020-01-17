@@ -28,8 +28,8 @@ The MERN stack is made up of four key components.
 * **Node.js** - A Javascript runtime environment used for executing Javascript outside of a web browser.
 * **MongoDB** - The database used to typically build MERN stack applications. It is a NoSQL, document-oriented database.
 * **React** -  A Javascript library that is component based, which is used to build the front-end (user interface) portion of the application. React utilises component states that contains information regarding what should be shown as part of the component. When the state updates, React updates that component within the DOM to reflect that update to the component state - this saves the entire DOM from being updated to reflect changes.
-* **Heroku** - [Heroku](https://www.heroku.com/) is a Platform-as-a-Service that allows developers to deploy applications to the cloud.
-* **Netlify** -
+* **Heroku** - [Heroku](https://www.heroku.com/) is a Platform-as-a-Service that allows developers to deploy applications to the cloud. The server side (API) of this project will be hosted on Heroku.
+* **Netlify** - another Platform-as-a-Service that allows developers to deploy their web applications quickly. This project will use Netlify to deploy the client application part.
 * **Github** -  [Github](https://github.com/)  is a company that provides free remote repository hosting utilising the Git version control system.
 Git tracks changes in the application source code in order to manage project development and smooth developer collaboration by automatically handling merges and updates to the code base.
 * **Trello** - Used for project management, Trello allows for the creation of Kanban-Style boards.
