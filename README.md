@@ -66,7 +66,113 @@ This Application Architecture Diagram shows how the Lookahead Application MERN c
 The Back-end is the server side of the application and it will be hosted on Heroku. The Back-end will serve the data to the React App through a series of requests between the Express API and the Front-end App. The user ultimately interacts with the React Front-end App and this React App will be hosted on Netlify.
 
 
-## User Stories
+## Project Management and User Stories
+
+### Overview
+Before any planning could take place for this project, the requirements and scope needed to be clearly defined. 
+
+To help define and maintain consistent progress towards achieving these requirements, the team elected to work by implementing Agile methodology. 
+By consistently incorporating client feedback into the design and development process, the overall product was likely to be both easier to develop and also fulfil the clients needs more closely.
+
+Given the fact that the development team and the client were working in different timezones, face-to-face meetings were not an option. As such, a slack channel was set up for quick and easy communication between both parties.
+
+Based on the information provided to the team by the client, preliminary research into what was expected to be achievable in the given timeframe was conducted. Features and functionality were broken down at a high level to help with prioritisation and time management. Once the team had agreed on a MVP functionality, the client was consulted for feedback. The client was happy to proceed with how features had been scoped, and so the team set about planning the project.
+
+### Project Timeline
+
+<details>
+
+  <summary>Day 0 - Client Contact and Project Scope</summary>
+As outlined above, prior to commencement of the project, requirements needed to be defined and features scoped. Once everything was agreed upon, the team set out to plan the project.
+
+Trello was elected as the primary tool for planning the project due to the ability to implement Kanban style boards with significant customisation available. The ability for Trello to connect with Github was also a large factor in choosing the program.
+
+</details>
+
+<details>
+
+  <summary>Day 1 - Initial User Stories, User Flow, Initial Planning and Setup</summary>
+
+
+With the foundational planning and communication tools in place, the team started by breaking the project features into User Stories using Trello (See Trello Day 1 screenshot). Based on these User Stories, the initial concept for User flow and interface structure was discussed and planned.  The Part A Assignment (documentation) requirements were delegated according to team member strengths and work began across all aspects of the project. The Part A requirements were split across the team as follows:
+
+##### Ben 
+* R1 - Project Overview
+* R4 - User Stories
+* R6 - Trello Screenshots
+
+##### Santiago
+* R2 - Dataflow Diagram
+* R3 - Application Architecture Diagram
+
+##### Alex
+* R5 - Wireframes
+
+With all the tasks delegated and initial User Stories completed, they were sent to the client for review.
+
+</details>
+
+<details>
+
+  <summary>Day 2 - Project Management Tools, Initial Wireframes, User Stories, Data Flow Diagram</summary>
+
+
+With the project now underway, the team continued working on the tasks they had been assigned. The client had reviewed the initial User Stories overnight and was happy with what had been completed.
+
+Initial research was conducted into libraries and tools that could be used during development.
+
+**Team Progress:**
+
+Alex commenced Mobile-First wireframe design in accordance with the user flow that had been established. Once completed, these were sent to the client for review.
+
+Santiago finalised the initial draft of the Data Flow Diagram and sent it to the client for review.
+
+Ben set up a new Trello board for organising the project into Sprints in preparation for setting up a project timeline and formalised task delegation for Part A.
+
+</details>
+
+<details>
+
+  <summary>Day 3 - Wireframe Updates, Application Architecture, Task Breakdown</summary>
+
+
+Having review the Data Flow Diagram and Wireframe designs, the client gave the team some feedback with regards to User flow which required refinement. The team discussed the feedback and agreed with all points that had been made so set about implementing improvements.
+
+**Team Progress**
+
+In accordance with the feedback provided, Alex refined the Mobile Wireframes and started designing for Tablet.
+
+Santiago commenced work on the Application Architecture Diagram and adjusted the Data flow diagram.
+
+Ben refined the initial User Stories by breaking them down into tasks that were more specific in order to delegate more effectively and allow the team to manage the project at a granular level.
+
+</details>
+
+<details>
+
+  <summary>Day 4 - Wireframe Finalisation, Diagram Updates,  Issue Mapping and Task Allocation
+</summary>
+
+The team continued working on the assigned tasks.
+
+**Team Progress**
+
+Alex finalised the wireframes for all screen sizes and sent the final design to the client for review.
+
+After review with the team and Coder Academy Educators, Santiago refined both the Data Flow diagram and Application Architecture Diagram to fit with standard diagram conventions.
+
+Ben finalised breaking down User stories and planning sprints. Github Repository issues were created for all key features of the application. Github was connected to the Trello board and User Stories/Tasks were mapped to the relevant Github Issues. Task timeframes, delegation and prioritisation was assigned in preparation for the new Sprint which would be commencing at the beginning of the next week.
+
+</details>
+
+<details>
+
+  <summary>Day 5 - Review and Documentation Finalisation</summary>
+
+The team conducted a final review of all aspects of the documentation that each team member had completed and finalised each component as a group.
+
+</details>
+
 ## Wireframes
 
 <details>
@@ -116,5 +222,11 @@ All created with Figma:
   <summary>Trello Day 4</summary>
 
   ![Trello Board Day 4](./docs/trello_history/trello-day4.png?raw=true)
+
+</details>
+<details>
+  <summary>Trello Day 5</summary>
+
+  ![Trello Board Day 5](./docs/trello_history/trello-day5.png?raw=true)
 
 </details>
