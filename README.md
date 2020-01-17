@@ -1,4 +1,4 @@
-# T3A2 Part A | Alex Leybourne, Ben Ulcoq, Santiago Chamon
+﻿# T3A2 Part A | Alex Leybourne, Ben Ulcoq, Santiago Chamon
 
 ## Purpose
 Operational lookaheads are used throughout construction and other industries. Although the specific nature of the operations/tasks they describe may change depending on the sector, the purpose of these simple ‘on-the-ground’ planning tools remain the same: to give all the stakeholders in the operational team a common perspective on what the next 6-7 days of the overall construction project entails - most lookaheads are developed as simple spreadsheets.
@@ -68,6 +68,31 @@ The Back-end is the server side of the application and it will be hosted on Hero
 
 ## User Stories
 ## Wireframes
+
+<details>
+  <summary>Mobile</summary>
+
+  ![Mobile Wireframes](https://github.com/llausa/lookahead/blob/master/docs/Wireframes/Version%203/Mobile%20Wireframes.png?raw=true)
+
+</details>
+
+<details>
+  <summary>Tablet Wireframes</summary>
+
+  ![Tablet Wireframes](https://github.com/llausa/lookahead/blob/master/docs/Wireframes/Version%203/Tablet%20Wireframes.png?raw=true)
+
+</details>
+
+<details>
+  <summary>Desktop Wireframes</summary>
+
+  ![Desktop Wireframes](https://github.com/llausa/lookahead/blob/master/docs/Wireframes/Version%203/Desktop%20Wireframes.png?raw=true)
+
+</details>
+
+All created with Figma:
+[Figma Project View Link](https://www.figma.com/file/XjnDBsczGMZrKEuaDKpse7/Lookahead?node-id=0%3A1)
+
 ## Trello Screenshots of Project
 <details>
   <summary>Trello Day 1</summary>
