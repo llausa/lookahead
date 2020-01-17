@@ -3,6 +3,8 @@
 ## Purpose
 Operational lookaheads are used throughout construction and other industries. Although the specific nature of the operations/tasks they describe may change depending on the sector, the purpose of these simple ‘on-the-ground’ planning tools remain the same: to give all the stakeholders in the operational team a common perspective on what the next 6-7 days of the overall construction project entails - most lookaheads are developed as simple spreadsheets.
 
+Our client is a McKinsey consultant who works in massive projects where operational lookaheads are critical for the projects' success.
+
 The aim of this project is to develop a Single Page Application (SPA) using the MERN stack that serves to replace and improve on the functionality of a spreadsheet for creating and managing lookaheads.
 
 
@@ -24,13 +26,19 @@ As this application will be built to service industries such as construction, th
 The application will be built using the MERN stack as part of the requirements for the assignment this project is being completed for.
 The MERN stack is made up of four key components.
 * **Node.js** - A Javascript runtime environment used for executing Javascript outside of a web browser.
-* **Express** - A web application framework packaged for use with Node. It facilitates the easy implementation of request routing and creating and utilising middleware to manipulate request and response data.
 * **MongoDB** - The database used to typically build MERN stack applications. It is a NoSQL, document-oriented database.
 * **React** -  A Javascript library that is component based, which is used to build the front-end (user interface) portion of the application. React utilises component states that contains information regarding what should be shown as part of the component. When the state updates, React updates that component within the DOM to reflect that update to the component state - this saves the entire DOM from being updated to reflect changes.
-* **Heroku??**
+* **Heroku** - [Heroku](https://www.heroku.com/) is a Platform-as-a-Service that allows developers to deploy applications to the cloud.
+* **Netlify** -
 * **Github** -  [Github](https://github.com/)  is a company that provides free remote repository hosting utilising the Git version control system.
 Git tracks changes in the application source code in order to manage project development and smooth developer collaboration by automatically handling merges and updates to the code base.
 * **Trello** - Used for project management, Trello allows for the creation of Kanban-Style boards.
+* **Critical Libraries for the Project**
+
+  - [Mongoose](https://github.com/Automattic/mongoose): MongoDB object modeling designed to work in an asynchronous environment. This is the driver that enables our server to communicate with MongoDB Atlas.
+  - [Express](https://github.com/expressjs/express): Fast, unopinionated, minimalist web framework for node. This library is what the project uses to create the server API.
+  - [Passport](https://github.com/jaredhanson/passport): Simple, unobtrusive authentication for Node.js. This library will handle authentication in the app.
+  - [React-Grid-Layout](https://github.com/STRML/react-grid-layout): A draggable and resizable grid layout with responsive breakpoints, for React. A lot of the drag and drop functioanlity of this project relies on this library.
 
 ## Data Flow Diagram
 ![Data Flow Diagram](docs/lookahead_data_flow_diagram.png)
