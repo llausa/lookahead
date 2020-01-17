@@ -41,9 +41,22 @@ Git tracks changes in the application source code in order to manage project dev
   - [React-Grid-Layout](https://github.com/STRML/react-grid-layout): A draggable and resizable grid layout with responsive breakpoints, for React. A lot of the drag and drop functioanlity of this project relies on this library.
 
 ## Data Flow Diagram
-![Data Flow Diagram](docs/lookahead_data_flow_diagram.png)
+![Overall Data Flow Diagram](docs/lookahead_data_flow_diagram.png)
 
 This Data Flow Diagram visualises the main data flows taking place inside the Lookahead application. The main processes of the Application are the authentication of Users, the CRUD (Create, Read, Update, Delete) functionality for Lookahead projects (similar in nature to Trello Boards) and the CRUD functionality for Task Cards (think Trello cards) within Lookahead Projects.
+
+The Data Flow Diagram is broken down into the main data flow avenues shown above in the subsections directly below.
+
+- User Authentication Data Flow
+![User Auth Data Flow Diagram](docs/user_authentication_data_flow_diagram.png)
+
+This diagram shows the data flow for authenticating a User. It includes Logging in and Sign up.
+
+- Lookahead Project CRUD Data Flow
+![Lookahead CRUD Data Flow Diagram](docs/lookahead_project_data_flow_diagram.png)
+
+- Task Card CRUD Data Flow
+![Task Card CRUD Data Flow](docs/task_card_data_flow_diagram.png)
 
 ## Application Architecture Diagram
 ![Application Architecure Diagram](docs/app_architecture_diagram.png)
