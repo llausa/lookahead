@@ -1,6 +1,6 @@
 [build]
   command = "yarn run build"
-  publish="path-to-react-app/build"
+  publish="path-to-react-app/src/client"
   base = "path-to-react-app"
   
 [[redirects]]
