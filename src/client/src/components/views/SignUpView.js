@@ -27,13 +27,13 @@ function SignUpView() {
     }
 
     function SignupPressed() {
-        console.log("Login Pressed")
+        console.log("Signup Pressed")
     }
 
     
     return (
         <div data-cy="signupView" style={mystyle}>
-        <h1 style={{margin: "40px 0 10px 0"}}>Signup</h1>
+        <h1 style={{margin: "40px 0 10px 0", fontSize: "70px"}}>Signup</h1>
         <p style={{margin: "0 0 20px 0", fontSize:"12px"}}>Please fill out all fields.</p>
         <TextField
           style={inputStyle}

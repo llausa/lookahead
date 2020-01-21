@@ -17,6 +17,10 @@ const logoStyle = {
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
+    margin: "0 0 40px 0",
+  },
+  pos: {
+    position: "fixed",
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -32,7 +36,7 @@ export default function Nav() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar className={classes.pos} >
         <Toolbar>
         <img src={Logo} alt="Logo" style={logoStyle} className={classes.title} aria-label="logo"/>
           <IconButton edge="end" className={classes.menuButton} color="inherit" aria-label="menu">
@@ -40,6 +44,7 @@ export default function Nav() {
           </IconButton>
         </Toolbar>
       </AppBar>
+      <div style={{margin: "0 0 60px 0"}}></div>
     </div>
   );
 }
