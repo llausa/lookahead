@@ -49,7 +49,7 @@ function PasswordChangeView() {
 
     return (
         <div data-cy="passwordChangeForm" style={mystyle}>
-        <h1 data-cy="passwordView">Password Change</h1>
+        <h1 data-cy="passwordView" style={{margin: "40px 0 10px 0", fontSize: "70px"}}>Password Change</h1>
         <p style={{margin: "0 0 20px 0", fontSize:"12px"}}>Please enter your account email below for a reset link to be sent.</p>
             <TextField
             style={inputStyle}
