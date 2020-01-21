@@ -14,7 +14,6 @@ const logoStyle = {
     left: "25px"
 }
 
-
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -28,6 +27,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Nav() {
+
   const classes = useStyles();
 
   return (

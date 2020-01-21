@@ -15,3 +15,11 @@ body {
     color: #fff;
     background-color: #2baafe!important;
 }
+
+.MuiFormLabel-root.Mui-focused {
+    color:  #757575!important;
+}
+
+.MuiOutlinedInput-notchedOutline {
+    border-color: #757575!important;
+}

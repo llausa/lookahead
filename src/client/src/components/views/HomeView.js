@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button';
 import LockIcon from '@material-ui/icons/Lock';
 
@@ -50,9 +51,9 @@ function HomeView() {
     return (
         <div style={mystyle}>
         <h1>Welcome</h1>
-        <Button onClick={LoginPressed} variant="outlined" style={buttonMain} color="primary">Login</Button>
-        <Button onClick={SignupPressed} variant="outlined" style={{margin: "0 20px"}}>Signup</Button>
-        <Button onClick={ResetPressed} variant="outlined" style={buttonResetP}>Reset Password <LockIcon style={smallIcon} /> </Button>
+        <Button component={Link} to="/login" onClick={LoginPressed} variant="outlined" style={buttonMain} color="primary">Login</Button>
+        <Button component={Link} to="/signup" onClick={SignupPressed} variant="outlined" style={{margin: "0 20px"}}>Signup</Button>
+        <Button component={Link} to="/account/password" onClick={ResetPressed} variant="outlined" style={buttonResetP}>Reset Password <LockIcon style={smallIcon} /> </Button>
         </div>
     )
 }
