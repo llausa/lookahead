@@ -1,4 +1,8 @@
+root {
+    --main-color: #2baafe;
+}
+
 .MuiAppBar-colorPrimary {
     color: #fff;
-    background-color: #007bff!important;
+    background-color: #2baafe!important;
 }
