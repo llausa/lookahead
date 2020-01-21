@@ -49,7 +49,7 @@ function HomeView() {
     }
 
     return (
-        <div style={mystyle}>
+        <div data-cy="homeView" style={mystyle}>
         <h1>Welcome</h1>
         <Button component={Link} to="/login" onClick={LoginPressed} variant="outlined" style={buttonMain} color="primary">Login</Button>
         <Button component={Link} to="/signup" onClick={SignupPressed} variant="outlined" style={{margin: "0 20px"}}>Signup</Button>

@@ -2,7 +2,7 @@ import React from "react";
 
 function ProjectUsersView() {
         return (
-            <h1>Project Users View</h1>
+            <h1 data-cy="projectUsersView">Project Users View</h1>
         )
 }
 

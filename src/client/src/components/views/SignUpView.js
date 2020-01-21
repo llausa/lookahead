@@ -3,6 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 function SignUpView() {
+
     const mystyle = {
         display: "flex",
         flexDirection: "column",
@@ -31,7 +32,7 @@ function SignUpView() {
 
     
     return (
-        <div style={mystyle}>
+        <div data-cy="signupView" style={mystyle}>
         <h1 style={{margin: "40px 0 10px 0"}}>Signup</h1>
         <p style={{margin: "0 0 20px 0", fontSize:"12px"}}>Please fill out all fields.</p>
         <TextField
