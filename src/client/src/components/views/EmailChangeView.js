@@ -2,7 +2,7 @@ import React from "react";
 
 function EmailChangeView() {
         return (
-            <h1>Email Change View</h1>
+            <h1 data-cy="emailView">Email Change View</h1>
         )
 }
 

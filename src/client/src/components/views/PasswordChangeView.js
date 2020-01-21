@@ -2,7 +2,7 @@ import React from "react";
 
 function PasswordChangeView() {
         return (
-            <h1>Password Change View</h1>
+            <h1 data-cy="passwordView">Password Change View</h1>
         )
 }
 

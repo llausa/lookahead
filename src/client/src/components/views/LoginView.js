@@ -2,7 +2,10 @@ import React from "react";
 
 function LoginView() {
         return (
-            <h1>Login View</h1>
+            <div>
+                <h1 data-cy="loginView">Login View</h1>
+                <form data-cy="loginForm"></form>
+            </div>
         )
 }
 

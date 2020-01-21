@@ -2,7 +2,7 @@ import React from "react";
 
 function EditTaskView() {
         return (
-            <h1>Edit Task View</h1>
+            <h1 data-cy="editTaskView">Edit Task View</h1>
         )
 }
 
