@@ -1,4 +1,7 @@
 import React, { Fragment, useState } from 'react'
+
+import Nav from './Nav'
+
 import { BrowserRouter, Route } from 'react-router-dom'
 import AccountDetailsView from './views/AccountDetailsView'
 import HomeView from './views/HomeView'
@@ -27,6 +30,7 @@ function App() {
 
   return (
     <div className="App">
+    <Nav></Nav>
       <BrowserRouter>
         <>
           <Route exact path="/" component={HomeView} data-cy="homeView"/>
