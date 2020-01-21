@@ -19,7 +19,9 @@ import PasswordChangeView from './views/PasswordChangeView'
 function App() {
 
   const [projectId, setProjectId] = useState(1)
+  const [ownerId, setOwnerId] = useState(1)
   const [userId, setUserId] = useState(2)
+  const [restrictedUserId, setRestrictedUserId] = useState(3)
   const [taskId, setTaskId] = useState(3)
 
 
@@ -27,20 +29,20 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <>
-          <Route exact path="/" component={HomeView}/>
-          <Route exact path="/login" component={LoginView}/>
-          <Route exact path="/signup" component={SignUpView}/>
-          <Route exact path="/projects" component={ProjectsView}/>
-          <Route exact path="/account/email" component={EmailChangeView}/>
-          <Route exact path="/account/password" component={PasswordChangeView}/>
-          <Route exact path="/account/details" component={AccountDetailsView}/>
-          <Route exact path="/project/:id" component={ProjectView} render={ props => <ProjectView {...props} projectId={projectId}/>}/>
-          <Route exact path="/projects/new" component={NewLookaheadView}/>
-          <Route exact path="/project/:id/users" component={ProjectUsersView} render={ props => <ProjectUsersView {...props} projectId={projectId}/>}/>
-          <Route exact path="/project/:id/users/:userid" component={ProjectUserSettingsView} render={ props => <ProjectUserSettingsView {...props} projectId={projectId} userId={userId}/>}/>
-          <Route exact path="/project/:id/edit" component={ProjectSettingsView} render={ props => <ProjectView {...props} projectId={projectId}/>}/>
-          <Route exact path="/project/:id/newtask" component={NewTaskView} render={ props => <ProjectView {...props} projectId={projectId}/>}/>
-          <Route exact path="/project/:id/edittask/:taskid" component={EditTaskView} render={ props => <ProjectUserSettingsView {...props} projectId={projectId} taskId={taskId}/>}/>
+          <Route exact path="/" component={HomeView} data-cy="homeView"/>
+          <Route exact path="/login" component={LoginView} data-cy="loginView"/>
+          <Route exact path="/signup" component={SignUpView} data-cy="signupView"/>
+          <Route exact path="/projects" component={ProjectsView} data-cy="projectsView"/>
+          <Route exact path="/account/email" component={EmailChangeView} data-cy="emailView"/>
+          <Route exact path="/account/password" component={PasswordChangeView} data-cy="passwordView"/>
+          <Route exact path="/account/details" component={AccountDetailsView} data-cy="detailsView"/>
+          <Route exact path="/project/:id" component={ProjectView} data-cy="projectView" render={ props => <ProjectView {...props} projectId={projectId}/>}/>
+          <Route exact path="/projects/new" component={NewLookaheadView} data-cy="newProjectView"/>
+          <Route exact path="/project/:id/users" component={ProjectUsersView} data-cy="projectUsersView" render={ props => <ProjectUsersView {...props} projectId={projectId}/>}/>
+          <Route exact path="/project/:id/users/:userid" component={ProjectUserSettingsView} data-cy="projectUserSettingsView" render={ props => <ProjectUserSettingsView {...props} projectId={projectId} userId={userId}/>}/>
+          <Route exact path="/project/:id/edit" component={ProjectSettingsView} data-cy="projectSettingsView" render={ props => <ProjectView {...props} projectId={projectId}/>}/>
+          <Route exact path="/project/:id/newtask" component={NewTaskView} data-cy="newTaskView" render={ props => <ProjectView {...props} projectId={projectId}/>}/>
+          <Route exact path="/project/:id/edittask/:taskid" component={EditTaskView} data-cy="editTaskView" render={ props => <ProjectUserSettingsView {...props} projectId={projectId} taskId={taskId}/>}/>
         </>
       </BrowserRouter>
     </div>

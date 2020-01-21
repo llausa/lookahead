@@ -2,7 +2,7 @@ import React from "react";
 
 function SignUpView() {
         return (
-            <h1>Sign Up View</h1>
+            <h1 data-cy="signupView">Sign Up View</h1>
         );
 }
 

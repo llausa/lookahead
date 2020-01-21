@@ -1,0 +1,15 @@
+{
+  "title": "Test Project",
+  "ownerId": 1,
+  "id": 1,
+  "tasks": [
+      { "id": 3,
+        "title": "Test Task",
+        "content": "Lorem Ipsum"
+      }
+          ],
+  "users": [{
+    "id": 2,
+    "permissions": 2
+  }]
+}
