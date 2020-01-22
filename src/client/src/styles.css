@@ -11,6 +11,8 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+/* 90% of this is overriding Material UI Colours */
+
 .MuiAppBar-colorPrimary {
     color: #fff;
     background-color: #2baafe!important;
@@ -26,4 +28,16 @@ body {
 
 .MuiButton-root {
     border-radius: 50px!important;
+}
+
+.MuiFormControl-marginNormal {
+    margin: 4px!important;
+}
+
+.MuiPickersDay-daySelected {
+    background-color: #2baafe!important;
+}
+
+.MuiButton-textPrimary {
+    color: #2baafe!important;
 }
