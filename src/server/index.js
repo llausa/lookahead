@@ -52,4 +52,22 @@ app.post("/api/lookaheads", (req, res) => {
   res.send(lookahead)
 })
 
+// Lookahead Project PUT route
+app.put('/api/lookaheads/:id', (req, res) => {
+  const lookahead = lookaheads.find(c => c.id === parseInt(req.params.id))
+  if (!lookahead) res.status(404).send('The project with that ID was not found')
+
+  const schema = {
+    name: Joi.string().min(3).required()
+  }
+  const result = Joi.validate(req.body, schema)
+
+  if (result.error) {
+    // 400 Bad Request
+    res.status(400).send(result.error.details[0].message)
+    return
+  }
+  res.send(lookahead)
+})
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
