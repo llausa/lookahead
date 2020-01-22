@@ -1,10 +1,9 @@
 import React from 'react'
 
-import { makeStyles, AppBar, Toolbar, Typography, Button, IconButton } from '@material-ui/core';
-
+import { makeStyles, AppBar, Toolbar, Button, IconButton } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search'
 
+import Menu from './Menu'
 import Logo from '../images/LookaheadLogo.svg'
 import '../styles.css'
 
@@ -35,7 +34,9 @@ export default function Nav() {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <div>
+    {/* <Menu></Menu> */}
+    <div data-cy="navbar" className={classes.root}>
       <AppBar className={classes.pos} >
         <Toolbar>
         <img src={Logo} alt="Logo" style={logoStyle} className={classes.title} aria-label="logo"/>
@@ -45,6 +46,7 @@ export default function Nav() {
         </Toolbar>
       </AppBar>
       <div style={{margin: "0 0 60px 0"}}></div>
+    </div>
     </div>
   );
 }

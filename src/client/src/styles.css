@@ -23,3 +23,7 @@ body {
 .MuiOutlinedInput-notchedOutline {
     border-color: #757575!important;
 }
+
+.MuiButton-root {
+    border-radius: 50px!important;
+}

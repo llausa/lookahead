@@ -30,8 +30,8 @@ function App() {
 
   return (
     <div className="App">
-    <Nav></Nav>
       <BrowserRouter>
+        <Nav></Nav>
         <>
           <Route exact path="/" component={HomeView} data-cy="homeView"/>
           <Route exact path="/login" component={LoginView} data-cy="loginView"/>

@@ -49,8 +49,8 @@ function LoginView() {
     }
 
     return (
-        <div data-cy="loginForm" style={mystyle}>
-            <h1 data-cy="loginView" style={{margin: "40px 0 10px 0", fontSize: "70px"}}>Login</h1>
+        <div data-cy="loginView" style={mystyle}>
+            <h1 style={{margin: "40px 0 10px 0", fontSize: "70px"}}>Login</h1>
             <p style={{margin: "0 0 20px 0", fontSize:"12px"}}>Please enter your email and password</p>
             <TextField
             style={inputStyle}

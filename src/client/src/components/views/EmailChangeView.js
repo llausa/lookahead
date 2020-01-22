@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom'
 import { TextField, Button } from '@material-ui/core';
-import LockIcon from '@material-ui/icons/Lock';
 
 import MailIcon from '@material-ui/icons/Mail';
 
@@ -46,8 +45,8 @@ function EmailChangeView() {
     }
 
     return (
-        <div data-cy="emailChangeForm" style={mystyle}>
-        <h1 data-cy="emailView" style={{margin: "40px 0 10px 0", fontSize: "50px"}}>Update Email</h1>
+        <div data-cy="emailView" style={mystyle}>
+        <h1 style={{margin: "40px 0 10px 0", fontSize: "50px"}}>Update Email</h1>
         <p style={{margin: "0 0 20px 0", fontSize:"12px"}}>Please enter your new email and password.</p>
             <TextField
             style={inputStyle}

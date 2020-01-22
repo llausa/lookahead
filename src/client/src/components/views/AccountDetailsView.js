@@ -31,8 +31,8 @@ function AccountDetailsView() {
     }
 
     return (
-        <div style={mystyle}>
-        <h1 data-cy="detailsView">Edit Account</h1>
+        <div data-cy="detailsView" style={mystyle}>
+        <h1>Edit Account</h1>
         <p style={{margin: "0 0 20px 0", fontSize:"12px"}}>Please fill out all fields.</p>
         <TextField
           style={inputStyle}
