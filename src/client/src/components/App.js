@@ -18,6 +18,8 @@ import NewLookaheadView from './views/NewLookaheadView'
 import EmailChangeView from './views/EmailChangeView'
 import PasswordChangeView from './views/PasswordChangeView'
 
+import stateReducer from "../config/stateReducer";
+
 
 function App() {
 
@@ -26,6 +28,24 @@ function App() {
   const [userId, setUserId] = useState(2)
   const [restrictedUserId, setRestrictedUserId] = useState(3)
   const [taskId, setTaskId] = useState(3)
+
+
+  function handleLogin(token) {
+    dispatchToken({
+      type: "setToken",
+      data: token
+    })
+  }
+
+  const [token, dispatchToken] = useReducer(stateReducer, null)
+  
+  
+  onRegisterFormSubmit = (token, cb) => {
+    sessionStorage.setItem("token", token)
+    handleLogin(token)
+  }
+
+  
 
 
   return (

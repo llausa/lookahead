@@ -1,16 +1,13 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const {
-    register,
-    login,
-    logout,
-    activeUserSession
-} = require('../controllers/auth_controller.js');
+const { celebrate, Joi } = require("celebrate");
+const AuthController = require("./../controllers/auth_controller");
 
-
-router.post('/register', register);
-router.post('/login', login);
-router.get('/logout', logout);
-router.get('/user', activeUserSession);
+router.post("/register", celebrate({
+    body: {
+        email: Joi.string().email().required(),
+        password: Joi.string().required()
+    }
+}), AuthController.register);
 
 module.exports = router;

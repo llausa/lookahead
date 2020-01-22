@@ -8,6 +8,7 @@ const MongoStore = require("connect-mongo")(session)
 const passport = require('passport')
 const morgan = require('morgan')
 const authRouter = require('./routes/auth_routes')
+require('dotenv').config()
 
 
 const port = process.env.PORT || 3000
@@ -37,7 +38,7 @@ app.use(session({
 
 require('./config/passport');
 app.use(passport.initialize());
-app.use(passport.session());
+
 
 app.use(morgan('common'));
 
