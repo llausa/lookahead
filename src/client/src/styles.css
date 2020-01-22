@@ -2,7 +2,28 @@ root {
     --main-color: #2baafe;
 }
 
+body {
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .MuiAppBar-colorPrimary {
     color: #fff;
     background-color: #2baafe!important;
+}
+
+.MuiFormLabel-root.Mui-focused {
+    color:  #757575!important;
+}
+
+.MuiOutlinedInput-notchedOutline {
+    border-color: #757575!important;
+}
+
+.MuiButton-root {
+    border-radius: 50px!important;
 }
