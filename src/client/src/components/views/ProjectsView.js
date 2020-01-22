@@ -35,8 +35,8 @@ function CreateNewPressed() {
 function ProjectsView() {
 
     return (
-        <div style={mystyle}>
-        <h1 data-cy="projectsView">My Lookaheads</h1>
+        <div data-cy="projectsView" style={mystyle}>
+        <h1>My Lookaheads</h1>
 
         <ProjectCard></ProjectCard>
         <ProjectCard></ProjectCard>
