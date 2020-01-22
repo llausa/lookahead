@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@date-io/date-fns": "1.x",
+    "@material-ui/pickers": "^3.2.9",
+    "date-fns": "^2.9.0"
+  }
+}
