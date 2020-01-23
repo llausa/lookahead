@@ -1,5 +1,7 @@
 ﻿# T3A2 Part A | Alex Leybourne, Ben Ulcoq, Santiago Chamon :sweet_potato: ⚛️ 
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/1f4244b9-9651-47ce-997d-365175476ab1/deploy-status)](https://app.netlify.com/sites/lookahead/deploys)
+
 ## Purpose
 Operational lookaheads are used throughout construction and other industries. Although the specific nature of the operations/tasks they describe may change depending on the sector, the purpose of these simple ‘on-the-ground’ planning tools remain the same: to give all the stakeholders in the operational team a common perspective on what the next 6-7 days of the overall construction project entails - most lookaheads are developed as simple spreadsheets.
 
