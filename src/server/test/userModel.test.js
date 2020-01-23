@@ -25,8 +25,8 @@ const invalidPWUser = {
 }
 
 const blankPositionUser = {
-  firstName: "Bob",
-  lastName: "Test",
+  firstName: "Jeff",
+  lastName: "Tester",
   email: "bob@test.com",
   password: "test123"
 }
@@ -139,6 +139,37 @@ describe('User Model Test', () => {
     })
     .catch(err => {
       expect(err).toBeUndefined()
+    })
+  })
+
+  it('create user with non-unique email should fail', async () => {
+    expect.assertions(8)
+    const validUser = new UserModel(validTestUser)
+    
+    await validUser.save()
+    .then(savedUser => {
+      console.log(savedUser)
+      expect(savedUser._id).toBeDefined()
+      expect(savedUser.firstName).toBe(validTestUser.firstName)
+      expect(savedUser.lastName).toBe(validTestUser.lastName)
+      expect(savedUser.email).toBe(validTestUser.email)
+      expect(savedUser.position).toBe(validTestUser.position)
+    })
+    .catch(err => {
+      expect(err).toBeUndefined()
+    })
+
+    const duplicateEmailUser = new UserModel(blankPositionUser)
+    await duplicateEmailUser.save()
+    .then(unsavedUser => {
+      console.log(unsavedUser)
+      expect(unsavedUser._id).toBeDefined()
+    })
+    .catch(err => {
+      console.log(err.errors)
+      expect(err).toBeInstanceOf(mongoose.Error.ValidationError)
+      expect(err.errors.email).toBeDefined()
+      expect(err.errors.firstName).toBeUndefined()
     })
   })
 
