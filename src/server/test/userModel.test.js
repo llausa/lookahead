@@ -24,6 +24,13 @@ const invalidPWUser = {
   position: "CEO"
 }
 
+const blankPositionUser = {
+  firstName: "Bob",
+  lastName: "Test",
+  email: "bob@test.com",
+  password: "test123"
+}
+
 const blankTestUser = {
   firstName: "",
     lastName: "",
@@ -55,11 +62,11 @@ afterEach(async () => {
 describe('User Model Test', () => {
 
   it('create & save valid user successfully', async () => {
+    expect.assertions(5)
     const validUser = new UserModel(validTestUser)
     
     await validUser.save()
     .then(savedUser => {
-      console.log('testing')
       expect(savedUser._id).toBeDefined()
       expect(savedUser.firstName).toBe(validTestUser.firstName)
       expect(savedUser.lastName).toBe(validTestUser.lastName)
@@ -73,10 +80,8 @@ describe('User Model Test', () => {
   })
 
 
-
-  // describe('Incomplete data should cause failure')
-
   it('create user without email should fail', async () => {
+    expect.assertions(3)
     const invalidUser = new UserModel(invalidEmailUser)
     await invalidUser.save()
     .then(unsavedUser => {
@@ -91,6 +96,7 @@ describe('User Model Test', () => {
 
 
   it('create user without password should fail', async () => {
+    expect.assertions(3)
     const invalidUser = new UserModel(invalidPWUser)
     await invalidUser.save()
     .then(unsavedUser => {
@@ -104,7 +110,7 @@ describe('User Model Test', () => {
   })
 
   it('create blank user should fail', async () => {
-    expect.assertions(2)
+    expect.assertions(6)
     const invalidUser = new UserModel(blankTestUser)
     await invalidUser.save()
     .then(unsavedUser => {
@@ -120,6 +126,20 @@ describe('User Model Test', () => {
     })
   })
 
-  
+  it('create user without position should be default', async () => {
+    expect.assertions(5)
+    const validUser = new UserModel(blankPositionUser)
+    await validUser.save()
+    .then(savedUser => {
+      expect(savedUser._id).toBeDefined()
+      expect(savedUser.firstName).toBe(blankPositionUser.firstName)
+      expect(savedUser.lastName).toBe(blankPositionUser.lastName)
+      expect(savedUser.email).toBe(blankPositionUser.email)
+      expect(savedUser.position).toBe("worker")
+    })
+    .catch(err => {
+      expect(err).toBeUndefined()
+    })
+  })
 
 })
