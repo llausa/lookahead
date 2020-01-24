@@ -20,7 +20,10 @@ router.post('/', async (req, res) => {
 
   await user.save()
 
-  res.send(user)
+  res.send({
+    name: user.firstName + user.lastName,
+    email: user.email
+  })
 })
 
 module.exports = router

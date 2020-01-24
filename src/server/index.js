@@ -1,4 +1,5 @@
 const express = require("express")
+const mongoose = require('mongoose')
 const Joi = require('joi')
 const morgan = require('morgan')
 const cors = require('cors')
@@ -7,6 +8,10 @@ const home = require("./routes/home")
 const users = require("./routes/users")
 
 const app = express();
+mongoose.connect('mongodb://localhost/lookahead')
+  .then(() => console.log('Connected to MongoDB...'))
+  .catch(err => console.error('Could not connect to MongoDB...', err))
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(morgan('tiny'))
