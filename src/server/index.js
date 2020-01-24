@@ -4,6 +4,7 @@ const morgan = require('morgan')
 const cors = require('cors')
 const lookaheads = require("./routes/lookaheads")
 const home = require("./routes/home")
+const users = require("./routes/users")
 
 const app = express();
 app.use(express.json())
@@ -11,6 +12,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(morgan('tiny'))
 app.use("/api/lookaheads", lookaheads)
 app.use("/", home)
+app.use("/api/users", users)
 
 const port = process.env.PORT || 3000;
 
