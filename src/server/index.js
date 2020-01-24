@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const Joi = require('joi')
 const morgan = require('morgan')
 const cors = require('cors')
+const auth = require('./routes/auth')
 const lookaheads = require("./routes/lookaheads")
 const home = require("./routes/home")
 const users = require("./routes/users")
@@ -18,6 +19,7 @@ app.use(morgan('tiny'))
 app.use("/api/lookaheads", lookaheads)
 app.use("/", home)
 app.use("/api/users", users)
+app.use('/api/auth', auth)
 
 const port = process.env.PORT || 3000;
 
