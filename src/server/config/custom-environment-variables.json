@@ -1,4 +1,4 @@
 {
   "jwtPrivateKey": "lookahead_jwtPrivateKey",
-  "db": "lookahead_db"
+  "db": "DB_HOST"
 }
