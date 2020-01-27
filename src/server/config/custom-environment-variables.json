@@ -1,3 +1,4 @@
 {
-  "jwtPrivateKey": "lookahead_jwtPrivateKey"
+  "jwtPrivateKey": "lookahead_jwtPrivateKey",
+  "db": "lookahead_db"
 }
