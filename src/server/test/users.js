@@ -11,14 +11,14 @@ const validTestUser = {
   firstName: "Bob",
   lastName: "Test",
   email: "bob@test.com",
-  password: "test123",
+  password: "Test12345",
   position: "CEO"
 }
 
 const invalidTestUser = {
   firstName: "Jim",
   lastName: "Test",
-  password: "test123",
+  password: "Test12345",
   position: "Hmm"
 }
 
@@ -77,6 +77,8 @@ describe('Test User Model', () => {
 
   describe('Unsuccessful Operations', () => {
 
+    describe('Missing Information', () => {
+
     it('Create User without email should fail', async () => {
       const invalidUser = new UserModel(invalidTestUser)
       return expect(invalidUser.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
@@ -87,15 +89,65 @@ describe('Test User Model', () => {
       return expect(invalidUser.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
     })
 
+    it('Create User without password should fail', async () => {
+      
+    })
+
+  })
+
+    describe('Email Validation', () => {
+
     it('Create user with duplicate email should fail', async () => {
       invalidTestUser.email = "bob@test.com"
-      console.log(invalidTestUser)
-      console.log(validTestUser)
       const validUser = new UserModel(validTestUser)
       const invalidUser = new UserModel(invalidTestUser)
       await validUser.save()
       return expect(invalidUser.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
     })
+
+    it('Create user with short email should fail', async () => {
+      invalidTestUser.email = "a@b.c"
+      const invalidUser = new UserModel(invalidTestUser)
+      return expect(invalidUser.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
+    })
+
+    it("Create user without '@' in email should fail", async () => {
+      invalidTestUser.email = "abcdef.com"
+      const invalidUser = new UserModel(invalidTestUser)
+      return expect(invalidUser.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
+    })
+
+    it('Create user without "." in email should fail', async () => {
+      invalidTestUser.email = "ab@cdefcom"
+      const invalidUser = new UserModel(invalidTestUser)
+      return expect(invalidUser.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
+    })
+
+  })
+
+    describe('Password Validation', () => {
+    
+
+    it('Create user without capital in password should fail', async () => {
+      invalidTestUser.email = "abc@def.com"
+      invalidTestUser.password = "test12345"
+      const invalidUser = new UserModel(invalidTestUser)
+      return expect(invalidUser.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
+    })
+
+    it('Create user without capital in password should fail', async () => {
+      invalidTestUser.password = "Testerino"
+      const invalidUser = new UserModel(invalidTestUser)
+      return expect(invalidUser.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
+    })
+
+    it('Create user without 8 digits in password should fail', async () => {
+      invalidTestUser.password = "Test123"
+      const invalidUser = new UserModel(invalidTestUser)
+      return expect(invalidUser.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
+    })
+
+  })
     
   })
 })
