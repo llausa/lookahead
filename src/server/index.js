@@ -1,4 +1,5 @@
 require('dotenv').config()
+require('./models/connect.js')
 const express = require("express")
 const mongoose = require('mongoose')
 const Joi = require('joi')
@@ -12,9 +13,9 @@ const users = require("./routes/users")
 
 const app = express();
 
-mongoose.connect('mongodb://localhost/lookahead')
-  .then(() => console.log('Connected to MongoDB...'))
-  .catch(err => console.error('Could not connect to MongoDB...', err))
+// mongoose.connect('mongodb://localhost/lookahead')
+//   .then(() => console.log('Connected to MongoDB...'))
+//   .catch(err => console.error('Could not connect to MongoDB...', err))
 
 if (!config.get('jwtPrivateKey')) {
   console.error('FATAL ERROR: jwtPrivateKey is not defined.')
