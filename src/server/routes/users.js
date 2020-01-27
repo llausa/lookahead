@@ -3,7 +3,16 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const _ = require('lodash')
 const express = require('express')
+const jwt = require('jsonwebtoken')
+const config = require('config')
 const router = express.Router()
+const auth = require('../middleware/auth')
+
+// Get current user
+router.get('/me', auth, async (req, res) => {
+  const user = await User.findById(req.user._id).select('-password')
+  res.send(user)
+})
 
 router.post('/', async (req, res) => {
   const { error } = validate(req.body)
@@ -22,7 +31,9 @@ router.post('/', async (req, res) => {
   user.password = await bcrypt.hash(user.password, salt)
   await user.save()
 
-  res.send(_.pick(user, ['_id', 'firstName', 'lastName', 'email']))
+  const token = user.generateAuthToken()
+
+  res.header('x-auth-token', token).send(_.pick(user, ['_id', 'firstName', 'lastName', 'email']))
 })
 
 module.exports = router
