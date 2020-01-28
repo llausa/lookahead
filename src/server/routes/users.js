@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt')
 const _ = require('lodash')
 const express = require('express')
 const jwt = require('jsonwebtoken')
-const config = require('config')
 const router = express.Router()
 const auth = require('../middleware/auth')
 

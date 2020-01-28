@@ -12,15 +12,13 @@ const users = require("./routes/users")
 
 const app = express()
 
-
-
 if (process.env.NODE_ENV == 'test') {
   mongoose.connect('mongodb://localhost/lookahead-test', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true}) 
   .then(mongoose.connection
     .once('open', () => {
       console.log('Connected to the Test Database')
     }
-      )
+    )
     .on('error', (error) => {
         console.warn('Error : ',error)
     }))
