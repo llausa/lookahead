@@ -31,7 +31,7 @@ describe('Test User Model', () => {
     .then(
     mongoose.connection
       .once('open', () => {
-        console.log('Connected to the Test Database')
+        // console.log('Connected to the Test Database')
         done()
       })
       .on('error', (error) => {
@@ -79,18 +79,35 @@ describe('Test User Model', () => {
 
     describe('Missing Information', () => {
 
-    it('Create User without email should fail', async () => {
-      const invalidUser = new UserModel(invalidTestUser)
-      return expect(invalidUser.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
-    })
-
     it('Create blank user should fail', async () => {
       const invalidUser = new UserModel(blankTestUser)
       return expect(invalidUser.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
     })
 
+    it('Create User without email should fail', async () => {
+      const invalidUser = new UserModel(invalidTestUser)
+      return expect(invalidUser.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
+    })
+
     it('Create User without password should fail', async () => {
-      
+      invalidTestUser.email = "abc@def.com"
+      invalidTestUser.password = undefined
+      const invalidUser = new UserModel(invalidTestUser)
+      return expect(invalidUser.save()).to.eventually.be.rejectedWith(Error).and.have.nested.property('errors.password.message', 'Path `password` is required.')
+    })
+
+    it('Create User without first name should fail', async () => {
+      invalidTestUser.password = "Test12345"
+      invalidTestUser.firstName = undefined
+      const invalidUser = new UserModel(invalidTestUser)
+      return expect(invalidUser.save()).to.eventually.be.rejectedWith(Error).and.have.nested.property('errors.firstName.message', 'Path `firstName` is required.')
+    })
+
+    it('Create User without last name should fail', async () => {
+      invalidTestUser.firstName = "Jim"
+      invalidTestUser.lastName = undefined
+      const invalidUser = new UserModel(invalidTestUser)
+      return expect(invalidUser.save()).to.eventually.be.rejectedWith(Error).and.have.nested.property('errors.lastName.message', 'Path `lastName` is required.')
     })
 
   })
@@ -98,6 +115,7 @@ describe('Test User Model', () => {
     describe('Email Validation', () => {
 
     it('Create user with duplicate email should fail', async () => {
+      invalidTestUser.lastName = "Test"
       invalidTestUser.email = "bob@test.com"
       const validUser = new UserModel(validTestUser)
       const invalidUser = new UserModel(invalidTestUser)

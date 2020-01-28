@@ -1,4 +1,4 @@
-const { UserModel, validate} = require('../models/user')
+const { UserModel, validateUser } = require('../models/user')
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const _ = require('lodash')
