@@ -45,6 +45,20 @@ const newTask = {
   day: 3
 }
 
+const overlapTask = {
+  title: "Sad boi",
+  start_time: 4,
+  length: 2,
+  day: 3
+}
+
+const overflowTask = {
+  title: "Split Boi",
+  start_time: 18,
+  length: 15,
+  day: 4
+}
+
 async function saveUsers() {
   ownerUser = new UserModel(validTestUser)
   await ownerUser.save()
@@ -205,16 +219,52 @@ describe('Test Project Model', () => {
 
     describe('Timezone Validation', () => {
 
-      it('Create Project with Timezone over max should fail', () => {
+      it('Create Project with Timezone over max should fail', async () => {
         validProject.timezone = 15
         const invalidProject = new ProjectModel(validProject)
         return expect(invalidProject.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
       })
 
-      it('Create Project with Timezone under min should fail', () => {
+      it('Create Project with Timezone under min should fail', async () => {
         validProject.timezone = -13
         const invalidProject = new ProjectModel(validProject)
         return expect(invalidProject.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
+      })
+
+    })
+
+    describe('Date Validation', () => {
+
+      it('Start Date must be before End Date', async () => {
+        validProject.start_date = setDate(Date.now(), 3)
+        validProject.end_date = setDate(Date.now(), 2)
+        const invalidProject = new ProjectModel(validProject)
+        return expect(invalidProject.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
+      })
+
+      it('End Date must be after Start Date', async () => {
+        validProject.start_date = setDate(Date.now(), 3)
+        validProject.end_date = setDate(Date.now(), 2)
+        const invalidProject = new ProjectModel(validProject)
+        return expect(invalidProject.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
+      })
+
+    })
+
+    describe('Task Validation', () => {
+
+      it('Task must not overflow day', async () => {
+        const newProject = new ProjectModel(validProject)
+        const savedProject = await newProject.save()
+        savedProject.tasks.push(overflowTask)
+        return expect(savedProject.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
+      })
+
+      it('Tasks must not overlap', async () => {
+        const newProject = new ProjectModel(validProject)
+        const savedProject = await newProject.save()
+        savedProject.tasks.push(overlapTask)
+        return expect(savedProject.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
       })
 
     })
