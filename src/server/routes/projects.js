@@ -75,16 +75,6 @@ router.delete('/:id', auth, (req, res) => {
   const project = projects.find(c => c.id === parseInt(req.params.id))
   if (!project) return res.status(404).send('The project with that ID was not found')
 
-    const schema = {
-    name: Joi.string().min(3).required()
-  }
-  const result = Joi.validate(req.body, schema)
-
-  if (result.error) {
-    // 400 Bad Request
-    res.status(400).send(result.error.details[0].message)
-    return
-  }
   const index = projects.indexOf(project)
   projects.splice(index, 1)
 
