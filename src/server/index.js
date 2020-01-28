@@ -12,7 +12,19 @@ const users = require("./routes/users")
 
 const app = express()
 
-if (process.env.NODE_ENV == 'test') {
+if (process.env.NODE_ENV == 'production') {
+  mongoose.connect(process.env.DB_HOST, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true}) 
+  .then(mongoose.connection
+    .once('open', () => {
+      console.log('Connected')
+    }
+    )
+    .on('error', (error) => {
+        console.warn('Error : ',error)
+    }))
+  .catch(err => console.error('Could not connect to MongoDB...', err))
+}
+else if (process.env.NODE_ENV == 'test') {
   mongoose.connect('mongodb://localhost/lookahead-test', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true}) 
   .then(mongoose.connection
     .once('open', () => {
@@ -48,9 +60,7 @@ const port = process.env.PORT || 3000
 
 app.use(cors({
   credentials: true,
-  origin: function (origin, callback) {
-      callback (null, true)
-  }
+  origin: "http://localhost:3000"
 }))
 
 app.listen(port, () => console.log(`listening on port ${port}!`))
