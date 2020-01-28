@@ -19,7 +19,7 @@ router.post('/', async (req, res) => {
   if (error) return res.status(400).send(error.details[0].message)
 
   let user = await UserModel.findOne({ email: req.body.email })
-  if(user) return res.status(400).send('UserModel already registered.')
+  if(user) return res.status(400).send('That email is already registered.')
 
   user = new UserModel(_.pick(req.body, ['firstName',
                                     'lastName',

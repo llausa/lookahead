@@ -1,3 +1,6 @@
+
+process.env.NODE_ENV = 'test'
+
 const mongoose = require("mongoose")
 const { UserModel } = require("../models/user")
 
@@ -24,6 +27,8 @@ const invalidTestUser = {
 
 const blankTestUser = {}
 
+console.log(process.env.NODE_ENV)
+
 describe('Test User Model', () => {
 
   before( (done) => {
@@ -31,7 +36,7 @@ describe('Test User Model', () => {
     .then(
     mongoose.connection
       .once('open', () => {
-        // console.log('Connected to the Test Database')
+        console.log('Connected to the Test Database')
         done()
       })
       .on('error', (error) => {
