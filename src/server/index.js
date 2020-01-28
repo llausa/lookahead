@@ -11,11 +11,11 @@ const projects = require("./routes/projects")
 const home = require("./routes/home")
 const users = require("./routes/users")
 
-const app = express();
+const app = express()
 
-// mongoose.connect('mongodb://localhost/lookahead')
-//   .then(() => console.log('Connected to MongoDB...'))
-//   .catch(err => console.error('Could not connect to MongoDB...', err))
+mongoose.connect('mongodb://localhost/lookahead', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
+  .then(() => console.log('Connected to MongoDB...'))
+  .catch(err => console.error('Could not connect to MongoDB...', err))
 
 if (!config.get('jwtPrivateKey')) {
   console.error('FATAL ERROR: jwtPrivateKey is not defined.')
@@ -31,7 +31,7 @@ app.use("/api/projects", projects)
 app.use("/api/users", users)
 app.use('/api/auth', auth)
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000
 
 app.use(cors({
   credentials: true,
@@ -40,4 +40,4 @@ app.use(cors({
   }
 }))
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(port, () => console.log(`Example app listening on port ${port}!`))
