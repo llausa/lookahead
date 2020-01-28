@@ -46,6 +46,13 @@ if (!process.env.JWT_SECRET) {
   process.exit(1)
 }
 
+app.use(cors())
+
+
+// {origin: "http://localhost:3000",
+// credentials: true
+// }
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(morgan('tiny'))
@@ -58,11 +65,6 @@ app.use('/api/auth', auth)
 const port = process.env.PORT || 3000
 
 
-app.use(cors())
-// {
-//   credentials: true,
-//   origin: "http://localhost:3000"
-// }
 
 app.listen(port, () => console.log(`listening on port ${port}!`))
 
