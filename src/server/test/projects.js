@@ -38,6 +38,13 @@ const validTestUser3 = {
   position: "COO"
 }
 
+const newTask = {
+  title: "Biggest Yeet",
+  start_time: 3,
+  length: 15,
+  day: 3
+}
+
 async function saveUsers() {
   ownerUser = new UserModel(validTestUser)
   await ownerUser.save()
@@ -56,7 +63,7 @@ describe('Test Project Model', () => {
     .then(
     mongoose.connection
       .once('open', () => {
-        console.log('Connected to the Test Database')
+        // console.log('Connected to the Test Database')
         done()
       })
       .on('error', (error) => {
@@ -80,7 +87,7 @@ describe('Test Project Model', () => {
         start_date: setDate(Date.now(), 3),
         end_date: setDate(Date.now(), 10),
         //Store Timezone as number +/- GMT?
-        timezone: 8,
+        timezone: 10,
         owner: ownerUser._id,
         tasks: [
           {
@@ -122,10 +129,94 @@ describe('Test Project Model', () => {
 
   describe('Successful Operations', () => {
 
-    it('Creates and Saves a valid Project Successfully', async () => {
-      const newProject = new ProjectModel(validProject)
-      const savedProject = await newProject.save()
-      return expect(savedProject._id).to.exist
+    describe('Projects', () => {
+
+      it('Creates and Saves a valid Project Successfully', async () => {
+        const newProject = new ProjectModel(validProject)
+        const savedProject = await newProject.save()
+        return expect(savedProject._id).to.exist
+      })
+
+    })
+
+    describe('Tasks', () => {
+
+      it('Create and saves a task successfully', async () => {
+        const newProject = new ProjectModel(validProject)
+        const savedProject = await newProject.save()
+        savedProject.tasks.push(newTask)
+        await (savedProject.save())
+        return expect(savedProject.tasks[2]._id).to.exist
+      })
+
+      it('Delete a task using ID successfully', async () => {
+        const newProject = new ProjectModel(validProject)
+        const savedProject = await newProject.save()
+        let taskId = await savedProject.tasks[1]._id
+        await savedProject.tasks.pull(taskId)
+        return expect(savedProject.tasks[1]).to.not.exist
+      })
+
+    })
+
+  })
+
+  describe('Unsuccessful Operations', () => {
+
+    describe('Missing Information', () => {
+
+      it('Create project without Title should fail', async () => {
+        validProject.title = undefined
+        const invalidProject = new ProjectModel(validProject)
+        return expect(invalidProject.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
+
+      })
+
+      it('Create project without start date should fail', async () => {
+        validProject.title = "Construction Project"
+        validProject.start_date = undefined
+        const invalidProject = new ProjectModel(validProject)
+        return expect(invalidProject.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
+      })
+
+      it('Create project without end date should fail', async () => {
+        validProject.start_date = setDate(Date.now(), 3)
+        validProject.end_date = undefined
+        const invalidProject = new ProjectModel(validProject)
+        return expect(invalidProject.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
+      })
+
+      it('Create project without timezone should fail', async () => {
+        validProject.end_date = setDate(Date.now(), 10)
+        validProject.timezone = undefined
+        const invalidProject = new ProjectModel(validProject)
+        return expect(invalidProject.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')  
+      })
+
+      it('Create project without owner should fail', async () => {
+        validProject.timezone = 10
+        validProject.owner = undefined
+        const invalidProject = new ProjectModel(validProject)
+        return expect(invalidProject.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')    
+      })
+
+
+    })
+
+    describe('Timezone Validation', () => {
+
+      it('Create Project with Timezone over max should fail', () => {
+        validProject.timezone = 15
+        const invalidProject = new ProjectModel(validProject)
+        return expect(invalidProject.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
+      })
+
+      it('Create Project with Timezone under min should fail', () => {
+        validProject.timezone = -13
+        const invalidProject = new ProjectModel(validProject)
+        return expect(invalidProject.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
+      })
+
     })
 
   })
