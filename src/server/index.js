@@ -12,8 +12,19 @@ const users = require("./routes/users")
 
 const app = express()
 
-if (process.env.NODE_ENV == 'test') {
-  mongoose.connect('mongodb://localhost/lookahead-test', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true}) 
+if (process.env.NODE_ENV == 'production') {
+  mongoose.connect(process.env.DB_HOST, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
+  .then(mongoose.connection
+    .once('open', () => {
+      console.log('Connected')
+    })
+    .on('error', (error) => {
+        console.warn('Error : ', error)
+    }))
+  .catch(err => console.error('Could not connect to MongoDB...', err))
+}
+else if (process.env.NODE_ENV == 'test') {
+  mongoose.connect('mongodb://localhost/lookahead-test', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
   .then(mongoose.connection
     .once('open', () => {
       console.log('Connected to the Test Database')
