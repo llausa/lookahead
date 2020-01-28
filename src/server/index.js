@@ -1,9 +1,8 @@
 require('dotenv').config()
-require('./models/connect.js')
+// require('./models/connect.js')
 const express = require("express")
 const mongoose = require('mongoose')
 const Joi = require('joi')
-const config = require('config')
 const morgan = require('morgan')
 const cors = require('cors')
 const auth = require('./routes/auth')
@@ -12,11 +11,26 @@ const home = require("./routes/home")
 const users = require("./routes/users")
 
 const app = express()
-mongoose.connect('mongodb://localhost/lookahead', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
+
+if (process.env.NODE_ENV == 'test') {
+  mongoose.connect('mongodb://localhost/lookahead-test', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true}) 
+  .then(mongoose.connection
+    .once('open', () => {
+      console.log('Connected to the Test Database')
+    }
+    )
+    .on('error', (error) => {
+        console.warn('Error : ',error)
+    }))
+  .catch(err => console.error('Could not connect to MongoDB...', err))
+}
+else {
+  mongoose.connect('mongodb://localhost/lookahead', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
   .then(() => console.log('Connected to MongoDB...'))
   .catch(err => console.error('Could not connect to MongoDB...', err))
+}
 
-if (!config.get('jwtPrivateKey')) {
+if (!process.env.JWT_SECRET) {
   console.error('FATAL ERROR: jwtPrivateKey is not defined.')
   process.exit(1)
 }
@@ -39,4 +53,6 @@ app.use(cors({
   }
 }))
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(port, () => console.log(`listening on port ${port}!`))
+
+module.exports = app
