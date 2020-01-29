@@ -32,7 +32,7 @@ console.log(process.env.NODE_ENV)
 describe('Test User Model', () => {
 
   before( (done) => {
-    mongoose.connect('mongodb://localhost/lookahead-test', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true}) 
+    mongoose.connect('mongodb://localhost/lookahead-test', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
     .then(
     mongoose.connection
       .once('open', () => {
@@ -45,7 +45,7 @@ describe('Test User Model', () => {
     )
   })
 
-  beforeEach( (done) => { 
+  beforeEach( (done) => {
       mongoose.connection.db.dropDatabase(() => {
         done()
       })
@@ -150,7 +150,7 @@ describe('Test User Model', () => {
   })
 
     describe('Password Validation', () => {
-    
+
 
     it('Create user without capital in password should fail', async () => {
       invalidTestUser.email = "abc@def.com"
@@ -159,7 +159,8 @@ describe('Test User Model', () => {
       return expect(invalidUser.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
     })
 
-    it('Create user without capital in password should fail', async () => {
+    it('Create user without number in password should fail', async () => {
+      invalidTestUser.email = "abc@def123.com"
       invalidTestUser.password = "Testerino"
       const invalidUser = new UserModel(invalidTestUser)
       return expect(invalidUser.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
@@ -172,6 +173,6 @@ describe('Test User Model', () => {
     })
 
   })
-    
+
   })
 })

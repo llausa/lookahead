@@ -1,8 +1,7 @@
 const mongoose = require('mongoose')
 const Joi = require('joi')
 const jwt = require('jsonwebtoken')
-const uniqueValidator = require('mongoose-unique-validator');
-
+const uniqueValidator = require('mongoose-unique-validator')
 
 const UserSchema = new mongoose.Schema({
     firstName: {
@@ -17,6 +16,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
+        match: [/^[A-z_\-.0-9+]+@[A-z_0-9]+?\.[A-z]{2,4}$/, 'Please fill a valid email address'],
         minlength: 6,
         maxlength: 255
     },
