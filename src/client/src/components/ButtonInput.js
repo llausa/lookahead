@@ -18,12 +18,12 @@ export default function ButtonInput(props) {
   const main = props.main;
   if (main) {
     return(
-      <Button variant="outlined" style={Main} color="primary">{props.text}</Button>
+      <Button variant="outlined" style={Main} color="primary"></Button>
     )
     
   }
   return (
-  <Button variant="outlined" style={Secondary} >{props.text}</Button>
+  <Button variant="outlined" style={Secondary}></Button>
   )
 }
 

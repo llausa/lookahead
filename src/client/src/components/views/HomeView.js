@@ -1,7 +1,10 @@
-import React from "react";
+import React from "react"
 import { Link } from 'react-router-dom'
-import Button from '@material-ui/core/Button';
-import LockIcon from '@material-ui/icons/Lock';
+import Button from '@material-ui/core/Button'
+import LockIcon from '@material-ui/icons/Lock'
+import Card from '@material-ui/core/Card'
+
+import axios from 'axios'
 
 function HomeView() {
 
@@ -36,22 +39,22 @@ function HomeView() {
         margin: "4px"
     }
 
-    function LoginPressed() {
+    const LoginPressed = () => {
         console.log("Login Pressed")
     }
 
-    function SignupPressed() {
+    const SignupPressed = () => {
         console.log("Signup Pressed")
     }
 
-    function ResetPressed() {
+    const ResetPressed = () => {
         console.log("Reset Pressed")
     }
 
     return (
         <div data-cy="homeView" style={mystyle}>
         <h1 style={{margin: "40px 0 10px 0", fontSize: "70px"}}>Welcome</h1>
-        <Button component={Link} to="/login" onClick={LoginPressed} variant="outlined" style={buttonMain} color="primary">Login</Button>
+        <Button  onClick={LoginPressed} variant="outlined" style={buttonMain} color="primary">Login</Button>
         <Button component={Link} to="/signup" onClick={SignupPressed} variant="outlined" style={{margin: "0 20px"}}>Signup</Button>
         <Button component={Link} to="/account/password" onClick={ResetPressed} variant="outlined" style={buttonResetP}>Reset Password <LockIcon style={smallIcon} /> </Button>
         </div>
