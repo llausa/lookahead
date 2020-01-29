@@ -22,7 +22,6 @@ if (process.env.NODE_ENV == 'production') {
         console.warn('Error : ', error)
     }))
   .catch(err => console.error('Could not connect to MongoDB...', err))
-  .then(ready())
 }
 else if (process.env.NODE_ENV == 'test') {
   mongoose.connect('mongodb://localhost/lookahead-test', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
