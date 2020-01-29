@@ -37,7 +37,7 @@ else if (process.env.NODE_ENV == 'test') {
 }
 else {
   mongoose.connect('mongodb://localhost/lookahead', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
-  .then(() => console.log('Connected to MongoDB...'))
+  .then(() => console.log('Connected to the Development Database'))
   .catch(err => console.error('Could not connect to MongoDB...', err))
 }
 
