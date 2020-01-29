@@ -3,6 +3,7 @@ process.env.NODE_ENV = 'test'
 
 const app = require('../index')
 const mongoose = require("mongoose")
+const { UserModel } = require("../models/user")
 const chai = require('chai')
 const chaiHttp = require('chai-http')
 const chaiAsPromised = require("chai-as-promised")
@@ -19,6 +20,14 @@ let validUser = {
 	"password": "Test1245"
 }
 
+let validUser2 = {
+  "firstName": "Jim",
+	"lastName": "Tester",
+	"position": "CEO",
+	"email": "tester@tester.com",
+	"password": "Test1245"
+}
+
 let invalidUser = {
   "firstName": "Test",
 	"position": "biggboi",
@@ -26,9 +35,27 @@ let invalidUser = {
 	"password": "Test1245"
 }
 
-if (mongoose.connection.name == 'lookahead-test') {
+
+
+if (mongoose.connection.name === 'lookahead-test') {
+
+  // console.log('WE ARE RUNNING THESE TESTS!')
 
   describe('Integration Tests', () => { 
+
+    before( (done) => {
+      mongoose.connect('mongodb://localhost/lookahead-test', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true}) 
+      .then(
+      mongoose.connection
+        .once('open', () => {
+          // console.log('Connected to the Test Database')
+          done()
+        })
+        .on('error', (error) => {
+            console.warn('Error : ',error)
+      })
+      )
+    })
 
     beforeEach( (done) => { 
       mongoose.connection.db.dropDatabase(() => {
@@ -37,6 +64,7 @@ if (mongoose.connection.name == 'lookahead-test') {
     })
 
     after( (done) => {
+      console.log('Closing Connection')
       mongoose.connection.close(() => {
         done()
       })
@@ -63,18 +91,15 @@ if (mongoose.connection.name == 'lookahead-test') {
       })
 
       describe('Unsuccesful Registration', () => {
-        
-        beforeEach( (done) => { 
+
+        it('Duplicate Email Registration should fail', (done) => {
+
           chai.request(app)
           .post('/api/users')
           .type('form')
           .send(validUser)
-          .end((err, res) => {
-              done()
-          })
-        })
+          .end()
 
-        it('Duplicate Email Registration should fail', (done) => {
           chai.request(app)
           .post('/api/users')
           .type('form')
@@ -86,7 +111,7 @@ if (mongoose.connection.name == 'lookahead-test') {
           })
         })
 
-        it('Missing Last Name should fail',  (done) => {
+        it('Missing Last Name should fail', (done) => {
           chai.request(app)
           .post('/api/users')
           .type('form')
@@ -98,7 +123,7 @@ if (mongoose.connection.name == 'lookahead-test') {
           })
         })
 
-        it('Missing First Name should fail',  (done) => {
+        it('Missing First Name should fail', (done) => {
           invalidUser.lastName = "Tester"
           invalidUser.firstName = undefined
           chai.request(app)
@@ -112,7 +137,7 @@ if (mongoose.connection.name == 'lookahead-test') {
           })
         })
 
-        it('Missing Email should fail',  (done) => {
+        it('Missing Email should fail', (done) => {
           invalidUser.email = undefined
           invalidUser.firstName = "Test"
           chai.request(app)
@@ -126,7 +151,7 @@ if (mongoose.connection.name == 'lookahead-test') {
           })
         })
 
-        it('Missing Password should fail',  (done) => {
+        it('Missing Password should fail', (done) => {
           invalidUser.email = "test@tester.com"
           invalidUser.firstName = "Test"
           chai.request(app)
@@ -140,7 +165,7 @@ if (mongoose.connection.name == 'lookahead-test') {
           })
         })
 
-        it('Invalid Email format should fail',  (done) => {
+        it('Invalid Email format should fail', (done) => {
           invalidUser.email = 'test@testcom'
           chai.request(app)
           .post('/api/users')
@@ -149,6 +174,46 @@ if (mongoose.connection.name == 'lookahead-test') {
           .end((err, res) => {
             expect(res).to.have.status(400)
             expect(res.body.message).to.equal('Email address must be a valid email.')
+            done()
+          })
+        })
+
+        it('Invalid password should fail - Capital', (done) => {
+          invalidUser.email = 'test@tester.com'
+          invalidUser.password = 'test1245'
+          chai.request(app)
+          .post('/api/users')
+          .type('form')
+          .send(invalidUser)
+          .end((err, res) => {
+            expect(res).to.have.status(400)
+            expect(res.body.message).to.equal('Password must meet security requirements.')
+            done()
+          })
+        })
+
+        it('Invalid password should fail - Number', (done) => {
+          invalidUser.password = 'Testerino'
+          chai.request(app)
+          .post('/api/users')
+          .type('form')
+          .send(invalidUser)
+          .end((err, res) => {
+            expect(res).to.have.status(400)
+            expect(res.body.message).to.equal('Password must meet security requirements.')
+            done()
+          })
+        })
+
+        it('Invalid password should fail - Length', (done) => {
+          invalidUser.password = 'Test12'
+          chai.request(app)
+          .post('/api/users')
+          .type('form')
+          .send(invalidUser)
+          .end((err, res) => {
+            expect(res).to.have.status(400)
+            expect(res.body.message).to.equal('Password must meet security requirements.')
             done()
           })
         })
@@ -218,24 +283,24 @@ if (mongoose.connection.name == 'lookahead-test') {
             })
           .end((err, res) => {
             expect(res).to.have.status(401)
-            expect(res.body.message).to.equal('Invalid Username or Password.')
+            expect(res.body.message).to.equal('Incorrect Email or Password.')
             done()
           })
         })
 
-          it('Invalid password should fail login with generic error message', (done) => {
-            chai.request(app)
-            .post('/api/auth')
-            .type('form')
-            .send({
-              email: "test@test.com",
-              password: "Test1254"
-              })
-            .end((err, res) => {
-              expect(res).to.have.status(401)
-              expect(res.body.message).to.equal('Invalid Username or Password.')
-              done()
+        it('Invalid password should fail login with generic error message', (done) => {
+          chai.request(app)
+          .post('/api/auth')
+          .type('form')
+          .send({
+            email: "test@test.com",
+            password: "Test1254"
             })
+          .end((err, res) => {
+            expect(res).to.have.status(401)
+            expect(res.body.message).to.equal('Incorrect Email or Password.')
+            done()
+          })
 
         })
 
@@ -243,6 +308,296 @@ if (mongoose.connection.name == 'lookahead-test') {
       })
       
     })
+
+    describe('Edit Details', () => {
+
+      let authToken
+
+        beforeEach( (done) => { 
+          chai.request(app)
+          .post('/api/users')
+          .type('form')
+          .send(validUser)
+          .end((err, res) => {
+            done()
+          })
+        })
+        
+
+      describe('Successful Operations', () => {
+
+        beforeEach( (done) => { 
+          chai.request(app)
+          .post('/api/auth')
+          .type('form')
+          .send({ 
+            "email": "test@test.com",
+            "password": "Test1245"
+          })
+          .end((err, res) => {
+            authToken = res.text
+            done()
+          })
+        })
+          
+        it('Successfully Update Password', (done) => {
+          chai.request(app)
+          .put('/account/password')
+          .type('form')
+          .set('Authorization', `Bearer ${authToken}`)
+          .send(
+            {
+              "oldPW" : validUser.password,
+              "newPW": "Shiny12345"
+            }
+          )
+          .end((err, res) => {
+              expect(res).to.have.status(200)
+              expect(res.body.message).to.equal('Password updated succesfully.')
+              done()
+          })
+
+        })
+
+        it('Successfully Update Email', (done) => {
+
+          chai.request(app)
+          .put('/account/email')
+          .type('form')
+          .set('Authorization', `Bearer ${authToken}`)
+          .send(
+            {
+              "email": "new@email.com",
+              "password": validUser.password
+            }
+          )
+          .end((err, res) => {
+
+            expect(res).to.have.status(200)
+            expect(res.body.message).to.equal('Email updated succesfully.')
+
+            UserModel.findOne({ email: 'new@email.com' },
+            (err, user) => {
+              expect(err).to.be.null
+              expect(user.firstName).to.equal(validUser.firstName)
+              expect(user.lastName).to.equal(validUser.lastName)
+              expect(user.position).to.equal(validUser.position)
+              expect(user.email).to.equal('new@email.com')
+              done()
+            })
+    
+          })
+          
+        })
+
+        it('Successfully Update Account Details', (done) => {
+
+          chai.request(app)
+          .put('/account/details')
+          .type('form')
+          .set('Authorization', `Bearer ${authToken}`)
+          .send(
+            {
+              "firstName": "Alex",
+              "lastName": "Yeetimus",
+              "Position": "Main Man"
+            }
+          )
+          .end((err, res) => {
+
+            expect(res).to.have.status(200)
+            expect(res.body.message).to.equal('Account Details Successfully Updated')
+
+            UserModel.findOne({ email: 'test@test.com' },
+            (err, user) => {
+              expect(err).to.be.null
+              expect(user.firstName).to.equal("Alex")
+              expect(user.lastName).to.equal("Yeetimus")
+              expect(user.position).to.equal("Main Man")
+              done()
+            })
+    
+          })
+          
+        })
+
+      })
+
+
+      describe('Unsuccessful Operations', () => {
+
+          beforeEach( (done) => { 
+            chai.request(app)
+            .post('/api/users')
+            .type('form')
+            .send(validUser2)
+            .end((err, res) => {
+  
+  
+            chai.request(app)
+            .post('/api/auth')
+            .type('form')
+            .send({ 
+              "email": validUser2.email,
+              "password": validUser2.password
+            })
+            .end((err, res) => {
+              authToken = res.text
+              done()
+            })
+            })
+  
+          })
+
+        it('Update without Token should fail', (done) => {
+          chai.request(app)
+          .put('/account/password')
+          .type('form')
+          .send(
+            {
+              "oldPW" : validUser.password,
+              "newPW": "Shiny12345"
+            }
+          )
+          .end((err, res) => {
+              expect(res).to.have.status(401)
+              expect(res.body.message).to.equal('Unauthorized Request - You must be logged in.')
+              done()
+          })
+
+        })
+
+        it('Duplicate Email should fail', (done) => {
+
+          chai.request(app)
+          .put('/account/email')
+          .type('form')
+          .set('Authorization', `Bearer ${authToken}`)
+          .send(
+            {
+              "email": "test@test.com",
+              "password": validUser2.password
+            }
+          )
+          .end((err, res) => {
+
+            expect(res).to.have.status(409)
+            expect(res.body.message).to.equal('An account already exists with that email.')
+            done()
+          })
+  
+        })
+
+        describe('Invalid Data', () => {
+
+          it('Invalid Email should fail', (done) => {
+
+            chai.request(app)
+            .put('/account/email')
+            .type('form')
+            .set('Authorization', `Bearer ${authToken}`)
+            .send(
+              {
+                "email": "test@testcom",
+                "password": validUser2.password
+              }
+            )
+            .end((err, res) => {
+              expect(res).to.have.status(400)
+              expect(res.body.message).to.equal('Email address must be a valid email.')
+              done()
+            })
+    
+          })
+
+          it('Incorrect password should fail', (done) => {
+
+            chai.request(app)
+            .put('/account/email')
+            .type('form')
+            .set('Authorization', `Bearer ${authToken}`)
+            .send(
+              {
+                "email": "test@tester.com",
+                "password": "wrongpassword"
+              }
+            )
+            .end((err, res) => {
+              expect(res).to.have.status(400)
+              expect(res.body.message).to.equal('Incorrect Password')
+              done()
+            })
+    
+          })
+
+          it('Invalid password should fail (No Number)', (done) => {
+
+            chai.request(app)
+            .put('/account/password')
+            .type('form')
+            .set('Authorization', `Bearer ${authToken}`)
+            .send(
+              {
+                "oldPW" : validUser.password,
+                "newPW": "Shiniest"
+              }
+            )
+            .end((err, res) => {
+              expect(res).to.have.status(400)
+              expect(res.body.message).to.equal('Password must meet security requirements.')
+              done()
+            })
+    
+          })
+
+          it('Invalid password should fail (No Capital)', (done) => {
+
+            chai.request(app)
+            .put('/account/password')
+            .type('form')
+            .set('Authorization', `Bearer ${authToken}`)
+            .send(
+              {
+                "oldPW" : validUser.password,
+                "newPW": "shiny12345"
+              }
+            )
+            .end((err, res) => {
+              expect(res).to.have.status(400)
+              expect(res.body.message).to.equal('Password must meet security requirements.')
+              done()
+            })
+    
+          })
+
+          it('Invalid password should fail (Length)', (done) => {
+
+            chai.request(app)
+            .put('/account/password')
+            .type('form')
+            .set('Authorization', `Bearer ${authToken}`)
+            .send(
+              {
+                "oldPW" : validUser.password,
+                "newPW": "Shiny12"
+              }
+            )
+            .end((err, res) => {
+              expect(res).to.have.status(400)
+              expect(res.body.message).to.equal('Password must meet security requirements.')
+              done()
+            })
+    
+          })
+          
+
+        })
+
+      })
+
+    })
     
   })
+
+
 }

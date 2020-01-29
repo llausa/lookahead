@@ -1,3 +1,5 @@
+process.env.NODE_ENV = 'test'
+
 const mongoose = require("mongoose")
 const { UserModel } = require("../models/user")
 const ProjectModel = require("../models/project")
@@ -136,6 +138,7 @@ describe('Test Project Model', () => {
   })
 
   after( (done) => {
+    console.log('Closing Connection')
    mongoose.connection.close(() => {
       done()
     })

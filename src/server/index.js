@@ -22,6 +22,7 @@ if (process.env.NODE_ENV == 'production') {
         console.warn('Error : ', error)
     }))
   .catch(err => console.error('Could not connect to MongoDB...', err))
+  .then(ready())
 }
 else if (process.env.NODE_ENV == 'test') {
   mongoose.connect('mongodb://localhost/lookahead-test', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
@@ -46,6 +47,7 @@ if (!process.env.JWT_SECRET) {
   process.exit(1)
 }
 
+
 app.use(cors())
 
 
@@ -66,6 +68,8 @@ const port = process.env.PORT || 3000
 
 
 
-app.listen(port, () => console.log(`listening on port ${port}!`))
+app.listen(port, () => {
+  console.log(`listening on port ${port}!`)
+})
 
 module.exports = app
