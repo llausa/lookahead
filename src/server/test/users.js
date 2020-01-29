@@ -52,6 +52,7 @@ describe('Test User Model', () => {
   })
 
   after( (done) => {
+  console.log('Closing Connection')
    mongoose.connection.close(() => {
       done()
     })
