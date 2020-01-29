@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const Joi = require('joi')
 const jwt = require('jsonwebtoken')
+const uniqueValidator = require('mongoose-unique-validator');
 
 
 const UserSchema = new mongoose.Schema({
@@ -36,6 +37,7 @@ UserSchema.methods.generateAuthToken = function() {
     return token
 }
 
+UserSchema.plugin(uniqueValidator)
 const UserModel = mongoose.model('User', UserSchema)
 
 function validateUser(user) {
@@ -50,4 +52,3 @@ function validateUser(user) {
 }
 
 module.exports = { UserModel, validateUser }
-
