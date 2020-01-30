@@ -28,9 +28,6 @@ async function addProjectToUser(id, project, role) {
       role, project
     })
     await user.save()
-    console.log(user)
-    console.log(project._id)
-
   })
   
 }
