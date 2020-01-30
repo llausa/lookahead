@@ -1,7 +1,7 @@
 const { UserModel } = require('../models/user')
 const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose')
-const Joi = require('joi')
+const Joi = require('@hapi/joi')
 const bcrypt = require('bcrypt')
 const _ = require('lodash')
 const express = require('express')
@@ -23,11 +23,11 @@ router.post('/', async (req, res) => {
 })
 
 function validate(req) {
-  const schema = {
+  const schema = Joi.object({
     email: Joi.string().min(5).max(255).required().email(),
     password: Joi.string().min(5).max(255).required()
-  }
-  return Joi.validate(req, schema)
+  })
+  return schema.validate(req)
 }
 
 

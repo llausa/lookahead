@@ -41,7 +41,7 @@ if (mongoose.connection.name === 'lookahead-test') {
 
   // console.log('WE ARE RUNNING THESE TESTS!')
 
-  describe('User Integration Tests', () => { 
+  describe('User Integration Tests', () => {
 
     before( (done) => {
       mongoose.connect('mongodb://localhost/lookahead-test', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
@@ -121,7 +121,7 @@ if (mongoose.connection.name === 'lookahead-test') {
           .send(invalidUser)
           .end((err, res) => {
             expect(res).to.have.status(400)
-            expect(res.body.message).to.equal('Last Name is required.')
+            expect(res.body.message).to.equal("Invalid user data.")
             done()
           })
         })
@@ -135,7 +135,7 @@ if (mongoose.connection.name === 'lookahead-test') {
           .send(invalidUser)
           .end((err, res) => {
             expect(res).to.have.status(400)
-            expect(res.body.message).to.equal('First Name is required.')
+            expect(res.body.message).to.equal("Invalid user data.")
             done()
           })
         })
@@ -149,7 +149,7 @@ if (mongoose.connection.name === 'lookahead-test') {
           .send(invalidUser)
           .end((err, res) => {
             expect(res).to.have.status(400)
-            expect(res.body.message).to.equal('Email address is required.')
+            expect(res.body.message).to.equal("Invalid user data.")
             done()
           })
         })
@@ -157,14 +157,14 @@ if (mongoose.connection.name === 'lookahead-test') {
         it('Missing Password should fail', (done) => {
           invalidUser.email = "test@tester.com"
           invalidUser.firstName = "Test"
-          // invalidUser.lastName = "Rino"
+          invalidUser.password = undefined
           chai.request(app)
           .post('/api/users')
           .type('form')
           .send(invalidUser)
           .end((err, res) => {
             expect(res).to.have.status(400)
-            expect(res.body.message).to.equal('Password is required.')
+            expect(res.body.message).to.equal("Invalid user data.")
             done()
           })
         })
@@ -177,7 +177,7 @@ if (mongoose.connection.name === 'lookahead-test') {
           .send(invalidUser)
           .end((err, res) => {
             expect(res).to.have.status(400)
-            expect(res.body.message).to.equal('Email address must be a valid email.')
+            expect(res.body.message).to.equal("Invalid user data.")
             done()
           })
         })
@@ -191,7 +191,7 @@ if (mongoose.connection.name === 'lookahead-test') {
           .send(invalidUser)
           .end((err, res) => {
             expect(res).to.have.status(400)
-            expect(res.body.message).to.equal('Password must meet security requirements.')
+            expect(res.body.message).to.equal("Invalid user data.")
             done()
           })
         })
@@ -204,7 +204,7 @@ if (mongoose.connection.name === 'lookahead-test') {
           .send(invalidUser)
           .end((err, res) => {
             expect(res).to.have.status(400)
-            expect(res.body.message).to.equal('Password must meet security requirements.')
+            expect(res.body.message).to.equal("Invalid user data.")
             done()
           })
         })
@@ -217,7 +217,7 @@ if (mongoose.connection.name === 'lookahead-test') {
           .send(invalidUser)
           .end((err, res) => {
             expect(res).to.have.status(400)
-            expect(res.body.message).to.equal('Password must meet security requirements.')
+            expect(res.body.message).to.equal("Invalid user data.")
             done()
           })
         })
