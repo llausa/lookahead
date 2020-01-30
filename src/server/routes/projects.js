@@ -1,7 +1,11 @@
 const express = require("express")
 const router = express.Router()
 const Joi = require('@hapi/joi')
+      .extend(require('@hapi/joi-date'))
+Joi.objectId = require('joi-objectid')(Joi)
 const auth = require('../middleware/auth')
+const projectController = require("../controllers/projectController")
+
 
 const projects = [
   { id: 1, name: "Project1" },
@@ -22,11 +26,7 @@ router.get("/:id", auth, (req, res) => {
   const project = projects.find(c => c.id === parseInt(req.params.id))
   if (!project) return res.status(404).send('The project with that ID was not found')
 
-  const schema = {
-    name: Joi.string().min(3).required()
-  }
-  const result = Joi.validate(req.body, schema)
-
+  
   if (result.error) {
     // 400 Bad Request
     res.status(400).send(result.error.details[0].message)
@@ -36,22 +36,8 @@ router.get("/:id", auth, (req, res) => {
 })
 
 // Projects POST route
-router.post("/", auth, (req, res) => {
-  const schema = {
-    name: Joi.string().min(3).required()
-  }
+router.post("/", auth, projectController.create)
 
-  const result = Joi.validate(req.body, schema)
-
-  if (result.error) return res.status(400).send(result.error.details[0].message)
-
-  const project = {
-    id: projects.length + 1,
-    name: req.body.name
-  }
-  projects.push(project)
-  res.send(project)
-})
 
 // project Project PUT route
 router.put('/:id', auth, (req, res) => {

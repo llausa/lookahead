@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt')
 const _ = require('lodash')
 
 async function register(req, res) {
+
   const { error } = validateUser(req.body)
   if (error) return res.status(400).json({"message": 'Invalid user data.'})
 
@@ -25,5 +26,7 @@ async function register(req, res) {
 
   res.header('x-auth-token', token).status(201).json({message:`User ${user.email} successfully created.`})
 }
+
+
 
 module.exports = { register }

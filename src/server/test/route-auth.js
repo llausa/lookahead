@@ -127,15 +127,15 @@ if (mongoose.connection.name === 'lookahead-test') {
       it('Succesfully Loads the Project Page Data', (done) => {
         
         chai.request(app)
-        .get(`/project/${project._id}/users`)
+        .get(`/project/${project._id}`)
         .set('Authorization', `Bearer ${authToken}`)
         .end((err, res) => {
             expect(err).to.be.null
             expect(res).to.have.status(200)
             expect(res.body.project).to.exist
-            expect(res.body.project).to.have.nested.property('tasks').and.
             done()
         })
+
       })
 
     })
