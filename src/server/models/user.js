@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const Joi = require('joi')
+const Joi = require('@hapi/joi')
 const jwt = require('jsonwebtoken')
 const uniqueValidator = require('mongoose-unique-validator')
 
@@ -31,7 +31,7 @@ const UserSchema = new mongoose.Schema({
         default: "worker"
     }
     ,
-    projects: 
+    projects:
         [
             {
                 role: { type: String, required: true },
@@ -52,14 +52,14 @@ UserSchema.plugin(uniqueValidator)
 const UserModel = mongoose.model('User', UserSchema)
 
 function validateUser(user) {
-    const schema = {
+    const schema = Joi.object({
         firstName: Joi.string().required(),
         lastName: Joi.string().required(),
         email: Joi.string().min(5).max(255).required().email(),
         password: Joi.string().min(5).max(255).required(),
         position: Joi.string()
-    }
-    return Joi.validate(user, schema)
+    })
+    return schema.validate(user)
 }
 
 module.exports = { UserModel, validateUser }

@@ -1,7 +1,7 @@
 const { UserModel } = require('../models/user')
 const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose')
-const Joi = require('joi')
+const Joi = require('@hapi/joi')
 const bcrypt = require('bcrypt')
 const _ = require('lodash')
 const express = require('express')
