@@ -159,7 +159,7 @@ describe('Test User Model', () => {
       return expect(invalidUser.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
     })
 
-    it('Create user without capital in password should fail', async () => {
+    it('Create user without number in password should fail', async () => {
       invalidTestUser.password = "Testerino"
       const invalidUser = new UserModel(invalidTestUser)
       return expect(invalidUser.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
