@@ -160,7 +160,6 @@ describe('Test User Model', () => {
     })
 
     it('Create user without number in password should fail', async () => {
-      invalidTestUser.email = "abc@def123.com"
       invalidTestUser.password = "Testerino"
       const invalidUser = new UserModel(invalidTestUser)
       return expect(invalidUser.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')

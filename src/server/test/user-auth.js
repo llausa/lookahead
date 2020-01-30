@@ -158,7 +158,7 @@ if (mongoose.connection.name === 'lookahead-test') {
         it('Missing Password should fail', (done) => {
           invalidUser.email = "test@tester.com"
           invalidUser.firstName = "Test"
-          invalidUser.lastName = "Rino"
+          // invalidUser.lastName = "Rino"
           chai.request(app)
           .post('/api/users')
           .type('form')
