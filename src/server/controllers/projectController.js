@@ -23,12 +23,16 @@ async function create(req, res) {
 }
 
 async function addProjectToUser(id, project, role) {
-  UserModel.findById(id, (err, user) => {
+  await UserModel.findById(id, async (err, user) => {
     user.projects.push({
-      role,
-      project
+      role, project
     })
+    await user.save()
+    console.log(user)
+    console.log(project._id)
+
   })
+  
 }
 
 module.exports = { create }
