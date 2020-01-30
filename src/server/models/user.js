@@ -36,11 +36,7 @@ const UserSchema = new mongoose.Schema({
     projects:
         [
             {
-                role: { type: String, required: true },
-                project: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "Project"
-                }
+                role: { type: String, required: true }
             }
         ]
 })
