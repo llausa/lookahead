@@ -41,7 +41,7 @@ if (mongoose.connection.name === 'lookahead-test') {
 
   // console.log('WE ARE RUNNING THESE TESTS!')
 
-  describe('Integration Tests', () => {
+  describe('User Integration Tests', () => { 
 
     before( (done) => {
       mongoose.connect('mongodb://localhost/lookahead-test', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
@@ -77,10 +77,9 @@ if (mongoose.connection.name === 'lookahead-test') {
         it('Succesfully Registers an Account', (done) => {
           chai.request(app)
           .post('/api/users')
-          // .type('form')
+          .type('form')
           .send(validUser)
           .end((err, res) => {
-              // console.log(res)
               expect(err).to.be.null
               expect(res).to.have.status(201)
               expect(res.body.message).to.equal('User test@test.com successfully created.')

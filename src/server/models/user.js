@@ -30,6 +30,17 @@ const UserSchema = new mongoose.Schema({
         type: String,
         default: "worker"
     }
+    ,
+    projects: 
+        [
+            {
+                role: { type: String, required: true },
+                project: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Project"
+                }
+            }
+        ]
 })
 
 UserSchema.methods.generateAuthToken = function() {
