@@ -3,6 +3,9 @@ const Joi = require('@hapi/joi')
 const jwt = require('jsonwebtoken')
 const uniqueValidator = require('mongoose-unique-validator')
 
+const emailRegex = /^[A-z_\-.0-9+]+@[A-z_0-9]+?\.[A-z]{2,4}$/
+const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
+
 const UserSchema = new mongoose.Schema({
     firstName: {
         type: String,
@@ -16,7 +19,6 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        match: [/^[A-z_\-.0-9+]+@[A-z_0-9]+?\.[A-z]{2,4}$/, 'Please fill a valid email address'],
         minlength: 6,
         maxlength: 255
     },
@@ -53,10 +55,21 @@ const UserModel = mongoose.model('User', UserSchema)
 
 function validateUser(user) {
     const schema = Joi.object({
-        firstName: Joi.string().required(),
-        lastName: Joi.string().required(),
-        email: Joi.string().min(5).max(255).required().email(),
-        password: Joi.string().min(5).max(255).required(),
+        firstName: Joi.string()
+                        .required(),
+        lastName: Joi.string()
+                        .required(),
+        email: Joi.string()
+                        .min(5)
+                        .max(255)
+                        .required()
+                        .email()
+                        .pattern(emailRegex),
+        password: Joi.string()
+                        .min(5)
+                        .max(255)
+                        .required()
+                        .pattern(passwordRegex),
         position: Joi.string()
     })
     return schema.validate(user)

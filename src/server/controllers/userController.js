@@ -1,4 +1,3 @@
-
 const { UserModel, validateUser} = require('../models/user')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
@@ -6,7 +5,7 @@ const _ = require('lodash')
 
 async function register(req, res) {
   const { error } = validateUser(req.body)
-  if (error) return res.status(400).send(error.details[0].message)
+  if (error) return res.status(400).json({"message": 'Invalid user data.'})
 
   let user = await UserModel.findOne({ email: req.body.email })
 
