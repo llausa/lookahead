@@ -27,4 +27,13 @@ async function register(req, res) {
   res.header('x-auth-token', token).status(201).json({message:`User ${user.email} successfully created.`})
 }
 
-module.exports = { register }
+async function addProject(id, project, role) {
+  UserModel.findById(id, (err, user) => {
+    user.projects.push({
+      role,
+      project
+    })
+  })
+}
+
+module.exports = { register, addProject }
