@@ -83,7 +83,7 @@ if (mongoose.connection.name === 'lookahead-test') {
               // console.log(res)
               expect(err).to.be.null
               expect(res).to.have.status(201)
-              expect(res.body.message).to.equal('User ben@testerino.com successfully created.')
+              expect(res.body.message).to.equal('User test@test.com successfully created.')
               done()
           })
         })
@@ -98,7 +98,7 @@ if (mongoose.connection.name === 'lookahead-test') {
           .post('/api/users')
           .type('form')
           .send(validUser)
-          .end()
+          .end((oof, yeet) => {
 
           chai.request(app)
           .post('/api/users')
@@ -106,9 +106,13 @@ if (mongoose.connection.name === 'lookahead-test') {
           .send(validUser)
           .end((err, res) => {
             expect(res).to.have.status(409)
-              expect(res.body.message).to.equal('An account already exists with that email.')
-              done()
+            expect(res.text).to.equal('An account already exists with that email.')
+
+            done()
           })
+          })
+
+
         })
 
         it('Missing Last Name should fail', (done) => {
