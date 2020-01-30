@@ -10,7 +10,7 @@ router.get('/me', auth, async (req, res) => {
   const user = await UserModel.findById(req.user._id).select('-password')
   res.send(user)
 })
-
+// Register User
 router.post('/', userController.register)
 
 
