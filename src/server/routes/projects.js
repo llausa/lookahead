@@ -2,8 +2,9 @@ const express = require("express")
 const router = express.Router()
 const Joi = require('@hapi/joi')
       .extend(require('@hapi/joi-date'))
-      .extend(require('joi-objectid'))
+Joi.objectId = require('joi-objectid')(Joi)
 const auth = require('../middleware/auth')
+const projectController = require("../controllers/projectController")
 
 
 const projects = [

@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt')
 const _ = require('lodash')
 
 async function register(req, res) {
+
   const { error } = validateUser(req.body)
   if (error) return res.status(400).json({"message": 'Invalid user data.'})
 
@@ -26,13 +27,6 @@ async function register(req, res) {
   res.header('x-auth-token', token).status(201).json({message:`User ${user.email} successfully created.`})
 }
 
-async function addProject(id, project, role) {
-  UserModel.findById(id, (err, user) => {
-    user.projects.push({
-      role,
-      project
-    })
-  })
-}
 
-module.exports = { register, addProject }
+
+module.exports = { register }
