@@ -12,7 +12,7 @@ const expect = chai.expect
 chai.use(chaiAsPromised)
 chai.use(chaiHttp)
 
-let validUser = { 
+let validUser = {
 	"firstName": "Test",
 	"lastName": "Tester",
 	"position": "biggboi",
@@ -44,7 +44,7 @@ if (mongoose.connection.name === 'lookahead-test') {
   describe('User Integration Tests', () => { 
 
     before( (done) => {
-      mongoose.connect('mongodb://localhost/lookahead-test', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true}) 
+      mongoose.connect('mongodb://localhost/lookahead-test', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
       .then(
       mongoose.connection
         .once('open', () => {
@@ -57,7 +57,7 @@ if (mongoose.connection.name === 'lookahead-test') {
       )
     })
 
-    beforeEach( (done) => { 
+    beforeEach( (done) => {
       mongoose.connection.db.dropDatabase(() => {
         done()
       })
@@ -82,7 +82,7 @@ if (mongoose.connection.name === 'lookahead-test') {
           .end((err, res) => {
               expect(err).to.be.null
               expect(res).to.have.status(201)
-              expect(res.body.message).to.equal('User ben@testerino.com successfully created.')
+              expect(res.body.message).to.equal('User test@test.com successfully created.')
               done()
           })
         })
@@ -97,7 +97,7 @@ if (mongoose.connection.name === 'lookahead-test') {
           .post('/api/users')
           .type('form')
           .send(validUser)
-          .end()
+          .end((oof, yeet) => {
 
           chai.request(app)
           .post('/api/users')
@@ -105,9 +105,13 @@ if (mongoose.connection.name === 'lookahead-test') {
           .send(validUser)
           .end((err, res) => {
             expect(res).to.have.status(409)
-              expect(res.body.message).to.equal('An account already exists with that email.')
-              done()
+            expect(res.text).to.equal('An account already exists with that email.')
+
+            done()
           })
+          })
+
+
         })
 
         it('Missing Last Name should fail', (done) => {
@@ -153,6 +157,7 @@ if (mongoose.connection.name === 'lookahead-test') {
         it('Missing Password should fail', (done) => {
           invalidUser.email = "test@tester.com"
           invalidUser.firstName = "Test"
+          // invalidUser.lastName = "Rino"
           chai.request(app)
           .post('/api/users')
           .type('form')
@@ -223,8 +228,8 @@ if (mongoose.connection.name === 'lookahead-test') {
 
 
     describe('Login', () => {
-      
-      beforeEach( (done) => { 
+
+      beforeEach( (done) => {
         chai.request(app)
         .post('/api/users')
         .type('form')
@@ -240,7 +245,7 @@ if (mongoose.connection.name === 'lookahead-test') {
           chai.request(app)
           .post('/api/auth')
           .type('form')
-          .send({ 
+          .send({
             "email": "test@test.com",
             "password": "Test1245"
           })
@@ -255,7 +260,7 @@ if (mongoose.connection.name === 'lookahead-test') {
           chai.request(app)
           .post('/api/auth')
           .type('form')
-          .send({ 
+          .send({
             "email": "test@test.com",
             "password": "Test1245"
           })
@@ -305,14 +310,14 @@ if (mongoose.connection.name === 'lookahead-test') {
 
 
       })
-      
+
     })
 
     describe('Edit Details', () => {
 
       let authToken
 
-        beforeEach( (done) => { 
+        beforeEach( (done) => {
           chai.request(app)
           .post('/api/users')
           .type('form')
@@ -321,15 +326,15 @@ if (mongoose.connection.name === 'lookahead-test') {
             done()
           })
         })
-        
+
 
       describe('Successful Operations', () => {
 
-        beforeEach( (done) => { 
+        beforeEach( (done) => {
           chai.request(app)
           .post('/api/auth')
           .type('form')
-          .send({ 
+          .send({
             "email": "test@test.com",
             "password": "Test1245"
           })
@@ -338,7 +343,7 @@ if (mongoose.connection.name === 'lookahead-test') {
             done()
           })
         })
-          
+
         it('Successfully Update Password', (done) => {
           chai.request(app)
           .put('/account/password')
@@ -384,9 +389,9 @@ if (mongoose.connection.name === 'lookahead-test') {
               expect(user.email).to.equal('new@email.com')
               done()
             })
-    
+
           })
-          
+
         })
 
         it('Successfully Update Account Details', (done) => {
@@ -415,9 +420,9 @@ if (mongoose.connection.name === 'lookahead-test') {
               expect(user.position).to.equal("Main Man")
               done()
             })
-    
+
           })
-          
+
         })
 
       })
@@ -425,18 +430,18 @@ if (mongoose.connection.name === 'lookahead-test') {
 
       describe('Unsuccessful Operations', () => {
 
-          beforeEach( (done) => { 
+          beforeEach( (done) => {
             chai.request(app)
             .post('/api/users')
             .type('form')
             .send(validUser2)
             .end((err, res) => {
-  
-  
+
+
             chai.request(app)
             .post('/api/auth')
             .type('form')
-            .send({ 
+            .send({
               "email": validUser2.email,
               "password": validUser2.password
             })
@@ -445,7 +450,7 @@ if (mongoose.connection.name === 'lookahead-test') {
               done()
             })
             })
-  
+
           })
 
         it('Update without Token should fail', (done) => {
@@ -484,7 +489,7 @@ if (mongoose.connection.name === 'lookahead-test') {
             expect(res.body.message).to.equal('An account already exists with that email.')
             done()
           })
-  
+
         })
 
         describe('Invalid Data', () => {
@@ -506,7 +511,7 @@ if (mongoose.connection.name === 'lookahead-test') {
               expect(res.body.message).to.equal('Email address must be a valid email.')
               done()
             })
-    
+
           })
 
           it('Incorrect password should fail', (done) => {
@@ -526,7 +531,7 @@ if (mongoose.connection.name === 'lookahead-test') {
               expect(res.body.message).to.equal('Incorrect Password')
               done()
             })
-    
+
           })
 
           it('Invalid password should fail (No Number)', (done) => {
@@ -546,7 +551,7 @@ if (mongoose.connection.name === 'lookahead-test') {
               expect(res.body.message).to.equal('Password must meet security requirements.')
               done()
             })
-    
+
           })
 
           it('Invalid password should fail (No Capital)', (done) => {
@@ -566,7 +571,7 @@ if (mongoose.connection.name === 'lookahead-test') {
               expect(res.body.message).to.equal('Password must meet security requirements.')
               done()
             })
-    
+
           })
 
           it('Invalid password should fail (Length)', (done) => {
@@ -586,16 +591,16 @@ if (mongoose.connection.name === 'lookahead-test') {
               expect(res.body.message).to.equal('Password must meet security requirements.')
               done()
             })
-    
+
           })
-          
+
 
         })
 
       })
 
     })
-    
+
   })
 
 

@@ -18,7 +18,8 @@ router.post('/', async (req, res) => {
   if (error) return res.status(400).send(error.details[0].message)
 
   let user = await UserModel.findOne({ email: req.body.email })
-  if(user) return res.status(400).send('An account already exists with that email.')
+
+  if(user) return res.status(409).send('An account already exists with that email.')
 
   user = new UserModel(_.pick(req.body, ['firstName',
                                     'lastName',
@@ -32,7 +33,7 @@ router.post('/', async (req, res) => {
 
   const token = user.generateAuthToken()
 
-  res.header('x-auth-token', token).send(_.pick(user, ['_id', 'firstName', 'lastName', 'email']))
+  res.header('x-auth-token', token).status(201).json({message:`User ${user.email} successfully created.`})
 })
 
 module.exports = router
