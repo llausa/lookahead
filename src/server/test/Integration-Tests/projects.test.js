@@ -76,31 +76,31 @@ if (mongoose.connection.name === 'lookahead-test') {
       })
 		})
 
-		
-		describe('Successful Operations', () => {
+		beforeEach( (done) => {
 
-			beforeEach( (done) => {
-
+			chai.request(app)
+			.post('/api/users')
+			.type('form')
+			.send(validUser)
+			.end((oof, yeet) => {
+				
 				chai.request(app)
-				.post('/api/users')
+				.post('/api/auth')
 				.type('form')
-				.send(validUser)
-				.end((oof, yeet) => {
-					
-					chai.request(app)
-          .post('/api/auth')
-          .type('form')
-          .send({
-            "email": "test@test.com",
-            "password": "Test1245"
-          })
-          .end((err, res) => {
-						authToken = res.body.token
-						validProject.owner = JWT.decode(res.body.token)._id
-						done()
-					})
+				.send({
+					"email": "test@test.com",
+					"password": "Test1245"
+				})
+				.end((err, res) => {
+					authToken = res.body.token
+					validProject.owner = JWT.decode(res.body.token)._id
+					done()
 				})
 			})
+		})
+
+		
+		describe('Successful Operations', () => {
 
 			it('Creates a Project Successfully', (done) => {
 			
@@ -140,9 +140,39 @@ if (mongoose.connection.name === 'lookahead-test') {
 				})
 
 
-				describe('Task Edits', () => {
+				it('Update Project Details', (done) => {
+					chai.request(app)
+						.put(`/api/projects/${projectId}`)
+						.type('form')
+						.set('Authorization', `Bearer ${authToken}`)
+						.send(
+							{
+								"end_date": "2020-02-10",
+								"timezone": -4,
+								"title": "Real Project"}
+						)
+						.end((err, res) => {
 
-					let taskId
+							ProjectModel.findById((projectId)),
+								function (err, project) {
+									expect(project.title).to.be("Real Project")
+									expect(project.timezone).to.be(-4)
+									expect(project.end_date).to.be("2020-02-10")
+									expect(res).to.have.status(200)
+									done()
+								}
+							)
+
+						})
+				})
+
+
+				it('Delete Project', (done) => {
+					expect(true).to.equal(false)
+					done()
+				})
+
+				
 					
 					it('Creates a Task Successfully', (done) => {
 					
@@ -164,11 +194,14 @@ if (mongoose.connection.name === 'lookahead-test') {
 						})
 
 					})
+					
+					describe('Task Edits', () => {
 
-					it('Delete a Task Successfully', (done) => {
+						let taskId
 
+						beforeEach(() => {
 						chai.request(app)
-						.put(`/api/projects/${projectId}`)
+						.put(`/api/projects/${projectId}/${taskId}`)
 						.type('form')
 						.set('Authorization', `Bearer ${authToken}`)
 						.send(validTask)
@@ -177,10 +210,13 @@ if (mongoose.connection.name === 'lookahead-test') {
 							ProjectModel.find({ title: "Test Project"},
 								function (err, project) {
 									taskId = project.tasks[0]._id
-									done()
 								}
 							)
 						})
+					})
+
+				
+					it('Delete a Task Successfully', (done) => {
 					
 						chai.request(app)
 						.delete(`/api/projects/${projectId}`)
@@ -204,21 +240,6 @@ if (mongoose.connection.name === 'lookahead-test') {
 
 						chai.request(app)
 						.put(`/api/projects/${projectId}/${taskId}`)
-						.type('form')
-						.set('Authorization', `Bearer ${authToken}`)
-						.send(validTask)
-						.end((err, res) => {
-
-							ProjectModel.find({ title: "Test Project"},
-								function (err, project) {
-									taskId = project.tasks[0]._id
-									done()
-								}
-							)
-						})
-					
-						chai.request(app)
-						.delete(`/api/projects/${projectId}`)
 						.set('Authorization', `Bearer ${authToken}`)
 						.send({
 							"title": "Build Apartment",
@@ -246,6 +267,55 @@ if (mongoose.connection.name === 'lookahead-test') {
 					})
 						
 				})
+
+				describe('User changes', () => {
+
+					it('Add User to Project', (done) => {
+						expect(true).to.equal(false)
+						done()
+					})
+
+					it('Remove User from Project', (done) => {
+						expect(true).to.equal(false)
+						done()
+					})
+
+					it('Edit Existing User Role', (done) => {
+						expect(true).to.equal(false)
+						done()
+					})
+
+				})
+
+			})
+
+		})
+
+		describe('Unsuccessful Operations', () => {
+
+			it('Unauthorised User should reject', (done) => {
+				expect(true).to.equal(false)
+				done()
+			})
+
+			it('Invalid Project Details should reject', (done) => {
+				expect(true).to.equal(false)
+				done()
+			})
+
+			describe('Project Updates', () => {
+
+				it('Invalid Timezone should reject', (done) => {
+					expect(true).to.equal(false)
+					done()
+				})
+
+				it('Earlier End Date should reject', (done) => {
+					expect(true).to.equal(false)
+					done()
+				})
+
+
 			})
 
 		})

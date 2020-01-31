@@ -14,7 +14,7 @@ async function create (req, res) {
   }
 
   req.body.owner = validUser._id
-  
+
   let project = new ProjectModel(_.pick(req.body, ['title', 'create_date', 'start_date', 'end_date', 'timezone', 'owner']))
   await project.save()
 
@@ -23,6 +23,24 @@ async function create (req, res) {
   res.status(201).json({message:'Project successfully created.'})
 
 }
+
+async function update (req, res) {
+
+}
+
+
+
+async function addUser (req, res) {
+  res.send('yeet')
+
+  // await addProjectToUser(validUser._id, project._id, role)
+
+}
+
+async function RemoveUser (req, res) {
+  res.send('yeet')
+}
+
 
 async function addProjectToUser (id, project, role) {
 

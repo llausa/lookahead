@@ -10,6 +10,7 @@ async function register(req, res) {
   let user = await UserModel.findOne({ email: req.body.email })
   if(user) return res.status(409).json({"message": "An account already exists with that email."})
 
+
   user = new UserModel(_.pick(req.body, ['firstName',
                                     'lastName',
                                     'email',
@@ -59,7 +60,7 @@ async function updateEmail(req, res) {
   if (!validUser) return res.status(404).json({"message": "Couldn't find user."})
 
   const validPassword = await bcrypt.compare(req.body.password, validUser.password)
-  if (!validPassword) return res.status(401).json({"message":"Invalid Email or Password."})
+  if (!validPassword) return res.status(401).json({"message":"Incorrect Password."})
 
   let user = await UserModel.findOne({ email: req.body.email })
   if(user) return res.status(409).json({"message": "An account already exists with that email."})
