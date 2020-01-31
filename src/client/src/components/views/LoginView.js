@@ -4,7 +4,7 @@ import { TextField, Button } from '@material-ui/core';
 import LockIcon from '@material-ui/icons/Lock';
 
 import PasswordInput from '../PasswordInput'
-import EmailInput from '../EmailInput'
+import FormInput from '../FormInput'
 
 
 function LoginView() {
@@ -55,7 +55,7 @@ function LoginView() {
         <div data-cy="loginView" style={mystyle}>
             <h1 style={{margin: "40px 0 10px 0", fontSize: "70px"}}>Login</h1>
             <p style={{margin: "0 0 20px 0", fontSize:"12px"}}>Please enter your email and password</p>
-            <EmailInput label="Email" validate={true} />
+            <FormInput label="Email" validate={true} />
             <PasswordInput label="Password" />
             <Button onClick={LoginPressed} variant="outlined" style={buttonMain} color="primary">Login</Button>
             <Button component={Link} to="/account/password" onClick={ResetPressed} variant="outlined" style={buttonResetP}>Reset Password <LockIcon style={smallIcon} /> </Button>
