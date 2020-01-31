@@ -20,8 +20,8 @@ const UserSchema = new mongoose.Schema({
         required: true,
         unique: true,
         minlength: 6,
-        maxlength: 255
-
+        maxlength: 255,
+        match: emailRegex
     },
     password: {
         type: String,
