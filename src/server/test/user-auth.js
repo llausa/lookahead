@@ -397,7 +397,7 @@ if (mongoose.connection.name === 'lookahead-test') {
         it('Successfully Update Account Details', (done) => {
 
           chai.request(app)
-          .put('/account/details')
+          .put('/api/users/details')
           .type('form')
           .set('Authorization', `Bearer ${authToken}`)
           .send(

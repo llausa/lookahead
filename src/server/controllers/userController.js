@@ -1,10 +1,9 @@
-const { UserModel, validateUser} = require('../models/user')
+const { UserModel, validateUser } = require('../models/user')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const _ = require('lodash')
 
 async function register(req, res) {
-
   const { error } = validateUser(req.body)
   if (error) return res.status(400).json({"message": 'Invalid user data.'})
 
@@ -27,6 +26,17 @@ async function register(req, res) {
   res.header('x-auth-token', token).status(201).json({message:`User ${user.email} successfully created.`})
 }
 
+async function updateDetails(req, res) {
+  const validUser = await UserModel.findById(req.user._id)
+  if (!validUser) return res.status(404).json({"message": "Couldn't find user."})
 
+  validUser.firstName = req.body.firstName
+  validUser.lastName = req.body.lastName
+  validUser.position = req.body.position
+  validateUser(validUser)
 
-module.exports = { register }
+  await validUser.save()
+  res.status(200).json({"message": "Account Details Successfully Updated"})
+}
+
+module.exports = { register, updateDetails }
