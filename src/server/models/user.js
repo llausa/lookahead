@@ -27,8 +27,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: 8,
-        maxlength: 1024,
-        match: passwordRegex
+        maxlength: 1024
     },
     position: {
         type: String,
