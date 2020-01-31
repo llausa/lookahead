@@ -105,7 +105,7 @@ if (mongoose.connection.name === 'lookahead-test') {
           .send(validUser)
           .end((err, res) => {
             expect(res).to.have.status(409)
-            expect(res.text).to.equal('An account already exists with that email.')
+            expect(res.body.message).to.equal('An account already exists with that email.')
 
             done()
           })
@@ -356,7 +356,6 @@ if (mongoose.connection.name === 'lookahead-test') {
             }
           )
           .end((err, res) => {
-              // console.log(res)
               expect(res).to.have.status(200)
               expect(res.body.message).to.equal('Password updated succesfully.')
               done()
@@ -447,7 +446,7 @@ if (mongoose.connection.name === 'lookahead-test') {
               "password": validUser2.password
             })
             .end((err, res) => {
-              authToken = res.text
+              authToken = res.body.token
               done()
             })
             })
@@ -456,17 +455,17 @@ if (mongoose.connection.name === 'lookahead-test') {
 
         it('Update without Token should fail', (done) => {
           chai.request(app)
-          .put('/account/password')
+          .put('/api/users/password')
           .type('form')
           .send(
             {
-              "oldPW" : validUser.password,
-              "newPW": "Shiny12345"
+              "currentPassword" : validUser.password,
+              "newPassword": "Shiny12345"
             }
           )
           .end((err, res) => {
               expect(res).to.have.status(401)
-              expect(res.body.message).to.equal('Unauthorized Request - You must be logged in.')
+              expect(res.body.message).to.equal('Access denied. No token provided.')
               done()
           })
 
@@ -475,7 +474,7 @@ if (mongoose.connection.name === 'lookahead-test') {
         it('Duplicate Email should fail', (done) => {
 
           chai.request(app)
-          .put('/account/email')
+          .put('/api/users/email')
           .type('form')
           .set('Authorization', `Bearer ${authToken}`)
           .send(

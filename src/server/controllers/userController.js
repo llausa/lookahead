@@ -8,7 +8,7 @@ async function register(req, res) {
   if (error) return res.status(400).json({"message": 'Invalid user data.'})
 
   let user = await UserModel.findOne({ email: req.body.email })
-  if(user) return res.status(409).send('An account already exists with that email.')
+  if(user) return res.status(409).json({"message": "An account already exists with that email."})
 
   user = new UserModel(_.pick(req.body, ['firstName',
                                     'lastName',
@@ -22,7 +22,7 @@ async function register(req, res) {
 
   const token = user.generateAuthToken()
 
-  res.header('x-auth-token', token).status(201).json({message:`User ${user.email} successfully created.`})
+  res.status(201).json({"message":`User ${user.email} successfully created.`, "token": token})
 }
 
 async function updateDetails(req, res) {
@@ -62,7 +62,7 @@ async function updateEmail(req, res) {
   if (!validPassword) return res.status(401).json({"message":"Invalid Email or Password."})
 
   let user = await UserModel.findOne({ email: req.body.email })
-  if(user) return res.status(409).send('An account already exists with that email.')
+  if(user) return res.status(409).json({"message": "An account already exists with that email."})
 
   validUser.email = req.body.email
 
