@@ -376,7 +376,6 @@ if (mongoose.connection.name === 'lookahead-test') {
             }
           )
           .end((err, res) => {
-
             expect(res).to.have.status(200)
             expect(res.body.message).to.equal('Email updated successfully.')
 
@@ -497,7 +496,7 @@ if (mongoose.connection.name === 'lookahead-test') {
           it('Invalid Email should fail', (done) => {
 
             chai.request(app)
-            .put('/account/email')
+            .put('/api/users/email')
             .type('form')
             .set('Authorization', `Bearer ${authToken}`)
             .send(
@@ -517,7 +516,7 @@ if (mongoose.connection.name === 'lookahead-test') {
           it('Incorrect password should fail', (done) => {
 
             chai.request(app)
-            .put('/account/email')
+            .put('/api/users/email')
             .type('form')
             .set('Authorization', `Bearer ${authToken}`)
             .send(
@@ -537,18 +536,18 @@ if (mongoose.connection.name === 'lookahead-test') {
           it('Invalid password should fail (No Number)', (done) => {
 
             chai.request(app)
-            .put('/account/password')
+            .put('/api/users/password')
             .type('form')
             .set('Authorization', `Bearer ${authToken}`)
             .send(
               {
-                "oldPW" : validUser.password,
-                "newPW": "Shiniest"
+                "currentPassword" : validUser.password,
+                "newPassword": "Shiniest"
               }
             )
             .end((err, res) => {
               expect(res).to.have.status(400)
-              expect(res.body.message).to.equal('Password must meet security requirements.')
+              expect(res.body.message).to.equal('Invalid password.')
               done()
             })
 
@@ -557,18 +556,18 @@ if (mongoose.connection.name === 'lookahead-test') {
           it('Invalid password should fail (No Capital)', (done) => {
 
             chai.request(app)
-            .put('/account/password')
+            .put('/api/users/password')
             .type('form')
             .set('Authorization', `Bearer ${authToken}`)
             .send(
               {
-                "oldPW" : validUser.password,
-                "newPW": "shiny12345"
+                "currentPassword" : validUser.password,
+                "newPassword": "shiny12345"
               }
             )
             .end((err, res) => {
               expect(res).to.have.status(400)
-              expect(res.body.message).to.equal('Password must meet security requirements.')
+              expect(res.body.message).to.equal('Invalid password.')
               done()
             })
 
@@ -577,18 +576,18 @@ if (mongoose.connection.name === 'lookahead-test') {
           it('Invalid password should fail (Length)', (done) => {
 
             chai.request(app)
-            .put('/account/password')
+            .put('/api/users/password')
             .type('form')
             .set('Authorization', `Bearer ${authToken}`)
             .send(
               {
-                "oldPW" : validUser.password,
-                "newPW": "Shiny12"
+                "currentPassword" : validUser.password,
+                "newPassword": "Shiny12"
               }
             )
             .end((err, res) => {
               expect(res).to.have.status(400)
-              expect(res.body.message).to.equal('Password must meet security requirements.')
+              expect(res.body.message).to.equal('Invalid password.')
               done()
             })
 
