@@ -42,9 +42,6 @@ const UserSchema = new mongoose.Schema({
             }
         ]
 })
-// UserModel.path('email').validate(function (value) {
-
-// })
 
 UserSchema.methods.generateAuthToken = function() {
     const token = jwt.sign({ _id: this._id }, process.env.JWT_SECRET)
