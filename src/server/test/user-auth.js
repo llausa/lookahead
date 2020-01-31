@@ -287,7 +287,7 @@ if (mongoose.connection.name === 'lookahead-test') {
             })
           .end((err, res) => {
             expect(res).to.have.status(401)
-            expect(res.body.message).to.equal('Incorrect Email or Password.')
+            expect(res.body.message).to.equal('Invalid Email or Password.')
             done()
           })
         })
@@ -302,7 +302,7 @@ if (mongoose.connection.name === 'lookahead-test') {
             })
           .end((err, res) => {
             expect(res).to.have.status(401)
-            expect(res.body.message).to.equal('Incorrect Email or Password.')
+            expect(res.body.message).to.equal('Invalid Email or Password.')
             done()
           })
 
@@ -397,7 +397,7 @@ if (mongoose.connection.name === 'lookahead-test') {
         it('Successfully Update Account Details', (done) => {
 
           chai.request(app)
-          .put('/account/details')
+          .put('/api/users/details')
           .type('form')
           .set('Authorization', `Bearer ${authToken}`)
           .send(

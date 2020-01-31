@@ -37,7 +37,7 @@ else if (process.env.NODE_ENV == 'test') {
 }
 else {
   mongoose.connect('mongodb://localhost/lookahead', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
-  .then(() => console.log('Connected to the Development Database'))
+  .then(() => console.log('Connected to Development Database...'))
   .catch(err => console.error('Could not connect to MongoDB...', err))
 }
 
@@ -46,9 +46,7 @@ if (!process.env.JWT_SECRET) {
   process.exit(1)
 }
 
-
 app.use(cors())
-
 
 // {origin: "http://localhost:3000",
 // credentials: true
@@ -67,8 +65,6 @@ const port = process.env.PORT || 3000
 
 
 
-app.listen(port, () => {
-  console.log(`listening on port ${port}!`)
-})
+app.listen(port, () => console.log(`listening on port ${port}!`))
 
 module.exports = app

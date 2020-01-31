@@ -4,6 +4,7 @@ const express = require('express')
 const router = express.Router()
 const auth = require('../middleware/auth')
 const userController = require('../controllers/userController')
+const { UserModel, validateUser } = require('../models/user')
 
 // Get current user
 router.get('/me', auth, async (req, res) => {
@@ -11,7 +12,10 @@ router.get('/me', auth, async (req, res) => {
   res.send(user)
 })
 
+// Register User
 router.post('/', userController.register)
 
+// Update User details
+router.put('/details', auth, userController.updateDetails)
 
 module.exports = router
