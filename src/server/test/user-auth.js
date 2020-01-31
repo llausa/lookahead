@@ -379,7 +379,7 @@ if (mongoose.connection.name === 'lookahead-test') {
           .end((err, res) => {
 
             expect(res).to.have.status(200)
-            expect(res.body.message).to.equal('Email updated succesfully.')
+            expect(res.body.message).to.equal('Email updated successfully.')
 
             UserModel.findOne({ email: 'new@email.com' },
             (err, user) => {

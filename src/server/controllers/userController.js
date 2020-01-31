@@ -8,7 +8,6 @@ async function register(req, res) {
   if (error) return res.status(400).json({"message": 'Invalid user data.'})
 
   let user = await UserModel.findOne({ email: req.body.email })
-
   if(user) return res.status(409).send('An account already exists with that email.')
 
   user = new UserModel(_.pick(req.body, ['firstName',
@@ -55,4 +54,22 @@ async function updatePassword(req, res) {
   res.status(200).json({"message": "Password updated succesfully."})
 }
 
-module.exports = { register, updateDetails, updatePassword }
+async function updateEmail(req, res) {
+  const validUser = await UserModel.findById(req.user._id)
+  if (!validUser) return res.status(404).json({"message": "Couldn't find user."})
+
+  const validPassword = await bcrypt.compare(req.body.password, validUser.password)
+  if (!validPassword) return res.status(401).json({"message":"Invalid Email or Password."})
+
+  let user = await UserModel.findOne({ email: req.body.email })
+  if(user) return res.status(409).send('An account already exists with that email.')
+
+  validUser.email = req.body.email
+
+  validateUser(validUser)
+
+  await validUser.save()
+  res.status(200).json({"message": "Email updated successfully."})
+}
+
+module.exports = { register, updateDetails, updatePassword, updateEmail }

@@ -19,5 +19,7 @@ router.post('/', userController.register)
 router.put('/details', auth, userController.updateDetails)
 // Update User password
 router.put('/password', auth, userController.updatePassword)
+// Update User email
+router.put('/email', auth, userController.updateEmail)
 
 module.exports = router
