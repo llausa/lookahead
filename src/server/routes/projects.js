@@ -5,6 +5,7 @@ const Joi = require('@hapi/joi')
 Joi.objectId = require('joi-objectid')(Joi)
 const auth = require('../middleware/auth')
 const projectController = require("../controllers/projectController")
+const taskController = require("../controllers/taskController")
 
 
 const projects = [

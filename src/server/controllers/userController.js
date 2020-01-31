@@ -10,6 +10,7 @@ async function register(req, res) {
   let user = await UserModel.findOne({ email: req.body.email })
   if(user) return res.status(409).json({"message": "An account already exists with that email."})
 
+
   user = new UserModel(_.pick(req.body, ['firstName',
                                     'lastName',
                                     'email',
