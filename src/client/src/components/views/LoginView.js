@@ -6,6 +6,8 @@ import axios from 'axios'
 import LockIcon from '@material-ui/icons/Lock'
 import ButtonInput from '../ButtonInput'
 import FormInput from '../FormInput'
+import TitleText from '../TitleText'
+import NormalText from '../NormalText'
 
 
 const Login = () => {
@@ -84,11 +86,11 @@ const Login = () => {
 
     return (
         <form onSubmit={onSubmit} className='form'> 
-        <Nav backButtonLink = "/"/>
+        <Nav backButtonLink = "/" BackButton={true} MenuButton={true}/>
         <div data-cy="loginView" style={mystyle}>
-            <h1 style={{margin: "40px 0 10px 0", fontSize: "70px"}}>Login</h1>
-            <p style={{margin: "0 0 20px 0", fontSize:"12px"}}>Please enter your email and password</p>
-
+            <TitleText text="Login" />
+            <NormalText text="Please enter your email and password" />
+            
             <FormInput type='email' validation={email} value={data.email} onChange={onChange} require={true} errorText="Invalid Email" label='Email'  id='email' name='email' />
             <FormInput type='password' validation={password} value={data.password} onChange={onChange} require={true} errorText="Password Invalid" label='Password' id='password' name='password' />
                 
