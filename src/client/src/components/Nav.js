@@ -61,7 +61,6 @@ const Nav = (props) => {
           </IconButton>) : (<></>) }
         </Toolbar>
       </AppBar>
-      <div style={{margin: "0 0 60px 0"}}></div>
     </div>
     <Menu checked={props.checked}/>
     </div>

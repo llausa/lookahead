@@ -8,6 +8,8 @@ import ButtonInput from '../ButtonInput'
 import FormInput from '../FormInput'
 import TitleText from '../TitleText'
 import NormalText from '../NormalText'
+import CardContainer from '../CardContainer'
+import Background from '../../images/WhiteBackground.jpg'
 
 
 const Login = () => {
@@ -25,7 +27,7 @@ const Login = () => {
         console.log(data)
 
         axios.post(
-        'https://vast-oasis-18718.herokuapp.com/api/login', data)
+        'https://vast-oasis-18718.herokuapp.com/api/auth', data)
         .then(function (response) {
             console.log(response)
         })
@@ -85,8 +87,10 @@ const Login = () => {
     }
 
     return (
-        <form onSubmit={onSubmit} className='form'> 
+        <>
         <Nav backButtonLink = "/" BackButton={true} MenuButton={true}/>
+        <CardContainer background={Background}>
+        <form onSubmit={onSubmit} className='form'> 
         <div data-cy="loginView" style={mystyle}>
             <TitleText text="Login" />
             <NormalText text="Please enter your email and password" />
@@ -98,6 +102,8 @@ const Login = () => {
             <Button component={Link} to="/account/password" onClick={ResetPressed} variant="outlined" style={buttonResetP}>Reset Password <LockIcon style={smallIcon} /> </Button>
         </div>
         </form>
+        </CardContainer>
+        </>
     )
 }
 

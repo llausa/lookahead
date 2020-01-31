@@ -1,7 +1,7 @@
 import React from 'react'
 import Card from '@material-ui/core/Card'
 
-const CardContainer = () => {
+const CardContainer = (props) => {
 
     const card = {
         display: "flex",
@@ -10,7 +10,7 @@ const CardContainer = () => {
         justifyContent: "center",
         textAlign: "center",
         color: "#006EE2",
-        height: "50vh",
+        minHeight: "50vh",
         width: "90vw",
         maxWidth: "500px",
         margin: "auto",
@@ -31,7 +31,7 @@ const CardContainer = () => {
 
     const page ={
         display: "flex",
-        backgroundImage: `url(${Background})`,
+        backgroundImage: `url(${props.background})`,
         backgroundSize: "cover",
         height: "100%",
         width: "100%",
