@@ -20,14 +20,15 @@ const UserSchema = new mongoose.Schema({
         required: true,
         unique: true,
         minlength: 6,
-        maxlength: 255
-
+        maxlength: 255,
+        match: emailRegex
     },
     password: {
         type: String,
         required: true,
         minlength: 8,
-        maxlength: 1024
+        maxlength: 1024,
+        match: passwordRegex
     },
     position: {
         type: String,
@@ -41,6 +42,9 @@ const UserSchema = new mongoose.Schema({
             }
         ]
 })
+// UserModel.path('email').validate(function (value) {
+
+// })
 
 UserSchema.methods.generateAuthToken = function() {
     const token = jwt.sign({ _id: this._id }, process.env.JWT_SECRET)
