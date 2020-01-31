@@ -376,7 +376,6 @@ if (mongoose.connection.name === 'lookahead-test') {
             }
           )
           .end((err, res) => {
-            // console.log(res)
             expect(res).to.have.status(200)
             expect(res.body.message).to.equal('Email updated successfully.')
 
@@ -527,8 +526,8 @@ if (mongoose.connection.name === 'lookahead-test') {
               }
             )
             .end((err, res) => {
-              expect(res).to.have.status(401)
-              expect(res.body.message).to.equal("Invalid Email or Password.")
+              expect(res).to.have.status(400)
+              expect(res.body.message).to.equal('Incorrect Password')
               done()
             })
 
