@@ -2,6 +2,14 @@ const { ProjectModel, validateProject } = require('../models/project')
 const { UserModel, addProject } = require('../models/user')
 const _  = require('lodash')
 
+async function allProjects (req, res) {
+  req.body.owner = req.user._id
+  let validUser = await UserModel.findById(req.user._id)
+  if (!validUser) return res.status(400).json({"message": 'Critical Error: User does not exist in the database'})
+
+
+}
+
 async function create (req, res) {
   req.body.owner = req.user._id
   const { error } = validateProject(req.body)
@@ -54,7 +62,7 @@ async function addProjectToUser (id, project, role) {
     await user.save()
 
   })
-  
+
 }
 
 module.exports = { create }
