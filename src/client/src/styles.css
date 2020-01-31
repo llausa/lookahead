@@ -1,5 +1,5 @@
 root {
-    --main-color: #2baafe;
+    --main-color: #006EE2;
 }
 
 body {
@@ -16,7 +16,7 @@ body {
 
 .MuiAppBar-colorPrimary {
     color: #fff;
-    background-color: #2baafe!important;
+    background-color: #006EE2!important;
 }
 
 /* .MuiFormLabel-root.Mui-focused {
@@ -36,9 +36,29 @@ body {
 }
 
 .MuiPickersDay-daySelected {
-    background-color: #2baafe!important;
+    background-color: #006EE2!important;
 }
 
 .MuiButton-textPrimary {
-    color: #2baafe!important;
+    color: #006EE2!important;
+}
+
+.MenuHidden {
+    opacity: 0;
+}
+
+.MenuVisible {
+    opacity: 1;
+}
+
+.HomeCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    color: rgb(0, 110, 226);
+    height: 50vh;
+    width: 90vw;
+    max-width: 500px;
+    margin: auto;
 }
