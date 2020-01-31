@@ -22,14 +22,15 @@ const InfoDialog = () => {
     fontSize: "12px",
     fontWeight: "strong",
     cursor: "pointer",
-    textDecoration: "underline"
+    textDecoration: "underline",
+    backgroundColor: "none"
   }
 
   return (
     <div>
-      <a style={SmallText} onClick={handleClickOpen}>
+      <p style={SmallText} onClick={handleClickOpen}>
         Password Requirements
-      </a>
+        </p>
       <Dialog
         open={open}
         onClose={handleClose}

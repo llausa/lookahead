@@ -2,27 +2,14 @@ import React from "react"
 import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 import LockIcon from '@material-ui/icons/Lock'
-import Card from '@material-ui/core/Card'
-
-import axios from 'axios'
+import Logo from '../../images/LookaheadLogoBlue.svg'
+import Background from '../../images/Background.jpg'
+import CardContainer from '../CardContainer'
 
 function HomeView() {
 
-    const mystyle = {
-        height: "70vh",
-        display: "flex",
-        flexDirection: "column",
-        alignitems: "center",
-        justifyContent: "center",
-        textAlign: "center",
-        color: "#2baafe",
-        padding: "10px",
-        maxWidth: "400px",
-        margin: "auto",
-    }
-
     const buttonMain = {
-        color: "#2baafe",
+        color: "#006EE2",
         margin: "20px",
         border: "1px solid rgb(43, 170, 254)"
     }
@@ -39,6 +26,17 @@ function HomeView() {
         margin: "4px"
     }
 
+    const logoStyle = {
+        position: "relative",
+        justifySelf: "center",
+        alignSelf: "center",
+        width: "40vw",
+        left: "-5px",
+        top: "-20px",
+        maxWidth: "400px",
+        margin: "30px 0"
+    }
+
     const LoginPressed = () => {
         console.log("Login Pressed")
     }
@@ -52,12 +50,16 @@ function HomeView() {
     }
 
     return (
-        <div data-cy="homeView" style={mystyle}>
-        <h1 style={{margin: "40px 0 10px 0", fontSize: "70px"}}>Welcome</h1>
-        <Button  onClick={LoginPressed} variant="outlined" style={buttonMain} color="primary">Login</Button>
-        <Button component={Link} to="/signup" onClick={SignupPressed} variant="outlined" style={{margin: "0 20px"}}>Signup</Button>
-        <Button component={Link} to="/account/password" onClick={ResetPressed} variant="outlined" style={buttonResetP}>Reset Password <LockIcon style={smallIcon} /> </Button>
-        </div>
+        
+           
+        <CardContainer background={Background}>
+                    <img src={Logo} alt="Logo" style={logoStyle}  aria-label="logo"/>
+                    <Button component={Link} to="/login" onClick={LoginPressed} variant="outlined" style={buttonMain} color="primary">Login</Button>
+                    <Button component={Link} to="/signup" onClick={SignupPressed} variant="outlined" style={{margin: "0 20px"}}>Signup</Button>
+                    <Button component={Link} to="/account/password" onClick={ResetPressed} variant="outlined" style={buttonResetP}>Reset Password <LockIcon style={smallIcon} /> </Button>
+        </CardContainer>
+            
+       
     )
 }
 

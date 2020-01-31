@@ -1,10 +1,10 @@
 import React from 'react'
 import Button from '@material-ui/core/Button';
 
-export default function ButtonInput(props) {
+const ButtonInput = (props) => {
 
-  const Main = {
-    color: "#2baafe",
+  const Primary = {
+    color: "#006EE2",
     margin: "20px",
     border: "1px solid rgb(43, 170, 254)"
   }
@@ -15,16 +15,17 @@ export default function ButtonInput(props) {
     fontSize: "8px"
   }
 
-  const main = props.main;
-  if (main) {
-    return(
-      <Button variant="outlined" style={Main} color="primary"></Button>
-    )
-    
+  const Disabled = {
+    color: "#C4C4C4",
+    margin: "20px",
+    border: "1px solid #C4C4C4"
   }
-  return (
-  <Button variant="outlined" style={Secondary}></Button>
-  )
+
+  return (<> {props.disabled? (<Button variant="outlined" type={props.type} style={Disabled} color={props.color} disabled > {props.text} </Button>)
+  :
+  (<Button variant="outlined" type={props.type} style={props.primary? Primary : Secondary} color={props.color}> {props.text} </Button>)}
+  </>)
+
 }
 
-
+export default ButtonInput
