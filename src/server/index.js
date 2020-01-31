@@ -13,7 +13,7 @@ const users = require("./routes/users")
 const app = express()
 
 if (process.env.NODE_ENV == 'production') {
-  mongoose.connect(process.env.DB_HOST, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false})
+  mongoose.connect(process.env.DB_HOST, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
   .then(mongoose.connection
     .once('open', () => {
       console.log('Connected')
@@ -24,7 +24,7 @@ if (process.env.NODE_ENV == 'production') {
   .catch(err => console.error('Could not connect to MongoDB...', err))
 }
 else if (process.env.NODE_ENV == 'test') {
-  mongoose.connect('mongodb://localhost/lookahead-test', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false})
+  mongoose.connect('mongodb://localhost/lookahead-test', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
   .then(mongoose.connection
     .once('open', () => {
       console.log('Connected to the Test Database')
@@ -36,7 +36,7 @@ else if (process.env.NODE_ENV == 'test') {
   .catch(err => console.error('Could not connect to MongoDB...', err))
 }
 else {
-  mongoose.connect('mongodb://localhost/lookahead', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false})
+  mongoose.connect('mongodb://localhost/lookahead', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
   .then(() => console.log('Connected to MongoDB...'))
   .catch(err => console.error('Could not connect to MongoDB...', err))
 }
