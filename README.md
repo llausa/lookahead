@@ -37,7 +37,6 @@ Git tracks changes in the application source code in order to manage project dev
 
   - [Mongoose](https://github.com/Automattic/mongoose): MongoDB object modeling designed to work in an asynchronous environment. This is the driver that enables our server to communicate with MongoDB Atlas.
   - [Express](https://github.com/expressjs/express): Fast, unopinionated, minimalist web framework for node. This library is what the project uses to create the server API.
-  - [Passport](https://github.com/jaredhanson/passport): Simple, unobtrusive authentication for Node.js. This library will handle authentication in the app.
   - [React-Grid-Layout](https://github.com/STRML/react-grid-layout): A draggable and resizable grid layout with responsive breakpoints, for React. A lot of the drag and drop functioanlity of this project relies on this library.
 
 ## Data Flow Diagram
