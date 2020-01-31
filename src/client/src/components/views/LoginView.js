@@ -9,7 +9,7 @@ import FormInput from '../FormInput'
 import TitleText from '../TitleText'
 import NormalText from '../NormalText'
 import CardContainer from '../CardContainer'
-import Background from '../../images/WhiteBackground.jpg'
+import Background from '../../images/WhiteBackgroundSmall.jpg'
 
 
 const Login = () => {

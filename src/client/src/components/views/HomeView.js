@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 import LockIcon from '@material-ui/icons/Lock'
 import Logo from '../../images/LookaheadLogoBlue.svg'
-import Background from '../../images/Background.jpg'
+import Background from '../../images/BackgroundSmall.jpg'
 import CardContainer from '../CardContainer'
 
 function HomeView() {
