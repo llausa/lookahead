@@ -28,6 +28,14 @@ async function update (req, res) {
 
 }
 
+async function remove (req, res) {
+
+}
+
+async function updateUser (req, res) {
+
+}
+
 
 
 async function addUser (req, res) {
@@ -37,7 +45,7 @@ async function addUser (req, res) {
 
 }
 
-async function RemoveUser (req, res) {
+async function removeUser (req, res) {
   res.send('yeet')
 }
 
@@ -57,4 +65,4 @@ async function addProjectToUser (id, project, role) {
   
 }
 
-module.exports = { create }
+module.exports = { create, update, remove, updateUser, removeUser, addUser }

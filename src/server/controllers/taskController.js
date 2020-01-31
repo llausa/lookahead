@@ -2,10 +2,12 @@ async function createTask (req, res) {
   res.send('yeet')
 }
 
-async function editTask (req, res) {
+async function updateTask (req, res) {
   res.send('yeet')
 }
 
-async function deleteTask (req, res) {
+async function removeTask (req, res) {
   res.send('yeet')
 }
+
+module.exports = { createTask, updateTask, removeTask }

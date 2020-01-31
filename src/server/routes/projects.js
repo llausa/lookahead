@@ -37,7 +37,24 @@ router.get("/:id", auth, (req, res) => {
 })
 
 // Projects POST route
-router.post("/", auth, projectController.create)
+router.post("/", auth, projectController.create )
+
+router.put("/:projectId", auth, projectController.update )
+
+router.delete("/:projectId", auth, projectController.remove )
+
+
+router.put("/:projectId/tasks", auth, taskController.createTask )
+
+router.delete("/:projectId/tasks", auth, taskController.removeTask )
+
+router.put("/:projectId/tasks/:taskId", auth, taskController.updateTask )
+
+router.post("/:projectId/users", auth, projectController.addUser )
+
+router.delete("/:projectId/users/:userId", auth, projectController.removeUser )
+
+router.put("/:projectId/users", auth, projectController.updateUser )
 
 
 // project Project PUT route
