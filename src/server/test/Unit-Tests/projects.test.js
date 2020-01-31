@@ -1,8 +1,8 @@
 process.env.NODE_ENV = 'test'
 
 const mongoose = require("mongoose")
-const { UserModel } = require("../models/user")
-const ProjectModel = require("../models/project")
+const { UserModel } = require("../../models/user")
+const { ProjectModel } = require("../../models/project")
 const moment = require('moment')
 
 const chai = require('chai')

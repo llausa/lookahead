@@ -1,8 +1,8 @@
 process.env.NODE_ENV = 'test'
 
-const app = require('../index')
+const app = require('../../index')
 const mongoose = require("mongoose")
-const { UserModel } = require("../models/user")
+const { UserModel } = require("../../models/user")
 const chai = require('chai')
 const chaiHttp = require('chai-http')
 const chaiAsPromised = require("chai-as-promised")
