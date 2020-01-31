@@ -3,6 +3,11 @@ import axios from 'axios'
 import ButtonInput from '../ButtonInput'
 import FormInput from '../FormInput'
 import InfoDialog from '../InfoDialog'
+import CardContainer from '../CardContainer'
+import Background from '../../images/WhiteBackgroundSmall.jpg'
+import Nav from '../Nav'
+import TitleText from '../TitleText'
+import NormalText from '../NormalText'
 
 
 const Signup = () => {
@@ -84,11 +89,14 @@ const Signup = () => {
 
       return (
   
+        <>
+        <Nav backButtonLink = "/" BackButton={true} MenuButton={true}/>
+        <CardContainer background={Background}>
           <form onSubmit={onSubmit} className='form'>
             <div data-cy='signupView' style={mystyle}>
-                <h1 style={{margin: '40px 0 10px 0', fontSize: '70px'}}>Signup</h1>
-                    
-                <p style={{margin: '0 0 20px 0', fontSize:'12px'}}>Please fill out all fields.</p>
+
+            <TitleText text="Signup" />
+            <NormalText text="Please fill out all fields." />
                 <FormInput type='text' validation={basic} value={data.firstName} onChange={onChange} require={true} errorText="Please enter more Characters" label='First Name' id='firstName' name='firstName'/>
                 <FormInput type='text' validation={basic} value={data.lastName} onChange={onChange} require={true} errorText="Please enter more Characters" label='Last Name' id='lastName' name='lastName' />
                 <FormInput type='text' value={data.position} onChange={onChange} label='Position' id='position' name='position' />
@@ -99,6 +107,8 @@ const Signup = () => {
                 <ButtonInput disabled={ButtonDisabled} type='submit' primary={true} color='primary' text={ButtonText} />   
             </div>
           </form>
+          </CardContainer>
+        </>
       )
 
 }
