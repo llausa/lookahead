@@ -19,7 +19,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        minlength: 5,
+        minlength: 6,
         maxlength: 255
 
     },
@@ -57,13 +57,13 @@ function validateUser(user) {
         lastName: Joi.string()
                         .required(),
         email: Joi.string()
-                        .min(5)
+                        .min(6)
                         .max(255)
                         .required()
                         .email()
                         .pattern(emailRegex),
         password: Joi.string()
-                        .min(5)
+                        .min(8)
                         .max(255)
                         .required()
                         .pattern(passwordRegex),
@@ -75,7 +75,7 @@ function validateUser(user) {
 function validateEmail(email) {
     const schema = Joi.object({
         email: Joi.string()
-                        .min(5)
+                        .min(6)
                         .max(255)
                         .required()
                         .email()
@@ -87,7 +87,7 @@ function validateEmail(email) {
 function validatePassword(password) {
     const schema = Joi.object({
         password: Joi.string()
-                        .min(5)
+                        .min(8)
                         .max(255)
                         .required()
                         .pattern(passwordRegex)
