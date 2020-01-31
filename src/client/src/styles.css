@@ -9,6 +9,7 @@ body {
 
 * {
     font-family: Arial, Helvetica, sans-serif;
+    transition-duration: 1s;
 }
 
 /* 90% of this is overriding Material UI Colours */
@@ -18,13 +19,13 @@ body {
     background-color: #2baafe!important;
 }
 
-.MuiFormLabel-root.Mui-focused {
+/* .MuiFormLabel-root.Mui-focused {
     color:  #757575!important;
 }
 
 .MuiOutlinedInput-notchedOutline {
     border-color: #757575!important;
-}
+} */
 
 .MuiButton-root {
     border-radius: 50px!important;

@@ -1,96 +1,84 @@
-import React, { Component } from 'react'
+import React, { useReducer } from 'react'
 import axios from 'axios'
 
 import Button from '@material-ui/core/Button'
-import TextInput from '../TextInput'
-import EmailInput from '../EmailInput'
-import PasswordInput from '../PasswordInput'
+import FormInput from '../FormInput'
+import InfoDialog from '../InfoDialog'
 
-export class Signup extends Component {
-    state = {
-      fname: "",
-      lname: "",
-      pos: "",
-      email: "",
-      pword: "",
-      pword2: ""
-    }
+
+const Signup = () => {
+    
+    const [data, setData] = useReducer((state, newState) => (
+        {...state, ...newState}
+    ), {
+        firstName: '',
+        lastName: '',
+        position: '',
+        email: '',
+        password: '',
+        passwordConfirmation: ''
+    })
   
-    onSubmit = (e) => {
-        const { fname, lname, pos, email, pword, pword2} = this.state
-        console.log("Signup Pressed")
+    const onSubmit = e => {
         e.preventDefault()
-        if (this.state.fname === "") {
-          console.log("You a dummy")
-        } else {
 
-            let data = {
-                "firstName": fname,
-                "lastName" : lname,
-                "email" : email,
-                "password" : pword,
-                "position": pos
-            }
+        console.log(data)
 
-            console.log(data)
-
-            axios.post(
-            "https://vast-oasis-18718.herokuapp.com/api/users", data)
-            .then(function (response) {
-                console.log(response)
-            })
-            .catch(function (error) {
-                console.log(error.response.data)
-            })
-        }
+        axios.post(
+        'https://vast-oasis-18718.herokuapp.com/api/users', data)
+        .then(function (response) {
+            console.log(response)
+        })
+        .catch(function (error) {
+            console.log(error.response.data)
+        })
         
     }
-  
-    onChange = (e) => this.setState({ [e.target.name]: e.target.value })
-  
-    render() {
+
+        const onChange = e => setData({[e.target.name]: e.target.value})
 
         const mystyle = {
-            display: "flex",
-            flexDirection: "column",
-            alignitems: "center",
-            justifyContent: "center",
-            textAlign: "center",
-            color: "#2baafe",
-            padding: "10px",
-            maxWidth: "400px",
-            margin: "auto",
+            display: 'flex',
+            flexDirection: 'column',
+            alignitems: 'center',
+            justifyContent: 'center',
+            textAlign: 'center',
+            color: '#2baafe',
+            padding: '10px',
+            maxWidth: '400px',
+            margin: 'auto',
         }
     
         const buttonMain = {
-            color: "#2baafe",
-            margin: "20px",
-            border: "1px solid rgb(43, 170, 254)"
+            color: '#2baafe',
+            margin: '20px',
+            border: '1px solid rgb(43, 170, 254)'
         }
 
-        const { fname, lname, pos, email, pword, pword2} = this.state
+        const text = (text) => text.length > 2
+        const email = (text) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(text)
+        const password = (text) => text.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,1000}$/)
 
       return (
   
-          <form onSubmit={this.onSubmit} className='form'>
-            <div data-cy="signupView" style={mystyle}>
-                <h1 style={{margin: "40px 0 10px 0", fontSize: "70px"}}>Signup</h1>
+          <form onSubmit={onSubmit} className='form'>
+            <div data-cy='signupView' style={mystyle}>
+                <h1 style={{margin: '40px 0 10px 0', fontSize: '70px'}}>Signup</h1>
                     
-                <p style={{margin: "0 0 20px 0", fontSize:"12px"}}>Please fill out all fields.</p>
-
-                <TextInput value={fname} onChange={this.onChange} type="text" id="fname" name="fname" required={true} label="First Name" />
-                <TextInput value={lname} onChange={this.onChange} type="text" id="lname" name="lname" required={true} label="Last Name" />
-                <TextInput value={pos} onChange={this.onChange} type="text" id="pos" name="pos" required={false} label="Position" />
-
-                <EmailInput value={email} onChange={this.onChange} id="email" name="email" />
-                <PasswordInput value={pword} onChange={this.onChange} id="pword" name="pword" label="Password"/>
-                <PasswordInput value={pword2} onChange={this.onChange} id="pword2" name="pword2" label="Confirm Password"/>
-
-                <Button type="submit" style={buttonMain} color="primary" >Submit</Button>     
+                <p style={{margin: '0 0 20px 0', fontSize:'12px'}}>Please fill out all fields.</p>
+                <FormInput type='text' validation={text} value={data.firstName} onChange={onChange} require={true} errorText="Please enter more Characters" label='First Name' id='firstName' name='firstName' />
+                <FormInput type='text' validation={text} value={data.lastName} onChange={onChange} require={true} errorText="Please enter more Characters" label='Last Name' id='lastName' name='lastName' />
+                <FormInput type='text' value={data.position} onChange={onChange} label='Position' id='position' name='position' />
+                <FormInput type='email' validation={email} value={data.email} onChange={onChange} require={true} errorText="Invalid Email" label='Email'  id='email' name='email' />
+                <FormInput type='password' validation={password} value={data.password} onChange={onChange} require={true} errorText="Password Invalid" label='Password' id='password' name='password' />
+                <FormInput type='password' validation={password} value={data.passwordConfirmation} onChange={onChange} require={true} errorText="Password Invalid" label='Confirm Password' id='passwordConfirmation' name='passwordConfirmation' />
+                <InfoDialog />  
+                
+                <Button type='submit' style={buttonMain} color='primary' >Submit</Button>   
             </div>
           </form>
       )
-    }
+
 }
 
 export default Signup

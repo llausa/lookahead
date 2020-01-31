@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 
 import DateInput from '../DateInput'
 import TextInput from '../TextInput'
-import EmailInput from '../EmailInput'
+import FormInput from '../FormInput'
 import PasswordInput from '../PasswordInput'
 import ButtonInput from '../ButtonInput'
 
@@ -47,7 +47,7 @@ function NewLookaheadView() {
         <DateInput label="Start Date"/>
         <DateInput label="End Date"/>
         
-        <EmailInput/>
+        <FormInput/>
 
         <PasswordInput label="Password"/>
         <PasswordInput label="Confirm Password"/>
