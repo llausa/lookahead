@@ -339,23 +339,24 @@ if (mongoose.connection.name === 'lookahead-test') {
             "password": "Test1245"
           })
           .end((err, res) => {
-            authToken = res.text
+            authToken = res.body.token
             done()
           })
         })
 
-        it('Successfully Update Password', (done) => {
+        it('Successfully updated password', (done) => {
           chai.request(app)
-          .put('/account/password')
+          .put('/api/users/password')
           .type('form')
           .set('Authorization', `Bearer ${authToken}`)
           .send(
             {
-              "oldPW" : validUser.password,
-              "newPW": "Shiny12345"
+              "currentPassword" : validUser.password,
+              "newPassword": "Shiny12345"
             }
           )
           .end((err, res) => {
+              // console.log(res)
               expect(res).to.have.status(200)
               expect(res.body.message).to.equal('Password updated succesfully.')
               done()
@@ -366,7 +367,7 @@ if (mongoose.connection.name === 'lookahead-test') {
         it('Successfully Update Email', (done) => {
 
           chai.request(app)
-          .put('/account/email')
+          .put('/api/users/email')
           .type('form')
           .set('Authorization', `Bearer ${authToken}`)
           .send(
@@ -404,7 +405,7 @@ if (mongoose.connection.name === 'lookahead-test') {
             {
               "firstName": "Alex",
               "lastName": "Yeetimus",
-              "Position": "Main Man"
+              "position": "Main Man"
             }
           )
           .end((err, res) => {

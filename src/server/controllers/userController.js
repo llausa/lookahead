@@ -39,4 +39,20 @@ async function updateDetails(req, res) {
   res.status(200).json({"message": "Account Details Successfully Updated"})
 }
 
-module.exports = { register, updateDetails }
+async function updatePassword(req, res) {
+  const validUser = await UserModel.findById(req.user._id)
+  if (!validUser) return res.status(404).json({"message": "Couldn't find user."})
+
+  const validPassword = await bcrypt.compare(req.body.currentPassword, validUser.password)
+  if (!validPassword) return res.status(401).json({"message":"Invalid Email or Password."})
+
+  const salt = await bcrypt.genSalt(10)
+  validUser.password = await bcrypt.hash(req.body.newPassword, salt)
+
+  validateUser(validUser)
+
+  await validUser.save()
+  res.status(200).json({"message": "Password updated succesfully."})
+}
+
+module.exports = { register, updateDetails, updatePassword }
