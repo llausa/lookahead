@@ -8,8 +8,7 @@ async function register(req, res) {
   if (error) return res.status(400).json({"message": 'Invalid user data.'})
 
   let user = await UserModel.findOne({ email: req.body.email })
-
-  if(user) return res.status(409).send('An account already exists with that email.')
+  if(user) return res.status(409).json({"message": "An account already exists with that email."})
 
   user = new UserModel(_.pick(req.body, ['firstName',
                                     'lastName',
@@ -23,7 +22,7 @@ async function register(req, res) {
 
   const token = user.generateAuthToken()
 
-  res.header('x-auth-token', token).status(201).json({message:`User ${user.email} successfully created.`})
+  res.status(201).json({"message":`User ${user.email} successfully created.`, "token": token})
 }
 
 async function updateDetails(req, res) {
@@ -39,4 +38,38 @@ async function updateDetails(req, res) {
   res.status(200).json({"message": "Account Details Successfully Updated"})
 }
 
-module.exports = { register, updateDetails }
+async function updatePassword(req, res) {
+  const validUser = await UserModel.findById(req.user._id)
+  if (!validUser) return res.status(404).json({"message": "Couldn't find user."})
+
+  const validPassword = await bcrypt.compare(req.body.currentPassword, validUser.password)
+  if (!validPassword) return res.status(401).json({"message":"Invalid Email or Password."})
+
+  const salt = await bcrypt.genSalt(10)
+  validUser.password = await bcrypt.hash(req.body.newPassword, salt)
+
+  validateUser(validUser)
+
+  await validUser.save()
+  res.status(200).json({"message": "Password updated succesfully."})
+}
+
+async function updateEmail(req, res) {
+  const validUser = await UserModel.findById(req.user._id)
+  if (!validUser) return res.status(404).json({"message": "Couldn't find user."})
+
+  const validPassword = await bcrypt.compare(req.body.password, validUser.password)
+  if (!validPassword) return res.status(401).json({"message":"Invalid Email or Password."})
+
+  let user = await UserModel.findOne({ email: req.body.email })
+  if(user) return res.status(409).json({"message": "An account already exists with that email."})
+
+  validUser.email = req.body.email
+
+  validateUser(validUser)
+
+  await validUser.save()
+  res.status(200).json({"message": "Email updated successfully."})
+}
+
+module.exports = { register, updateDetails, updatePassword, updateEmail }
