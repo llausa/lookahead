@@ -32,8 +32,8 @@ router.put("/:projectId/users", auth, projectController.updateUser )
 
 router.put("/:projectId/tasks", auth, taskController.createTask )
 
-router.put("/:projectId/tasks/:taskId", auth, taskController.updateTask )
+router.delete("/:projectId/tasks/:taskId", auth, taskController.removeTask )
 
-router.delete("/:projectId/tasks", auth, taskController.removeTask )
+router.put("/:projectId/tasks/:taskId", auth, taskController.updateTask )
 
 module.exports = router

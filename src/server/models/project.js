@@ -11,7 +11,7 @@ const ProjectSchema = new mongoose.Schema({
     create_date: {type: Date, required: true, default: Date.now() },
     start_date: { type: Date, required: true },
     end_date: { type: Date, required: true },
-    //Store Timezone as number +/- GMT?
+    location: { type: String, required: true },
     timezone: { type: Number, required: true, min: -12, max: 14 },
     owner: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true},
     tasks: [TaskSchema],
@@ -34,6 +34,7 @@ function validateProject (project) {
       create_date: Joi.date().iso().required(),
       start_date: Joi.date().iso().greater(Joi.ref('create_date')).required(),
       end_date: Joi.date().iso().greater(Joi.ref('start_date')).required(),
+      location: Joi.string().required(),
       timezone: Joi.number().min(-12).max(14).required(),
       owner: Joi.objectId().required()
   })
