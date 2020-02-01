@@ -164,7 +164,6 @@ if (mongoose.connection.name === 'lookahead-test') {
 							"title": "Real Project"}
 					)
 					.end(async (err, res) => {
-						// console.log(projectId)
 						await ProjectModel.findById((projectId),
 							function (err, project) {
 								expect(res).to.have.status(200)
@@ -368,6 +367,8 @@ if (mongoose.connection.name === 'lookahead-test') {
 								}
 							)
 							.end((errors, res) => {
+								console.log(userId)
+
 								done()
 							})
 						})
@@ -382,7 +383,6 @@ if (mongoose.connection.name === 'lookahead-test') {
 
 								await ProjectModel.find({ title: "Test Project"},
 										async function (err, project) {
-
 											expect(project[0].users[0]).to.not.exist
 
 											await UserModel.findById((userId),
@@ -394,8 +394,6 @@ if (mongoose.connection.name === 'lookahead-test') {
 
 										}
 									)
-
-
 							})
 
 						})
