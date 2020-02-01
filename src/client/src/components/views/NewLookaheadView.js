@@ -9,7 +9,7 @@ import PasswordInput from '../PasswordInput'
 import ButtonInput from '../ButtonInput'
 
 
-function NewLookaheadView() {
+const NewLookaheadView = () => {
 
     const mystyle = {
         display: "flex",
@@ -40,19 +40,16 @@ function NewLookaheadView() {
     return (
         <div data-cy="newProjectView" style={mystyle}>
             <h1 style={{margin: "40px 0 10px 0", fontSize: "40px"}}>New Lookahead</h1>
-        {/* <p style={{margin: "0 0 20px 0", fontSize:"12px"}}>Please fill out all fields.</p> */}
-        <TextInput label="Title" required={true} />
-        <TextInput label="Description" multiline={true} />
-
-        <DateInput label="Start Date"/>
-        <DateInput label="End Date"/>
         
-        <FormInput/>
+            <TextInput label="Title" required={true} />
+            <TextInput label="Description" multiline={true} />
 
-        <PasswordInput label="Password"/>
-        <PasswordInput label="Confirm Password"/>
+            <DateInput label="Start Date"/>
+            <DateInput label="End Date"/>
+            
+            <FormInput/>
 
-        <ButtonInput main={true} text="Save">Save</ButtonInput>
+            <ButtonInput main={true} text="Save">Save</ButtonInput>
 
         </div>
     )
