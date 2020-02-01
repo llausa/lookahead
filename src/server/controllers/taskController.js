@@ -61,6 +61,8 @@ async function removeTask (req, res) {
   if (error) return res.status(400).end(error.details[0].message)
 
   await validProject.save()
+
+  
   res.status(200).json({"message": "Task successfully deleted."})
 
 }
