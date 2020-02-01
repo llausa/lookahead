@@ -1,3 +1,10 @@
+const { TaskSchema, validateTask } = require("../models/task")
+const { ProjectModel } = require("../models/project")
+const _ = require("lodash")
+
+
+
+
 async function createTask (req, res) {
 
   let task = req.body
@@ -12,20 +19,12 @@ async function createTask (req, res) {
     return res.status(400).send('That project does not exist.')
   }
 
-  let project = new ProjectModel(_.pick(req.body, ['title', 'create_date', 'start_date', 'end_date', 'timezone', 'owner']))
-  await project.save()
-
-  await addProjectToUser(validUser._id, project._id, 'Owner')
-
-  res.status(201).json({message:'Project successfully created.'})
+  validProject.tasks.push(task)
+  await validProject.save()
+ 
+  res.status(201).json({message:'Task successfully created.'})
 
 }
-
-a = {"title": "Build House",
-	"start_time": 2,
-	"length": 4,
-	"day": 1,
-	"description": "Big Yeet"}
 
 async function updateTask (req, res) {
   res.send('yeet')

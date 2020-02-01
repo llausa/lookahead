@@ -211,7 +211,6 @@ if (mongoose.connection.name === 'lookahead-test') {
 				
 					it('Creates a Task Successfully', (done) => {
 					
-						console.log(projectId)
 						chai.request(app)
 						.put(`/api/projects/${projectId}/tasks`)
 						.type('form')
