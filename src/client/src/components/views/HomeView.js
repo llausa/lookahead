@@ -5,8 +5,9 @@ import LockIcon from '@material-ui/icons/Lock'
 import Logo from '../../images/LookaheadLogoBlue.svg'
 import Background from '../../images/BackgroundSmall.jpg'
 import CardContainer from '../CardContainer'
+import Menu from '../Menu'
 
-function HomeView() {
+const HomeView = () => {
 
     const buttonMain = {
         color: "#006EE2",
@@ -50,15 +51,16 @@ function HomeView() {
     }
 
     return (
-        
-           
+        <>
+           <Menu/>
         <CardContainer background={Background}>
+        
                     <img src={Logo} alt="Logo" style={logoStyle}  aria-label="logo"/>
                     <Button component={Link} to="/login" onClick={LoginPressed} variant="outlined" style={buttonMain} color="primary">Login</Button>
                     <Button component={Link} to="/signup" onClick={SignupPressed} variant="outlined" style={{margin: "0 20px"}}>Signup</Button>
                     <Button component={Link} to="/account/password" onClick={ResetPressed} variant="outlined" style={buttonResetP}>Reset Password <LockIcon style={smallIcon} /> </Button>
         </CardContainer>
-            
+            </>
        
     )
 }
