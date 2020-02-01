@@ -7,7 +7,7 @@ async function allProjects (req, res) {
   let validUser = await UserModel.findById(req.user._id)
   if (!validUser) return res.status(400).json({"message": 'Critical Error: User does not exist in the database'})
 
-
+  res.status(200).json({"projects": (validUser.projects)})
 }
 
 async function create (req, res) {
@@ -28,7 +28,7 @@ async function create (req, res) {
 
   await addProjectToUser(validUser._id, project._id, 'Owner')
 
-  res.status(201).json({message:'Project successfully created.'})
+  res.status(201).json({"id": project._id, "message":'Project successfully created.'})
 
 }
 
@@ -47,10 +47,16 @@ async function updateUser (req, res) {
 
 
 async function addUser (req, res) {
-  res.send('yeet')
+  req.body.owner = req.user._id
 
-  // await addProjectToUser(validUser._id, project._id, role)
+  console.log(req.user._id)
+  console.log(req.params.projectId)
+  console.log(req.body.role)
+  let updatedProject = await addProjectToUser(req.user._id, req.params.projectId, req.body.role)
+  console.log(updatedProject)
+  if (!updatedProject) return res.status(404).json({"message": "User could not be added to project."})
 
+  res.status(201).json(updatedProject)
 }
 
 async function removeUser (req, res) {
@@ -70,7 +76,7 @@ async function addProjectToUser (id, project, role) {
     await user.save()
 
   })
-
+  return 'User Successfully Added to Project'
 }
 
-module.exports = { create, update, remove, updateUser, removeUser, addUser }
+module.exports = { create, update, remove, updateUser, removeUser, addUser, allProjects }
