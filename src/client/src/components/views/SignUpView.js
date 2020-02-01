@@ -16,16 +16,11 @@ const Signup = () => {
         {...state, ...newState}
     ), {
         firstName: '',
-        firstNameValid: false,
         lastName: '',
-        lastNameValid: false,
         position: '',
         email: '',
-        emailValid: false,
         password: '',
-        passwordValid: false,
         passwordConfirmation: '',
-        passwordConfirmationValid: false
     })
   
     const onSubmit = e => {
@@ -45,8 +40,7 @@ const Signup = () => {
     }
 
         const onChange = e => setData({[e.target.name]: e.target.value})
-        // const isValid = e => setData({[e.target.name + "Valid"]: e.target.isValid})
-
+    
         const mystyle = {
             display: 'flex',
             flexDirection: 'column',
@@ -59,12 +53,6 @@ const Signup = () => {
             margin: 'auto',
         }
 
-        let firstNameValid = false
-        let lastNameValid = false
-        let emailValid = false
-        let passwordValid = false
-        let passwordConfirmationValid = false
-    
 
         // Client Validation
         const basic = (text) => text.length > 2
@@ -74,18 +62,8 @@ const Signup = () => {
 
         // Checks all forms that are required are filled with no erros
         // Then allows Submit button to work
-
-
-        let ButtonText = ""
-        let ButtonDisabled = true
-
-        if ( true ) { 
-            ButtonText = "Submit" 
-            ButtonDisabled = false 
-        } else { 
-            ButtonText = "Please Complete Form"
-            ButtonDisabled = true 
-        }
+        let ButtonText = "Submit" 
+        let ButtonDisabled = false
 
       return (
   

@@ -30,8 +30,7 @@ const FormInput = (props) => {
 
   const validate = e => {
     props.onChange(e)
-    props.showMenu && setValid(props.validation(e.target.value))
-    // props.isValid(e)
+    props.validation && setValid(props.validation(e.target.value))
   }
 
   return(
