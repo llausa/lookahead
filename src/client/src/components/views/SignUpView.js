@@ -9,7 +9,6 @@ import Nav from '../Nav'
 import TitleText from '../TitleText'
 import NormalText from '../NormalText'
 
-
 const Signup = () => {
     
     const [data, setData] = useReducer((state, newState) => (
@@ -60,8 +59,7 @@ const Signup = () => {
         const password = (text) => text.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,1000}$/)
         const passwordFinal = (text) => text === data.password
 
-        // Checks all forms that are required are filled with no erros
-        // Then allows Submit button to work
+        
         let ButtonText = "Submit" 
         let ButtonDisabled = false
 

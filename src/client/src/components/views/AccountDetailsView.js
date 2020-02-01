@@ -1,8 +1,41 @@
-import React from "react";
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import React, {useReducer} from "react"
+import CardContainer from '../CardContainer'
+import Nav from '../Nav'
+import Background from '../../images/WhiteBackgroundSmall.jpg'
+import axios from 'axios'
+import ButtonInput from '../ButtonInput'
+import FormInput from '../FormInput'
+import TitleText from '../TitleText'
+import NormalText from '../NormalText'
 
-function AccountDetailsView() {
+
+const AccountDetailsView = () => {
+
+  const [data, setData] = useReducer((state, newState) => (
+    {...state, ...newState}
+  ), {
+    firstName: '',
+    lastName: '',
+    position: '',
+  })
+
+  const onSubmit = e => {
+    e.preventDefault()
+
+    console.log(data)
+
+    axios.post(
+    'https://vast-oasis-18718.herokuapp.com/api/users', data)
+    .then(function (response) {
+        console.log(response)
+    })
+    .catch(function (error) {
+        console.log(error.response.data)
+    })
+    
+  }
+
+  const onChange = e => setData({[e.target.name]: e.target.value})
 
     const mystyle = {
         display: "flex",
@@ -10,59 +43,35 @@ function AccountDetailsView() {
         alignitems: "center",
         justifyContent: "center",
         textAlign: "center",
-        color: "#2baafe",
+        color: "#006EE2",
         padding: "10px",
         maxWidth: "400px",
         margin: "auto",
     }
 
-    const buttonMain = {
-        color: "#2baafe",
-        margin: "20px",
-        border: "1px solid rgb(43, 170, 254)"
-    }
+    // Client Validation
+    const basic = (text) => text.length > 2
 
-    const inputStyle = {
-        margin: "4px",
-    }
-
-    function SavePressed() {
-        console.log("Save Pressed")
-    }
+    let ButtonText = "Save" 
+    let ButtonDisabled = false
 
     return (
+      <>
+      <Nav backButtonLink = "/" BackButton={true} MenuButton={true} />
+      <CardContainer background={Background}>
+      <form onSubmit={onSubmit} className='form'>
         <div data-cy="detailsView" style={mystyle}>
-        <h1>Edit Account</h1>
-        <p style={{margin: "0 0 20px 0", fontSize:"12px"}}>Please fill out all fields.</p>
-        <TextField
-          style={inputStyle}
-          required
-          id="outlined-required"
-          label="First Name"
-          defaultValue=""
-          variant="outlined"
-          size="small"
-        />
-        <TextField
-          style={inputStyle}
-          required
-          id="outlined-required"
-          label="Last Name"
-          defaultValue=""
-          variant="outlined"
-          size="small"
-        />
-        <TextField
-          style={inputStyle}
-          id="outlined"
-          label="Position"
-          defaultValue=""
-          variant="outlined"
-          size="small"
-        />
-        <Button onClick={SavePressed} variant="outlined" style={buttonMain} color="primary">Save</Button>
+        <TitleText text="Account Details" />
+        <NormalText text="Please fill out all required fields" />
+        <FormInput type='text' validation={basic} value={data.firstName} onChange={onChange} require={true} errorText="Please enter more Characters" label='First Name' id='firstName' name='firstName'/>
+        <FormInput type='text' validation={basic} value={data.lastName} onChange={onChange} require={true} errorText="Please enter more Characters" label='Last Name' id='lastName' name='lastName' />
+        <FormInput type='text' value={data.position} onChange={onChange} label='Position' id='position' name='position' />
+        <ButtonInput disabled={ButtonDisabled} type='submit' primary={true} color='primary' text={ButtonText} />
         </div>
+        </form>
+        </CardContainer>
+        </>
     )  
 }
 
-export default AccountDetailsView;
+export default AccountDetailsView
