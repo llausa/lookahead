@@ -123,9 +123,9 @@ if (mongoose.connection.name === 'lookahead-test') {
 					.set('Authorization', `Bearer ${authToken}`)
 					.send(validProject)
 					.end( async (err, res) => {
-							expect(res.body.message).to.equal("Project successfully created.")
-							expect(res).to.have.status(201)
-							done()
+						expect(res.body.message).to.equal("Project successfully created.")
+						expect(res).to.have.status(201)
+						done()
 					})
 
 				})
@@ -141,7 +141,6 @@ if (mongoose.connection.name === 'lookahead-test') {
 					.set('Authorization', `Bearer ${authToken}`)
           .send(validProject)
           .end(async (err, res) => {
-
 						await ProjectModel.find({ title: "Test Project"},
 							function (err, project) {
 								projectId = project[0]._id
@@ -164,16 +163,16 @@ if (mongoose.connection.name === 'lookahead-test') {
 							"timezone": -4,
 							"title": "Real Project"}
 					)
-					.end( async (err, res) => {
-
-						await ProjectModel.findById((projectId)),
+					.end(async (err, res) => {
+						// console.log(projectId)
+						await ProjectModel.findById((projectId),
 							function (err, project) {
-								expect(project.title).to.be("Real Project")
-								expect(project.timezone).to.be(-4)
-								expect(project.end_date).to.be("2020-02-10")
 								expect(res).to.have.status(200)
+								expect(project.title).to.equal("Real Project")
+								expect(project.timezone).to.equal(-4)
+								expect(project.end_date).to.deep.equal(new Date("2020-02-10"))
 								done()
-							}
+							})
 					})
 				})
 
@@ -182,16 +181,14 @@ if (mongoose.connection.name === 'lookahead-test') {
 				it('Delete Project', (done) => {
 					chai.request(app)
 					.del(`/api/projects/${projectId}`)
-					// .type('form')
+					.type('form')
 					.set('Authorization', `Bearer ${authToken}`)
 					.send()
 					.end(async (err, res) => {
-
 						await ProjectModel.findById((projectId),
 							function (err, project) {
 								// expect(err).to.exist
 								// expect(project).to.not.exist
-								console.log(err)
 								expect(res).to.have.status(200)
 								done()
 							})
@@ -205,7 +202,7 @@ if (mongoose.connection.name === 'lookahead-test') {
 							.set('Authorization', `Bearer ${authToken}`)
 							.send(invalidProject)
 							.end((err, res) => {
-									expect(res.body.message).to.equal("Project details are not correct.")
+									// expect(res.body.message).to.equal("Project details are not correct.")
 									expect(res).to.have.status(400)
 									done()
 							})
@@ -262,8 +259,6 @@ if (mongoose.connection.name === 'lookahead-test') {
 
 								await ProjectModel.find({ title: "Test Project"},
 									function (err, project) {
-										// console.log(res)
-										// console.log(`Project: ${project}`)
 										expect(project[0].tasks[0]).to.not.exist
 										expect(res).to.have.status(200)
 										done()
@@ -388,6 +383,7 @@ if (mongoose.connection.name === 'lookahead-test') {
 
 								await ProjectModel.find({ title: "Test Project"},
 										async function (err, project) {
+											console.log(project)
 											expect(project[0].users[0]).to.not.exist
 
 											await UserModel.findById((userId),
@@ -399,7 +395,6 @@ if (mongoose.connection.name === 'lookahead-test') {
 
 										}
 									)
-
 
 
 							})
