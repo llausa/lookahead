@@ -55,6 +55,7 @@ let validTask = {
 let authToken
 let userId
 let secondToken
+let projectId
 
 if (mongoose.connection.name === 'lookahead-test') {
 
@@ -129,7 +130,7 @@ if (mongoose.connection.name === 'lookahead-test') {
 
 			describe('Edit Project', () => {
 
-				let projectId
+				
 
 				beforeEach( (done) => {
 					chai.request(app)
@@ -141,10 +142,11 @@ if (mongoose.connection.name === 'lookahead-test') {
 
 						await ProjectModel.find({ title: "Test Project"},
 							function (err, project) {
-								projectId = project._id
+								projectId = project[0]._id
+								done()
 							}
 						)
-						done()
+						
 					})
 				})
 
@@ -209,6 +211,7 @@ if (mongoose.connection.name === 'lookahead-test') {
 				
 					it('Creates a Task Successfully', (done) => {
 					
+						console.log(projectId)
 						chai.request(app)
 						.put(`/api/projects/${projectId}/tasks`)
 						.type('form')
@@ -218,7 +221,7 @@ if (mongoose.connection.name === 'lookahead-test') {
 
 							await ProjectModel.find({ title: "Test Project"},
 								function (err, project) {
-									expect(project.tasks[0]._id).to.exist
+									expect(project[0].tasks[0]._id).to.exist
 									expect(res).to.have.status(201)
 									done()
 								}
@@ -242,7 +245,7 @@ if (mongoose.connection.name === 'lookahead-test') {
 
 								await ProjectModel.find({ title: "Test Project"},
 									function (err, project) {
-										taskId = project.tasks[0]._id
+										taskId = project[0].tasks[0]._id
 										done()
 									})
 							})
@@ -259,7 +262,7 @@ if (mongoose.connection.name === 'lookahead-test') {
 
 								await ProjectModel.find({ title: "Test Project"},
 									function (err, project) {
-										expect(project.tasks[0]).to.not.exist
+										expect(project[0].tasks[0]).to.not.exist
 										expect(res).to.have.status(200)
 										done()
 									}
@@ -285,11 +288,11 @@ if (mongoose.connection.name === 'lookahead-test') {
 
 								await ProjectModel.find({ title: "Test Project"},
 									function (err, project) {
-										expect(project.tasks[0]).to.have.property('title', 'Build Apartment')
-										expect(project.tasks[0]).to.have.property('start_time', 3)
-										expect(project.tasks[0]).to.have.property('length', 3)
-										expect(project.tasks[0]).to.have.property('day', 3)
-										expect(project.tasks[0]).to.have.property('description', 'Bigger Yeetimus')
+										expect(project[0].tasks[0]).to.have.property('title', 'Build Apartment')
+										expect(project[0].tasks[0]).to.have.property('start_time', 3)
+										expect(project[0].tasks[0]).to.have.property('length', 3)
+										expect(project[0].tasks[0]).to.have.property('day', 3)
+										expect(project[0].tasks[0]).to.have.property('description', 'Bigger Yeetimus')
 										expect(res).to.have.status(200)
 										done()
 									}
@@ -338,14 +341,14 @@ if (mongoose.connection.name === 'lookahead-test') {
 
 							await ProjectModel.find({ title: "Test Project"},
 								function (error, project) {
-									expect(project.users[1]).to.exist.and.to.have.nested.property('role', 'read')
+									expect(project[0].users[0]).to.exist.and.to.have.nested.property('role', 'read')
 									expect(res).to.have.status(200)
 								}
 							)
 
 							await UserModel.findById((userId),
 							function (err, user) {
-								expect(user.projects[0]).to.exist.and.to.have.nested.property('role', 'read')
+								expect(user[0].projects[0]).to.exist.and.to.have.nested.property('role', 'read')
 								done()
 							})
 
@@ -379,12 +382,12 @@ if (mongoose.connection.name === 'lookahead-test') {
 							.end( async (errors, res) => {
 
 								await ProjectModel.find({ title: "Test Project"},
-										function (err, project) {
-											expect(project.users[0]).to.not.exist
+										async function (err, project) {
+											expect(project[0].users[0]).to.not.exist
 
 											await UserModel.findById((userId),
 												function (err, user) {
-													expect(user.projects[0]).to.not.exist
+													expect(user[0].projects[0]).to.not.exist
 													expect(res).to.have.status(200)
 													done()
 											})
@@ -413,13 +416,13 @@ if (mongoose.connection.name === 'lookahead-test') {
 
 								await ProjectModel.find({ title: "Test Project"},
 										function (err, project) {
-											expect(project.users[0]).to.not.exist
+											expect(project[0].users[0]).to.not.exist
 										}
 									)
 
 								await UserModel.findById((userId),
 									function (err, user) {
-										expect(user.projects[0].role).to.exist
+										expect(user[0].projects[0].role).to.exist
 										expect(res).to.have.status(200)
 										done()
 								})
@@ -468,7 +471,7 @@ if (mongoose.connection.name === 'lookahead-test') {
 
 								await ProjectModel.find({ title: "Test Project"},
 									function (error, project) {
-										projectId = project._id
+										projectId = project[0]._id
 
 										chai.request(app)
 										.put(`/api/projects/${projectId}/users`)
