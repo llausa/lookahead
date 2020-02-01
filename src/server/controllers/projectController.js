@@ -109,7 +109,7 @@ async function removeUser (req, res) {
   let validProject = await ProjectModel.findById((req.params.projectId))
   if (!validProject) return res.status(404).json({"message": "Couldn't find project."})
 
-  console.log('yeet')
+  console.log(validProject.users)
 }
 
 async function addProjectToUser (id, project, role) {

@@ -358,7 +358,7 @@ if (mongoose.connection.name === 'lookahead-test') {
 
 						beforeEach(() => {
 							chai.request(app)
-							.post(`/api/projects/${projectId}/users`)
+							.post(`api/projects/${projectId}/users`)
 							.set('Authorization', `Bearer ${authToken}`)
 							.send(
 								{
