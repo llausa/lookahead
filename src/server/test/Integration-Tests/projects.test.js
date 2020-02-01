@@ -123,13 +123,6 @@ if (mongoose.connection.name === 'lookahead-test') {
 					.end( async (err, res) => {
 							expect(res.body.message).to.equal("Project successfully created.")
 							expect(res).to.have.status(201)
-
-							testID = JWT.decode(authToken)._id
-
-							await UserModel.findById((testID), function (err, user) {
-								console.log(user)
-							})
-
 							done()
 					})
 
@@ -349,21 +342,21 @@ if (mongoose.connection.name === 'lookahead-test') {
 								function (error, project) {
 									console.log(project[0].users[0])
 									expect(project[0].users[0]).to.exist.and.to.have.nested.property('role', 'Read')
+									expect(project[0].users[1]).to.not.exist
 									expect(res).to.have.status(200)
-								}
-							).then( async () => {
+
+								})
+
+							.then( async () => {
 								await UserModel.findById((userId),
 								function (err, user) {
 									console.log(user)
 									console.log(user.projects)
 									expect(user.projects[0]).to.exist.and.to.have.nested.property('role', 'Read')
+									expect(user.projects[1]).to.not.exist
 									done()
 								})
 							})
-
-
-
-
 						})
 					})
 

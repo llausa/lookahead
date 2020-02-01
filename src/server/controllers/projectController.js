@@ -51,12 +51,12 @@ async function addUser (req, res) {
 
   // console.log(req.params.projectId)
   let role = req.body.role
-  let id = req.user._id
+  let id = req.body.user
 
   await ProjectModel.findById((req.params.projectId),
   async function (err, project) {
     project.users.push({
-      role, id
+      role, user : id
     })
     await project.save()
   })
