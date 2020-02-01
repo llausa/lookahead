@@ -340,7 +340,6 @@ if (mongoose.connection.name === 'lookahead-test') {
 
 							await ProjectModel.find({ title: "Test Project"},
 								function (error, project) {
-									console.log(project[0].users[0])
 									expect(project[0].users[0]).to.exist.and.to.have.nested.property('role', 'Read')
 									expect(project[0].users[1]).to.not.exist
 									expect(res).to.have.status(200)
@@ -350,8 +349,6 @@ if (mongoose.connection.name === 'lookahead-test') {
 							.then( async () => {
 								await UserModel.findById((userId),
 								function (err, user) {
-									console.log(user)
-									console.log(user.projects)
 									expect(user.projects[0]).to.exist.and.to.have.nested.property('role', 'Read')
 									expect(user.projects[1]).to.not.exist
 									done()
