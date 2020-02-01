@@ -184,7 +184,6 @@ if (mongoose.connection.name === 'lookahead-test') {
 					.set('Authorization', `Bearer ${authToken}`)
 					.send()
 					.end(async (err, res) => {
-
 						await ProjectModel.findById((projectId)),
 							function (err, project) {
 								// expect(err).to.exist

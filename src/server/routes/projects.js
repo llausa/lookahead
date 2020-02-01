@@ -19,23 +19,9 @@ const projects = [
 
 // Projects list route
 router.get("/", auth, projectController.allProjects)
-// (req, res) => {
-//   res.send(projects);
-// });
 
 // Project view route
-router.get("/:id", auth, (req, res) => {
-  const project = projects.find(c => c.id === parseInt(req.params.id))
-  if (!project) return res.status(404).send('The project with that ID was not found')
-
-
-  if (result.error) {
-    // 400 Bad Request
-    res.status(400).send(result.error.details[0].message)
-    return
-  }
-  res.send(project)
-})
+router.get("/:projectId", auth, projectController.getProject)
 
 // Projects POST route
 router.post("/", auth, projectController.create )

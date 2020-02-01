@@ -2,6 +2,7 @@ const { ProjectModel, validateProject } = require('../models/project')
 const { UserModel, addProject } = require('../models/user')
 const _  = require('lodash')
 
+// GET Projects
 async function allProjects (req, res) {
   req.body.owner = req.user._id
   let validUser = await UserModel.findById(req.user._id)
@@ -10,6 +11,7 @@ async function allProjects (req, res) {
   res.status(200).json({"projects": (validUser.projects)})
 }
 
+// POST Project
 async function create (req, res) {
   req.body.owner = req.user._id
   const { error } = validateProject(req.body)
@@ -32,10 +34,25 @@ async function create (req, res) {
 
 }
 
+// GET project
+async function getProject (req, res) {
+  req.body.owner = req.user._id
+
+  let validUser = await UserModel.findById(req.user._id)
+  if (!validUser) return res.status(400).json({"message": 'Critical Error: User does not exist in the database'})
+
+  let project = await ProjectModel.findById((req.params.projectId))
+  if (!project) return res.status(404).json({"message": "Project with this ID was not found."})
+
+  res.status(200).send(project)
+}
+
+// UPDATE project
 async function update (req, res) {
 
 }
 
+// DELETE project
 async function remove (req, res) {
 
 }
@@ -43,8 +60,6 @@ async function remove (req, res) {
 async function updateUser (req, res) {
 
 }
-
-
 
 async function addUser (req, res) {
   req.body.owner = req.user._id
@@ -61,7 +76,6 @@ async function addUser (req, res) {
     await project.save()
   })
 
-
   await addProjectToUser(id, req.params.projectId, role)
   // if (!updatedUser) return res.status(404).json({"message": "Project could not be added to user."})
 
@@ -71,7 +85,6 @@ async function addUser (req, res) {
 async function removeUser (req, res) {
   res.send('yeet')
 }
-
 
 async function addProjectToUser (id, project, role) {
 
@@ -90,4 +103,4 @@ async function addProjectToUser (id, project, role) {
   // return 'Project successfully added to User'
 }
 
-module.exports = { create, update, remove, updateUser, removeUser, addUser, allProjects }
+module.exports = { create, update, remove, updateUser, removeUser, addUser, allProjects, getProject }
