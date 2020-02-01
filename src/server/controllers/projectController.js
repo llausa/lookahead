@@ -98,7 +98,11 @@ async function addUser (req, res) {
       role, user : id
     })
     await project.save()
+
+    console.log(project.users)
   })
+
+  
 
   await addProjectToUser(id, req.params.projectId, role)
 
@@ -108,23 +112,35 @@ async function addUser (req, res) {
 // /:projectId/users/:userId
 async function removeUser (req, res) {
 
-
-
-  let validProject = await ProjectModel.findById({"user": req.params.projectId})
+  let validProject = await ProjectModel.findById(req.params.projectId)
   if (!validProject) {
     return res.status(400).send('That project does not exist.')
   }
 
-  console.log(validProject.users)
+  let oldmate = validProject.users.find(element => element.user == req.params.userId)
 
-  const {error} = await validProject.users.pull(req.params.userId)
+  const {error} = validProject.users.pull(oldmate._id)
   if (error) return res.status(400).end(error.details[0].message)
 
-  console.log(validProject.users)
-
   await validProject.save()
+
+  await removeProjectFromUser(oldmate.user, req.params.projectId)
+
+
   res.status(200).json({"message": "User removed successfully."})
 
+}
+
+
+async function removeProjectFromUser (userId, projectId) {
+
+  let user = await UserModel.findById(userId)
+
+  let oldmate = user.projects.find(element => element.project == projectId)
+
+  user.projects.pull(oldmate._id)
+
+  await user.save()
 }
 
 async function addProjectToUser (id, project, role) {

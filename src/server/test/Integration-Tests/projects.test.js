@@ -352,15 +352,15 @@ if (mongoose.connection.name === "lookahead-test") {
           })
 
           describe("User Edits", () => {
-            beforeEach(() => {
-              chai
-                .request(app)
-                .post(`/api/projects/${projectId}/users`)
-                .set("Authorization", `Bearer ${authToken}`)
-                .send({
-                  role: "read",
-                  user: userId
-                })
+            beforeEach( (done) => {
+								chai
+								.request(app)
+								.post(`/api/projects/${projectId}/users`)
+								.set("Authorization", `Bearer ${authToken}`)
+								.send({
+									role: "Read",
+									user: userId
+								})
                 .end((errors, res) => {
                   done()
                 })
@@ -376,12 +376,12 @@ if (mongoose.connection.name === "lookahead-test") {
                   await ProjectModel.find(
                     { title: "Test Project" },
                     async function(err, project) {
-											console.log(project[0].users)
+
                       expect(project[0].users[0]).to.not.exist
 
                       await UserModel.findById(userId, function(err, user) {
-                        // expect(user.projects[0]).to.not.exist
-                        // expect(res).to.have.status(200)
+                        expect(user.projects[0]).to.not.exist
+                        expect(res).to.have.status(200)
                         done()
                       })
                     }
@@ -420,7 +420,7 @@ if (mongoose.connection.name === "lookahead-test") {
 
     describe("Unsuccessful Operations", () => {
       describe("Incorrect Data", () => {
-        beforeEach( done => {
+        beforeEach( (done) => {
           chai
             .request(app)
             .post("/api/users")
@@ -494,9 +494,9 @@ if (mongoose.connection.name === "lookahead-test") {
             done()
           })
 
-          it("Cannot Bring End Date Forward", done => {
-            expect(true).to.equal(false)
-            done()
+					it("Cannot Bring End Date Forward", done => {
+						expect(true).to.equal(false)
+						done()
 					})
 					
 					it("Overlapping Task should fail", done => {
