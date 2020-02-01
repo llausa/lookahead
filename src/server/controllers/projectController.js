@@ -2,6 +2,7 @@ const { ProjectModel, validateProject } = require('../models/project')
 const { UserModel, addProject } = require('../models/user')
 const _  = require('lodash')
 
+// GET Projects
 async function allProjects (req, res) {
   req.body.owner = req.user._id
   let validUser = await UserModel.findById(req.user._id)
@@ -10,6 +11,7 @@ async function allProjects (req, res) {
   res.status(200).json({"projects": (validUser.projects)})
 }
 
+// POST Project
 async function create (req, res) {
   req.body.owner = req.user._id
   const { error } = validateProject(req.body)
@@ -32,19 +34,55 @@ async function create (req, res) {
 
 }
 
+// GET Project
+async function getProject (req, res) {
+  req.body.owner = req.user._id
+
+  let validUser = await UserModel.findById(req.user._id)
+  if (!validUser) return res.status(400).json({"message": 'Critical Error: User does not exist in the database'})
+
+  let project = await ProjectModel.findById((req.params.projectId))
+  if (!project) return res.status(404).json({"message": "Project with this ID was not found."})
+
+  res.status(200).send(project)
+}
+
+// UPDATE Project
 async function update (req, res) {
+  let validProject = await ProjectModel.findById((req.params.projectId))
+  if (!validProject) return res.status(404).json({"message": "Couldn't find project."})
 
+  validProject.title = req.body.title
+  validProject.timezone = req.body.timezone
+  validProject.end_date = req.body.end_date
+  let { err } = validateProject(validProject)
+  if (err) return res.status(400).json({"message": "Project details are not correct."})
+
+  await validProject.save()
+  res.status(200).json({"message": "Project details successfully updated"})
 }
 
+// DELETE project
 async function remove (req, res) {
+  let validProject = await ProjectModel.findById((req.params.projectId))
+  if (!validProject) return res.status(404).json({"message": "Couldn't find project."})
 
+  ProjectModel.findByIdAndRemove(req.params.projectId, (err, project) => {
+    if (err) return res.status(400).send(err);
+    const response = {
+        message: "Project successfully deleted",
+        id: project._id
+    }
+  return res.status(200).json({"message": "Project successfully deleted", "id": project })
+  })
 }
+
+
+
 
 async function updateUser (req, res) {
 
 }
-
-
 
 async function addUser (req, res) {
   req.body.owner = req.user._id
@@ -61,21 +99,20 @@ async function addUser (req, res) {
     await project.save()
   })
 
-
   await addProjectToUser(id, req.params.projectId, role)
-  // if (!updatedUser) return res.status(404).json({"message": "Project could not be added to user."})
 
   res.status(200).json("User added to Project Successfully.")
 }
 
+// /:projectId/users/:userId
 async function removeUser (req, res) {
-  res.send('yeet')
+  let validProject = await ProjectModel.findById((req.params.projectId))
+  if (!validProject) return res.status(404).json({"message": "Couldn't find project."})
+
+  console.log('yeet')
 }
 
-
 async function addProjectToUser (id, project, role) {
-
-  console.log(`${id}, ${project}, ${role}`)
 
   await UserModel.findById(id)
   .then(async (user) =>  {
@@ -90,4 +127,4 @@ async function addProjectToUser (id, project, role) {
   // return 'Project successfully added to User'
 }
 
-module.exports = { create, update, remove, updateUser, removeUser, addUser, allProjects }
+module.exports = { create, update, remove, updateUser, removeUser, addUser, allProjects, getProject }
