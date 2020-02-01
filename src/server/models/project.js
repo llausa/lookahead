@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const TaskSchema = require('./task')
+const { TaskSchema } = require('./task')
 const { UserModel } = require('./user')
 const Joi = require('@hapi/joi')
       .extend(require('@hapi/joi-date'))
@@ -28,7 +28,7 @@ const ProjectSchema = new mongoose.Schema({
 
 const ProjectModel = new mongoose.model('Project', ProjectSchema)
 
-function validateProject(project) {
+function validateProject (project) {
   const schema = Joi.object({
       title: Joi.string().required(),
       create_date: Joi.date().iso().required(),
