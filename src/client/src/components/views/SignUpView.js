@@ -47,7 +47,7 @@ const Signup = () => {
             alignitems: 'center',
             justifyContent: 'center',
             textAlign: 'center',
-            color: '#2baafe',
+            color: '#006EE2',
             padding: '10px',
             maxWidth: '400px',
             margin: 'auto',
