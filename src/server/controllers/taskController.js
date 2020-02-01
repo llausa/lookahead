@@ -2,9 +2,6 @@ const { TaskSchema, validateTask } = require("../models/task")
 const { ProjectModel } = require("../models/project")
 const _ = require("lodash")
 
-
-
-
 async function createTask (req, res) {
 
   let task = req.body
@@ -21,7 +18,7 @@ async function createTask (req, res) {
 
   validProject.tasks.push(task)
   await validProject.save()
- 
+
   res.status(201).json({message:'Task successfully created.'})
 
 }

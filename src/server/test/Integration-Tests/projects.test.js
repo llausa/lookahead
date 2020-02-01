@@ -95,7 +95,7 @@ if (mongoose.connection.name === 'lookahead-test') {
 			.type('form')
 			.send(validUser)
 			.end((oof, yeet) => {
-				
+
 				chai.request(app)
 				.post('/api/auth')
 				.type('form')
@@ -114,23 +114,30 @@ if (mongoose.connection.name === 'lookahead-test') {
 		describe('Successful Operations', () => {
 
 			it('Creates a Project Successfully', (done) => {
-			
+
 				chai.request(app)
 					.post('/api/projects')
 					.type('form')
 					.set('Authorization', `Bearer ${authToken}`)
 					.send(validProject)
-					.end((err, res) => {
+					.end( async (err, res) => {
 							expect(res.body.message).to.equal("Project successfully created.")
 							expect(res).to.have.status(201)
+
+							testID = JWT.decode(authToken)._id
+
+							await UserModel.findById((testID), function (err, user) {
+								console.log(user)
+							})
+
 							done()
 					})
-	
+
 				})
 
 			describe('Edit Project', () => {
 
-				
+
 
 				beforeEach( (done) => {
 					chai.request(app)
@@ -146,7 +153,7 @@ if (mongoose.connection.name === 'lookahead-test') {
 								done()
 							}
 						)
-						
+
 					})
 				})
 
@@ -174,7 +181,7 @@ if (mongoose.connection.name === 'lookahead-test') {
 							}
 					})
 				})
-				
+
 
 
 				it('Delete Project', (done) => {
@@ -208,9 +215,9 @@ if (mongoose.connection.name === 'lookahead-test') {
 									done()
 							})
 					})
-				
+
 					it('Creates a Task Successfully', (done) => {
-					
+
 						chai.request(app)
 						.put(`/api/projects/${projectId}/tasks`)
 						.type('form')
@@ -229,7 +236,7 @@ if (mongoose.connection.name === 'lookahead-test') {
 						})
 
 					})
-					
+
 					describe('Task Edits', () => {
 
 						let taskId
@@ -250,9 +257,9 @@ if (mongoose.connection.name === 'lookahead-test') {
 							})
 						})
 
-				
+
 						it('Delete a Task Successfully', (done) => {
-						
+
 							chai.request(app)
 							.delete(`/api/projects/${projectId}/tasks`)
 							.set('Authorization', `Bearer ${authToken}`)
@@ -300,7 +307,7 @@ if (mongoose.connection.name === 'lookahead-test') {
 							})
 
 						})
-						
+
 					})
 
 				describe('User changes', () => {
@@ -312,7 +319,7 @@ if (mongoose.connection.name === 'lookahead-test') {
 						.type('form')
 						.send(validUser2)
 						.end((oof, yeet) => {
-							
+
 							chai.request(app)
 							.post('/api/auth')
 							.type('form')
@@ -333,25 +340,30 @@ if (mongoose.connection.name === 'lookahead-test') {
 						.post(`/api/projects/${projectId}/users`)
 						.set('Authorization', `Bearer ${authToken}`)
 						.send({
-							"role": "read", 
-							"user": userId 
+							"role": "Read",
+							"user": userId
 						})
 						.end( async (errors, res) => {
 
 							await ProjectModel.find({ title: "Test Project"},
 								function (error, project) {
-									expect(project[0].users[0]).to.exist.and.to.have.nested.property('role', 'read')
+									console.log(project[0].users[0])
+									expect(project[0].users[0]).to.exist.and.to.have.nested.property('role', 'Read')
 									expect(res).to.have.status(200)
 								}
-							)
-
-							await UserModel.findById((userId),
-							function (err, user) {
-								expect(user[0].projects[0]).to.exist.and.to.have.nested.property('role', 'read')
-								done()
+							).then( async () => {
+								await UserModel.findById((userId),
+								function (err, user) {
+									console.log(user)
+									console.log(user.projects)
+									expect(user.projects[0]).to.exist.and.to.have.nested.property('role', 'Read')
+									done()
+								})
 							})
 
-							
+
+
+
 						})
 					})
 
@@ -363,8 +375,8 @@ if (mongoose.connection.name === 'lookahead-test') {
 							.set('Authorization', `Bearer ${authToken}`)
 							.send(
 								{
-									"role": "read", 
-									"user": userId 
+									"role": "read",
+									"user": userId
 								}
 							)
 							.end((errors, res) => {
@@ -373,7 +385,7 @@ if (mongoose.connection.name === 'lookahead-test') {
 						})
 
 						it('Remove User from Project', (done) => {
-							
+
 							chai.request(app)
 							.delete(`/api/projects/${projectId}/users/${userId}`)
 							.set('Authorization', `Bearer ${authToken}`)
@@ -394,21 +406,21 @@ if (mongoose.connection.name === 'lookahead-test') {
 										}
 									)
 
-								
+
 
 							})
 
 						})
 
 						it('Edit Existing User Role', (done) => {
-							
+
 							chai.request(app)
 							.put(`/api/projects/${projectId}/users`)
 							.set('Authorization', `Bearer ${authToken}`)
 							.send(
 								{
-								"role": "read", 
-								"user": userId 
+								"role": "read",
+								"user": userId
 								}
 							)
 							.end( async (errors, res) => {
@@ -448,7 +460,7 @@ if (mongoose.connection.name === 'lookahead-test') {
 					.type('form')
 					.send(validUser2)
 					.end((oof, yeet) => {
-						
+
 						chai.request(app)
 						.post('/api/auth')
 						.type('form')
@@ -460,7 +472,7 @@ if (mongoose.connection.name === 'lookahead-test') {
 						.end((err, res) => {
 							secondToken = res.body.token
 							userId = JWT.decode(res.body.token)._id
-							
+
 							chai.request(app)
 							.post('/api/projects')
 							.type('form')
@@ -476,8 +488,8 @@ if (mongoose.connection.name === 'lookahead-test') {
 										.put(`/api/projects/${projectId}/users`)
 										.set('Authorization', `Bearer ${authToken}`)
 										.send({
-											"role": "read", 
-											"user": userId 
+											"role": "read",
+											"user": userId
 										})
 										.end(() => {
 											done()
@@ -528,7 +540,7 @@ if (mongoose.connection.name === 'lookahead-test') {
 
 
 		})
-    
+
   })
 
 }

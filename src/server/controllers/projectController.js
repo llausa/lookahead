@@ -49,14 +49,23 @@ async function updateUser (req, res) {
 async function addUser (req, res) {
   req.body.owner = req.user._id
 
-  console.log(req.user._id)
-  console.log(req.params.projectId)
-  console.log(req.body.role)
-  let updatedProject = await addProjectToUser(req.user._id, req.params.projectId, req.body.role)
-  console.log(updatedProject)
-  if (!updatedProject) return res.status(404).json({"message": "User could not be added to project."})
+  // console.log(req.params.projectId)
+  let role = req.body.role
+  let id = req.user._id
 
-  res.status(201).json(updatedProject)
+  await ProjectModel.findById((req.params.projectId),
+  async function (err, project) {
+    project.users.push({
+      role, id
+    })
+    await project.save()
+  })
+
+
+  await addProjectToUser(id, req.params.projectId, role)
+  // if (!updatedUser) return res.status(404).json({"message": "Project could not be added to user."})
+
+  res.status(200).json("User added to Project Successfully.")
 }
 
 async function removeUser (req, res) {
@@ -65,6 +74,8 @@ async function removeUser (req, res) {
 
 
 async function addProjectToUser (id, project, role) {
+
+  console.log(`${id}, ${project}, ${role}`)
 
   await UserModel.findById(id)
   .then(async (user) =>  {
@@ -76,7 +87,7 @@ async function addProjectToUser (id, project, role) {
     await user.save()
 
   })
-  return 'User Successfully Added to Project'
+  // return 'Project successfully added to User'
 }
 
 module.exports = { create, update, remove, updateUser, removeUser, addUser, allProjects }
