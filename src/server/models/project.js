@@ -11,7 +11,7 @@ const ProjectSchema = new mongoose.Schema({
     create_date: {type: Date, required: true, default: Date.now() },
     start_date: { type: Date, required: true },
     end_date: { type: Date, required: true },
-    //Store Timezone as number +/- GMT?
+    location: { type: String, required: true },
     timezone: { type: Number, required: true, min: -12, max: 14 },
     owner: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true},
     tasks: [TaskSchema],
