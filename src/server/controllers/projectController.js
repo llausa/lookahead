@@ -11,6 +11,7 @@ async function allProjects (req, res) {
 }
 
 async function create (req, res) {
+
   req.body.owner = req.user._id
   const { error } = validateProject(req.body)
   if (error) return res.status(400).send(error.details[0].message)
@@ -23,7 +24,7 @@ async function create (req, res) {
 
   req.body.owner = validUser._id
 
-  let project = new ProjectModel(_.pick(req.body, ['title', 'create_date', 'start_date', 'end_date', 'timezone', 'owner']))
+  let project = new ProjectModel(_.pick(req.body, ['title', 'create_date', 'start_date', 'end_date', 'timezone', 'owner', 'location']))
   await project.save()
 
   await addProjectToUser(validUser._id, project._id, 'Owner')
@@ -74,8 +75,6 @@ async function removeUser (req, res) {
 
 
 async function addProjectToUser (id, project, role) {
-
-  console.log(`${id}, ${project}, ${role}`)
 
   await UserModel.findById(id)
   .then(async (user) =>  {

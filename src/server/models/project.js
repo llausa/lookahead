@@ -34,6 +34,7 @@ function validateProject (project) {
       create_date: Joi.date().iso().required(),
       start_date: Joi.date().iso().greater(Joi.ref('create_date')).required(),
       end_date: Joi.date().iso().greater(Joi.ref('start_date')).required(),
+      location: Joi.string().required(),
       timezone: Joi.number().min(-12).max(14).required(),
       owner: Joi.objectId().required()
   })

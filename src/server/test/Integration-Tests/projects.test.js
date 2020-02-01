@@ -32,7 +32,8 @@ let validProject = {
 			"title": "Test Project",
       "create_date": "2020-02-01",
       "start_date": "2020-02-02",
-      "end_date": "2020-02-05",
+			"end_date": "2020-02-05",
+			"location": "Brisbane",
       "timezone": 10
 }
 
@@ -41,6 +42,7 @@ let invalidProject = {
 	"create_date": "2020-02-01",
 	"start_date": "2020-02-05",
 	"end_date": "2020-02-03",
+	"location": "Brisbane",
 	"timezone": 10
 }
 
@@ -162,9 +164,9 @@ if (mongoose.connection.name === 'lookahead-test') {
 							"timezone": -4,
 							"title": "Real Project"}
 					)
-					.end((err, res) => {
+					.end( async (err, res) => {
 
-						ProjectModel.findById((projectId)),
+						await ProjectModel.findById((projectId)),
 							function (err, project) {
 								expect(project.title).to.be("Real Project")
 								expect(project.timezone).to.be(-4)
@@ -179,20 +181,20 @@ if (mongoose.connection.name === 'lookahead-test') {
 
 				it('Delete Project', (done) => {
 					chai.request(app)
-					.delete(`/api/projects/${projectId}`)
-					.type('form')
+					.del(`/api/projects/${projectId}`)
+					// .type('form')
 					.set('Authorization', `Bearer ${authToken}`)
 					.send()
 					.end(async (err, res) => {
 
-						await ProjectModel.findById((projectId)),
+						await ProjectModel.findById((projectId),
 							function (err, project) {
 								// expect(err).to.exist
 								// expect(project).to.not.exist
 								console.log(err)
 								expect(res).to.have.status(200)
 								done()
-							}
+							})
 						})
 					})
 
@@ -254,13 +256,14 @@ if (mongoose.connection.name === 'lookahead-test') {
 						it('Delete a Task Successfully', (done) => {
 
 							chai.request(app)
-							.delete(`/api/projects/${projectId}/tasks`)
+							.del(`/api/projects/${projectId}/tasks/${taskId}`)
 							.set('Authorization', `Bearer ${authToken}`)
-							.send(taskId)
 							.end( async (err, res) => {
 
 								await ProjectModel.find({ title: "Test Project"},
 									function (err, project) {
+										// console.log(res)
+										// console.log(`Project: ${project}`)
 										expect(project[0].tasks[0]).to.not.exist
 										expect(res).to.have.status(200)
 										done()
@@ -287,6 +290,7 @@ if (mongoose.connection.name === 'lookahead-test') {
 
 								await ProjectModel.find({ title: "Test Project"},
 									function (err, project) {
+										console.log(project.tasks)
 										expect(project[0].tasks[0]).to.have.property('title', 'Build Apartment')
 										expect(project[0].tasks[0]).to.have.property('start_time', 3)
 										expect(project[0].tasks[0]).to.have.property('length', 3)
@@ -377,7 +381,7 @@ if (mongoose.connection.name === 'lookahead-test') {
 						it('Remove User from Project', (done) => {
 
 							chai.request(app)
-							.delete(`/api/projects/${projectId}/users/${userId}`)
+							.del(`/api/projects/${projectId}/users/${userId}`)
 							.set('Authorization', `Bearer ${authToken}`)
 							.send()
 							.end( async (errors, res) => {
