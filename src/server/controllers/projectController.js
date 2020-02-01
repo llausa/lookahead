@@ -99,7 +99,6 @@ async function addUser (req, res) {
     })
     await project.save()
 
-    console.log(project.users)
   })
 
   
