@@ -75,17 +75,9 @@ const Login = () => {
     const email = (text) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(text)
     const password = (text) => text.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,1000}$/)
 
-    let ButtonText = ""
-    let ButtonDisabled = true
+    let ButtonText = "Login" 
 
-    if ( true ) { 
-        ButtonText = "Login" 
-        ButtonDisabled = false 
-    } else { 
-        ButtonText = "Please Complete Form"
-        ButtonDisabled = true 
-    }
-
+    
     return (
         <>
         <Nav backButtonLink = "/" BackButton={true} MenuButton={true}/>
