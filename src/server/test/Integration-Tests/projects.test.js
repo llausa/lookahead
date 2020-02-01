@@ -493,10 +493,14 @@ if (mongoose.connection.name === "lookahead-test") {
             done()
           })
 
-          it("Earlier End Date should reject", done => {
+          it("Cannot Bring End Date Forward", done => {
             expect(true).to.equal(false)
             done()
-          })
+					})
+					
+					it("Overlapping Task should fail", done => {
+
+					})
         })
       })
     })
