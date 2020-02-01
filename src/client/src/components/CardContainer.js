@@ -40,7 +40,7 @@ const CardContainer = (props) => {
 
 
     return (
-        <div data-cy="homeView" style={page}>
+        <div style={page}>
             <Card style={card}>
                 <div style={innerDiv} >
                     {props.children}
