@@ -285,7 +285,6 @@ if (mongoose.connection.name === 'lookahead-test') {
 
 								await ProjectModel.find({ title: "Test Project"},
 									function (err, project) {
-										console.log(project.tasks)
 										expect(project[0].tasks[0]).to.have.property('title', 'Build Apartment')
 										expect(project[0].tasks[0]).to.have.property('start_time', 3)
 										expect(project[0].tasks[0]).to.have.property('length', 3)
@@ -383,7 +382,7 @@ if (mongoose.connection.name === 'lookahead-test') {
 
 								await ProjectModel.find({ title: "Test Project"},
 										async function (err, project) {
-											console.log(project)
+
 											expect(project[0].users[0]).to.not.exist
 
 											await UserModel.findById((userId),
