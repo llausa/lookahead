@@ -17,7 +17,7 @@ import EmailChangeView from './views/EmailChangeView'
 import PasswordChangeView from './views/PasswordChangeView'
 
 
-function App() {
+const App = () => {
 
   const [projectId, setProjectId] = useState(1)
   const [ownerId, setOwnerId] = useState(1)
@@ -47,7 +47,7 @@ function App() {
         </>
       </BrowserRouter>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

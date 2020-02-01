@@ -6,6 +6,7 @@ import Logo from '../../images/LookaheadLogoBlue.svg'
 import Background from '../../images/BackgroundSmall.jpg'
 import CardContainer from '../CardContainer'
 import Menu from '../Menu'
+import Zoom from 'react-reveal/Zoom'
 
 const HomeView = () => {
 
@@ -55,7 +56,7 @@ const HomeView = () => {
            <Menu/>
         <CardContainer background={Background}>
         
-                    <img src={Logo} alt="Logo" style={logoStyle}  aria-label="logo"/>
+        <Zoom><img src={Logo} alt="Logo" style={logoStyle}  aria-label="logo"/></Zoom>
                     <Button component={Link} to="/login" onClick={LoginPressed} variant="outlined" style={buttonMain} color="primary">Login</Button>
                     <Button component={Link} to="/signup" onClick={SignupPressed} variant="outlined" style={{margin: "0 20px"}}>Signup</Button>
                     <Button component={Link} to="/account/password" onClick={ResetPressed} variant="outlined" style={buttonResetP}>Reset Password <LockIcon style={smallIcon} /> </Button>
