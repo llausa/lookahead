@@ -32,7 +32,8 @@ let validProject = {
 			"title": "Test Project",
       "create_date": "2020-02-01",
       "start_date": "2020-02-02",
-      "end_date": "2020-02-05",
+			"end_date": "2020-02-05",
+			"location": "Brisbane",
       "timezone": 10
 }
 
@@ -41,6 +42,7 @@ let invalidProject = {
 	"create_date": "2020-02-01",
 	"start_date": "2020-02-05",
 	"end_date": "2020-02-03",
+	"location": "Brisbane",
 	"timezone": 10
 }
 
@@ -251,9 +253,8 @@ if (mongoose.connection.name === 'lookahead-test') {
 						it('Delete a Task Successfully', (done) => {
 
 							chai.request(app)
-							.del(`/api/projects/${projectId}/tasks`)
+							.del(`/api/projects/${projectId}/tasks/${taskId}`)
 							.set('Authorization', `Bearer ${authToken}`)
-							.send(taskId)
 							.end( async (err, res) => {
 
 								await ProjectModel.find({ title: "Test Project"},
@@ -381,7 +382,7 @@ if (mongoose.connection.name === 'lookahead-test') {
 
 								await ProjectModel.find({ title: "Test Project"},
 										async function (err, project) {
-											console.log(project)
+
 											expect(project[0].users[0]).to.not.exist
 
 											await UserModel.findById((userId),
@@ -393,7 +394,6 @@ if (mongoose.connection.name === 'lookahead-test') {
 
 										}
 									)
-
 
 
 							})

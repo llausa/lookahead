@@ -13,6 +13,7 @@ async function allProjects (req, res) {
 
 // POST Project
 async function create (req, res) {
+
   req.body.owner = req.user._id
   const { error } = validateProject(req.body)
   if (error) return res.status(400).send(error.details[0].message)
@@ -25,7 +26,7 @@ async function create (req, res) {
 
   req.body.owner = validUser._id
 
-  let project = new ProjectModel(_.pick(req.body, ['title', 'create_date', 'start_date', 'end_date', 'timezone', 'owner']))
+  let project = new ProjectModel(_.pick(req.body, ['title', 'create_date', 'start_date', 'end_date', 'timezone', 'owner', 'location']))
   await project.save()
 
   await addProjectToUser(validUser._id, project._id, 'Owner')
