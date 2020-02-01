@@ -55,7 +55,7 @@ const Nav = (props) => {
             <KeyboardBackspaceIcon/>
           </IconButton>) : (<></>) }
         <img src={Logo} alt="Logo" style={logoStyle} className={classes.title} aria-label="logo"/>
-        {props.BackButton ? (
+        {props.MenuButton ? (
           <IconButton onClick={showMenu} edge="end" className={classes.menuButton} color="inherit" aria-label="Menu">
             <MenuIcon />
           </IconButton>) : (<></>) }
@@ -63,7 +63,9 @@ const Nav = (props) => {
       </AppBar>
     </div>
     <Menu checked={props.checked}/>
+    <div></div>
     </div>
+    
   )
 }
 

@@ -1,13 +1,37 @@
-import React from "react";
+import React, { useReducer } from "react"
+import { Button } from '@material-ui/core'
+import axios from 'axios'
+import MailIcon from '@material-ui/icons/Mail'
+import CardContainer from '../CardContainer'
+import Background from '../../images/WhiteBackgroundSmall.jpg'
+import Nav from '../Nav'
+import TitleText from '../TitleText'
+import FormInput from '../FormInput'
 
-import { Link } from 'react-router-dom'
-import { TextField, Button } from '@material-ui/core';
-import LockIcon from '@material-ui/icons/Lock';
 
-import MailIcon from '@material-ui/icons/Mail';
+const PasswordChangeView = () => {
 
+    const [data, setData] = useReducer((state, newState) => (
+        {...state, ...newState}
+    ), {
+        email: '',
+    })
 
-function PasswordChangeView() {
+    const onSubmit = e => {
+        e.preventDefault()
+
+        console.log(data)
+
+        axios.post(
+        'https://vast-oasis-18718.herokuapp.com/api/auth', data)
+        .then(function (response) {
+            console.log(response)
+        })
+        .catch(function (error) {
+            console.log(error.response.data)
+        })
+        
+    }
 
     const mystyle = {
         display: "flex",
@@ -15,27 +39,18 @@ function PasswordChangeView() {
         alignitems: "center",
         justifyContent: "center",
         textAlign: "center",
-        color: "#2baafe",
+        color: "#006EE2",
         padding: "10px",
         maxWidth: "400px",
         margin: "auto",
     }
     
     const buttonMain = {
-        color: "#2baafe",
+        color: "#006EE2",
         margin: "20px",
-        border: "1px solid rgb(43, 170, 254)"
+        border: "1px solid #006EE2"
     }
     
-    const inputStyle = {
-        margin: "4px",
-    }
-
-    const buttonResetP = {
-        color: "rgb(140, 140, 140)",
-        margin: "30px 80px",
-        fontSize: "8px"
-    }
 
     const smallIcon= {
         width: "auto",
@@ -47,22 +62,25 @@ function PasswordChangeView() {
         console.log("Send Email Pressed")
     }
 
+    // Client Validation
+    const onChange = e => setData({[e.target.name]: e.target.value})
+    const email = (text) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(text)
+
     return (
+        <>
+        <Nav backButtonLink = "/" BackButton={true} MenuButton={true}/>
+        <CardContainer background={Background}>
+        <form onSubmit={onSubmit} className='form'> 
         <div data-cy="passwordView" style={mystyle}>
-        <h1 style={{margin: "40px 0 10px 0", fontSize: "70px"}}>Password Change</h1>
-        <p style={{margin: "0 0 20px 0", fontSize:"12px"}}>Please enter your account email below for a reset link to be sent.</p>
-            <TextField
-            style={inputStyle}
-            required
-            id="outlined"
-            label="Email"
-            defaultValue=""
-            variant="outlined"
-            size="small"
-            />
-            <Button onClick={SendEmailPressed} variant="outlined" style={buttonMain} color="primary">Send Email <MailIcon style={smallIcon} /></Button>
+        <TitleText text="Password Change" />
+        <FormInput type='email' validation={email} value={data.email} onChange={onChange} require={true} errorText="Invalid Email" label='Email'  id='email' name='email' />
+        
+        <Button onClick={SendEmailPressed} variant="outlined" style={buttonMain} color="primary">Send Email <MailIcon style={smallIcon} /></Button>
         </div>
+        </form>
+        </CardContainer>
+        </>
     )
 }
 
-export default PasswordChangeView;
+export default PasswordChangeView

@@ -47,7 +47,7 @@ const Signup = () => {
             alignitems: 'center',
             justifyContent: 'center',
             textAlign: 'center',
-            color: '#2baafe',
+            color: '#006EE2',
             padding: '10px',
             maxWidth: '400px',
             margin: 'auto',
@@ -68,7 +68,7 @@ const Signup = () => {
       return (
   
         <>
-        <Nav backButtonLink = "/" BackButton={true} MenuButton={true}/>
+        <Nav backButtonLink = "/" BackButton={true} MenuButton={true} />
         <CardContainer background={Background}>
           <form onSubmit={onSubmit} className='form'>
             <div data-cy='signupView' style={mystyle}>

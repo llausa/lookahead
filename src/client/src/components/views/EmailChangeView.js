@@ -1,10 +1,40 @@
-import React from "react";
+import React , { useReducer }from "react"
+import axios from 'axios'
 import { Link } from 'react-router-dom'
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button } from '@material-ui/core'
+import CardContainer from '../CardContainer'
+import Background from '../../images/WhiteBackgroundSmall.jpg'
+import Nav from '../Nav'
+import TitleText from '../TitleText'
+import FormInput from '../FormInput'
+import NormalText from '../NormalText'
 
-import MailIcon from '@material-ui/icons/Mail';
+import MailIcon from '@material-ui/icons/Mail'
 
-function EmailChangeView() {
+const EmailChangeView = () => {
+
+    const [data, setData] = useReducer((state, newState) => (
+        {...state, ...newState}
+    ), {
+        emailNew: '',
+        password: ''
+    })
+
+    const onSubmit = e => {
+        e.preventDefault()
+
+        console.log(data)
+
+        axios.post(
+        'https://vast-oasis-18718.herokuapp.com/api/users', data)
+        .then(function (response) {
+            console.log(response)
+        })
+        .catch(function (error) {
+            console.log(error.response.data)
+        })
+        
+    }
 
     const mystyle = {
         display: "flex",
@@ -19,9 +49,9 @@ function EmailChangeView() {
     }
     
     const buttonMain = {
-        color: "#2baafe",
+        color: "#006EE2",
         margin: "20px",
-        border: "1px solid rgb(43, 170, 254)"
+        border: "1px solid #006EE2"
     }
     
     const inputStyle = {
@@ -44,31 +74,28 @@ function EmailChangeView() {
         console.log("Send Email Pressed")
     }
 
+    // Client validation
+    const onChange = e => setData({[e.target.name]: e.target.value})
+    const email = (text) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(text)
+
     return (
+        <>
+        <Nav backButtonLink = "/" BackButton={true} MenuButton={true}/>
+        <CardContainer background={Background}>
+        <form onSubmit={onSubmit} className='form'> 
         <div data-cy="emailView" style={mystyle}>
-        <h1 style={{margin: "40px 0 10px 0", fontSize: "50px"}}>Update Email</h1>
-        <p style={{margin: "0 0 20px 0", fontSize:"12px"}}>Please enter your new email and password.</p>
-            <TextField
-            style={inputStyle}
-            required
-            id="outlined"
-            label="New Email"
-            defaultValue=""
-            variant="outlined"
-            size="small"
-            />
-            <TextField
-            style={inputStyle}
-            required
-            id="outlined-password-input"
-            label="Password"
-            type="password"
-            autoComplete="current-password"
-            variant="outlined"
-            size="small"
-            />
-            <Button onClick={SendEmailPressed} variant="outlined" style={buttonMain} color="primary">Save Email <MailIcon style={smallIcon} /></Button>
+        
+        <TitleText text="Update Email" />
+        <NormalText text="Please enter your new email and password." />
+        <FormInput type='email' validation={email} value={data.emailNew} onChange={onChange} require={true} errorText="Invalid Email" label='Email'  id='emailNew' name='emailNew' />
+        <FormInput type='password' value={data.password} onChange={onChange} require={true} errorText="Password Invalid" label='Password' id='password' name='password' />
+        
+        <Button onClick={SendEmailPressed} variant="outlined" style={buttonMain} color="primary">Save Email <MailIcon style={smallIcon} /></Button>
+        
         </div>
+        </form>
+        </CardContainer>
+        </>
     )
 }
 
