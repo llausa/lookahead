@@ -6,7 +6,7 @@ const ButtonInput = (props) => {
   const Primary = {
     color: "#006EE2",
     margin: "20px",
-    border: "1px solid rgb(43, 170, 254)"
+    border: "1px solid #006EE2"
   }
 
   const Secondary = {

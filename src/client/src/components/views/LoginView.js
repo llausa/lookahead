@@ -43,7 +43,6 @@ const Login = () => {
         alignitems: "center",
         justifyContent: "center",
         textAlign: "center",
-        color: "#2baafe",
         padding: "10px",
         maxWidth: "400px",
         margin: "auto",

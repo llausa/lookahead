@@ -68,7 +68,7 @@ const Signup = () => {
       return (
   
         <>
-        <Nav backButtonLink = "/" BackButton={true} MenuButton={true}/>
+        <Nav backButtonLink = "/" BackButton={true} MenuButton={true} />
         <CardContainer background={Background}>
           <form onSubmit={onSubmit} className='form'>
             <div data-cy='signupView' style={mystyle}>

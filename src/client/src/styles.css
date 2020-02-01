@@ -27,6 +27,10 @@ body {
     border-color: #757575!important;
 } */
 
+.MuiButton-outlinedPrimary {
+    color: #006EE2!important;
+}
+
 .MuiButton-root {
     border-radius: 50px!important;
 }
@@ -37,6 +41,7 @@ body {
 
 .MuiPickersDay-daySelected {
     background-color: #006EE2!important;
+    border: #006EE2!important;
 }
 
 .MuiButton-textPrimary {

@@ -9,7 +9,7 @@ import TitleText from '../TitleText'
 import FormInput from '../FormInput'
 
 
-function PasswordChangeView() {
+const PasswordChangeView = () => {
 
     const [data, setData] = useReducer((state, newState) => (
         {...state, ...newState}
@@ -83,4 +83,4 @@ function PasswordChangeView() {
     )
 }
 
-export default PasswordChangeView;
+export default PasswordChangeView
