@@ -23,8 +23,14 @@ router.get("/", auth, projectController.allProjects)
 // Project view route
 router.get("/:projectId", auth, projectController.getProject)
 
-// Projects POST route
+// create Project route
 router.post("/", auth, projectController.create )
+
+// update Project route
+router.put("/:projectId", auth, projectController.update)
+
+// delete Project route
+router.delete("/:projectId", auth, projectController.remove )
 
 router.put("/:projectId/tasks", auth, taskController.createTask )
 
@@ -33,7 +39,7 @@ router.post("/:projectId/users", auth, projectController.addUser )
 
 router.put("/:projectId", auth, projectController.update )
 
-router.delete("/:projectId", auth, projectController.remove )
+
 
 router.delete("/:projectId/tasks", auth, taskController.removeTask )
 

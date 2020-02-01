@@ -34,7 +34,7 @@ async function create (req, res) {
 
 }
 
-// GET project
+// GET Project
 async function getProject (req, res) {
   req.body.owner = req.user._id
 
@@ -47,15 +47,42 @@ async function getProject (req, res) {
   res.status(200).send(project)
 }
 
-// UPDATE project
+// UPDATE Project
 async function update (req, res) {
 
+  let validProject = await ProjectModel.findById((req.params.projectId))
+  if (!validProject) return res.status(404).json({"message": "Couldn't find project."})
+
+  validProject.title = req.body.title
+  validProject.timezone = req.body.timezone
+  validProject.end_date = req.body.end_date
+  validateProject(validProject)
+
+  await validProject.save()
+  res.status(200).json({"message": "Project details successfully updated"})
 }
 
 // DELETE project
 async function remove (req, res) {
+  let validProject = await ProjectModel.findById((req.params.projectId))
+  if (!validProject) return res.status(404).json({"message": "Couldn't find project."})
+
+  ProjectModel.findByIdAndRemove(req.params.projectId, (err, project) => {
+    // As always, handle any potential errors:
+    if (err) return res.status(400).send(err);
+    // We'll create a simple object to send back with a message and the id of the document that was removed
+    // You can really do this however you want, though.
+    const response = {
+        message: "Project successfully deleted",
+        id: project._id
+  }
+  return res.status(200).json({"message": "Project successfully deleted", "id": project })
+})
 
 }
+
+
+
 
 async function updateUser (req, res) {
 
@@ -87,8 +114,6 @@ async function removeUser (req, res) {
 }
 
 async function addProjectToUser (id, project, role) {
-
-  console.log(`${id}, ${project}, ${role}`)
 
   await UserModel.findById(id)
   .then(async (user) =>  {
