@@ -1,13 +1,41 @@
-import React from "react";
+import React, { useReducer } from "react"
+import Nav from '../Nav'
 import { Link } from 'react-router-dom'
-import { TextField, Button } from '@material-ui/core';
-import LockIcon from '@material-ui/icons/Lock';
-
-import PasswordInput from '../PasswordInput'
+import { Button } from '@material-ui/core'
+import axios from 'axios'
+import LockIcon from '@material-ui/icons/Lock'
+import ButtonInput from '../ButtonInput'
 import FormInput from '../FormInput'
+import TitleText from '../TitleText'
+import NormalText from '../NormalText'
+import CardContainer from '../CardContainer'
+import Background from '../../images/WhiteBackgroundSmall.jpg'
 
 
-function LoginView() {
+const Login = () => {
+
+    const [data, setData] = useReducer((state, newState) => (
+        {...state, ...newState}
+    ), {
+        email: '',
+        password: ''
+    })
+
+    const onSubmit = e => {
+        e.preventDefault()
+
+        console.log(data)
+
+        axios.post(
+        'https://vast-oasis-18718.herokuapp.com/api/auth', data)
+        .then(function (response) {
+            console.log(response)
+        })
+        .catch(function (error) {
+            console.log(error.response.data)
+        })
+        
+    }
 
     const mystyle = {
         display: "flex",
@@ -19,16 +47,6 @@ function LoginView() {
         padding: "10px",
         maxWidth: "400px",
         margin: "auto",
-    }
-    
-    const buttonMain = {
-        color: "#2baafe",
-        margin: "20px",
-        border: "1px solid rgb(43, 170, 254)"
-    }
-    
-    const inputStyle = {
-        margin: "4px",
     }
 
     const buttonResetP = {
@@ -51,16 +69,34 @@ function LoginView() {
         console.log("Reset Pressed")
     }
 
+    const onChange = e => setData({[e.target.name]: e.target.value})
+
+    // Client Validation
+    const email = (text) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(text)
+    const password = (text) => text.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,1000}$/)
+
+    let ButtonText = "Login" 
+
+    
     return (
+        <>
+        <Nav backButtonLink = "/" BackButton={true} MenuButton={true}/>
+        <CardContainer background={Background}>
+        <form onSubmit={onSubmit} className='form'> 
         <div data-cy="loginView" style={mystyle}>
-            <h1 style={{margin: "40px 0 10px 0", fontSize: "70px"}}>Login</h1>
-            <p style={{margin: "0 0 20px 0", fontSize:"12px"}}>Please enter your email and password</p>
-            <FormInput label="Email" validate={true} />
-            <PasswordInput label="Password" />
-            <Button onClick={LoginPressed} variant="outlined" style={buttonMain} color="primary">Login</Button>
+            <TitleText text="Login" />
+            <NormalText text="Please enter your email and password" />
+            
+            <FormInput type='email' validation={email} value={data.email} onChange={onChange} require={true} errorText="Invalid Email" label='Email'  id='email' name='email' />
+            <FormInput type='password' validation={password} value={data.password} onChange={onChange} require={true} errorText="Password Invalid" label='Password' id='password' name='password' />
+                
+            <ButtonInput onClick={LoginPressed} type='submit' primary={true} color='primary' text={ButtonText} /> 
             <Button component={Link} to="/account/password" onClick={ResetPressed} variant="outlined" style={buttonResetP}>Reset Password <LockIcon style={smallIcon} /> </Button>
         </div>
+        </form>
+        </CardContainer>
+        </>
     )
 }
 
-export default LoginView;
+export default Login

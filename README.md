@@ -1,11 +1,9 @@
-﻿# T3A2 Part A | Alex Leybourne, Ben Ulcoq, Santiago Chamon :sweet_potato: ⚛️ 
+﻿# T3A2 Part A | Alex Leybourne, Ben Ulcoq, Santiago Chamon :sweet_potato: ⚛️
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/1f4244b9-9651-47ce-997d-365175476ab1/deploy-status)](https://app.netlify.com/sites/lookahead/deploys)
 
 ## Purpose
 Operational lookaheads are used throughout construction and other industries. Although the specific nature of the operations/tasks they describe may change depending on the sector, the purpose of these simple ‘on-the-ground’ planning tools remain the same: to give all the stakeholders in the operational team a common perspective on what the next 6-7 days of the overall construction project entails - most lookaheads are developed as simple spreadsheets.
-
-Our client is a McKinsey consultant who works in massive projects where operational lookaheads are critical for the projects' success.
 
 The aim of this project is to develop a Single Page Application (SPA) using the MERN stack that serves to replace and improve on the functionality of a spreadsheet for creating and managing lookaheads.
 
@@ -39,7 +37,6 @@ Git tracks changes in the application source code in order to manage project dev
 
   - [Mongoose](https://github.com/Automattic/mongoose): MongoDB object modeling designed to work in an asynchronous environment. This is the driver that enables our server to communicate with MongoDB Atlas.
   - [Express](https://github.com/expressjs/express): Fast, unopinionated, minimalist web framework for node. This library is what the project uses to create the server API.
-  - [Passport](https://github.com/jaredhanson/passport): Simple, unobtrusive authentication for Node.js. This library will handle authentication in the app.
   - [React-Grid-Layout](https://github.com/STRML/react-grid-layout): A draggable and resizable grid layout with responsive breakpoints, for React. A lot of the drag and drop functioanlity of this project relies on this library.
 
 ## Data Flow Diagram
@@ -63,7 +60,7 @@ This diagram shows the data flow for authenticating a User. It includes Logging 
 ## Application Architecture Diagram
 ![Application Architecure Diagram](docs/app_architecture_diagram.png)
 
-This Application Architecture Diagram shows how the Lookahead Application MERN components work with each other. The diagram works in a foundational manner, with the components at the bottom being necessary for the items towards the top. The data in MongoDB is hosted on MongoDB Atlas, with the Back-end communicating with the Database through Mongoose. The Back-end has all the business logic of the application and it passes the data through an Express API to the React Front-end App. 
+This Application Architecture Diagram shows how the Lookahead Application MERN components work with each other. The diagram works in a foundational manner, with the components at the bottom being necessary for the items towards the top. The data in MongoDB is hosted on MongoDB Atlas, with the Back-end communicating with the Database through Mongoose. The Back-end has all the business logic of the application and it passes the data through an Express API to the React Front-end App.
 
 The Back-end is the server side of the application and it will be hosted on Heroku. The Back-end will serve the data to the React App through a series of requests between the Express API and the Front-end App. The user ultimately interacts with the React Front-end App and this React App will be hosted on Netlify.
 
@@ -71,9 +68,9 @@ The Back-end is the server side of the application and it will be hosted on Hero
 ## Project Management and User Stories
 
 ### Overview
-Before any planning could take place for this project, the requirements and scope needed to be clearly defined. 
+Before any planning could take place for this project, the requirements and scope needed to be clearly defined.
 
-To help define and maintain consistent progress towards achieving these requirements, the team elected to work by implementing Agile methodology. 
+To help define and maintain consistent progress towards achieving these requirements, the team elected to work by implementing Agile methodology.
 By consistently incorporating client feedback into the design and development process, the overall product was likely to be both easier to develop and also fulfil the clients needs more closely.
 
 Given the fact that the development team and the client were working in different timezones, face-to-face meetings were not an option. As such, a slack channel was set up for quick and easy communication between both parties.
@@ -99,7 +96,7 @@ Trello was elected as the primary tool for planning the project due to the abili
 
 With the foundational planning and communication tools in place, the team started by breaking the project features into User Stories using Trello (See Trello Day 1 screenshot). Based on these User Stories, the initial concept for User flow and interface structure was discussed and planned.  The Part A Assignment (documentation) requirements were delegated according to team member strengths and work began across all aspects of the project. The Part A requirements were split across the team as follows:
 
-##### Ben 
+##### Ben
 * R1 - Project Overview
 * R4 - User Stories
 * R6 - Trello Screenshots
@@ -204,7 +201,7 @@ Trello Board can be found here: https://trello.com/b/lCfavHOS/sprint-board
 All created with Figma:
 [Figma Project View Link](https://www.figma.com/file/XjnDBsczGMZrKEuaDKpse7/Lookahead?node-id=0%3A1)
 
-This folder contains the stages of refinement for the wireframes based on client feedback: 
+This folder contains the stages of refinement for the wireframes based on client feedback:
 [Folder Link](https://github.com/llausa/lookahead/tree/master/docs/Wireframes)
 
 ## Trello Screenshots of Project
