@@ -100,13 +100,16 @@ async function addUser (req, res) {
   })
 
   await addProjectToUser(id, req.params.projectId, role)
-  // if (!updatedUser) return res.status(404).json({"message": "Project could not be added to user."})
 
   res.status(200).json("User added to Project Successfully.")
 }
 
+// /:projectId/users/:userId
 async function removeUser (req, res) {
-  res.send('yeet')
+  let validProject = await ProjectModel.findById((req.params.projectId))
+  if (!validProject) return res.status(404).json({"message": "Couldn't find project."})
+
+  console.log('yeet')
 }
 
 async function addProjectToUser (id, project, role) {

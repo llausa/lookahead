@@ -381,6 +381,7 @@ if (mongoose.connection.name === 'lookahead-test') {
 
 								await ProjectModel.find({ title: "Test Project"},
 										async function (err, project) {
+											console.log(project)
 											expect(project[0].users[0]).to.not.exist
 
 											await UserModel.findById((userId),
