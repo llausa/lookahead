@@ -57,7 +57,7 @@ const AccountDetailsView = () => {
 
     return (
       <>
-      <Nav backButtonLink = "/" BackButton={true} MenuButton={true} />
+      <Nav backButtonLink = "/projects" BackButton={true} MenuButton={false} />
       <CardContainer background={Background}>
       <form onSubmit={onSubmit} className='form'>
         <div data-cy="detailsView" style={mystyle}>
