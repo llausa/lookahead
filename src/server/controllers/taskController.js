@@ -25,7 +25,7 @@ async function createTask (req, res) {
 
 async function updateTask (req, res) {
 
-  
+
 
   let validProject = await ProjectModel.findById(req.params.projectId)
   if (!validProject) {
@@ -33,7 +33,7 @@ async function updateTask (req, res) {
   }
 
   let validTask = validProject.tasks.find((val) => val._id = req.params.taskId)
-  
+
 
   const { error } = validateTask(req.body)
   if (error) return res.status(400).send(error.details[0].message)
@@ -51,7 +51,7 @@ async function updateTask (req, res) {
 }
 
 async function removeTask (req, res) {
-  
+
   let validProject = await ProjectModel.findById(req.params.projectId)
   if (!validProject) {
     return res.status(400).send('That project does not exist.')
@@ -59,9 +59,9 @@ async function removeTask (req, res) {
 
   const {error} = await validProject.tasks.pull(req.params.taskId)
   if (error) return res.status(400).end(error.details[0].message)
-  
+
   await validProject.save()
-  res.status(200).json({"message": "Task successfully deleted."})  
+  res.status(200).json({"message": "Task successfully deleted."})
 
 }
 
