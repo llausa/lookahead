@@ -31,7 +31,7 @@ router.post("/:projectId/users", auth, projectController.addUser )
 // Remove User from Project
 router.delete("/:projectId/users/:userId", auth, projectController.removeUser )
 
-router.put("/:projectId/users", auth, projectController.updateUser )
+router.put("/:projectId/users/:userId", auth, projectController.updateUser )
 
 router.put("/:projectId/tasks", auth, taskController.createTask )
 

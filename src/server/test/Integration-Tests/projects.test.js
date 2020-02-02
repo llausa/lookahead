@@ -54,6 +54,14 @@ let validTask = {
   description: "Big Yeet"
 }
 
+let overflowTask = {
+  title: "Build House",
+  start_time: 22,
+  length: 4,
+  day: 3,
+  description: "Big Yeet"
+}
+
 let authToken
 let userId
 let secondToken
@@ -391,22 +399,21 @@ if (mongoose.connection.name === "lookahead-test") {
             it("Edit Existing User Role", done => {
               chai
                 .request(app)
-                .put(`/api/projects/${projectId}/users`)
+                .put(`/api/projects/${projectId}/users/${userId}`)
                 .set("Authorization", `Bearer ${authToken}`)
                 .send({
-                  role: "read",
-                  user: userId
+                  role: "Write"
                 })
                 .end(async (errors, res) => {
                   await ProjectModel.find({ title: "Test Project" }, function(
                     err,
                     project
                   ) {
-                    expect(project[0].users[0]).to.not.exist
+                    expect(project[0].users[0]).to.have.nested.property('role', 'Write')
                   })
 
                   await UserModel.findById(userId, function(err, user) {
-                    expect(user[0].projects[0].role).to.exist
+                    expect(user.projects[0]).to.have.nested.property('role', 'Write')
                     expect(res).to.have.status(200)
                     done()
                   })
@@ -498,9 +505,48 @@ if (mongoose.connection.name === "lookahead-test") {
 						done()
 					})
 
-					it("Overlapping Task should fail", done => {
+					it("Overlapping Task should fail", (done) => {
 
+							chai
+              .request(app)
+              .put(`/api/projects/${projectId}/tasks`)
+              .type("form")
+              .set("Authorization", `Bearer ${authToken}`)
+              .send(validTask)
+              .end(async (err, res) => {
+                await ProjectModel.find({ title: "Test Project" }, function(
+                  err,
+                  project
+                ) {
+                  taskId = project[0].tasks[0]._id
+                  done()
+                })
+							})
+							
 					})
+
+					it("Overflowing Task should save both", (done) => {
+						chai
+              .request(app)
+              .put(`/api/projects/${projectId}/tasks`)
+              .type("form")
+              .set("Authorization", `Bearer ${authToken}`)
+              .send(overflowTask)
+              .end(async (err, res) => {
+                await ProjectModel.find({ title: "Test Project" }, function(
+                  err,
+                  project
+                ) {
+									expect(project[0].tasks[1]._id).to.exist
+									expect(project[0].tasks[2]._id).to.exist
+									expect(res).to.have.status(201)
+									expect(res.body.message).to.equal("Tasks successfully created.")
+									expect()
+                  done()
+                })
+              })
+					})
+
         })
       })
     })
