@@ -134,7 +134,7 @@ if (mongoose.connection.name === "lookahead-test") {
 					.end((err, res) => {
 						expect(err).to.be.null
 						expect(res).to.have.status(200)
-						expect(res.body.projects).to.be.an("array")
+						expect(res.body).to.be.an("array")
 						done()
 					})
 			})
