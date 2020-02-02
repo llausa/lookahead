@@ -8,7 +8,11 @@ async function allProjects (req, res) {
   let validUser = await UserModel.findById(req.user._id)
   if (!validUser) return res.status(404).json({"message": 'Critical Error: User does not exist in the database'})
 
-  res.status(200).json({"projects": (validUser.projects)})
+  let userProjs = validUser.projects.map(project => project.project)
+
+  let projObjs = await ProjectModel.find({ _id: { $in: userProjs } })
+
+  res.status(200).json(projObjs)
 }
 
 // POST Project
@@ -123,6 +127,7 @@ async function usersInProject (req, res) {
   }
 }
 
+// Get users not in project
 async function usersNotInProject (req, res) {
   req.body.owner = req.user._id
 
