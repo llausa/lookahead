@@ -9,7 +9,7 @@ import '../styles.css'
 
 
 const logoStyle = {
-    position: "static",
+    position: "center",
     height: "30px",
     left: "-5px"
 }
@@ -17,7 +17,6 @@ const logoStyle = {
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    margin: "0 0 40px 0",
   },
   pos: {
     position: "fixed",
@@ -30,6 +29,10 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+const Invisible = {
+  opacity: 0,
+  pointerEvents: "none",
+}
 
 const HandleBack = () => {
   console.log("We going back boi")
@@ -52,17 +55,23 @@ const Nav = (props) => {
         {props.BackButton ? (
           <IconButton component={Link} to={props.backButtonLink} onClick={HandleBack} className={classes.menuButton} color="inherit" aria-label="Back">
             <KeyboardBackspaceIcon/>
-          </IconButton>) : (<></>) }
+          </IconButton>) : (
+            <IconButton className={classes.menuButton} style={Invisible} color="inherit">
+            <KeyboardBackspaceIcon/>
+          </IconButton>) }
         <img src={Logo} alt="Logo" style={logoStyle} className={classes.title} aria-label="logo"/>
         {props.MenuButton ? (
           <IconButton onClick={showMenu} edge="end" className={classes.menuButton} color="inherit" aria-label="Menu">
             <MenuIcon />
-          </IconButton>) : (<></>) }
+          </IconButton>) : (
+            <IconButton edge="end" className={classes.menuButton} style={Invisible} color="inherit" >
+            <MenuIcon />
+          </IconButton>) }
         </Toolbar>
       </AppBar>
     </div>
     <Menu checked={props.checked}/>
-    <div></div>
+    <div style={{position: "relative", height: "50px"}}></div>
     </div>
     
   )

@@ -31,8 +31,6 @@ const CardContainer = (props) => {
 
     const page ={
         display: "flex",
-        backgroundImage: `url(${props.background})`,
-        backgroundSize: "cover",
         height: "100%",
         width: "100%",
         position: "absolute",

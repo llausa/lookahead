@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react'
 
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import AccountDetailsView from './views/AccountDetailsView'
 import HomeView from './views/HomeView'
 import EditTaskView from './views/EditTaskView'
@@ -9,6 +9,7 @@ import SignUpView from './views/SignUpView'
 import ProjectView from './views/ProjectView'
 import ProjectsView from './views/ProjectsView'
 import ProjectUsersView from './views/ProjectUsersView'
+import ProjectAddUsersView from './views/ProjectAddUsersView'
 import ProjectUserSettingsView from './views/ProjectUserSettingsView'
 import ProjectSettingsView from './views/ProjectSettingsView'
 import NewTaskView from './views/NewTaskView'
@@ -29,7 +30,7 @@ const App = () => {
   return (
     <div className="App">
       <BrowserRouter>
-        <>
+      <Switch>
           <Route exact path="/" component={HomeView} data-cy="homeView"/>
           <Route exact path="/login" component={LoginView} data-cy="loginView"/>
           <Route exact path="/signup" component={SignUpView} data-cy="signupView"/>
@@ -40,11 +41,12 @@ const App = () => {
           <Route exact path="/project/:id" component={ProjectView} data-cy="projectView" render={ props => <ProjectView {...props} projectId={projectId}/>}/>
           <Route exact path="/projects/new" component={NewLookaheadView} data-cy="newProjectView"/>
           <Route exact path="/project/:id/users" component={ProjectUsersView} data-cy="projectUsersView" render={ props => <ProjectUsersView {...props} projectId={projectId}/>}/>
+          <Route exact path="/project/:id/users/add" component={ProjectAddUsersView} data-cy="projectAddUsersView" render={ props => <ProjectAddUsersView {...props} projectId={projectId}/>}/>
           <Route exact path="/project/:id/users/:userid" component={ProjectUserSettingsView} data-cy="projectUserSettingsView" render={ props => <ProjectUserSettingsView {...props} projectId={projectId} userId={userId}/>}/>
           <Route exact path="/project/:id/edit" component={ProjectSettingsView} data-cy="projectSettingsView" render={ props => <ProjectView {...props} projectId={projectId}/>}/>
           <Route exact path="/project/:id/newtask" component={NewTaskView} data-cy="newTaskView" render={ props => <ProjectView {...props} projectId={projectId}/>}/>
           <Route exact path="/project/:id/edittask/:taskid" component={EditTaskView} data-cy="editTaskView" render={ props => <ProjectUserSettingsView {...props} projectId={projectId} taskId={taskId}/>}/>
-        </>
+        </Switch>
       </BrowserRouter>
     </div>
   )
