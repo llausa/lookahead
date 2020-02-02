@@ -1,8 +1,7 @@
-import React from "react"
-import { Link } from 'react-router-dom'
+import React from "react";
 import Button from '@material-ui/core/Button'
 import AddIcon from '@material-ui/icons/Add'
-import ProjectCard from '../ProjectCard'
+import UserCard from '../UserCard'
 import Nav from '../Nav'
 import TitleText from '../TitleText'
 import Background from '../Background'
@@ -32,8 +31,8 @@ const buttonMain = {
 }
 
 const page ={
-    backgroundSize: "cover",
-    height: "110%",
+    backgroundColor: "none",
+    height: "120%",
     width: "100%",
     position: "absolute",
     flexDirection: "column",
@@ -42,26 +41,22 @@ const page ={
 }
 
 
-function CreateNewPressed() {
-    console.log("Create New Pressed")
-}
-
-const ProjectsView = () => {
+const ProjectAddUsersView = () => {
 
     return (
         <>
-        <Nav MenuButton={true} />
+        <Nav backButtonLink = "/project/:id/users" MenuButton={true} BackButton={true} />
         <div style={page}>
 
         
         
         <div data-cy="projectsView" style={mystyle}>
-        <TitleText text="Projects" style={{ marginTop: "50px"}} />
+        <TitleText text="Project Add Users" style={{ marginTop: "30px"}} />
 
-        <ProjectCard title="YEEET" />
-        <ProjectCard/>
+        <UserCard user="Yuri Tarded" userPrivilege="none" userEmail="MrYeet@yeetmail.com" />
+        <UserCard user="GONK MAN" userPrivilege="none" userEmail="MrYeet@yeetmail.com" />
+        <UserCard/>
 
-        <Button component={Link} to="/projects/new" onClick={CreateNewPressed} variant="outlined" style={buttonMain} color="primary">Create New <AddIcon style={smallIcon} /></Button>
         </div>
         </div>
         <Background/>
@@ -69,4 +64,4 @@ const ProjectsView = () => {
     )
 }
 
-export default ProjectsView
+export default ProjectAddUsersView

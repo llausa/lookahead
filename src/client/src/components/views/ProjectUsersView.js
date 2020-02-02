@@ -5,6 +5,7 @@ import UserCard from '../UserCard'
 import Nav from '../Nav'
 import TitleText from '../TitleText'
 import Background from '../Background'
+import { Link } from 'react-router-dom'
 
 const mystyle = {
     display: "flex",
@@ -40,8 +41,8 @@ const page ={
     justifyContent: "center",
 }
 
-function CreateNewPressed() {
-    console.log("Create New Pressed")
+function AddUserPressed() {
+    console.log("Add User Pressed")
 }
 
 const ProjectUsersView = () => {
@@ -56,10 +57,10 @@ const ProjectUsersView = () => {
         <div data-cy="projectsView" style={mystyle}>
         <TitleText text="Project Users" style={{ marginTop: "50px"}} />
 
-        <UserCard/>
+        <UserCard user="Mr Yeet" userPrivilege="Owner" userEmail="MrYeet@yeetmail.com" />
         <UserCard/>
 
-        <Button onClick={CreateNewPressed} variant="outlined" style={buttonMain} color="primary">Create New <AddIcon style={smallIcon} /></Button>
+        <Button component={Link} to="/project/:id/users/add" onClick={AddUserPressed} variant="outlined" style={buttonMain} color="primary">Add User<AddIcon style={smallIcon} /></Button>
         </div>
         </div>
         <Background/>
