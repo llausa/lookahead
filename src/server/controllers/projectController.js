@@ -188,6 +188,8 @@ async function removeProjectFromUser (userId, projectId) {
 
   await user.save()
 }
+
+
 async function addProjectToUser (id, project, role) {
 
   await UserModel.findById(id)

@@ -54,6 +54,14 @@ let validTask = {
   description: "Big Yeet"
 }
 
+let overflowTask = {
+  title: "Build House",
+  start_time: 22,
+  length: 4,
+  day: 3,
+  description: "Big Yeet"
+}
+
 let authToken
 let userId
 let secondToken
@@ -498,7 +506,7 @@ if (mongoose.connection.name === "lookahead-test") {
 						done()
 					})
 
-					it("Overlapping Task should fail", done => {
+					it("Overlapping Task should fail", (done) => {
 
 							chai
               .request(app)
@@ -516,6 +524,27 @@ if (mongoose.connection.name === "lookahead-test") {
                 })
 							})
 							
+					})
+
+					it("Overflowing Task should save both", (done) => {
+						chai
+              .request(app)
+              .put(`/api/projects/${projectId}/tasks`)
+              .type("form")
+              .set("Authorization", `Bearer ${authToken}`)
+              .send(overflowTask)
+              .end(async (err, res) => {
+                await ProjectModel.find({ title: "Test Project" }, function(
+                  err,
+                  project
+                ) {
+									expect(project[0].tasks[1])._id.to.exist
+									expect(project[0].tasks[2])._id.to.exist
+									expect(res).to.have.status(200)
+									expect()
+                  done()
+                })
+              })
 					})
 
         })

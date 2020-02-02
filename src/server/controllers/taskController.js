@@ -5,7 +5,6 @@ const _ = require("lodash")
 async function createTask (req, res) {
 
   
-
   let task = req.body
 
   const { error } = validateTask(task)
@@ -18,9 +17,25 @@ async function createTask (req, res) {
     return res.status(400).send('That project does not exist.')
   }
 
-  await checkOverlap(task, validProject)
+  checkOverlap(task, validProject)
   if (!checkOverlap) {
     return res.status(400).send('Tasks cannot overlap.')
+  }
+
+  if ((task.start_time + task.length) > 24) {
+    let overlap = ((task.start_time + task.length) - 24)
+
+    let splitTask = Object.assign({}, task)
+    splitTask.length = overlap
+    splitTask.day += 1
+
+    task.length -= overlap
+
+    validProject.tasks.push(task, splitTask)
+    await validProject.save()
+  
+    res.status(201).json({message:'Tasks successfully created.'})
+
   }
 
   validProject.tasks.push(task)
@@ -51,7 +66,7 @@ async function updateTask (req, res) {
   validTask.description = req.body.description
 
 
-  await checkOverlap(validTask, validProject)
+  checkOverlap(validTask, validProject)
   if (!checkOverlap) {
     return res.status(400).send('Tasks cannot overlap.')
   }
@@ -84,14 +99,17 @@ function checkOverlap (task, project) {
   console.log('task', task)
   console.log('project', project)
 
+  taskStart = new Date(0, 0, task.day, task.start_time)
+  taskFinish = new Date(0, 0, task.day, task.start_time + task.length)
+
   for(let projTask of project.tasks) {
-    if (projTask.day == task.day ) {
-      if(
-        ((task.start_time > projTask.start_time) && (task.start_time < (projTask.start_time + projTask.length))) || 
-        (((task.start_time + task.length) > projTask.start_time) && ((task.start_time + task.length) < (projTask.start_time + projTask.length)))
-      ) {
-        return false
-      }
+    projTaskStart = new Date(0, 0, projTask.day, projTask.start_time)
+    projTaskFinish = new Date(0, 0, projTask.day, projTask.start_time + projTask.length)
+    if(
+      (taskStart > projTaskStart && taskStart < projTaskFinish) ||
+      (taskFinish > projTaskStart && taskFinish < projTaskFinish)
+    ) {
+      return false
     }
   }
   return true
