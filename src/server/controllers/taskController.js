@@ -7,15 +7,18 @@ async function createTask (req, res) {
   
   let task = req.body
 
-  const { error } = validateTask(task)
-  if (error) return res.status(400).send(error.details[0].message)
-
-
   let validProject = await ProjectModel.findById(req.params.projectId)
 
   if (!validProject) {
     return res.status(400).send('That project does not exist.')
   }
+
+  let projectDays = ((validProject.end_date.getDate() - validProject.start_date.getDate())) + 1
+
+
+  const { error } = validateTask(task, projectDays)
+  if (error) return res.status(400).send(error.details[0].message)
+
 
   checkOverlap(task, validProject)
   if (!checkOverlap) {
@@ -56,8 +59,9 @@ async function updateTask (req, res) {
 
   let validTask = validProject.tasks.find((val) => val._id = req.params.taskId)
 
+  let projectDays = ((validProject.end_date.getDate() - validProject.start_date.getDate())) + 1
 
-  const { error } = validateTask(req.body)
+  const { error } = validateTask(req.body, projectDays)
   if (error) return res.status(400).send(error.details[0].message)
 
   validTask.title = req.body.title
@@ -97,8 +101,6 @@ async function removeTask (req, res) {
 
 function checkOverlap (task, project) {
 
-  console.log('task', task)
-  console.log('project', project)
 
   taskStart = new Date(0, 0, task.day, task.start_time)
   taskFinish = new Date(0, 0, task.day, task.start_time + task.length)
