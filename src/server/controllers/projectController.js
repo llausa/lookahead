@@ -59,7 +59,6 @@ async function update (req, res) {
   req.body.owner = req.user._id
   let validUser = await UserModel.findById(req.user._id)
 
-
   let validProject = await ProjectModel.findById((req.params.projectId))
   if (!validProject) return res.status(404).json({"message": "Couldn't find project."})
 
