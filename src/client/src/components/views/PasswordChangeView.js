@@ -3,7 +3,7 @@ import { Button } from '@material-ui/core'
 import axios from 'axios'
 import MailIcon from '@material-ui/icons/Mail'
 import CardContainer from '../CardContainer'
-import Background from '../../images/WhiteBackgroundSmall.jpg'
+import Background from '../Background'
 import Nav from '../Nav'
 import TitleText from '../TitleText'
 import FormInput from '../FormInput'
@@ -68,7 +68,7 @@ const PasswordChangeView = () => {
 
     return (
         <>
-        <Nav backButtonLink = "/projects" BackButton={true} MenuButton={false}/>
+        <Nav BackButton={false} MenuButton={false}/>
         <CardContainer background={Background}>
         <form onSubmit={onSubmit} className='form'> 
         <div data-cy="passwordView" style={mystyle}>
@@ -79,6 +79,7 @@ const PasswordChangeView = () => {
         </div>
         </form>
         </CardContainer>
+        <Background/>
         </>
     )
 }

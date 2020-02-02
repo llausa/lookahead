@@ -5,7 +5,7 @@ import Nav from '../Nav'
 import DateInput from '../DateInput'
 import TextInput from '../TextInput'
 import ButtonInput from '../ButtonInput'
-import Background from '../../images/WhiteBackgroundSmall.jpg'
+import Background from '../Background'
 import TitleText from '../TitleText'
 import NormalText from '../NormalText'
 import TimeZonePicker from '../TimeZonePicker'
@@ -75,6 +75,7 @@ const NewLookaheadView = () => {
         </div>
         </form>
         </CardContainer>
+        <Background/>
         </>
     )
 }

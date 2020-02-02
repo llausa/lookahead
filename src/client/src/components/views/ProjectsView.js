@@ -1,10 +1,11 @@
-import React from "react";
+import React from "react"
+import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 import AddIcon from '@material-ui/icons/Add'
 import ProjectCard from '../ProjectCard'
 import Nav from '../Nav'
 import TitleText from '../TitleText'
-import Background from '../../images/WhiteBackgroundSmall.jpg'
+import Background from '../Background'
 
 const mystyle = {
     display: "flex",
@@ -61,9 +62,10 @@ const ProjectsView = () => {
         <ProjectCard title="YEEET" />
         <ProjectCard/>
 
-        <Button onClick={CreateNewPressed} variant="outlined" style={buttonMain} color="primary">Create New <AddIcon style={smallIcon} /></Button>
+        <Button component={Link} to="/projects/new" onClick={CreateNewPressed} variant="outlined" style={buttonMain} color="primary">Create New <AddIcon style={smallIcon} /></Button>
         </div>
         </div>
+        <Background/>
         </>
     )
 }

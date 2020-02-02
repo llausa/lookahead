@@ -9,7 +9,7 @@ import FormInput from '../FormInput'
 import TitleText from '../TitleText'
 import NormalText from '../NormalText'
 import CardContainer from '../CardContainer'
-import Background from '../../images/WhiteBackgroundSmall.jpg'
+import Background from '../Background'
 
 
 const Login = () => {
@@ -79,7 +79,7 @@ const Login = () => {
     
     return (
         <>
-        <Nav backButtonLink = "/" BackButton={true} MenuButton={true}/>
+        <Nav backButtonLink = "/" BackButton={true} MenuButton={false}/>
         <CardContainer background={Background}>
         <form onSubmit={onSubmit} className='form'> 
         <div data-cy="loginView" style={mystyle}>
@@ -94,6 +94,7 @@ const Login = () => {
         </div>
         </form>
         </CardContainer>
+        <Background/>
         </>
     )
 }
