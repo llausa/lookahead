@@ -3,6 +3,11 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const _ = require('lodash')
 
+async function details(req, res) {
+  const user = await UserModel.findById(req.user._id).select('-password')
+  res.send(user)
+}
+
 async function register(req, res) {
   const { error } = validateUser(req.body)
   if (error) return res.status(400).json({"message": 'Invalid user data.'})
@@ -76,4 +81,4 @@ async function updateEmail(req, res) {
   res.status(200).json({"message": "Email updated successfully."})
 }
 
-module.exports = { register, updateDetails, updatePassword, updateEmail }
+module.exports = { register, updateDetails, updatePassword, updateEmail, details }
