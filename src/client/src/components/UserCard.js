@@ -4,6 +4,7 @@ import CardContent from '@material-ui/core/CardContent'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import NormalText from './NormalText'
 import ButtonUserImport from './ButtonUserInput'
+import ButtonUserInput from "./ButtonUserInput"
 
 
 const innerDiv = {
@@ -37,14 +38,16 @@ const UserCard = (props) => {
     <Card  style={CardStyle}>
     <CardContent>
     <div style={{display: "flex"}}>
-      <div style={{margin: "auto"}}>
+      <div style={{margin: "auto", maxWidth: "100px"}}>
         <AccountCircleIcon style={{color: "#006EE2", fontSize: "8rem" }}/>
       </div>
       
       <div style={innerDiv}>
-        <h1>{props.user ? (`${props.user}`) : ("User")}</h1>
-        <NormalText text={"Privileges: " + props.userPrivilege} />
-        <NormalText text={"Email: " + props.userEmail} />
+        <h1 style={{margin: "10px"}}>{props.user ? (`${props.user}`) : ("User")}</h1>
+        <NormalText text={"Privileges: " + props.userPrivilege} style={{margin: 0}}/>
+        <NormalText text={"Email: " + props.userEmail} style={{margin: 0}}/>
+
+        {props.userEdit ? (<ButtonUserInput text="Edit User"/>) : (<ButtonUserInput add={true} text="Add User"/>)}
       </div>
     </div>
     </CardContent>

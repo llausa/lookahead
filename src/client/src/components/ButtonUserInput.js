@@ -5,23 +5,21 @@ const ButtonUserInput = (props) => {
 
   const Primary = {
     color: "#006EE2",
-    margin: "20px",
-    border: "1px solid #006EE2"
+    border: "1px solid #006EE2",
+    fontSize: "8px"
   }
 
   const Secondary = {
     color: "rgb(140, 140, 140)",
-    margin: "30px 80px",
     fontSize: "8px"
   }
 
   const Disabled = {
     color: "#C4C4C4",
-    margin: "20px",
     border: "1px solid #C4C4C4"
   }
 
-  return (<> {props.disabled? (<Button variant="outlined" type={props.type} style={Disabled} color={props.color} disabled > {props.text} </Button>)
+  return (<> {props.add? (<Button variant="outlined" type={props.type} style={Primary} color={props.color} > {props.text} </Button>)
   :
   (<Button variant="outlined" type={props.type} style={props.primary? Primary : Secondary} color={props.color}> {props.text} </Button>)}
   </>)
