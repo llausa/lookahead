@@ -18,7 +18,7 @@ async function createTask (req, res) {
 
   let userInProject = validProject.users.find(element => element.user == validUser._id)
 
-  if ((validUser._id == String(validProject.owner)) || userInProject == 'Write' ) {
+  if ((validUser._id == String(validProject.owner)) || userInProject.role == 'Write' ) {
 
     let projectDays = ((validProject.end_date.getDate() - validProject.start_date.getDate())) + 1
 
@@ -73,7 +73,7 @@ async function updateTask (req, res) {
 
   let userInProject = validProject.users.find(element => element.user == validUser._id)
 
-  if ((validUser._id == String(validProject.owner)) || userInProject == 'Write' ) {
+  if ((validUser._id == String(validProject.owner)) || userInProject.role == 'Write' ) {
 
   let validTask = validProject.tasks.find((val) => val._id = req.params.taskId)
 
@@ -117,7 +117,7 @@ async function removeTask (req, res) {
 
   let userInProject = validProject.users.find(element => element.user == validUser._id)
 
-  if ((validUser._id == String(validProject.owner)) || userInProject == 'Write' ) {
+  if ((validUser._id == String(validProject.owner)) || userInProject.role == 'Write' ) {
 
   const {error} = await validProject.tasks.pull(req.params.taskId)
   if (error) return res.status(400).end(error.details[0].message)
