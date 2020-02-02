@@ -7,7 +7,7 @@ async function allProjects (req, res) {
   req.body.owner = req.user._id
 
   let validUser = await UserModel.findById(req.user._id)
-  if (!validUser) return res.status(404).json({"message": 'Critical Error: User does not exist in the database'})
+  .catch( (err) => { return res.status(404).json(error.details[0].message) })
 
   let userProjs = validUser.projects.map(project => project.project)
 
@@ -25,6 +25,7 @@ async function create (req, res) {
   if (error) return res.status(400).send(error.details[0].message)
 
   let validUser = await UserModel.findById(req.user._id)
+  .catch( (err) => { return res.status(404).json(error.details[0].message) })
 
   if (!validUser) {
     return res.status(404).send('Critical Error: User does not exist in the database')
@@ -47,7 +48,7 @@ async function getProject (req, res) {
   req.body.owner = req.user._id
 
   let validUser = await UserModel.findById(req.user._id)
-  if (!validUser) return res.status(404).json({"message": 'Critical Error: User does not exist in the database'})
+  .catch( (err) => { return res.status(404).json(error.details[0].message) })
 
   let validProject = await ProjectModel.findById((req.params.projectId))
   .catch( (err) => { return res.status(404).json(error.details[0].message) })
@@ -66,6 +67,7 @@ async function update (req, res) {
 
   req.body.owner = req.user._id
   let validUser = await UserModel.findById(req.user._id)
+  .catch( (err) => { return res.status(404).json(error.details[0].message) })
 
   let validProject = await ProjectModel.findById((req.params.projectId))
   .catch( (err) => { return res.status(404).json(error.details[0].message) })
@@ -90,6 +92,7 @@ async function update (req, res) {
 async function remove (req, res) {
   req.body.owner = req.user._id
   let validUser = await UserModel.findById(req.user._id)
+  .catch( (err) => { return res.status(404).json(error.details[0].message) })
 
   let validProject = await ProjectModel.findById((req.params.projectId))
   .catch( (err) => { return res.status(404).json(error.details[0].message) })
@@ -97,7 +100,7 @@ async function remove (req, res) {
   if (validUser._id == String(validProject.owner)) {
     ProjectModel.findByIdAndRemove(req.params.projectId, async (err, project) => {
 
-    if (err) return res.status(404).send(err);
+    if (err) return res.status(404).send(err)
 
     for ( let user of project.users ) {
       await removeProjectFromUser(user.user, req.params.projectId)
@@ -119,7 +122,7 @@ async function usersInProject (req, res) {
   req.body.owner = req.user._id
 
   let validUser = await UserModel.findById(req.user._id)
-  if (!validUser) return res.status(404).json({"message": 'Critical Error: User does not exist in the database'})
+  .catch( (err) => { return res.status(404).json(error.details[0].message) })
 
   let validProject = await ProjectModel.findById((req.params.projectId))
   .catch( (err) => { return res.status(404).json(error.details[0].message) })
@@ -129,6 +132,7 @@ async function usersInProject (req, res) {
     projUsers.push(validProject.owner)
 
     let usersObjs = await UserModel.find({ _id: { $in: projUsers } })
+    .catch( (err) => { return res.status(404).json(error.details[0].message) })
 
     res.status(200).json(usersObjs)
   } else {
@@ -141,7 +145,7 @@ async function usersNotInProject (req, res) {
   req.body.owner = req.user._id
 
   let validUser = await UserModel.findById(req.user._id)
-  if (!validUser) return res.status(404).json({"message": 'Critical Error: User does not exist in the database'})
+  .catch( (err) => { return res.status(404).json(error.details[0].message) })
 
   let validProject = await ProjectModel.findById((req.params.projectId))
   .catch( (err) => { return res.status(404).json(error.details[0].message) })
@@ -151,6 +155,7 @@ async function usersNotInProject (req, res) {
     projUsers.push(validProject.owner)
 
     let usersObjs = await UserModel.find({ _id: { $nin: projUsers } })
+    .catch( (err) => { return res.status(404).json(error.details[0].message) })
 
     res.status(200).json(usersObjs)
   } else {
@@ -162,7 +167,7 @@ async function usersNotInProject (req, res) {
 async function updateUser (req, res) {
 
   let validUser = await UserModel.findById(req.user._id)
-  if (!validUser) return res.status(404).json({"message": 'Critical Error: User does not exist in the database'})
+  .catch( (err) => { return res.status(404).json(error.details[0].message) })
 
   let validProject = await ProjectModel.findById((req.params.projectId))
   .catch( (err) => { return res.status(404).json(error.details[0].message) })
@@ -229,6 +234,7 @@ async function removeUser (req, res) {
 async function updateUserRoleInProject (userId, projectId, role) {
 
   let user = await UserModel.findById(userId)
+  .catch( (err) => { return res.status(404).json(error.details[0].message) })
 
   let oldmate = user.projects.find(element => element.project == projectId)
 
@@ -239,6 +245,7 @@ async function updateUserRoleInProject (userId, projectId, role) {
 }
 async function removeProjectFromUser (userId, projectId) {
   let user = await UserModel.findById(userId)
+  .catch( (err) => { return res.status(404).json(error.details[0].message) })
 
   let oldmate = user.projects.find(element => element.project == projectId)
 
@@ -259,6 +266,7 @@ async function addProjectToUser (id, project, role) {
     await user.save()
 
   })
+  .catch( (err) => { return res.status(404).json(error.details[0].message) })
   // return 'Project successfully added to User'
 }
 

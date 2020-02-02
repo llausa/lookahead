@@ -5,6 +5,8 @@ const _ = require('lodash')
 
 async function details(req, res) {
   const user = await UserModel.findById(req.user._id).select('-password -email')
+  .catch( (err) => { return res.status(404).json(error.details[0].message) })
+
   res.send(user)
 }
 
@@ -34,9 +36,8 @@ async function register(req, res) {
 
 async function updateDetails(req, res) {
 
-
-  const validUser = await UserModel.findById(req.user._id)
-  if (!validUser) return res.status(404).json({"message": "Couldn't find user."})
+  let validUser = await UserModel.findById(req.user._id)
+  .catch( (err) => { return res.status(404).json(error.details[0].message) })
 
   if (!req.body.firstName || !req.body.lastName || !req.body.position ) {
     return res.status(400).json({"message": "Invalid user data."})
@@ -53,8 +54,8 @@ async function updateDetails(req, res) {
 
 async function updatePassword(req, res) {
 
-  const validUser = await UserModel.findById(req.user._id)
-  if (!validUser) return res.status(404).json({"message": "Couldn't find user."})
+  let validUser = await UserModel.findById(req.user._id)
+  .catch( (err) => { return res.status(404).json(error.details[0].message) })
 
   const { error } = validatePassword({password: req.body.newPassword})
   if (error) return res.status(400).json({"message": 'Invalid password.'})
@@ -71,8 +72,8 @@ async function updatePassword(req, res) {
 
 async function updateEmail(req, res) {
 
-  const validUser = await UserModel.findById(req.user._id)
-  if (!validUser) return res.status(404).json({"message": "Couldn't find user."})
+  let validUser = await UserModel.findById(req.user._id)
+  .catch( (err) => { return res.status(404).json(error.details[0].message) })
 
   const { error } = validateEmail({email: req.body.email})
   if (error) return res.status(400).json({"message": 'Email address must be a valid email.'})
@@ -83,8 +84,9 @@ async function updateEmail(req, res) {
   const validPassword = await bcrypt.compare(req.body.password, validUser.password)
   if (!validPassword) return res.status(400).json({"message":'Incorrect Password'})
 
-  let user = await UserModel.findOne({ email: req.body.email })
-  if(user) return res.status(409).json({"message": "An account already exists with that email."})
+  await UserModel.findOne({ email: req.body.email })
+  .catch( (err) => { return res.status(409).json({"message": "An account already exists with that email."})})
+
 
   validUser.email = req.body.email
 
