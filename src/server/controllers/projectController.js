@@ -154,16 +154,16 @@ async function updateUser (req, res) {
     return res.status(404).send('That project does not exist.')
   }
 
-  let updateUser = validProject.users.find(element => element.user == req.params.userId)
-  if (!updateUser) {
+  let changingUser = validProject.users.find(element => element.user == req.params.userId)
+  if (!changingUser) {
     return res.status(404).send('That user does not exist.')
-  }updateUser
+  }
 
   if (validUser._id == String(validProject.owner)) {
-  updateUser.role = req.body.role
+  changingUser.role = req.body.role
   await validProject.save()
 
-  await updateUserRoleInProject(updateUser.user, req.params.projectId, req.body.role)
+  await updateUserRoleInProject(changingUser.user, req.params.projectId, req.body.role)
 
   res.status(200).json({"message": "User updated successfully."})
   } else {
