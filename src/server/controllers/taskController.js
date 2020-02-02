@@ -1,9 +1,12 @@
 const { TaskSchema, validateTask } = require("../models/task")
 const { ProjectModel } = require("../models/project")
+const { UserModel } = require("../models/user")
 const _ = require("lodash")
 
 async function createTask (req, res) {
 
+  let validUser = await UserModel.findById(req.user._id)
+  if (!validUser) return res.status(404).json({"message": 'Critical Error: Logged in User does not exist in the database'})
 
   let task = req.body
 
@@ -13,48 +16,64 @@ async function createTask (req, res) {
     return res.status(400).send('That project does not exist.')
   }
 
-  let projectDays = ((validProject.end_date.getDate() - validProject.start_date.getDate())) + 1
+  let userInProject = validProject.users.find(element => element.user == validUser._id)
+
+  if ((validUser._id == String(validProject.owner)) || userInProject == 'Write' ) {
+
+    let projectDays = ((validProject.end_date.getDate() - validProject.start_date.getDate())) + 1
 
 
-  const { error } = validateTask(task, projectDays)
-  if (error) return res.status(400).send(error.details[0].message)
+    const { error } = validateTask(task, projectDays)
+    if (error) return res.status(400).send(error.details[0].message)
 
 
-  checkOverlap(task, validProject)
-  if (!checkOverlap) {
-    return res.status(400).send('Tasks cannot overlap.')
-  }
+    checkOverlap(task, validProject)
+    if (!checkOverlap) {
+      return res.status(400).send('Tasks cannot overlap.')
+    }
 
-  if ((task.start_time + task.length) > 24) {
+    if ((task.start_time + task.length) > 24) {
 
-    let overlap = ((parseInt(task.start_time) + parseInt(task.length)) - 24)
+      let overlap = ((parseInt(task.start_time) + parseInt(task.length)) - 24)
 
-    let splitTask = Object.assign({}, task)
-    splitTask.length = overlap
-    splitTask.day += 1
+      let splitTask = Object.assign({}, task)
+      splitTask.length = overlap
+      splitTask.day += 1
 
-    task.length -= overlap
+      task.length -= overlap
 
-    validProject.tasks.push(task, splitTask)
-    await validProject.save()
+      validProject.tasks.push(task, splitTask)
+      await validProject.save()
 
-    res.status(201).json({message:'Tasks successfully created.'})
+      res.status(201).json({message:'Tasks successfully created.'})
 
+    } else {
+      validProject.tasks.push(task)
+      await validProject.save()
+
+      res.status(201).json({"message":'Task successfully created.'})
+    }
   } else {
-    validProject.tasks.push(task)
-    await validProject.save()
-
-    res.status(201).json({"message":'Task successfully created.'})
+    res.status(401).json({"message": "You're not authorized to edit this project."})
   }
+ 
 }
 
 async function updateTask (req, res) {
+
+  let validUser = await UserModel.findById(req.user._id)
+  if (!validUser) return res.status(404).json({"message": 'Critical Error: Logged in User does not exist in the database'})
+
 
 
   let validProject = await ProjectModel.findById(req.params.projectId)
   if (!validProject) {
     return res.status(400).send('That project does not exist.')
   }
+
+  let userInProject = validProject.users.find(element => element.user == validUser._id)
+
+  if ((validUser._id == String(validProject.owner)) || userInProject == 'Write' ) {
 
   let validTask = validProject.tasks.find((val) => val._id = req.params.taskId)
 
@@ -79,14 +98,26 @@ async function updateTask (req, res) {
 
   res.status(200).json({message:'Task successfully updated.'})
 
+} else {
+  res.status(401).json({"message": "You're not authorized to edit this project."})
+}
+
 }
 
 async function removeTask (req, res) {
+
+  let validUser = await UserModel.findById(req.user._id)
+  if (!validUser) return res.status(404).json({"message": 'Critical Error: Logged in User does not exist in the database'})
+
 
   let validProject = await ProjectModel.findById(req.params.projectId)
   if (!validProject) {
     return res.status(400).send('That project does not exist.')
   }
+
+  let userInProject = validProject.users.find(element => element.user == validUser._id)
+
+  if ((validUser._id == String(validProject.owner)) || userInProject == 'Write' ) {
 
   const {error} = await validProject.tasks.pull(req.params.taskId)
   if (error) return res.status(400).end(error.details[0].message)
@@ -95,6 +126,10 @@ async function removeTask (req, res) {
 
 
   res.status(200).json({"message": "Task successfully deleted."})
+
+} else {
+  res.status(401).json({"message": "You're not authorized to edit this project."})
+}
 
 }
 
