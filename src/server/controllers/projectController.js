@@ -63,14 +63,12 @@ async function update (req, res) {
   req.body.owner = req.user._id
   let validUser = await UserModel.findById(req.user._id)
 
-
   let validProject = await ProjectModel.findById((req.params.projectId))
   if (!validProject) return res.status(404).json({"message": "Couldn't find project."})
 
   validProject.title = req.body.title
   validProject.timezone = req.body.timezone
   validProject.end_date = req.body.end_date
-
 
   let { err } = validateProject(validProject)
   if (err) return res.status(400).json({"message": "Project details are not correct."})
@@ -94,11 +92,7 @@ async function remove (req, res) {
   if (validUser._id == String(validProject.owner)) {
     ProjectModel.findByIdAndRemove(req.params.projectId, (err, project) => {
     if (err) return res.status(404).send(err);
-    const response = {
-      message: "Project successfully deleted",
-      id: project._id
-    }
-    return res.status(200).json({"message": "Project successfully deleted", "id": project })
+    return res.status(200).json({"message": "Project successfully deleted"})
   })
   } else {
     res.status(401).json({"message": "You're not authorized to see this project."})
@@ -152,21 +146,31 @@ async function usersNotInProject (req, res) {
 // Update User Role
 async function updateUser (req, res) {
 
+  let validUser = await UserModel.findById(req.user._id)
+  if (!validUser) return res.status(404).json({"message": 'Critical Error: User does not exist in the database'})
+
   let validProject = await ProjectModel.findById(req.params.projectId)
   if (!validProject) {
     return res.status(404).send('That project does not exist.')
   }
 
-  let validUser = validProject.users.find(element => element.user == req.params.userId)
-  if (!validUser) {
+  let changingUser = validProject.users.find(element => element.user == req.params.userId)
+  if (!changingUser) {
     return res.status(404).send('That user does not exist.')
   }
-  validUser.role = req.body.role
+
+  if (validUser._id == String(validProject.owner)) {
+  changingUser.role = req.body.role
   await validProject.save()
 
-  await updateUserRoleInProject(validUser.user, req.params.projectId, req.body.role)
+  await updateUserRoleInProject(changingUser.user, req.params.projectId, req.body.role)
 
   res.status(200).json({"message": "User updated successfully."})
+  } else {
+    res.status(401).json({"message": "You're not authorized to update this project."})
+  }
+
+ 
 
 }
 // Add User to Project
@@ -184,6 +188,7 @@ async function addUser (req, res) {
     await project.save()
 
   })
+
   await addProjectToUser(id, req.params.projectId, role)
 
   res.status(200).json("User added to Project Successfully.")
