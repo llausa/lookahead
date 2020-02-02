@@ -7,29 +7,57 @@ const chai = require('chai')
 const chaiHttp = require('chai-http')
 const chaiAsPromised = require("chai-as-promised")
 const JWT = require('jsonwebtoken')
+const { ProjectModel } = require('../../models/project')
 const expect = chai.expect
 chai.use(chaiAsPromised)
 chai.use(chaiHttp)
 
-let validUser = { 
+let validOwner = {
+	"firstName": "notATest",
+	"lastName": "notATester",
+	"position": "notABiggBoi",
+	"email": "notatest@test.com",
+	"password": "Test1245"
+}
+
+let validUser = {
 	"firstName": "Test",
 	"lastName": "Tester",
 	"position": "biggboi",
 	"email": "test@test.com",
-	"password": "Test1245"
+  "password": "Test1245"
+}
+
+let validUser2 = {
+	"firstName": "Test2",
+	"lastName": "Tester2",
+	"position": "biggboi2",
+	"email": "test2@test.com",
+	"password": "Test54321"
+}
+
+let validProject = {
+  title: "Test Project",
+  create_date: "2020-02-01",
+  start_date: "2020-02-02",
+  end_date: "2020-02-05",
+  location: "Brisbane",
+  timezone: 10
 }
 
 let authToken
+let secondToken
+let projectId
 
 
 if (mongoose.connection.name === 'lookahead-test') {
 
   // console.log('WE ARE RUNNING THESE TESTS!')
 
-  describe('Page load Integration Tests', () => { 
+  describe('Page load Integration Tests', () => {
 
     before( (done) => {
-      mongoose.connect('mongodb://localhost/lookahead-test', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true}) 
+      mongoose.connect('mongodb://localhost/lookahead-test', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
       .then(
       mongoose.connection
         .once('open', () => {
@@ -42,7 +70,7 @@ if (mongoose.connection.name === 'lookahead-test') {
       )
     })
 
-    beforeEach( (done) => { 
+    beforeEach( (done) => {
       mongoose.connection.db.dropDatabase(() => {
         done()
       })
@@ -58,16 +86,35 @@ if (mongoose.connection.name === 'lookahead-test') {
             chai.request(app)
             .post('/api/auth')
             .type('form')
-            .send({ 
+            .send({
               "email": "test@test.com",
               "password": "Test1245"
             })
             .end((err, res) => {
-              authToken = res.text
-              done()
+              // console.log(res.body.token)
+              authToken = res.body.token
+              chai
+              .request(app)
+              .post("/api/projects")
+              .type("form")
+              .set("Authorization", `Bearer ${authToken}`)
+              .send(validProject)
+              .end(async (err, res) => {
+                await ProjectModel.find({ title: "Test Project" }, function(
+                  err,
+                  project
+                ) {
+                  projectId = project[0]._id
+                  console.log(projectId)
+                  done()
+                })
+
             })
         })
     })
+
+  })
+
 
     after( (done) => {
       console.log('Closing Connection')
@@ -82,40 +129,42 @@ if (mongoose.connection.name === 'lookahead-test') {
       let decoded = JWT.decode(authToken)
 
       it('Succesfully Loads the Projects Page Data', (done) => {
-        
+
         chai.request(app)
-        .get('/projects')
+        .get('/api/projects')
         .set('Authorization', `Bearer ${authToken}`)
         .end((err, res) => {
+            // console.log(res)
             expect(err).to.be.null
             expect(res).to.have.status(200)
+            // console.log(res)
             expect(res.body.projects).to.be.an('array')
-            expect(res.body.projects[0]).to.have.nested.property('_id', decoded._id)
             done()
         })
       })
 
-      it('Succesfully Loads the Account Details Page Data', (done) => {
-        
+      it('Succesfully Loads the User Details Page Data', (done) => {
+
         chai.request(app)
-        .get('/account/details')
+        .get('/api/users/details')
         .set('Authorization', `Bearer ${authToken}`)
         .end((err, res) => {
             expect(err).to.be.null
             expect(res).to.have.status(200)
-            expect(res.body.details).to.have.property('firstName', validUser.firstName)
-            expect(res.body.details).to.have.property('lastName', validUser.lastName)
-            expect(res.body.details).to.have.property('position', validUser.position)
+            expect(res.body).to.have.property('firstName', validUser.firstName)
+            expect(res.body).to.have.property('lastName', validUser.lastName)
+            expect(res.body).to.have.property('position', validUser.position)
             done()
         })
       })
 
       it('Succesfully Loads the Project Users Page Data', (done) => {
-        
+
         chai.request(app)
         .get(`/project/${project._id}/users`)
         .set('Authorization', `Bearer ${authToken}`)
         .end((err, res) => {
+            console.log(res)
             expect(err).to.be.null
             expect(res).to.have.status(200)
             expect(res.body.users).to.be.an('array')
@@ -125,7 +174,7 @@ if (mongoose.connection.name === 'lookahead-test') {
       })
 
       it('Succesfully Loads the Project Page Data', (done) => {
-        
+
         chai.request(app)
         .get(`/project/${project._id}`)
         .set('Authorization', `Bearer ${authToken}`)

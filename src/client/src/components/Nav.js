@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { makeStyles, AppBar, Toolbar, IconButton } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
@@ -30,7 +30,6 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-let menu = false
 
 const HandleBack = () => {
   console.log("We going back boi")

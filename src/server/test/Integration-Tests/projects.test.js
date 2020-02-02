@@ -161,7 +161,7 @@ if (mongoose.connection.name === "lookahead-test") {
               title: "Real Project"
             })
             .end(async (err, res) => {
-              // console.log(projectId)
+              // console.log(res)
               await ProjectModel.findById(projectId, function(err, project) {
                 expect(res).to.have.status(200)
                 expect(project.title).to.equal("Real Project")
@@ -497,7 +497,7 @@ if (mongoose.connection.name === "lookahead-test") {
 						expect(true).to.equal(false)
 						done()
 					})
-					
+
 					it("Overlapping Task should fail", done => {
 
 							chai
