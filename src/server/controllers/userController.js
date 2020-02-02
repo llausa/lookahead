@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt')
 const _ = require('lodash')
 
 async function details(req, res) {
-  const user = await UserModel.findById(req.user._id).select('-password')
+  const user = await UserModel.findById(req.user._id).select('-password -email')
   res.send(user)
 }
 
