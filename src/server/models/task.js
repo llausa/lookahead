@@ -13,18 +13,20 @@ const TaskSchema = new mongoose.Schema({
 })
 
 
-function validateTask (task) {
+function validateTask (task, projectDays) {
+
 
   const schema = Joi.object({
       title: Joi.string().required(),
       start_time: Joi.number().min(0).max(23).required(),
       length: Joi.number().min(1).max(24).required(),
-      day: Joi.number().min(1).required(),
+      day: Joi.number().min(1).max(projectDays).required(),
       description:  Joi.string(),
       complete: Joi.boolean()
   })
 
   return schema.validate(task)
+
 }
 
 module.exports = { TaskSchema, validateTask }
