@@ -23,7 +23,8 @@ async function createTask (req, res) {
   }
 
   if ((task.start_time + task.length) > 24) {
-    let overlap = ((task.start_time + task.length) - 24)
+
+    let overlap = ((parseInt(task.start_time) + parseInt(task.length)) - 24)
 
     let splitTask = Object.assign({}, task)
     splitTask.length = overlap

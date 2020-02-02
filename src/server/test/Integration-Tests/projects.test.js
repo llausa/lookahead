@@ -537,9 +537,10 @@ if (mongoose.connection.name === "lookahead-test") {
                   err,
                   project
                 ) {
-									expect(project[0].tasks[1])._id.to.exist
-									expect(project[0].tasks[2])._id.to.exist
-									expect(res).to.have.status(200)
+									expect(project[0].tasks[1]._id).to.exist
+									expect(project[0].tasks[2]._id).to.exist
+									expect(res).to.have.status(201)
+									expect(res.body.message).to.equal("Tasks successfully created.")
 									expect()
                   done()
                 })
