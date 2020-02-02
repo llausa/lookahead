@@ -23,7 +23,10 @@ router.put("/:projectId", auth, projectController.update)
 router.delete("/:projectId", auth, projectController.remove )
 
 // get project users
-router.get("/:projectId/users", auth, projectController.users)
+router.get("/:projectId/users", auth, projectController.usersInProject)
+
+// get app users not in project
+router.get("/:projectId/add_users", auth, projectController.usersNotInProject)
 
 // Project add any user role to a project
 router.post("/:projectId/users", auth, projectController.addUser )

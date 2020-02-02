@@ -102,10 +102,49 @@ async function remove (req, res) {
 }
 
 // Get Users of Project
-async function users (req, res) {
-  res.send(200)
+async function usersInProject (req, res) {
+  req.body.owner = req.user._id
+
+  let validUser = await UserModel.findById(req.user._id)
+  if (!validUser) return res.status(400).json({"message": 'Critical Error: User does not exist in the database'})
+
+  let validProject = await ProjectModel.findById(req.params.projectId)
+  if (!validProject) return res.status(404).json({"message": "Project with this ID was not found."})
+
+  if (validUser._id == String(validProject.owner)) {
+    let projUsers = validProject.users.map(user => user.user)
+    projUsers.push(validProject.owner)
+
+    let usersObjs = await UserModel.find({ _id: { $in: projUsers } })
+
+    res.status(200).json(usersObjs)
+  } else {
+    res.status(404).json({"message": "You're not authorized to see this project."})
+  }
 }
 
+async function usersNotInProject (req, res) {
+  req.body.owner = req.user._id
+
+  let validUser = await UserModel.findById(req.user._id)
+  if (!validUser) return res.status(400).json({"message": 'Critical Error: User does not exist in the database'})
+
+  let validProject = await ProjectModel.findById(req.params.projectId)
+  if (!validProject) return res.status(404).json({"message": "Project with this ID was not found."})
+
+  if (validUser._id == String(validProject.owner)) {
+    let projUsers = validProject.users.map(user => user.user)
+    projUsers.push(validProject.owner)
+
+    let usersObjs = await UserModel.find({ _id: { $nin: projUsers } })
+
+    res.status(200).json(usersObjs)
+  } else {
+    res.status(404).json({"message": "You're not authorized to see this project."})
+  }
+}
+
+// Update User Role
 // Update User Role
 async function updateUser (req, res) {
 
@@ -118,7 +157,6 @@ async function updateUser (req, res) {
   if (!validUser) {
     return res.status(400).send('That user does not exist.')
   }
-
   validUser.role = req.body.role
   await validProject.save()
 
@@ -127,12 +165,10 @@ async function updateUser (req, res) {
   res.status(200).json({"message": "User updated successfully."})
 
 }
-
 // Add User to Project
 async function addUser (req, res) {
   req.body.owner = req.user._id
 
-  // console.log(req.params.projectId)
   let role = req.body.role
   let id = req.body.user
 
@@ -151,7 +187,6 @@ async function addUser (req, res) {
 
 // Remove User from Project
 async function removeUser (req, res) {
-
   let validProject = await ProjectModel.findById(req.params.projectId)
   if (!validProject) {
     return res.status(400).send('That project does not exist.')
@@ -167,23 +202,20 @@ async function removeUser (req, res) {
   await removeProjectFromUser(oldmate.user, req.params.projectId)
 
   res.status(200).json({"message": "User removed successfully."})
-
 }
 
-
+// Remove Project from User
 async function updateUserRoleInProject (userId, projectId, role) {
 
   let user = await UserModel.findById(userId)
 
-  let oldmate = user.projects.find(element => element.project == projectId) 
-  
+  let oldmate = user.projects.find(element => element.project == projectId)
+
   oldmate.role = role
 
   await user.save()
 
 }
-
-
 async function removeProjectFromUser (userId, projectId) {
   let user = await UserModel.findById(userId)
 
@@ -193,7 +225,6 @@ async function removeProjectFromUser (userId, projectId) {
 
   await user.save()
 }
-
 
 async function addProjectToUser (id, project, role) {
 
@@ -210,4 +241,4 @@ async function addProjectToUser (id, project, role) {
   // return 'Project successfully added to User'
 }
 
-module.exports = { create, update, remove, updateUser, users, removeUser, addUser, allProjects, getProject }
+module.exports = { create, update, remove, updateUser, usersInProject, removeUser, addUser, allProjects, getProject, usersNotInProject }
