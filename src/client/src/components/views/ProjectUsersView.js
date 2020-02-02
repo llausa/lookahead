@@ -57,8 +57,8 @@ const ProjectUsersView = () => {
         <div data-cy="projectsView" style={mystyle}>
         <TitleText text="Project Users" style={{ marginTop: "50px"}} />
 
-        <UserCard user="Mr Yeet" userPrivilege="Owner" userEmail="MrYeet@yeetmail.com" userEdit={true}/>
-        <UserCard userEdit={true}/>
+        <UserCard user="Elon Musk" userPrivilege="Owner" userEmail="Elon@Musk.com" userEdit={true}/>
+        <UserCard user="Steve Jobs" userPrivilege="Read/Write" userEmail="Steve@apple.com" userEdit={true}/>
 
         <Button component={Link} to="/project/:id/users/add" onClick={AddUserPressed} variant="outlined" style={buttonMain} color="primary">Add User<AddIcon style={smallIcon} /></Button>
         </div>

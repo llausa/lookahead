@@ -1,10 +1,33 @@
-import 'date-fns';
-import React from 'react';
-import DateFnsUtils from '@date-io/date-fns';
+import 'date-fns'
+import React from 'react'
+import DateFnsUtils from '@date-io/date-fns'
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
-} from '@material-ui/pickers';
+} from '@material-ui/pickers'
+import { withStyles} from '@material-ui/core/styles'
+
+const CssKeyboardDatePicker= withStyles({
+  root: {
+    '& label.Mui-focused': {
+      color: 'black',
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: 'black',
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: '#C4C4C4',
+      },
+      '&:hover fieldset': {
+        borderColor: 'black',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: 'black',
+      },
+    },
+  },
+})(KeyboardDatePicker)
 
 const  MaterialUIPickers = (props) => {
 
@@ -23,7 +46,7 @@ const  MaterialUIPickers = (props) => {
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <KeyboardDatePicker
+        <CssKeyboardDatePicker
           disableToolbar
           required = {true}
           inputVariant="outlined"

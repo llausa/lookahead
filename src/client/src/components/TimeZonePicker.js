@@ -1,7 +1,30 @@
 import React from 'react'
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import momentTZ from 'moment-timezone';
+import TextField from '@material-ui/core/TextField'
+import Autocomplete from '@material-ui/lab/Autocomplete'
+import momentTZ from 'moment-timezone'
+import { withStyles} from '@material-ui/core/styles'
+
+const CssTextField= withStyles({
+  root: {
+    '& label.Mui-focused': {
+      color: 'black',
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: 'black',
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: '#C4C4C4',
+      },
+      '&:hover fieldset': {
+        borderColor: 'black',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: 'black',
+      },
+    },
+  },
+})(TextField)
 
 const defaultTimeZone = ({location: momentTZ.tz.guess()})
 console.log(defaultTimeZone)
@@ -21,7 +44,7 @@ const TimeZonePicker = (props) => {
       options={timeZonesList}
       getOptionLabel={option => option.location}
       renderInput={params => (
-        <TextField {...params} label={props.label} variant="outlined" fullWidth />
+        <CssTextField {...params} label={props.label} variant="outlined" fullWidth />
       )}
     />
     </>
