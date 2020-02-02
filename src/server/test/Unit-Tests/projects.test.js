@@ -75,7 +75,7 @@ async function saveUsers() {
 describe('Test Project Model', () => {
 
   before( (done) => {
-    mongoose.connect('mongodb://localhost/lookahead-test', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true}) 
+    mongoose.connect('mongodb://localhost/lookahead-test', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
     .then(
     mongoose.connection
       .once('open', () => {
@@ -88,7 +88,7 @@ describe('Test Project Model', () => {
     )
   })
 
-  beforeEach( (done) => { 
+  beforeEach( (done) => {
       mongoose.connection.db.dropDatabase( async () => {
         done()
       })
@@ -207,14 +207,14 @@ describe('Test Project Model', () => {
         validProject.end_date = setDate(Date.now(), 10)
         validProject.timezone = undefined
         const invalidProject = new ProjectModel(validProject)
-        return expect(invalidProject.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')  
+        return expect(invalidProject.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
       })
 
       it('Create project without owner should fail', async () => {
         validProject.timezone = 10
         validProject.owner = undefined
         const invalidProject = new ProjectModel(validProject)
-        return expect(invalidProject.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')    
+        return expect(invalidProject.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
       })
 
 
