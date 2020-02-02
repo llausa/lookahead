@@ -73,9 +73,15 @@ async function update (req, res) {
   .catch( (err) => { return res.status(404).json(error.details[0].message) })
   // if (!validProject) return res.status(404).json({"message": "Couldn't find project."})
 
+  if (validProject.end_date.getDate() < Date.parse(req.body.end_date)) {
+    return res.status(400).json({"message": "Project can't be shortened."})
+  }
+
   validProject.title = req.body.title
   validProject.timezone = req.body.timezone
   validProject.end_date = req.body.end_date
+  validProject.location = req.body.location
+  
 
   let { err } = validateProject(validProject)
   if (err) return res.status(400).json({"message": "Project details are not correct."})
