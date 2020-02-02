@@ -42,13 +42,13 @@ async function getProject (req, res) {
   let validUser = await UserModel.findById(req.user._id)
   if (!validUser) return res.status(400).json({"message": 'Critical Error: User does not exist in the database'})
 
-  let project = await ProjectModel.findById((req.params.projectId))
-  if (!project) return res.status(404).json({"message": "Project with this ID was not found."})
+  let validProject = await ProjectModel.findById((req.params.projectId))
+  if (!validProject) return res.status(404).json({"message": "Project with this ID was not found."})
 
   let userInProject = validProject.users.find(element => element.user == validUser._id)
 
-  if ((validUser._id == String(project.owner)) || userInProject ) {
-    res.status(200).send(project)
+  if ((validUser._id == String(validProject.owner)) || userInProject ) {
+    res.status(200).send(validProject)
   } else {
     res.status(404).json({"message": "You're not authorized to see this project."})
   }
