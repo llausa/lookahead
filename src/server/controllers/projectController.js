@@ -101,6 +101,11 @@ async function remove (req, res) {
   }
 }
 
+// Get Users of Project
+async function users (req, res) {
+  res.send(200)
+}
+
 // Update User Role
 async function updateUser (req, res) {
 }
@@ -173,4 +178,4 @@ async function addProjectToUser (id, project, role) {
   // return 'Project successfully added to User'
 }
 
-module.exports = { create, update, remove, updateUser, removeUser, addUser, allProjects, getProject }
+module.exports = { create, update, remove, updateUser, users, removeUser, addUser, allProjects, getProject }
