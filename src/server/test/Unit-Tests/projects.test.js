@@ -105,6 +105,7 @@ describe('Test Project Model', () => {
         //Store Timezone as number +/- GMT?
         timezone: 10,
         owner: ownerUser._id,
+        location: "Brisbane",
         tasks: [
           {
             title: "Big Yeet",
@@ -233,48 +234,6 @@ describe('Test Project Model', () => {
         const invalidProject = new ProjectModel(validProject)
         return expect(invalidProject.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
       })
-
     })
-
-    describe('Date Validation', () => {
-
-      it('Start Date must be before End Date', async () => {
-        validProject.start_date = setDate(Date.now(), 3)
-        validProject.end_date = setDate(Date.now(), 2)
-        const invalidProject = new ProjectModel(validProject)
-        return expect(invalidProject.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
-      })
-
-      it('End Date must be after Start Date', async () => {
-        validProject.start_date = setDate(Date.now(), 3)
-        validProject.end_date = setDate(Date.now(), 2)
-        const invalidProject = new ProjectModel(validProject)
-        return expect(invalidProject.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
-      })
-
-    })
-
-    describe('Task Validation', () => {
-
-      it('Task must not overflow day', async () => {
-        const newProject = new ProjectModel(validProject)
-        const savedProject = await newProject.save()
-        savedProject.tasks.push(overflowTask)
-        return expect(savedProject.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
-      })
-
-      it('Tasks must not overlap', async () => {
-        const newProject = new ProjectModel(validProject)
-        const savedProject = await newProject.save()
-        savedProject.tasks.push(overlapTask)
-        return expect(savedProject.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
-      })
-
-    })
-
   })
-
-
-
-
 })

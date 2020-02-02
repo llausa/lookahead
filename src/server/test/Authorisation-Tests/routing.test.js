@@ -132,10 +132,8 @@ if (mongoose.connection.name === "lookahead-test") {
 					.get("/api/projects")
 					.set("Authorization", `Bearer ${authToken}`)
 					.end((err, res) => {
-						// console.log(res)
 						expect(err).to.be.null
 						expect(res).to.have.status(200)
-						// console.log(res)
 						expect(res.body.projects).to.be.an("array")
 						done()
 					})
@@ -159,14 +157,25 @@ if (mongoose.connection.name === "lookahead-test") {
 			it("Succesfully Loads the Project Users Page Data", done => {
 				chai
 					.request(app)
-					.get(`/api/projects/${projectId}`)
+					.get(`/api/projects/${projectId}/users`)
 					.set("Authorization", `Bearer ${authToken}`)
 					.end((err, res) => {
-						// console.log(res.body)
 						expect(err).to.be.null
 						expect(res).to.have.status(200)
-						expect(res.body.users).to.be.an("array")
-						expect(res.body.owner).to.equal(decoded._id)
+						expect(res.body).to.be.an("array")
+						done()
+					})
+			})
+
+      it("Succesfully Loads the Project Users Page Data", done => {
+				chai
+					.request(app)
+					.get(`/api/projects/${projectId}/add_users`)
+					.set("Authorization", `Bearer ${authToken}`)
+					.end((err, res) => {
+						expect(err).to.be.null
+						expect(res).to.have.status(200)
+						expect(res.body).to.be.an("array")
 						done()
 					})
 			})
@@ -179,7 +188,7 @@ if (mongoose.connection.name === "lookahead-test") {
 					.end((err, res) => {
 						expect(err).to.be.null
 						expect(res).to.have.status(200)
-						expect(res.body.projects).to.exist
+						expect(res.body).to.have.property("title", validProject.title)
 						done()
 					})
 			})
