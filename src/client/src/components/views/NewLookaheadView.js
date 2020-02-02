@@ -1,12 +1,15 @@
-import React from "react";
-
-import Button from '@material-ui/core/Button';
-
+import React from "react"
+import axios from 'axios'
+import CardContainer from '../CardContainer'
+import Nav from '../Nav'
 import DateInput from '../DateInput'
 import TextInput from '../TextInput'
 import FormInput from '../FormInput'
-import PasswordInput from '../PasswordInput'
 import ButtonInput from '../ButtonInput'
+import Background from '../../images/WhiteBackgroundSmall.jpg'
+import TitleText from '../TitleText'
+import NormalText from '../NormalText'
+import TimeZonePicker from '../TimeZonePicker'
 
 
 const NewLookaheadView = () => {
@@ -23,35 +26,30 @@ const NewLookaheadView = () => {
         margin: "auto",
     }
 
-    const buttonMain = {
-        color: "#2baafe",
-        margin: "20px",
-        border: "1px solid rgb(43, 170, 254)"
-    }
+    
 
-    const inputStyle = {
-        margin: "4px",
-    }
-
-    function SignupPressed() {
-        console.log("Signup Pressed")
-    }
 
     return (
+        <>
+      <Nav backButtonLink = "/projects" BackButton={true} MenuButton={false} />
+      <CardContainer background={Background}>
+      <form className='form'>
         <div data-cy="newProjectView" style={mystyle}>
-            <h1 style={{margin: "40px 0 10px 0", fontSize: "40px"}}>New Lookahead</h1>
-        
+            <TitleText text="New Project" />
+            <NormalText text="Please fill out all required fields" />
             <TextInput label="Title" required={true} />
             <TextInput label="Description" multiline={true} />
 
+            <TimeZonePicker label="Timezone" />
             <DateInput label="Start Date"/>
             <DateInput label="End Date"/>
-            
-            <FormInput/>
 
-            <ButtonInput main={true} text="Save">Save</ButtonInput>
+            <ButtonInput disabled={false} type='submit' primary={true} color='primary' text="Create" />
 
         </div>
+        </form>
+        </CardContainer>
+        </>
     )
 }
 
