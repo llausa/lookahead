@@ -75,11 +75,13 @@ async function updateEmail(req, res) {
   let validUser = await UserModel.findById(req.user._id)
   .catch( (err) => { return res.status(404).json(error.details[0].message) })
 
-  const { error } = validateEmail({email: req.body.email})
+
+
+  let error = validateEmail({email: req.body.email}).error
   if (error) return res.status(400).json({"message": 'Email address must be a valid email.'})
 
-  const { errors } = validatePassword({password: req.body.password})
-  if (errors) return res.status(400).json({"message": 'Invalid password.'})
+  error = validatePassword({password: req.body.password}).error
+  if (error) return res.status(400).json({"message": 'Invalid password.'})
 
   const validPassword = await bcrypt.compare(req.body.password, validUser.password)
   if (!validPassword) return res.status(400).json({"message":'Incorrect Password'})
