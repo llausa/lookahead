@@ -6,30 +6,30 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 
-export default function MaterialUIPickers(props) {
+const  MaterialUIPickers = (props) => {
 
 
-    var tempDate = new Date();
-    var date = tempDate.getFullYear() + '-' + (tempDate.getMonth()+1) + '-' + tempDate.getDate() +' '+ tempDate.getHours()+':'+ tempDate.getMinutes()+':'+ tempDate.getSeconds();
-    const currDate = "Current Date= "+date;
+  var tempDate = new Date()
+  var date = tempDate.getFullYear() + '-' + (tempDate.getMonth()+1) + '-' + (tempDate.getDate()+ props.day) +' '+ tempDate.getHours()+':'+ tempDate.getMinutes()+':'+ tempDate.getSeconds()
+  const currDate = "Current Date= "+date
     
 
 
-  // The first commit of Material-UI
-  const [selectedDate, setSelectedDate] = React.useState(new Date(currDate));
+  const [selectedDate, setSelectedDate] = React.useState(new Date(currDate))
 
   const handleDateChange = date => {
-    setSelectedDate(date);
-  };
+    setSelectedDate(date)
+  }
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <KeyboardDatePicker
           disableToolbar
+          required = {true}
           inputVariant="outlined"
           format="dd/MM/yyyy"
           margin="normal"
-          id="date-picker-dialog"
+          id={props.id}
           label={props.label}
           size="small"
           value={selectedDate}
@@ -39,5 +39,7 @@ export default function MaterialUIPickers(props) {
           }}
         />
     </MuiPickersUtilsProvider>
-  );
+  )
 }
+
+export default MaterialUIPickers
