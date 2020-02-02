@@ -6,7 +6,7 @@ const _  = require('lodash')
 async function allProjects (req, res) {
   req.body.owner = req.user._id
   let validUser = await UserModel.findById(req.user._id)
-  if (!validUser) return res.status(400).json({"message": 'Critical Error: User does not exist in the database'})
+  if (!validUser) return res.status(404).json({"message": 'Critical Error: User does not exist in the database'})
 
   res.status(200).json({"projects": (validUser.projects)})
 }
@@ -21,7 +21,7 @@ async function create (req, res) {
   let validUser = await UserModel.findById(req.user._id)
 
   if (!validUser) {
-    return res.status(400).send('Critical Error: User does not exist in the database')
+    return res.status(404).send('Critical Error: User does not exist in the database')
   }
 
   req.body.owner = validUser._id
@@ -40,7 +40,7 @@ async function getProject (req, res) {
   req.body.owner = req.user._id
 
   let validUser = await UserModel.findById(req.user._id)
-  if (!validUser) return res.status(400).json({"message": 'Critical Error: User does not exist in the database'})
+  if (!validUser) return res.status(404).json({"message": 'Critical Error: User does not exist in the database'})
 
   let validProject = await ProjectModel.findById((req.params.projectId))
   if (!validProject) return res.status(404).json({"message": "Project with this ID was not found."})
@@ -50,7 +50,7 @@ async function getProject (req, res) {
   if ((validUser._id == String(validProject.owner)) || userInProject ) {
     res.status(200).send(validProject)
   } else {
-    res.status(404).json({"message": "You're not authorized to see this project."})
+    res.status(401).json({"message": "You're not authorized to see this project."})
   }
 }
 
@@ -75,7 +75,7 @@ async function update (req, res) {
     await validProject.save()
     res.status(200).json({"message": "Project details successfully updated"})
   } else {
-    res.status(404).json({"message": "You're not authorized to see this project."})
+    res.status(401).json({"message": "You're not authorized to see this project."})
   }
 }
 
@@ -89,7 +89,7 @@ async function remove (req, res) {
 
   if (validUser._id == String(validProject.owner)) {
     ProjectModel.findByIdAndRemove(req.params.projectId, (err, project) => {
-    if (err) return res.status(400).send(err);
+    if (err) return res.status(404).send(err);
     const response = {
       message: "Project successfully deleted",
       id: project._id
@@ -97,7 +97,7 @@ async function remove (req, res) {
     return res.status(200).json({"message": "Project successfully deleted", "id": project })
   })
   } else {
-    res.status(404).json({"message": "You're not authorized to see this project."})
+    res.status(401).json({"message": "You're not authorized to see this project."})
   }
 }
 
@@ -106,7 +106,7 @@ async function usersInProject (req, res) {
   req.body.owner = req.user._id
 
   let validUser = await UserModel.findById(req.user._id)
-  if (!validUser) return res.status(400).json({"message": 'Critical Error: User does not exist in the database'})
+  if (!validUser) return res.status(404).json({"message": 'Critical Error: User does not exist in the database'})
 
   let validProject = await ProjectModel.findById(req.params.projectId)
   if (!validProject) return res.status(404).json({"message": "Project with this ID was not found."})
@@ -119,7 +119,7 @@ async function usersInProject (req, res) {
 
     res.status(200).json(usersObjs)
   } else {
-    res.status(404).json({"message": "You're not authorized to see this project."})
+    res.status(401).json({"message": "You're not authorized to see this project."})
   }
 }
 
@@ -127,7 +127,7 @@ async function usersNotInProject (req, res) {
   req.body.owner = req.user._id
 
   let validUser = await UserModel.findById(req.user._id)
-  if (!validUser) return res.status(400).json({"message": 'Critical Error: User does not exist in the database'})
+  if (!validUser) return res.status(404).json({"message": 'Critical Error: User does not exist in the database'})
 
   let validProject = await ProjectModel.findById(req.params.projectId)
   if (!validProject) return res.status(404).json({"message": "Project with this ID was not found."})
@@ -140,22 +140,21 @@ async function usersNotInProject (req, res) {
 
     res.status(200).json(usersObjs)
   } else {
-    res.status(404).json({"message": "You're not authorized to see this project."})
+    res.status(401).json({"message": "You're not authorized to see this project."})
   }
 }
 
-// Update User Role
 // Update User Role
 async function updateUser (req, res) {
 
   let validProject = await ProjectModel.findById(req.params.projectId)
   if (!validProject) {
-    return res.status(400).send('That project does not exist.')
+    return res.status(404).send('That project does not exist.')
   }
 
   let validUser = validProject.users.find(element => element.user == req.params.userId)
   if (!validUser) {
-    return res.status(400).send('That user does not exist.')
+    return res.status(404).send('That user does not exist.')
   }
   validUser.role = req.body.role
   await validProject.save()
@@ -189,13 +188,13 @@ async function addUser (req, res) {
 async function removeUser (req, res) {
   let validProject = await ProjectModel.findById(req.params.projectId)
   if (!validProject) {
-    return res.status(400).send('That project does not exist.')
+    return res.status(404).send('That project does not exist.')
   }
 
   let oldmate = validProject.users.find(element => element.user == req.params.userId)
 
   const {error} = validProject.users.pull(oldmate._id)
-  if (error) return res.status(400).end(error.details[0].message)
+  if (error) return res.status(404).end(error.details[0].message)
 
   await validProject.save()
 

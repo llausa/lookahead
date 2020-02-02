@@ -487,7 +487,7 @@ if (mongoose.connection.name === "lookahead-test") {
             })
             .end(async (err, res) => {
               expect(res.body.message).to.equal(
-                "You do not have permission to do that."
+                "You're not authorized to see this project."
               )
               expect(res).to.have.status(401)
               done()
@@ -522,7 +522,7 @@ if (mongoose.connection.name === "lookahead-test") {
                   done()
                 })
 							})
-							
+
 					})
 
 					it("Overflowing Task should save both", (done) => {

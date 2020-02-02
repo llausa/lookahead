@@ -105,6 +105,7 @@ describe('Test Project Model', () => {
         //Store Timezone as number +/- GMT?
         timezone: 10,
         owner: ownerUser._id,
+        location: "Brisbane",
         tasks: [
           {
             title: "Big Yeet",
