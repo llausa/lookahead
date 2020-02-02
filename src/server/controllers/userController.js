@@ -84,8 +84,8 @@ async function updateEmail(req, res) {
   const validPassword = await bcrypt.compare(req.body.password, validUser.password)
   if (!validPassword) return res.status(400).json({"message":'Incorrect Password'})
 
-  await UserModel.findOne({ email: req.body.email })
-  .catch( (err) => { return res.status(409).json({"message": "An account already exists with that email."})})
+  let user = await UserModel.findOne({ email: req.body.email })
+  if(user) return res.status(409).json({"message": "An account already exists with that email."})
 
 
   validUser.email = req.body.email
