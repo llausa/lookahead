@@ -531,7 +531,7 @@ if (mongoose.connection.name === 'lookahead-test') {
             )
             .end((err, res) => {
               expect(res).to.have.status(400)
-              expect(res.body.message).to.equal('Incorrect Password')
+              expect(res.body.message).to.equal('Incorrect Password.')
               done()
             })
 
