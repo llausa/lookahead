@@ -392,22 +392,21 @@ if (mongoose.connection.name === "lookahead-test") {
             it("Edit Existing User Role", done => {
               chai
                 .request(app)
-                .put(`/api/projects/${projectId}/users`)
+                .put(`/api/projects/${projectId}/users/${userId}`)
                 .set("Authorization", `Bearer ${authToken}`)
                 .send({
-                  role: "read",
-                  user: userId
+                  role: "Write"
                 })
                 .end(async (errors, res) => {
                   await ProjectModel.find({ title: "Test Project" }, function(
                     err,
                     project
                   ) {
-                    expect(project[0].users[0]).to.not.exist
+                    expect(project[0].users[0]).to.have.nested.property('role', 'Write')
                   })
 
                   await UserModel.findById(userId, function(err, user) {
-                    expect(user[0].projects[0].role).to.exist
+                    expect(user.projects[0]).to.have.nested.property('role', 'Write')
                     expect(res).to.have.status(200)
                     done()
                   })
@@ -501,7 +500,24 @@ if (mongoose.connection.name === "lookahead-test") {
 					
 					it("Overlapping Task should fail", done => {
 
+							chai
+              .request(app)
+              .put(`/api/projects/${projectId}/tasks`)
+              .type("form")
+              .set("Authorization", `Bearer ${authToken}`)
+              .send(validTask)
+              .end(async (err, res) => {
+                await ProjectModel.find({ title: "Test Project" }, function(
+                  err,
+                  project
+                ) {
+                  taskId = project[0].tasks[0]._id
+                  done()
+                })
+							})
+							
 					})
+
         })
       })
     })

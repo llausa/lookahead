@@ -4,6 +4,8 @@ const _ = require("lodash")
 
 async function createTask (req, res) {
 
+  
+
   let task = req.body
 
   const { error } = validateTask(task)
@@ -16,6 +18,11 @@ async function createTask (req, res) {
     return res.status(400).send('That project does not exist.')
   }
 
+  await checkOverlap(task, validProject)
+  if (!checkOverlap) {
+    return res.status(400).send('Tasks cannot overlap.')
+  }
+
   validProject.tasks.push(task)
   await validProject.save()
 
@@ -24,7 +31,6 @@ async function createTask (req, res) {
 }
 
 async function updateTask (req, res) {
-
 
 
   let validProject = await ProjectModel.findById(req.params.projectId)
@@ -43,6 +49,12 @@ async function updateTask (req, res) {
   validTask.length = req.body.length
   validTask.day = req.body.day
   validTask.description = req.body.description
+
+
+  await checkOverlap(validTask, validProject)
+  if (!checkOverlap) {
+    return res.status(400).send('Tasks cannot overlap.')
+  }
 
   await validProject.save()
 
@@ -64,6 +76,25 @@ async function removeTask (req, res) {
 
   
   res.status(200).json({"message": "Task successfully deleted."})
+
+}
+
+function checkOverlap (task, project) {
+
+  console.log('task', task)
+  console.log('project', project)
+
+  for(let projTask of project.tasks) {
+    if (projTask.day == task.day ) {
+      if(
+        ((task.start_time > projTask.start_time) && (task.start_time < (projTask.start_time + projTask.length))) || 
+        (((task.start_time + task.length) > projTask.start_time) && ((task.start_time + task.length) < (projTask.start_time + projTask.length)))
+      ) {
+        return false
+      }
+    }
+  }
+  return true
 
 }
 
