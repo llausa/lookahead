@@ -4,7 +4,7 @@ const _ = require("lodash")
 
 async function createTask (req, res) {
 
-  
+
   let task = req.body
 
   let validProject = await ProjectModel.findById(req.params.projectId)
@@ -37,16 +37,15 @@ async function createTask (req, res) {
 
     validProject.tasks.push(task, splitTask)
     await validProject.save()
-  
+
     res.status(201).json({message:'Tasks successfully created.'})
 
+  } else {
+    validProject.tasks.push(task)
+    await validProject.save()
+
+    res.status(201).json({"message":'Task successfully created.'})
   }
-
-  validProject.tasks.push(task)
-  await validProject.save()
-
-  res.status(201).json({message:'Task successfully created.'})
-
 }
 
 async function updateTask (req, res) {
@@ -94,7 +93,7 @@ async function removeTask (req, res) {
 
   await validProject.save()
 
-  
+
   res.status(200).json({"message": "Task successfully deleted."})
 
 }
