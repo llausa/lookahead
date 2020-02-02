@@ -22,6 +22,9 @@ router.put("/:projectId", auth, projectController.update)
 // delete Project route
 router.delete("/:projectId", auth, projectController.remove )
 
+// get project users
+router.get("/:projectId/users", auth, projectController.users)
+
 // Project add any user role to a project
 router.post("/:projectId/users", auth, projectController.addUser )
 
