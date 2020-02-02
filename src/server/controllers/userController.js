@@ -81,7 +81,7 @@ async function updateEmail(req, res) {
   if (error) return res.status(400).json({"message": 'Email address must be a valid email.'})
 
   error = validatePassword({password: req.body.password}).error
-  if (error) return res.status(400).json({"message": 'Invalid password.'})
+  if (error) return res.status(400).json({"message": 'Incorrect Password.'})
 
   const validPassword = await bcrypt.compare(req.body.password, validUser.password)
   if (!validPassword) return res.status(400).json({"message":'Incorrect Password'})

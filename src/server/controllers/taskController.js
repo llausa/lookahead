@@ -26,9 +26,9 @@ async function createTask(req, res) {
     userInProject.role == "Write"
   ) {
     let projectDays =
-      validProject.end_date.getDate() - validProject.start_date.getDate() + 1
-
-    const { error } = validateTask(task, projectDays)
+      (validProject.end_date - validProject.start_date) / 1000 / 60 / 60 / 24
+    
+      const { error } = validateTask(task, projectDays)
     if (error) return res.status(400).send(error.details[0].message)
 
     checkOverlap(task, validProject)
@@ -86,7 +86,7 @@ async function updateTask(req, res) {
     )
 
     let projectDays =
-      validProject.end_date.getDate() - validProject.start_date.getDate() + 1
+      (validProject.end_date - validProject.start_date) / 1000 / 60 / 60 / 24
 
     const { error } = validateTask(req.body, projectDays)
     if (error) return res.status(400).send(error.details[0].message)
