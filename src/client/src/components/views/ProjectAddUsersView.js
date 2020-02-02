@@ -5,7 +5,6 @@ import UserCard from '../UserCard'
 import Nav from '../Nav'
 import TitleText from '../TitleText'
 import Background from '../Background'
-import { Link } from 'react-router-dom'
 
 const mystyle = {
     display: "flex",
@@ -41,26 +40,23 @@ const page ={
     justifyContent: "center",
 }
 
-function AddUserPressed() {
-    console.log("Add User Pressed")
-}
 
-const ProjectUsersView = () => {
+const ProjectAddUsersView = () => {
 
     return (
         <>
-        <Nav MenuButton={true} />
+        <Nav backButtonLink = "/project/:id/users" MenuButton={true} BackButton={true} />
         <div style={page}>
 
         
         
         <div data-cy="projectsView" style={mystyle}>
-        <TitleText text="Project Users" style={{ marginTop: "50px"}} />
+        <TitleText text="Project Add Users" style={{ marginTop: "30px"}} />
 
-        <UserCard user="Mr Yeet" userPrivilege="Owner" userEmail="MrYeet@yeetmail.com" userEdit={true}/>
-        <UserCard userEdit={true}/>
+        <UserCard user="Yuri Tarded" userPrivilege="none" userEmail="MrYeet@yeetmail.com" />
+        <UserCard user="GONK MAN" userPrivilege="none" userEmail="MrYeet@yeetmail.com" />
+        <UserCard/>
 
-        <Button component={Link} to="/project/:id/users/add" onClick={AddUserPressed} variant="outlined" style={buttonMain} color="primary">Add User<AddIcon style={smallIcon} /></Button>
         </div>
         </div>
         <Background/>
@@ -68,4 +64,4 @@ const ProjectUsersView = () => {
     )
 }
 
-export default ProjectUsersView
+export default ProjectAddUsersView

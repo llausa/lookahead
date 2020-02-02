@@ -2,11 +2,13 @@ const jwt = require('jsonwebtoken')
 
 module.exports = function (req, res, next) {
 
+
   let token
 
   if (req.get('Authorization')) {
     token = req.get('Authorization').split(" ")[1]
   }
+
   else {
     return res.status(401).json({"message": "Access denied. No token provided."})
   }
@@ -17,6 +19,6 @@ module.exports = function (req, res, next) {
     next()
   }
   catch (ex) {
-    res.status(400).json({"message":"Invalid token."})
+    res.status(400).json({"message":"Invalid auth token."})
   }
 }

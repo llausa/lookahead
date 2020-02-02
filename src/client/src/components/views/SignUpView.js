@@ -4,7 +4,7 @@ import ButtonInput from '../ButtonInput'
 import FormInput from '../FormInput'
 import InfoDialog from '../InfoDialog'
 import CardContainer from '../CardContainer'
-import Background from '../../images/WhiteBackgroundSmall.jpg'
+import Background from '../Background'
 import Nav from '../Nav'
 import TitleText from '../TitleText'
 import NormalText from '../NormalText'
@@ -66,7 +66,7 @@ const Signup = () => {
       return (
   
         <>
-        <Nav backButtonLink = "/" BackButton={true} MenuButton={true} />
+        <Nav backButtonLink = "/" BackButton={true} MenuButton={false} />
         <CardContainer background={Background}>
           <form onSubmit={onSubmit} className='form'>
             <div data-cy='signupView' style={mystyle}>
@@ -84,6 +84,7 @@ const Signup = () => {
             </div>
           </form>
           </CardContainer>
+          <Background/>
         </>
       )
 

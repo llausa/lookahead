@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { TextField, Button } from '@material-ui/core'
 import CardContainer from '../CardContainer'
-import Background from '../../images/WhiteBackgroundSmall.jpg'
+import Background from '../Background'
 import Nav from '../Nav'
 import TitleText from '../TitleText'
 import FormInput from '../FormInput'
@@ -95,6 +95,7 @@ const EmailChangeView = () => {
         </div>
         </form>
         </CardContainer>
+        <Background/>
         </>
     )
 }
