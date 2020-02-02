@@ -22,7 +22,7 @@ const CssTextField = withStyles({
       },
     },
   },
-})(TextField);
+})(TextField)
 
 const FormInput = (props) => {
 
