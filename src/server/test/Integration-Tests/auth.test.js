@@ -375,9 +375,11 @@ if (mongoose.connection.name === 'lookahead-test') {
               "password": validUser.password
             }
           )
-          .end((err, res) => {
-            expect(res).to.have.status(200)
+          .end((oof, res) => {
+
+            
             expect(res.body.message).to.equal('Email updated successfully.')
+            expect(res).to.have.status(200)
 
             UserModel.findOne({ email: 'new@email.com' },
             (err, user) => {
@@ -408,8 +410,9 @@ if (mongoose.connection.name === 'lookahead-test') {
           )
           .end((err, res) => {
 
-            expect(res).to.have.status(200)
+            
             expect(res.body.message).to.equal('Account Details Successfully Updated')
+            expect(res).to.have.status(200)
 
             UserModel.findOne({ email: 'test@test.com' },
             (err, user) => {
@@ -484,8 +487,9 @@ if (mongoose.connection.name === 'lookahead-test') {
           )
           .end((err, res) => {
 
-            expect(res).to.have.status(409)
+            
             expect(res.body.message).to.equal('An account already exists with that email.')
+            expect(res).to.have.status(409)
             done()
           })
 
