@@ -70,3 +70,16 @@ body {
 .MuiChip-icon {
     color: rgb(0, 110, 226)!important;
 }
+
+.BlackWhite {
+    -webkit-filter: grayscale(100%); 
+    filter: grayscale(100%);
+}
+
+.BlueGradient {
+    background: rgb(0,110,226);
+    background: -moz-linear-gradient(180deg, rgba(0,110,226,1) 0%, rgba(0,61,125,1) 100%);
+    background: -webkit-linear-gradient(180deg, rgba(0,110,226,1) 0%, rgba(0,61,125,1) 100%);
+    background: linear-gradient(180deg, rgba(0,110,226,1) 0%, rgba(0,61,125,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#006ee2",endColorstr="#003d7d",GradientType=1);
+}
