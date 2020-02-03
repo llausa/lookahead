@@ -45,14 +45,13 @@ const Nav = (props) => {
 
   const handleClick = () => {
     setOpen(!open)
-    console.log("OPEN MENU")
   }
 
 
   const classes = useStyles()
 
   return (
-    <div>
+    <div style={{overflow: "hidden"}}>
     <div data-cy="navbar" className={classes.root}>
       <AppBar className={classes.pos} >
         <Toolbar>

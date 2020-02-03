@@ -8,8 +8,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import Slide from '@material-ui/core/Slide'
 
 const MenuHolder = {
-    zIndex: 2,
-    position: "absolute",
+    zIndex: 4,
     display: "flex",
     flexDirection: "column",
     alignitems: "center",
