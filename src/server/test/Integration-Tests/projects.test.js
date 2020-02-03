@@ -491,7 +491,7 @@ if (mongoose.connection.name === "lookahead-test") {
 							title: "Real Project"
 						})
 						.end(async (err, res) => {
-							console.log(res)
+
 							expect(res.body.message).to.equal(
 								"You're not authorized to see this project."
 							)

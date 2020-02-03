@@ -73,8 +73,6 @@ async function update (req, res) {
   .catch( (err) => { return res.status(404).json(error.details[0].message) })
   // if (!validProject) return res.status(404).json({"message": "Couldn't find project."})
 
-  console.log(validProject.end_date)
-  console.log(req.body.end_date)
 
   if (validProject.end_date.getDate() >= Date.parse(req.body.end_date)) {
     return res.status(400).json({"message": "Project can't be shortened."})
