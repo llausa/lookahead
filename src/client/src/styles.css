@@ -91,15 +91,3 @@ body {
     left: 100vw;
 }
 
-/* Nav Bar Menu Color */
-.ikmLey, .ikmLey::before, .ikmLey::after {
-    background-color: white !important;
-    outline: none;
-    cursor: pointer;
-}
-
-.eHzcRf, .eHzcRf::before, .eHzcRf::after {
-    background-color: white !important;
-    outline: none;
-    cursor: pointer;
-}
