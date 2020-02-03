@@ -70,8 +70,9 @@ const ProjectAddUsersView = () => {
         <div style={{margin: "20px"}}><FormInput type='text' label='Search Users' id='userSearch' name='userSearch'/> <Button variant="outlined" style={buttonMain} color="primary"><SearchIcon/></Button></div>
         </Card>
 
-        <UserCard user="Marty McFly" userPrivilege="none" userPosition="Time Traveller" userEmail="Back2The@Future.com" />
-        <UserCard user="Keanu Reeves" userPrivilege="none" userPosition="Assassin" userEmail="DontHurtMyDog@gmail.com" />
+        <UserCard user="Marty McFly"  userPosition="Time Traveller" userEmail="Back2The@Future.com" />
+        <UserCard user="Keanu Reeves"  userPosition="Assassin" userEmail="DontHurtMyDog@gmail.com" />
+        
         <UserCard/>
 
         </div>

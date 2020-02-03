@@ -1,7 +1,6 @@
 import React , { useReducer }from "react"
 import axios from 'axios'
-import { Link } from 'react-router-dom'
-import { TextField, Button } from '@material-ui/core'
+import { Button } from '@material-ui/core'
 import CardContainer from '../CardContainer'
 import Background from '../Background'
 import Nav from '../Nav'
@@ -52,16 +51,6 @@ const EmailChangeView = () => {
         color: "#006EE2",
         margin: "20px",
         border: "1px solid #006EE2"
-    }
-    
-    const inputStyle = {
-        margin: "4px",
-    }
-
-    const buttonResetP = {
-        color: "rgb(140, 140, 140)",
-        margin: "30px 80px",
-        fontSize: "8px"
     }
 
     const smallIcon= {

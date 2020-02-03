@@ -9,7 +9,7 @@ export const Background = (props) => {
     const ImageBackground1 ={
         backgroundImage: `url(${BackGroundUrl1})`,
         backgroundSize: "cover",
-        zIndex: "-3",
+        zIndex: "-2",
         height: "100%",
         width: "100%",
         position: "fixed",
@@ -20,8 +20,9 @@ export const Background = (props) => {
 
     const ImageBackground2 ={
         backgroundImage: `url(${BackGroundUrl2})`,
+        background: `url(${BackGroundUrl2})`,
         backgroundSize: "cover",
-        zIndex: "-3",
+        zIndex: "-2",
         height: "100%",
         width: "100%",
         position: "fixed",
@@ -33,8 +34,8 @@ export const Background = (props) => {
     const Overlay ={
         backgroundColor: "white",
         backgroundSize: "cover",
-        opacity: "92%",
-        zIndex: "-2",
+        opacity: "90%",
+        zIndex: "-1",
         height: "100%",
         width: "100%",
         position: "fixed",
@@ -46,7 +47,7 @@ export const Background = (props) => {
 
     return (
         <>
-        <div style={Overlay} className={props.blue ? ("BlueGradient") : ("")} ></div>
+        <div style={Overlay} className={props.blue ? ("BlueGradient Overlay") : ("Overlay")} ></div>
         <div style={props.background2 ? (ImageBackground1) : (ImageBackground2)} className="BlackWhite"></div>
         </>
     )
