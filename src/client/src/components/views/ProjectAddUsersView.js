@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Button from '@material-ui/core/Button'
 import AddIcon from '@material-ui/icons/Add'
 import UserCard from '../UserCard'
@@ -7,6 +7,8 @@ import Background from '../Background'
 import Card from '@material-ui/core/Card'
 import FormInput from '../FormInput'
 import SearchIcon from '@material-ui/icons/Search'
+import { useParams } from 'react-router-dom'
+import axios from 'axios'
 
 const mystyle = {
     display: "flex",
@@ -54,11 +56,24 @@ const CardStyle = {
   }
 
 
-const ProjectAddUsersView = () => {
+export default function ProjectAddUsersView(props) {
+
+    const authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTMwYzI3NjI5ZWQxNjEyOWMwNWM5YTMiLCJpYXQiOjE1ODAzODA2OTh9.JjlZiPVjyvhmgPqzIA2P5qPthq3XJg6qAF5RONN9Pak'
+
+    const { projectId } = useParams()
+
+    const [users, setUsers] = useState([])
+
+    useEffect(() => {
+        axios.get(`http://localhost:3001/api/projects/${projectId}/add_users`, {headers: {Authorization: `Bearer ${authToken}`}})
+        .then(res => { 
+            setUsers(res.data)
+        })
+    }, [])
 
     return (
         <>
-        <Nav backButtonLink = "/project/:id/users" MenuButton={true} BackButton={true} />
+        <Nav backButtonLink = "/project/:projectId/users" MenuButton={true} BackButton={true} />
         <div style={page}>
 
         
@@ -70,10 +85,9 @@ const ProjectAddUsersView = () => {
         <div style={{margin: "20px"}}><FormInput type='text' label='Search Users' id='userSearch' name='userSearch'/> <Button variant="outlined" style={buttonMain} color="primary"><SearchIcon/></Button></div>
         </Card>
 
-        <UserCard user="Marty McFly"  userPosition="Time Traveller" userEmail="Back2The@Future.com" />
-        <UserCard user="Keanu Reeves"  userPosition="Assassin" userEmail="DontHurtMyDog@gmail.com" />
-        
-        <UserCard/>
+        {users.map(user => {
+            return <UserCard key={user._id} user={user.firstName + ' ' + user.lastName}  userPosition={user.position} userEmail={user.email} userId={user._id} />
+        })}
 
         </div>
         </div>
@@ -82,4 +96,3 @@ const ProjectAddUsersView = () => {
     )
 }
 
-export default ProjectAddUsersView
