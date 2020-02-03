@@ -10,7 +10,7 @@ export default function Grid(props) {
 
   const [layout, setLayout] = useState([])
 
-  const authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTMwYzI3NjI5ZWQxNjEyOWMwNWM5YTMiLCJpYXQiOjE1ODAzODA2OTh9.JjlZiPVjyvhmgPqzIA2P5qPthq3XJg6qAF5RONN9Pak'
+  const authToken = ''
 
   const { projectId } = useParams()
 
