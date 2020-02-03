@@ -82,7 +82,7 @@ async function update (req, res) {
   validProject.timezone = req.body.timezone
   validProject.end_date = req.body.end_date
   validProject.location = req.body.location
-  
+
 
   let { err } = validateProject(validProject)
   if (err) return res.status(400).json({"message": "Project details are not correct."})
@@ -112,7 +112,7 @@ async function remove (req, res) {
     for ( let user of project.users ) {
       await removeProjectFromUser(user.user, req.params.projectId)
     }
-    
+
     return res.status(200).json({"message": "Project successfully deleted"})
 
 
@@ -195,7 +195,7 @@ async function updateUser (req, res) {
     res.status(401).json({"message": "You're not authorized to update this project."})
   }
 
- 
+
 
 }
 // Add User to Project
@@ -273,7 +273,7 @@ async function addProjectToUser (id, project, role) {
     await user.save()
 
   })
-  .catch( (err) => { return res.status(404).json(error.details[0].message) })
+  // .catch( (err) => { return res.status(404).json(error.details[0].message) })
   // return 'Project successfully added to User'
 }
 

@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react'
 
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import AccountDetailsView from './views/AccountDetailsView'
 import HomeView from './views/HomeView'
 import EditTaskView from './views/EditTaskView'
@@ -26,14 +26,20 @@ const App = () => {
   const [restrictedUserId, setRestrictedUserId] = useState(3)
   const [taskId, setTaskId] = useState(3)
 
+  const [redirect, setRedirect] = useState(null)
+
+  const redirectFunc = (val) => {
+    setRedirect(val)
+  }
 
   return (
     <div className="App">
       <BrowserRouter>
-      <Switch>
+        {redirect && <Redirect to={redirect} />}
+        <Switch>
           <Route exact path="/" component={HomeView} data-cy="homeView"/>
           <Route exact path="/login" component={LoginView} data-cy="loginView"/>
-          <Route exact path="/signup" component={SignUpView} data-cy="signupView"/>
+          <Route exact path="/signup" data-cy="signupView" ><SignUpView redirect={redirectFunc} /></Route>
           <Route exact path="/projects" component={ProjectsView} data-cy="projectsView"/>
           <Route exact path="/account/email" component={EmailChangeView} data-cy="emailView"/>
           <Route exact path="/account/password" component={PasswordChangeView} data-cy="passwordView"/>
