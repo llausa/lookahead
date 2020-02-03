@@ -223,6 +223,8 @@ if (mongoose.connection.name === "lookahead-test") {
 								err,
 								project
 							) {
+								console.log('validTask', validTask)
+								console.log('created', project[0].tasks)
 								expect(project[0].tasks[0]._id).to.exist
 								expect(res).to.have.status(201)
 								done()
@@ -234,6 +236,7 @@ if (mongoose.connection.name === "lookahead-test") {
 					let taskId
 
 					beforeEach(done => {
+
 						chai
 							.request(app)
 							.put(`/api/projects/${projectId}/tasks`)
@@ -281,6 +284,7 @@ if (mongoose.connection.name === "lookahead-test") {
 								description: "Bigger Yeetimus"
 							})
 							.end(async (err, res) => {
+
 								await ProjectModel.find({ title: "Test Project" }, function(
 									err,
 									project
@@ -470,10 +474,15 @@ if (mongoose.connection.name === "lookahead-test") {
 															role: "read",
 															user: userId
 														})
-														.end()
+														.end(
+
+														)
+														done()
+														
 												}
 											)
-											done()
+
+
 										})
 								})
 						})
@@ -501,23 +510,33 @@ if (mongoose.connection.name === "lookahead-test") {
 				})
 
 				describe("Project Updates", () => {
+
 					it("Overlapping Task should fail", done => {
+
 						chai
 							.request(app)
 							.put(`/api/projects/${projectId}/tasks`)
 							.type("form")
 							.set("Authorization", `Bearer ${authToken}`)
 							.send(validTask)
-							.end(async (err, res) => {
-								await ProjectModel.find({ title: "Test Project" }, function(
-									err,
-									project
-								) {
-									taskId = project[0].tasks[0]._id
+							.end((err1, res1) => {
+								// console.log(res1)
+
+						chai
+							.request(app)
+							.put(`/api/projects/${projectId}/tasks`)
+							.type("form")
+							.set("Authorization", `Bearer ${authToken}`)
+							.send(validTask)
+							.end((err, res) => {
+								
+									expect(res.body.message).to.equal('Tasks cannot overlap.')
+									expect(res).to.have.status(400)
 									done()
 								})
 							})
-					})
+						})
+					
 
 					it("Overflowing Task should save both", done => {
 						chai
