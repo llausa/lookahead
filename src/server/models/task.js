@@ -7,7 +7,7 @@ const TaskSchema = new mongoose.Schema({
   title: { type: String, required: true  },
   start_time: { type: Number, required: true, min: 0, max: 23 },
   length: { type: Number, required: true, min: 1, max: 24 },
-  day: { type: Number, required: true, min: 1},
+  day: { type: Number, required: true, min: 0},
   description: { type: String },
   complete: { type: Boolean, default: false }
 })
@@ -20,7 +20,7 @@ function validateTask (task, projectDays) {
       title: Joi.string().required(),
       start_time: Joi.number().min(0).max(23).required(),
       length: Joi.number().min(1).max(24).required(),
-      day: Joi.number().min(1).max(projectDays).required(),
+      day: Joi.number().min(0).max(projectDays - 1).required(),
       description:  Joi.string(),
       complete: Joi.boolean()
   })
