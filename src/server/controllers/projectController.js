@@ -75,7 +75,8 @@ async function update (req, res) {
 
   console.log(validProject.end_date)
   console.log(req.body.end_date)
-  if (validProject.end_date.getDate() < Date.parse(req.body.end_date)) {
+
+  if (validProject.end_date.getDate() >= Date.parse(req.body.end_date)) {
     return res.status(400).json({"message": "Project can't be shortened."})
   }
 
