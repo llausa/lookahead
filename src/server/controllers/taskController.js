@@ -52,7 +52,7 @@ async function createTask(req, res) {
     } else {
       validProject.tasks.push(task)
       await validProject.save()
-      console.log(validProject)
+
 
       return res.status(201).json({ message: "Task successfully created." })
     }
@@ -155,11 +155,7 @@ async function updateAllTasks (req, res) {
     }
   )
 
-  console.log(req.body)
 
-  console.log('------------------')
-
-  console.log(validProject.tasks)
 
   let userInProject = validProject.users.find(
     element => element.user == validUser._id
@@ -179,7 +175,7 @@ async function updateAllTasks (req, res) {
   let projectDays =
     (validProject.end_date - validProject.start_date) / 1000 / 60 / 60 / 24
 
-    console.log(validProject.tasks)
+
 
   for(let task of newTasks) {
     let strippedTask = {...task}
@@ -203,11 +199,11 @@ async function updateAllTasks (req, res) {
     projTask.description = task.description
   }
 
-  console.log('hello')
+
 
   await validProject.save()
 
-  console.log('goodbye')
+
 
   res.status(200).json({ message: "Task successfully updated." })
 }
