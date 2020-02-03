@@ -2,11 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { makeStyles, AppBar, Toolbar, IconButton } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
-import CloseIcon from '@material-ui/icons/Close'
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace'
 import Menu from './Menu'
 import Logo from '../images/LookaheadLogo.svg'
 import '../styles.css'
+import { HamburgerElastic } from 'react-animated-burgers'
 
 
 const logoStyle = {
@@ -45,14 +45,13 @@ const Nav = (props) => {
 
   const handleClick = () => {
     setOpen(!open)
-    console.log("OPEN MENU")
   }
 
 
   const classes = useStyles()
 
   return (
-    <div>
+    <div style={{overflow: "hidden"}}>
     <div data-cy="navbar" className={classes.root}>
       <AppBar className={classes.pos} >
         <Toolbar>
@@ -65,11 +64,8 @@ const Nav = (props) => {
           </IconButton>) }
         <img src={Logo} alt="Logo" style={logoStyle} className={classes.title} aria-label="logo"/>
         {props.MenuButton ? (
-          <IconButton onClick={handleClick} edge="end" className={classes.menuButton} color="inherit" aria-label="Menu">
-          <>
-            {open? (<CloseIcon/>) : (<MenuIcon/>)}
-          </>
-          </IconButton>) : (
+          <HamburgerElastic isActive={open? (true) : (false)} onClick={handleClick} edge="end" buttonWidth={30} buttonStyle={{ Color: "white" }}/>
+          ) : (
             <IconButton edge="end" className={classes.menuButton} style={Invisible} color="inherit" >
             <MenuIcon />
           </IconButton>) }
