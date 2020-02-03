@@ -13,10 +13,11 @@ router.get('/details', auth, userController.details) // works
 router.post('/', userController.register) // works
 
 // Update User email
-router.put('/email', auth, userController.updateEmail)
+router.put('/email', auth, userController.updateEmail) // works
+
 // Update User details
-router.put('/details', auth, userController.updateDetails) // not validating body of request atm giving error on console
+router.put('/details', auth, userController.updateDetails) // works
 // Update User password
-router.put('/password', auth, userController.updatePassword)
+router.put('/password', auth, userController.updatePassword) // works
 
 module.exports = router

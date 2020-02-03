@@ -37,14 +37,14 @@ const TimeZonePicker = (props) => {
         <>
         <Autocomplete
       id={props.id}
-      style={{margin: "4px"}}
+      style={{margin: "4px", width: "100%"}}
       size="small"
       disableClearable
       defaultValue={defaultTimeZone}
       options={timeZonesList}
       getOptionLabel={option => option.location}
       renderInput={params => (
-        <CssTextField {...params} label={props.label} variant="outlined" fullWidth />
+        <CssTextField {...params} label={props.label} variant="outlined" fullWidth style={{width: "100%"}} />
       )}
     />
     </>

@@ -53,7 +53,6 @@ const HomeView = () => {
 
     return (
         <>
-           <Menu/>
         <CardContainer>
         
         <Zoom><img src={Logo} alt="Logo" style={logoStyle}  aria-label="logo"/></Zoom>
