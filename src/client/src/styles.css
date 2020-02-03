@@ -67,6 +67,12 @@ body {
 .BlackWhite {
     -webkit-filter: grayscale(100%); 
     filter: grayscale(100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
 }
 
 .BlueGradient {
@@ -75,6 +81,13 @@ body {
     background: -webkit-linear-gradient(180deg, rgba(0,110,226,1) 0%, rgba(0,61,125,1) 100%);
     background: linear-gradient(180deg, rgba(0,110,226,1) 0%, rgba(0,61,125,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#006ee2",endColorstr="#003d7d",GradientType=1);
+}
+
+.Overlay {
+    opacity: 90%;
+    -moz-opacity: 0.9; /* Firefox and Mozilla browsers */
+   -webkit-opacity: 0.9; /* WebKit browser e.g. Safari */
+   filter: alpha(opacity=9); 
 }
 
 /* Menu Positions */
