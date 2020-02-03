@@ -233,8 +233,7 @@ function checkOverlap(task, project) {
       (taskFinish > projTaskStart && taskFinish < projTaskFinish)) ||
       (taskStart <= projTaskStart && taskFinish >= projTaskFinish))
     ) {
-      console.log(projTask)
-      console.log(task)
+
       return false
     }
   }
