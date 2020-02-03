@@ -35,7 +35,7 @@ const FormInput = (props) => {
 
   return(
     <CssTextField
-      style={{margin: "4px"}}
+      style={{margin: "4px", width: props.width}}
       required={props.require? true : undefined}
       error={!valid}
       name={props.name}

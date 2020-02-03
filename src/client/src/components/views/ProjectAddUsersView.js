@@ -3,8 +3,10 @@ import Button from '@material-ui/core/Button'
 import AddIcon from '@material-ui/icons/Add'
 import UserCard from '../UserCard'
 import Nav from '../Nav'
-import TitleText from '../TitleText'
 import Background from '../Background'
+import Card from '@material-ui/core/Card'
+import FormInput from '../FormInput'
+import SearchIcon from '@material-ui/icons/Search'
 
 const mystyle = {
     display: "flex",
@@ -26,7 +28,7 @@ const smallIcon= {
 
 const buttonMain = {
     color: "#006EE2",
-    margin: "20px",
+    margin: "6px",
     border: "1px solid #006EE2",
 }
 
@@ -40,6 +42,17 @@ const page ={
     justifyContent: "center",
 }
 
+const CardStyle = {
+    position: "sticky",
+    margin: "20px",
+    width: "90vw",
+    height: "auto",
+    maxWidth: "500px",
+    alignSelf: "center",
+    borderRadius: "25px",
+    color: '#006EE2'
+  }
+
 
 const ProjectAddUsersView = () => {
 
@@ -51,7 +64,11 @@ const ProjectAddUsersView = () => {
         
         
         <div data-cy="projectsView" style={mystyle}>
-        <TitleText text="Project Add Users" style={{ marginTop: "30px"}} />
+        
+        <Card style={CardStyle}>
+        <p style={{margin: "10px", fontWeight: "bold", fontSize: "40px"}}>Project Add Users</p>
+        <div style={{margin: "20px"}}><FormInput type='text' label='Search Users' id='userSearch' name='userSearch'/> <Button variant="outlined" style={buttonMain} color="primary"><SearchIcon/></Button></div>
+        </Card>
 
         <UserCard user="Marty McFly" userPrivilege="none" userPosition="Time Traveller" userEmail="Back2The@Future.com" />
         <UserCard user="Keanu Reeves" userPrivilege="none" userPosition="Assassin" userEmail="DontHurtMyDog@gmail.com" />

@@ -55,6 +55,7 @@ const  MaterialUIPickers = (props) => {
           id={props.id}
           label={props.label}
           size="small"
+          style={{width: "100%"}}
           value={selectedDate}
           onChange={handleDateChange}
           KeyboardButtonProps={{
