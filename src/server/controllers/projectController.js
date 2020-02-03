@@ -265,16 +265,11 @@ async function addProjectToUser (id, project, role) {
 
   await UserModel.findById(id)
   .then(async (user) =>  {
-
     user.projects.push({
       role, project
     })
-
     await user.save()
-
   })
-  // .catch( (err) => { return res.status(404).json(error.details[0].message) })
-  // return 'Project successfully added to User'
 }
 
 module.exports = { create, update, remove, updateUser, usersInProject, removeUser, addUser, allProjects, getProject, usersNotInProject }
