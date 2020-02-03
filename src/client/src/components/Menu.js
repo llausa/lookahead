@@ -83,13 +83,8 @@ function LogoutPressed() {
 
 const MenuView = (props) => {
 
-    let [checked, setChecked] = React.useState(false)
-
-    setChecked = props.checked
-
     return (
-    <Slide direction="left" in={checked} mountOnEnter unmountOnExit>
-        <div style={MenuHolder} >
+        <div style={MenuHolder} className={props.className}>
             <div data-cy="MenuView" style={mystyle}>
                 <h1 style={{margin: "40px 0 10px 0", fontSize: "70px"}}>Menu</h1>
                 <Button component={Link} to="/projects" onClick={MyLookaheadsPressed} variant="outlined" style={buttonMain} color="primary">My Lookaheads</Button>
@@ -100,7 +95,6 @@ const MenuView = (props) => {
                 <p style={VersionText}>lookahead v1.0.0 2020</p>
             </div>
         </div>
-    </Slide>
     )
 }
 
