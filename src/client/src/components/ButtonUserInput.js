@@ -14,9 +14,9 @@ const ButtonUserInput = (props) => {
     fontSize: "8px"
   }
 
-  return (<> {props.add? (<Button variant="outlined" type={props.type} style={Primary} color={props.color} > {props.text} </Button>)
+  return (<> {props.add? (<Button onClick={props.onClick} variant="outlined" type={props.type} style={Primary} color={props.color} > {props.text} </Button>)
   :
-  (<Button variant="outlined" type={props.type} style={props.primary? Primary : Secondary} color={props.color}> {props.text} </Button>)}
+  (<Button onClick={props.onClick} variant="outlined" type={props.type} style={props.primary? Primary : Secondary} color={props.color}> {props.text} </Button>)}
   </>)
 
 }
