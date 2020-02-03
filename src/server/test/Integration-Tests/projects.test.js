@@ -166,7 +166,8 @@ if (mongoose.connection.name === "lookahead-test") {
 						.send({
 							end_date: "2020-02-10",
 							timezone: -4,
-							title: "Real Project"
+							title: "Real Project",
+							location: 'yeet'
 						})
 						.end(async (err, res) => {
 							await ProjectModel.findById(projectId, function(err, project) {
@@ -490,6 +491,7 @@ if (mongoose.connection.name === "lookahead-test") {
 							title: "Real Project"
 						})
 						.end(async (err, res) => {
+
 							expect(res.body.message).to.equal(
 								"You're not authorized to see this project."
 							)
