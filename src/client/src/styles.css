@@ -11,20 +11,11 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-/* 90% of this is overriding Material UI Colours */
 
 .MuiAppBar-colorPrimary {
     color: #fff;
     background-color: #006EE2!important;
 }
-
-/* .MuiFormLabel-root.Mui-focused {
-    color:  #757575!important;
-}
-
-.MuiOutlinedInput-notchedOutline {
-    border-color: #757575!important;
-} */
 
 .MuiButton-outlinedPrimary {
     color: #006EE2!important;
@@ -71,6 +62,8 @@ body {
     color: rgb(0, 110, 226)!important;
 }
 
+/* Background color effects */
+
 .BlackWhite {
     -webkit-filter: grayscale(100%); 
     filter: grayscale(100%);
@@ -84,6 +77,7 @@ body {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#006ee2",endColorstr="#003d7d",GradientType=1);
 }
 
+/* Menu Positions */
 .MenuOpen {
     position: fixed;
     opacity: 1;
@@ -97,12 +91,15 @@ body {
     left: 100vw;
 }
 
-.SpinIn {
-    transform: rotate(0deg);
-    transition-duration: 0.6s;
+/* Nav Bar Menu Color */
+.ikmLey, .ikmLey::before, .ikmLey::after {
+    background-color: white !important;
+    outline: none;
+    cursor: pointer;
 }
 
-.SpinOut {
-    transform: rotate(360deg);
-    transition-duration: 0.6s;
+.eHzcRf, .eHzcRf::before, .eHzcRf::after {
+    background-color: white !important;
+    outline: none;
+    cursor: pointer;
 }

@@ -1,11 +1,10 @@
-import React, { useState } from "react"
+import React from "react"
 import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 import LockIcon from '@material-ui/icons/Lock'
 import MailIcon from '@material-ui/icons/Mail'
 import EditIcon from '@material-ui/icons/Edit'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
-import Slide from '@material-ui/core/Slide'
 
 const MenuHolder = {
     zIndex: 4,
