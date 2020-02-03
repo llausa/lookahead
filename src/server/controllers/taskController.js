@@ -52,7 +52,7 @@ async function createTask(req, res) {
     } else {
       validProject.tasks.push(task)
       await validProject.save()
-      console.log(validProject)
+
 
       return res.status(201).json({ message: "Task successfully created." })
     }
@@ -144,6 +144,70 @@ async function removeTask(req, res) {
   }
 }
 
+async function updateAllTasks (req, res) {
+  let validUser = await UserModel.findById(req.user._id).catch(err => {
+    return res.status(404).json(error.details[0].message)
+  })
+
+  let validProject = await ProjectModel.findById(req.params.projectId).catch(
+    err => {
+      return res.status(404).json(error.details[0].message)
+    }
+  )
+
+
+
+  let userInProject = validProject.users.find(
+    element => element.user == validUser._id
+  )
+
+  if (
+    validUser._id != String(validProject.owner) &&
+    userInProject.role != "Write"
+  ) {
+    return res
+      .status(401)
+      .json({ message: "You're not authorized to edit this project." })
+  }
+
+  let newTasks = req.body.tasks
+
+  let projectDays =
+    (validProject.end_date - validProject.start_date) / 1000 / 60 / 60 / 24
+
+
+
+  for(let task of newTasks) {
+    let strippedTask = {...task}
+    delete strippedTask._id
+    const { error } = validateTask(strippedTask, projectDays)
+    if (error) return res.status(400).send(error.details[0].message)
+  }
+
+  for(let task of newTasks) {
+    if(!checkOverlap(task, {tasks: newTasks})) {
+      return res.status(400).send("Tasks cannot overlap.")
+    }
+  }
+
+  for(let task of newTasks) {
+    let projTask = validProject.tasks.find(el => el._id == task._id)
+    projTask.title = task.title
+    projTask.start_time = task.start_time
+    projTask.length = task.length
+    projTask.day = task.day
+    projTask.description = task.description
+  }
+
+
+
+  await validProject.save()
+
+
+
+  res.status(200).json({ message: "Task successfully updated." })
+}
+
 function checkOverlap(task, project) {
  
   taskStart = new Date(0, 0, task.day, task.start_time)
@@ -165,12 +229,11 @@ function checkOverlap(task, project) {
       (taskFinish > projTaskStart && taskFinish < projTaskFinish)) ||
       (taskStart <= projTaskStart && taskFinish >= projTaskFinish))
     ) {
-      console.log(projTask)
-      console.log(task)
+
       return false
     }
   }
   return true
 }
 
-module.exports = { createTask, updateTask, removeTask }
+module.exports = { createTask, updateTask, removeTask, updateAllTasks }

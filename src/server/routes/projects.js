@@ -44,8 +44,11 @@ router.put("/:projectId/users/:userId", auth, projectController.updateUser ) // 
 router.put("/:projectId/tasks", auth, taskController.createTask ) // we're not figuring out dates correctly
 
 
+router.put("/:projectId/tasks/edit", auth, taskController.updateAllTasks ) // havent tested yet bc cant create tasks
+
+router.put("/:projectId/tasks/:taskId", auth, taskController.updateTask ) // havent tested yet bc cant create tasks
+
 router.delete("/:projectId/tasks/:taskId", auth, taskController.removeTask ) // works
 
-router.put("/:projectId/tasks/:taskId", auth, taskController.updateTask ) // works
 
 module.exports = router
