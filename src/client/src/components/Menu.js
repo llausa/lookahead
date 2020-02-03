@@ -31,6 +31,10 @@ const mystyle = {
     zIndex: 10
 }
 
+let link=(
+    "https://res.cloudinary.com/djic27lvo/video/upload/v1580729266/oooft_tljruu.mp3"
+)
+
 const buttonMain = {
     color: "#006EE2",
     margin: "0 20px 20px 20px",
@@ -53,13 +57,17 @@ const VersionText = {
     position: "absolute",
     color: "gray",
     fontSize: "10px",
-    bottom: "10px",
-    alignSelf: "center"
+    bottom: "40px",
+    alignSelf: "center",
+    fontWeight: "bold",
+    cursor: "pointer",
 }
 
 function MyLookaheadsPressed() {
     console.log("My Lookaheads Pressed")
 }
+
+let audio = new Audio(link)
 
 function EditDetailsPressed() {
     console.log("Edit Details Pressed")
@@ -68,7 +76,7 @@ function EditDetailsPressed() {
 function ChangeEmailPressed() {
     console.log("Change Email Pressed")
 }
-
+const hehe = () => audio.play()
 function ChangePasswordPressed() {
     console.log("Change Password Pressed")
 }
@@ -79,7 +87,9 @@ function LogoutPressed() {
 
 
 
+
 const MenuView = (props) => {
+    
 
     return (
         <div style={MenuHolder} className={props.className}>
@@ -90,7 +100,7 @@ const MenuView = (props) => {
                 <Button component={Link} to="/account/email" onClick={ChangeEmailPressed} variant="outlined" style={buttonGeneral}>Change Email <MailIcon style={smallIcon} /> </Button>
                 <Button component={Link} to="/account/password" onClick={ChangePasswordPressed} variant="outlined" style={buttonGeneral}>Change Password <LockIcon style={smallIcon} /> </Button>
                 <Button component={Link} to="/" variant="outlined" onClick={LogoutPressed} style={buttonGeneral}>Logout <ExitToAppIcon style={smallIcon} /></Button>
-                <p style={VersionText}>lookahead v1.0.0 2020</p>
+                <a onClick={hehe} style={VersionText}>lookahead v1.0.0 2020</a>
             </div>
         </div>
     )

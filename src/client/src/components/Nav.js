@@ -64,7 +64,7 @@ const Nav = (props) => {
           </IconButton>) }
         <img src={Logo} alt="Logo" style={logoStyle} className={classes.title} aria-label="logo"/>
         {props.MenuButton ? (
-          <HamburgerElastic isActive={open? (true) : (false)} onClick={handleClick} edge="end" buttonWidth={30} buttonStyle={{ Color: "white" }}/>
+          <HamburgerElastic isActive={open? (true) : (false)} onClick={handleClick} edge="end" buttonWidth={20} barColor="white"/>
           ) : (
             <IconButton edge="end" className={classes.menuButton} style={Invisible} color="inherit" >
             <MenuIcon />
