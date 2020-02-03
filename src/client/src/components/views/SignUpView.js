@@ -31,7 +31,9 @@ const Signup = (props) => {
         'https://vast-oasis-18718.herokuapp.com/api/users', data)
         .then(function (response) {
             console.log(response)
-            props.redirect('/projects')
+            if (response.status == 200) {
+                props.redirect('/projects')
+            }
         })
         .catch(function (error) {
             console.log(error)

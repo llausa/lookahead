@@ -30,10 +30,12 @@ const Login = (props) => {
         'https://vast-oasis-18718.herokuapp.com/api/auth', data)
         .then(function (response) {
             console.log(response.status)
-            props.redirect('/projects')
+            if (response.status == 200) {
+                props.redirect('/projects')
+            }
         })
         .catch(function (error) {
-            console.log(error.response.data)
+            console.log(error)
         })
 
     }
