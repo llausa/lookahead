@@ -44,6 +44,8 @@ router.put("/:projectId/tasks", auth, taskController.createTask ) // we're not f
 
 router.delete("/:projectId/tasks/:taskId", auth, taskController.removeTask ) //havent tested yet bc cant create tasks
 
+router.put("/:projectId/tasks/edit", auth, taskController.updateAllTasks ) // havent tested yet bc cant create tasks
+
 router.put("/:projectId/tasks/:taskId", auth, taskController.updateTask ) // havent tested yet bc cant create tasks
 
 module.exports = router
