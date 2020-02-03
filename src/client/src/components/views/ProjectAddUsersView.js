@@ -71,6 +71,13 @@ export default function ProjectAddUsersView(props) {
         })
     }, [])
 
+    const addUser = (userId) => {
+        axios.post(`http://localhost:3001/api/projects/${projectId}/users`, {user: userId, role: 'Read'}, {headers: {Authorization: `Bearer ${authToken}`}})
+        .then(() => {
+            setUsers(users.filter(el => el._id !== userId))
+        })
+    }
+
     return (
         <>
         <Nav backButtonLink = "/project/:projectId/users" MenuButton={true} BackButton={true} />
@@ -86,7 +93,7 @@ export default function ProjectAddUsersView(props) {
         </Card>
 
         {users.map(user => {
-            return <UserCard key={user._id} user={user.firstName + ' ' + user.lastName}  userPosition={user.position} userEmail={user.email} userId={user._id} />
+            return <UserCard key={user._id} user={user.firstName + ' ' + user.lastName}  userPosition={user.position} userEmail={user.email} onClick={() => addUser(user._id)}/>
         })}
 
         </div>
