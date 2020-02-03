@@ -142,24 +142,17 @@ async function removeTask(req, res) {
 }
 
 function checkOverlap(task, project) {
-  taskStart = new Date(0, 0, task.day, task.start_time)
-  taskFinish = new Date(0, 0, task.day, task.start_time + task.length)
 
   for (let projTask of project.tasks) {
-    projTaskStart = new Date(0, 0, projTask.day, projTask.start_time)
-    projTaskFinish = new Date(
-      0,
-      0,
-      projTask.day,
-      projTask.start_time + projTask.length
-    )
-    if (
-      (taskStart > projTaskStart && taskStart < projTaskFinish) ||
-      (taskFinish > projTaskStart && taskFinish < projTaskFinish)
-    ) {
-      return false
+    if (projTask.day == task.day) {
+      let end_time = projTask.start_time + projTask.length
+      if ((task.start_time > projTask.start_time && task.start_time < end_time)
+      || (task.end_time > projTask.start_time && task.end_time < end_time)) {
+        return false
+      }
     }
   }
+  
   return true
 }
 
