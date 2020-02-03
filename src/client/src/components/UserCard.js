@@ -43,10 +43,10 @@ const UserCard = (props) => {
       
       <div style={innerDiv}>
         <h1 style={{margin: "10px"}}>{props.user ? (`${props.user}`) : ("User")}</h1>
-        <NormalText text={"Privileges: " + props.userPrivilege} style={{margin: 0}}/>
+        <NormalText text={props.userPrivilege ? ("Privileges: " + props.userPrivilege) : (<></>)} style={{margin: 0}}/>
         <NormalText text={"Position: " + props.userPosition} style={{margin: 0}}/>
         <NormalText text={"Email: " + props.userEmail} style={{margin: 0}}/>
-
+        <p style={{opacity: 1, margin: 0}}>{props.userId}</p>
         {props.userEdit ? (<ButtonUserInput text="Edit User"/>) : (<ButtonUserInput add={true} text="Add User"/>)}
       </div>
     </div>

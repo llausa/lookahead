@@ -32,7 +32,7 @@ const mystyle = {
 }
 
 let link=(
-    "https://res.cloudinary.com/djic27lvo/video/upload/v1580729266/oooft_tljruu.mp3"
+    "https://res.cloudinary.com/djic27lvo/video/upload/v1580732432/OOOFT.mp3"
 )
 
 const buttonMain = {
@@ -61,6 +61,7 @@ const VersionText = {
     alignSelf: "center",
     fontWeight: "bold",
     cursor: "pointer",
+    border: "none"
 }
 
 function MyLookaheadsPressed() {
@@ -100,7 +101,7 @@ const MenuView = (props) => {
                 <Button component={Link} to="/account/email" onClick={ChangeEmailPressed} variant="outlined" style={buttonGeneral}>Change Email <MailIcon style={smallIcon} /> </Button>
                 <Button component={Link} to="/account/password" onClick={ChangePasswordPressed} variant="outlined" style={buttonGeneral}>Change Password <LockIcon style={smallIcon} /> </Button>
                 <Button component={Link} to="/" variant="outlined" onClick={LogoutPressed} style={buttonGeneral}>Logout <ExitToAppIcon style={smallIcon} /></Button>
-                <a onClick={hehe} style={VersionText}>lookahead v1.0.0 2020</a>
+                <button onClick={hehe} style={VersionText}>lookahead v1.0.0 2020</button>
             </div>
         </div>
     )
