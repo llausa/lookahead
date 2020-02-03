@@ -53,8 +53,8 @@ const ProjectAddUsersView = () => {
         <div data-cy="projectsView" style={mystyle}>
         <TitleText text="Project Add Users" style={{ marginTop: "30px"}} />
 
-        <UserCard user="Marty McFly" userPrivilege="none" userEmail="Back2The@Future.com" />
-        <UserCard user="Keanu Reeves" userPrivilege="none" userEmail="DontHurtMyDog@gmail.com" />
+        <UserCard user="Marty McFly" userPrivilege="none" userPosition="Time Traveller" userEmail="Back2The@Future.com" />
+        <UserCard user="Keanu Reeves" userPrivilege="none" userPosition="Assassin" userEmail="DontHurtMyDog@gmail.com" />
         <UserCard/>
 
         </div>
