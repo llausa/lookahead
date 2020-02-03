@@ -149,6 +149,7 @@ async function usersInProject (req, res) {
 
 // Get users not in project
 async function usersNotInProject (req, res) {
+
   req.body.owner = req.user._id
 
   let validUser = await UserModel.findById(req.user._id)
@@ -157,7 +158,9 @@ async function usersNotInProject (req, res) {
   let validProject = await ProjectModel.findById((req.params.projectId))
   .catch( (err) => { return res.status(404).json(error.details[0].message) })
 
+
   if (validUser._id == String(validProject.owner)) {
+
     let projUsers = validProject.users.map(user => user.user)
     projUsers.push(validProject.owner)
 
