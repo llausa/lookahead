@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react'
+import React, { useReducer, useState } from 'react'
 import axios from 'axios'
 import ButtonInput from '../ButtonInput'
 import FormInput from '../FormInput'
@@ -8,8 +8,18 @@ import Background from '../Background'
 import Nav from '../Nav'
 import TitleText from '../TitleText'
 import NormalText from '../NormalText'
+import Loader from '../Loader'
 
 const Signup = () => {
+
+    // For Loading Animation
+    const [loading, setLoading] = useState(false)
+
+    const [passwordConfirmation, setPasswordConfirmation] = useReducer((state, newState) => (
+        {...state, ...newState}
+    ), {
+        passwordConfirmation: '',
+    })
     
     const [data, setData] = useReducer((state, newState) => (
         {...state, ...newState}
@@ -19,7 +29,6 @@ const Signup = () => {
         position: '',
         email: '',
         password: '',
-        passwordConfirmation: '',
     })
   
     const onSubmit = e => {
@@ -31,14 +40,17 @@ const Signup = () => {
         'https://vast-oasis-18718.herokuapp.com/api/users', data)
         .then(function (response) {
             console.log(response)
+            setLoading(false)
         })
         .catch(function (error) {
             console.log(error.response.data)
+            setLoading(false)
         })
         
     }
 
         const onChange = e => setData({[e.target.name]: e.target.value})
+        const passwordConfirmChange = e => setPasswordConfirmation({[e.target.name]: e.target.value})
     
         const mystyle = {
             display: 'flex',
@@ -59,15 +71,17 @@ const Signup = () => {
         const password = (text) => text.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,1000}$/)
         const passwordFinal = (text) => text === data.password
 
-        
-        let ButtonText = "Submit" 
-        let ButtonDisabled = false
+        const SignupPressed = ()  => {
+            console.log("Login Pressed")
+            setLoading(true)
+        }
 
       return (
   
         <>
         <Nav backButtonLink = "/" BackButton={true} MenuButton={false} />
         <CardContainer background={Background}>
+        <Loader style={{opacity: loading ? 1 : 0}} />
           <form onSubmit={onSubmit} className='form'>
             <div data-cy='signupView' style={mystyle}>
 
@@ -78,9 +92,9 @@ const Signup = () => {
                 <FormInput type='text' value={data.position} onChange={onChange} label='Position' id='position' name='position' />
                 <FormInput type='email' validation={email} value={data.email} onChange={onChange} require={true} errorText="Invalid Email" label='Email'  id='email' name='email' />
                 <FormInput type='password' validation={password} value={data.password} onChange={onChange} require={true} errorText="Password Invalid" label='Password' id='password' name='password' />
-                <FormInput type='password' validation={passwordFinal} value={data.passwordConfirmation} onChange={onChange} require={true} errorText="Passwords Do Not Match" label='Confirm Password' id='passwordConfirmation' name='passwordConfirmation' />
+                <FormInput type='password' validation={passwordFinal} value={data.passwordConfirmation} onChange={passwordConfirmChange} require={true} errorText="Passwords Do Not Match" label='Confirm Password' id='passwordConfirmation' name='passwordConfirmation' />
                 <InfoDialog />  
-                <ButtonInput disabled={ButtonDisabled} type='submit' primary={true} color='primary' text={ButtonText} />   
+                <ButtonInput onClick={SignupPressed} disabled={false} type='submit' primary={true} color='primary' text="Submit" />   
             </div>
           </form>
           </CardContainer>
