@@ -4,18 +4,17 @@ const { UserModel } = require("../models/user")
 const _ = require("lodash")
 
 async function createTask(req, res) {
-
-  let validUser = await UserModel.findById(req.user._id)
-  .catch( (err) => { return res.status(404).json(error.details[0].message) })
+  let validUser = await UserModel.findById(req.user._id).catch(err => {
+    return res.status(404).json(error.details[0].message)
+  })
 
   let task = req.body
 
-  let validProject = await ProjectModel.findById((req.params.projectId))
-  .catch( (err) => { return res.status(404).json(error.details[0].message) })
-
-  if (!validProject) {
-    return res.status(400).send("That project does not exist.")
-  }
+  let validProject = await ProjectModel.findById(req.params.projectId).catch(
+    err => {
+      return res.status(404).json(error.details[0].message)
+    }
+  )
 
   let userInProject = validProject.users.find(
     element => element.user == validUser._id
@@ -26,52 +25,54 @@ async function createTask(req, res) {
     userInProject.role == "Write"
   ) {
     let projectDays =
-      (validProject.end_date - validProject.start_date) / 1000 / 60 / 60 / 24
-    
-      const { error } = validateTask(task, projectDays)
-    if (error) return res.status(400).send(error.details[0].message)
+    (validProject.end_date - validProject.start_date) / 1000 / 60 / 60 / 24
 
-    checkOverlap(task, validProject)
-    if (!checkOverlap) {
-      return res.status(400).send("Tasks cannot overlap.")
+    const { error } = validateTask(task, projectDays)
+    if (error){return res.status(400).send(error.details[0].message)}
+
+    if (!checkOverlap(task, validProject)) {
+      return res.status(400).json({ "message": "Tasks cannot overlap."})
     }
 
     if (task.start_time + task.length > 24) {
       let overlap = parseInt(task.start_time) + parseInt(task.length) - 24
 
       let splitTask = Object.assign({}, task)
+      splitTask.start_time = 0
       splitTask.length = overlap
-      splitTask.day += 1
+      splitTask.day = parseInt(splitTask.day) + 1
 
       task.length -= overlap
 
       validProject.tasks.push(task, splitTask)
       await validProject.save()
 
-      res.status(201).json({ message: "Tasks successfully created." })
+
+      return res.status(201).json({ message: "Tasks successfully created." })
     } else {
-
-      const { error } = validateTask(task, projectDays)
-      if (error) return res.status(400).send(error.details[0].message)
-
       validProject.tasks.push(task)
       await validProject.save()
+      console.log(validProject)
 
-      res.status(201).json({ message: "Task successfully created." })
+      return res.status(201).json({ message: "Task successfully created." })
     }
   } else {
-    res
+    return res
       .status(401)
       .json({ message: "You're not authorized to edit this project." })
   }
 }
 
 async function updateTask(req, res) {
-  let validUser = await UserModel.findById(req.user._id)
-  .catch( (err) => { return res.status(404).json(error.details[0].message) })
+  let validUser = await UserModel.findById(req.user._id).catch(err => {
+    return res.status(404).json(error.details[0].message)
+  })
 
-  let validProject = await ProjectModel.findById((req.params.projectId))
-  .catch( (err) => { return res.status(404).json(error.details[0].message) })
+  let validProject = await ProjectModel.findById(req.params.projectId).catch(
+    err => {
+      return res.status(404).json(error.details[0].message)
+    }
+  )
 
   let userInProject = validProject.users.find(
     element => element.user == validUser._id
@@ -97,8 +98,7 @@ async function updateTask(req, res) {
     validTask.day = req.body.day
     validTask.description = req.body.description
 
-    checkOverlap(validTask, validProject)
-    if (!checkOverlap) {
+    if (!checkOverlap(validTask, validProject)) {
       return res.status(400).send("Tasks cannot overlap.")
     }
 
@@ -106,7 +106,6 @@ async function updateTask(req, res) {
 
     res.status(200).json({ message: "Task successfully updated." })
   } else {
-
     res
       .status(401)
       .json({ message: "You're not authorized to edit this project." })
@@ -114,11 +113,15 @@ async function updateTask(req, res) {
 }
 
 async function removeTask(req, res) {
-  let validUser = await UserModel.findById(req.user._id)
-  .catch( (err) => { return res.status(404).json(error.details[0].message) })
+  let validUser = await UserModel.findById(req.user._id).catch(err => {
+    return res.status(404).json(error.details[0].message)
+  })
 
-  let validProject = await ProjectModel.findById((req.params.projectId))
-  .catch( (err) => { return res.status(404).json(error.details[0].message) })
+  let validProject = await ProjectModel.findById(req.params.projectId).catch(
+    err => {
+      return res.status(404).json(error.details[0].message)
+    }
+  )
 
   let userInProject = validProject.users.find(
     element => element.user == validUser._id
@@ -142,17 +145,31 @@ async function removeTask(req, res) {
 }
 
 function checkOverlap(task, project) {
+ 
+  taskStart = new Date(0, 0, task.day, task.start_time)
+  taskFinish = new Date(0, 0, task.day, task.start_time + task.length)
 
   for (let projTask of project.tasks) {
-    if (projTask.day == task.day) {
-      let end_time = projTask.start_time + projTask.length
-      if ((task.start_time > projTask.start_time && task.start_time < end_time)
-      || (task.end_time > projTask.start_time && task.end_time < end_time)) {
-        return false
-      }
+    projTaskStart = new Date(0, 0, projTask.day, projTask.start_time)
+    projTaskFinish = new Date(
+      0,
+      0,
+      projTask.day,
+      projTask.start_time + projTask.length
+    )
+    
+    
+    if (
+      (task._id != projTask._id) &&
+      (((taskStart > projTaskStart && taskStart < projTaskFinish) ||
+      (taskFinish > projTaskStart && taskFinish < projTaskFinish)) ||
+      (taskStart <= projTaskStart && taskFinish >= projTaskFinish))
+    ) {
+      console.log(projTask)
+      console.log(task)
+      return false
     }
   }
-  
   return true
 }
 
