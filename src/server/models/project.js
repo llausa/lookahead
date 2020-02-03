@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const TaskSchema = require('./task')
+const { TaskSchema } = require('./task')
 const { UserModel } = require('./user')
 const Joi = require('@hapi/joi')
       .extend(require('@hapi/joi-date'))
@@ -11,7 +11,7 @@ const ProjectSchema = new mongoose.Schema({
     create_date: {type: Date, required: true, default: Date.now() },
     start_date: { type: Date, required: true },
     end_date: { type: Date, required: true },
-    //Store Timezone as number +/- GMT?
+    location: { type: String, required: true },
     timezone: { type: Number, required: true, min: -12, max: 14 },
     owner: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true},
     tasks: [TaskSchema],
@@ -28,12 +28,13 @@ const ProjectSchema = new mongoose.Schema({
 
 const ProjectModel = new mongoose.model('Project', ProjectSchema)
 
-function validateProject(project) {
+function validateProject (project) {
   const schema = Joi.object({
       title: Joi.string().required(),
       create_date: Joi.date().iso().required(),
       start_date: Joi.date().iso().greater(Joi.ref('create_date')).required(),
       end_date: Joi.date().iso().greater(Joi.ref('start_date')).required(),
+      location: Joi.string().required(),
       timezone: Joi.number().min(-12).max(14).required(),
       owner: Joi.objectId().required()
   })

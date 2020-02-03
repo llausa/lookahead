@@ -10,7 +10,7 @@ import TitleText from '../TitleText'
 import NormalText from '../NormalText'
 import Loader from '../Loader'
 
-const Signup = () => {
+const Signup = (props) => {
 
     // For Loading Animation
     const [loading, setLoading] = useState(false)
@@ -30,7 +30,7 @@ const Signup = () => {
         email: '',
         password: '',
     })
-  
+
     const onSubmit = e => {
         e.preventDefault()
 
@@ -41,13 +41,16 @@ const Signup = () => {
         .then(function (response) {
             console.log(response)
             setLoading(false)
+            if (response.status === 201) {
+                props.redirect('/projects')
+            }
         })
         .catch(function (error) {
             console.log(error.response.data)
+            console.log(error)
             setLoading(false)
-        })
-        
-    }
+        }) }
+    
 
         const onChange = e => setData({[e.target.name]: e.target.value})
         const passwordConfirmChange = e => setPasswordConfirmation({[e.target.name]: e.target.value})
@@ -65,6 +68,8 @@ const Signup = () => {
         }
 
 
+
+
         // Client Validation
         const basic = (text) => text.length > 2
         const email = (text) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(text)
@@ -72,12 +77,12 @@ const Signup = () => {
         const passwordFinal = (text) => text === data.password
 
         const SignupPressed = ()  => {
-            console.log("Login Pressed")
+            console.log("Signup Pressed")
             setLoading(true)
         }
 
       return (
-  
+
         <>
         <Nav backButtonLink = "/" BackButton={true} MenuButton={false} />
         <CardContainer background={Background}>
@@ -103,5 +108,6 @@ const Signup = () => {
       )
 
 }
+
 
 export default Signup

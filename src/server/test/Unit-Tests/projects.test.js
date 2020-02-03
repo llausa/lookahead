@@ -1,8 +1,8 @@
 process.env.NODE_ENV = 'test'
 
 const mongoose = require("mongoose")
-const { UserModel } = require("../models/user")
-const ProjectModel = require("../models/project")
+const { UserModel } = require("../../models/user")
+const { ProjectModel } = require("../../models/project")
 const moment = require('moment')
 
 const chai = require('chai')
@@ -75,7 +75,7 @@ async function saveUsers() {
 describe('Test Project Model', () => {
 
   before( (done) => {
-    mongoose.connect('mongodb://localhost/lookahead-test', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true}) 
+    mongoose.connect('mongodb://localhost/lookahead-test', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
     .then(
     mongoose.connection
       .once('open', () => {
@@ -88,7 +88,7 @@ describe('Test Project Model', () => {
     )
   })
 
-  beforeEach( (done) => { 
+  beforeEach( (done) => {
       mongoose.connection.db.dropDatabase( async () => {
         done()
       })
@@ -105,6 +105,7 @@ describe('Test Project Model', () => {
         //Store Timezone as number +/- GMT?
         timezone: 10,
         owner: ownerUser._id,
+        location: "Brisbane",
         tasks: [
           {
             title: "Big Yeet",
@@ -207,14 +208,14 @@ describe('Test Project Model', () => {
         validProject.end_date = setDate(Date.now(), 10)
         validProject.timezone = undefined
         const invalidProject = new ProjectModel(validProject)
-        return expect(invalidProject.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')  
+        return expect(invalidProject.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
       })
 
       it('Create project without owner should fail', async () => {
         validProject.timezone = 10
         validProject.owner = undefined
         const invalidProject = new ProjectModel(validProject)
-        return expect(invalidProject.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')    
+        return expect(invalidProject.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
       })
 
 
@@ -233,48 +234,6 @@ describe('Test Project Model', () => {
         const invalidProject = new ProjectModel(validProject)
         return expect(invalidProject.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
       })
-
     })
-
-    describe('Date Validation', () => {
-
-      it('Start Date must be before End Date', async () => {
-        validProject.start_date = setDate(Date.now(), 3)
-        validProject.end_date = setDate(Date.now(), 2)
-        const invalidProject = new ProjectModel(validProject)
-        return expect(invalidProject.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
-      })
-
-      it('End Date must be after Start Date', async () => {
-        validProject.start_date = setDate(Date.now(), 3)
-        validProject.end_date = setDate(Date.now(), 2)
-        const invalidProject = new ProjectModel(validProject)
-        return expect(invalidProject.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
-      })
-
-    })
-
-    describe('Task Validation', () => {
-
-      it('Task must not overflow day', async () => {
-        const newProject = new ProjectModel(validProject)
-        const savedProject = await newProject.save()
-        savedProject.tasks.push(overflowTask)
-        return expect(savedProject.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
-      })
-
-      it('Tasks must not overlap', async () => {
-        const newProject = new ProjectModel(validProject)
-        const savedProject = await newProject.save()
-        savedProject.tasks.push(overlapTask)
-        return expect(savedProject.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
-      })
-
-    })
-
   })
-
-
-
-
 })

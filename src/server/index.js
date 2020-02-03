@@ -9,8 +9,12 @@ const auth = require('./routes/auth')
 const projects = require("./routes/projects")
 const home = require("./routes/home")
 const users = require("./routes/users")
+const bodyParser = require("body-parser")
 
 const app = express()
+
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
 if (process.env.NODE_ENV == 'production') {
   mongoose.connect(process.env.DB_HOST, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
@@ -61,7 +65,7 @@ app.use("/api/projects", projects)
 app.use("/api/users", users)
 app.use('/api/auth', auth)
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3001
 
 
 

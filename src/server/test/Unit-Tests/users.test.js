@@ -2,7 +2,7 @@
 process.env.NODE_ENV = 'test'
 
 const mongoose = require("mongoose")
-const { UserModel } = require("../models/user")
+const { UserModel } = require("../../models/user")
 
 const chai = require('chai')
 const chaiAsPromised = require("chai-as-promised")
@@ -150,21 +150,6 @@ describe('Test User Model', () => {
   })
 
     describe('Password Validation', () => {
-
-
-    it('Create user without capital in password should fail', async () => {
-      invalidTestUser.email = "abc@def.com"
-      invalidTestUser.password = "test12345"
-      const invalidUser = new UserModel(invalidTestUser)
-      return expect(invalidUser.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
-    })
-
-    it('Create user without number in password should fail', async () => {
-      invalidTestUser.password = "Testerino"
-      const invalidUser = new UserModel(invalidTestUser)
-      return expect(invalidUser.save()).to.eventually.be.rejectedWith(Error).and.have.property('name', 'ValidationError')
-    })
-
     it('Create user without 8 digits in password should fail', async () => {
       invalidTestUser.password = "Test123"
       const invalidUser = new UserModel(invalidTestUser)

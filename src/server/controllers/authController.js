@@ -16,7 +16,7 @@ async function login(req, res) {
 
   const token = user.generateAuthToken()
 
-  res.send({token, 'id': user._id})
+  res.json({"token": token})
 }
 
 function validate(req) {

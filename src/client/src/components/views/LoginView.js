@@ -13,7 +13,7 @@ import Background from '../Background'
 import Loader from '../Loader'
 
 
-const Login = () => {
+const Login = (props) => {
 
     // For Loading Animation
     const [loading, setLoading] = useState(false)
@@ -35,12 +35,15 @@ const Login = () => {
         .then(function (response) {
             console.log(response)
             setLoading(false)
+            if (response.status === 200) {
+                props.redirect('/projects')
+            }
         })
         .catch(function (error) {
             console.log(error.response.data)
             setLoading(false)
         })
-        
+
     }
 
     const mystyle = {
@@ -65,7 +68,7 @@ const Login = () => {
         height: "10px",
         margin: "4px"
     }
-    
+
     const LoginPressed = ()  => {
         console.log("Login Pressed")
         setLoading(true)
@@ -78,19 +81,19 @@ const Login = () => {
     const email = (text) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(text)
     const password = (text) => text.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,1000}$/)
 
-    let ButtonText = "Login" 
+    let ButtonText = "Login"
 
-    
+
     return (
         <>
         <Nav backButtonLink = "/" BackButton={true} MenuButton={false}/>
         <CardContainer background={Background}>
-        <form onSubmit={onSubmit} className='form'> 
+        <form onSubmit={onSubmit} className='form'>
         <div data-cy="loginView" style={mystyle}>
             <Loader style={{opacity: loading ? 1 : 0}} />
             <TitleText text="Login" />
             <NormalText text="Please enter your email and password" />
-            
+
             <FormInput type='email' validation={email} value={data.email} onChange={onChange} require={true} errorText="Invalid Email" label='Email'  id='email' name='email' />
             <FormInput type='password' validation={password} value={data.password} onChange={onChange} require={true} errorText="Password Invalid" label='Password' id='password' name='password' />
                 

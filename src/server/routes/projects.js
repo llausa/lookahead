@@ -5,66 +5,50 @@ const Joi = require('@hapi/joi')
 Joi.objectId = require('joi-objectid')(Joi)
 const auth = require('../middleware/auth')
 const projectController = require("../controllers/projectController")
-
-
-const projects = [
-  { id: 1, name: "Project1" },
-  { id: 2, name: "Project2" },
-  { id: 3, name: "Project3" },
-  { id: 4, name: "Project4" },
-  { id: 5, name: "Project5" },
-]
-
+const taskController = require("../controllers/taskController")
 
 // Projects list route
-router.get("/", auth, (req, res) => {
-  res.send(projects);
-});
+router.get("/", auth, projectController.allProjects) // works but if empty, returns empty array
 
 // Project view route
-router.get("/:id", auth, (req, res) => {
-  const project = projects.find(c => c.id === parseInt(req.params.id))
-  if (!project) return res.status(404).send('The project with that ID was not found')
+router.get("/:projectId", auth, projectController.getProject) // works if projectId is correct and project exist but hangs
+// if projectId sent is invalid or doesnt exist in DB
 
-  
-  if (result.error) {
-    // 400 Bad Request
-    res.status(400).send(result.error.details[0].message)
-    return
-  }
-  res.send(project)
-})
+// create Project route
+router.post("/", auth, projectController.create ) // works
 
-// Projects POST route
-router.post("/", auth, projectController.create)
+// update Project route
+router.put("/:projectId", auth, projectController.update) // works properly if body is correct and Id is correct. Wont work otherwise
+// we're not catching errors when body is incorrect
+
+// delete Project route
+router.delete("/:projectId", auth, projectController.remove ) // works properly if projectId is valid. If a project is deleted, it is not being removed from User.projects.
+
+// get project users
+router.get("/:projectId/users", auth, projectController.usersInProject) // works if projectId is correct
+
+// get app users not in project
+router.get("/:projectId/add_users", auth, projectController.usersNotInProject) // works correctly
+
+// Project add any user role to a project
+router.post("/:projectId/users", auth, projectController.addUser ) // works with appropriate with appropriate body
+// { "role": ("Read" or "Write"), "user": { "userId" }
+// we dont check to see if a user is already in the project
+
+// Remove User from Project
+router.delete("/:projectId/users/:userId", auth, projectController.removeUser ) // works correctly - dont send body, send if of
+// user you want to delete in request url. If you try to delete a user that's not in the project the request hangs with
+
+router.put("/:projectId/users/:userId", auth, projectController.updateUser ) // works correctly
+
+router.put("/:projectId/tasks", auth, taskController.createTask ) // we're not figuring out dates correctly
 
 
-// project Project PUT route
-router.put('/:id', auth, (req, res) => {
-  const project = projects.find(c => c.id === parseInt(req.params.id))
-  if (!project) return res.status(404).send('The project with that ID was not found')
+router.put("/:projectId/tasks/edit", auth, taskController.updateAllTasks ) // havent tested yet bc cant create tasks
 
-  const schema = {
-    name: Joi.string().min(3).required()
-  }
-  const result = Joi.validate(req.body, schema)
+router.put("/:projectId/tasks/:taskId", auth, taskController.updateTask ) // havent tested yet bc cant create tasks
 
-  if (result.error) {
-    // 400 Bad Request
-    res.status(400).send(result.error.details[0].message)
-    return
-  }
-  res.send(project)
-})
+router.delete("/:projectId/tasks/:taskId", auth, taskController.removeTask ) // works
 
-router.delete('/:id', auth, (req, res) => {
-  const project = projects.find(c => c.id === parseInt(req.params.id))
-  if (!project) return res.status(404).send('The project with that ID was not found')
-
-  const index = projects.indexOf(project)
-  projects.splice(index, 1)
-
-  res.send(project)
-})
 
 module.exports = router
