@@ -83,3 +83,26 @@ body {
     background: linear-gradient(180deg, rgba(0,110,226,1) 0%, rgba(0,61,125,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#006ee2",endColorstr="#003d7d",GradientType=1);
 }
+
+.MenuOpen {
+    opacity: 1;
+    transition-duration: 0.6s;
+    position: absolute;
+    left: 0vw;
+}
+
+.MenuClosed {
+    transition-duration: 0.6s;
+    position: absolute;
+    left: 100vw;
+}
+
+.SpinIn {
+    transform: rotate(0deg);
+    transition-duration: 0.6s;
+}
+
+.SpinOut {
+    transform: rotate(360deg);
+    transition-duration: 0.6s;
+}

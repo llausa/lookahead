@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { makeStyles, AppBar, Toolbar, IconButton } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
+import CloseIcon from '@material-ui/icons/Close'
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace'
 import Menu from './Menu'
 import Logo from '../images/LookaheadLogo.svg'
@@ -38,12 +39,15 @@ const HandleBack = () => {
   console.log("We going back boi")
 }
 
-
-const showMenu = (e) => {
-  
-}
-
 const Nav = (props) => {
+
+  const [open, setOpen] = React.useState(false)
+
+  const handleClick = () => {
+    setOpen(!open)
+    console.log("OPEN MENU")
+  }
+
 
   const classes = useStyles()
 
@@ -61,8 +65,10 @@ const Nav = (props) => {
           </IconButton>) }
         <img src={Logo} alt="Logo" style={logoStyle} className={classes.title} aria-label="logo"/>
         {props.MenuButton ? (
-          <IconButton onClick={showMenu} edge="end" className={classes.menuButton} color="inherit" aria-label="Menu">
-            <MenuIcon />
+          <IconButton onClick={handleClick} edge="end" className={classes.menuButton} color="inherit" aria-label="Menu">
+          <>
+            {open? (<CloseIcon/>) : (<MenuIcon/>)}
+          </>
           </IconButton>) : (
             <IconButton edge="end" className={classes.menuButton} style={Invisible} color="inherit" >
             <MenuIcon />
@@ -70,7 +76,7 @@ const Nav = (props) => {
         </Toolbar>
       </AppBar>
     </div>
-    <Menu checked={props.checked}/>
+    <Menu className={open ? 'MenuOpen' : 'MenuClosed'} />
     <div style={{position: "relative", height: "50px"}}></div>
     </div>
     
