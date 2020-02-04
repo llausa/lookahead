@@ -47,7 +47,6 @@ const Nav = (props) => {
     setOpen(!open)
   }
 
-
   const classes = useStyles()
 
   return (
@@ -75,7 +74,7 @@ const Nav = (props) => {
     <Menu className={open ? 'MenuOpen' : 'MenuClosed'} />
     <div style={{position: "relative", height: "50px"}}></div>
     </div>
-    
+
   )
 }
 

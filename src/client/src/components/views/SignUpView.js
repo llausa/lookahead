@@ -25,7 +25,7 @@ const Signup = (props) => {
     ), {
         passwordConfirmation: '',
     })
-    
+
     // Data for signup submit
     const [data, setData] = useReducer((state, newState) => (
         {...state, ...newState}
@@ -59,11 +59,11 @@ const Signup = (props) => {
             setLoading(false)
             setErrorMessage(error.response.data)
         }) }
-    
+
         // Updates values on change
         const onChange = e => setData({[e.target.name]: e.target.value})
         const passwordConfirmChange = e => setPasswordConfirmation({[e.target.name]: e.target.value})
-    
+
         // Styling
         const mystyle = {
             display: 'flex',
@@ -112,8 +112,8 @@ const Signup = (props) => {
                 <FormInput type='email' validation={email} value={data.email} onChange={onChange} require={true} errorText="Invalid Email" label='Email'  id='email' name='email' />
                 <FormInput type='password' validation={password} value={data.password} onChange={onChange} require={true} errorText="Password Invalid" label='Password' id='password' name='password' />
                 <FormInput type='password' validation={passwordFinal} value={data.passwordConfirmation} onChange={passwordConfirmChange} require={true} errorText="Passwords Do Not Match" label='Confirm Password' id='passwordConfirmation' name='passwordConfirmation' />
-                <InfoDialog />  
-                <ButtonInput onClick={SignupPressed} disabled={!isValid()} type='submit' primary={true} text="Submit" />   
+                <InfoDialog />
+                <ButtonInput onClick={SignupPressed} disabled={!isValid()} type='submit' primary={true} text="Submit" />
             </div>
           </form>
           </CardContainer>
