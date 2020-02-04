@@ -9,6 +9,27 @@ const API = axios.create({
     withCredentials: true
 })
 
+
+LocalAPI.interceptors.request.use(function(config) {
+  const authHeader = config.headers.common.Authorization
+
+  if (authHeader) {
+    const token = authHeader.split("Bearer ")[1]
+    const id = JWT.decode(token)._id
+
+    if (!id) {
+      if (Cookies.get('authToken')) {
+        Cookies.remove('authToken')
+      }
+
+    }
+
+    }
+
+  return config
+  
+})
+
 let token = Cookies.get('authToken')
 
 if (token) {
