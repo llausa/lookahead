@@ -37,14 +37,13 @@ const Login = (props) => {
         console.log(data)
 
         axios.post(
-            `http://localhost:3001/api/auth`,
-            data
-        )
+            'http://localhost:3001/api/auth', data)
         .then(function (response) {
             console.log(response)
             // localStorage.setItem('authToken', response.body.token)
             setLoading(false)
-            if (response.status === 200) {
+            if (response.status == 200) {
+                console.log('Should redirect')
                 props.redirect('/projects')
             }
         })
