@@ -3,11 +3,14 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const _ = require('lodash')
 
-async function details(req, res) {
+async function details(req, res, next) {
   const user = await UserModel.findById(req.user._id).select('-password -email')
   .catch( (err) => { return res.status(404).json(error.details[0].message) })
 
-  res.send(user)
+  res.status(200)
+  res.locals.user = user
+  res.locals.validUser = user
+  next()
 }
 
 async function register(req, res, next) {
@@ -63,7 +66,7 @@ async function updateDetails(req, res, next) {
 
 }
 
-async function updatePassword(req, res) {
+async function updatePassword(req, res, next) {
 
   let validUser = await UserModel.findById(req.user._id)
   .catch( (err) => { return res.status(404).json(error.details[0].message) })
@@ -78,10 +81,14 @@ async function updatePassword(req, res) {
   validUser.password = await bcrypt.hash(req.body.newPassword, salt)
 
   await validUser.save()
-  res.status(200).json({"message": "Password updated succesfully."})
+  res.status(200)
+  res.locals.validUser = validUser
+  res.locals.message = "Password updated succesfully."
+
+  next()
 }
 
-async function updateEmail(req, res) {
+async function updateEmail(req, res, next) {
 
   let validUser = await UserModel.findById(req.user._id)
   .catch( (err) => { return res.status(404).json(error.details[0].message) })
@@ -104,7 +111,12 @@ async function updateEmail(req, res) {
   validUser.email = req.body.email
 
   await validUser.save()
-  res.status(200).json({"message": "Email updated successfully."})
+
+  res.status(200)
+  res.locals.validUser = validUser
+  res.locals.message = "Email updated successfully."
+
+  next()
 }
 
 module.exports = { register, updateDetails, updatePassword, updateEmail, details }
