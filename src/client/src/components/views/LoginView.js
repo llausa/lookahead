@@ -1,6 +1,6 @@
-import React, { useReducer } from "react"
+import React, { useReducer, useState } from "react"
 import Nav from '../Nav'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Button } from '@material-ui/core'
 import axios from 'axios'
 import LockIcon from '@material-ui/icons/Lock'
@@ -10,9 +10,13 @@ import TitleText from '../TitleText'
 import NormalText from '../NormalText'
 import CardContainer from '../CardContainer'
 import Background from '../Background'
+import Loader from '../Loader'
 
 
 const Login = (props) => {
+
+    // For Loading Animation
+    const [loading, setLoading] = useState(false)
 
     const [data, setData] = useReducer((state, newState) => (
         {...state, ...newState}
@@ -29,14 +33,16 @@ const Login = (props) => {
         axios.post(
         'https://vast-oasis-18718.herokuapp.com/api/auth', data)
         .then(function (response) {
-            console.log(response.status)
-            if (response.status == 200) {
+            console.log(response)
+            setLoading(false)
+            if (response.status === 200) {
                 localStorage.setItem('authToken', response.body.token)
                 props.redirect('/projects')
             }
         })
         .catch(function (error) {
-            console.log(error)
+            console.log(error.response.data)
+            setLoading(false)
         })
 
     }
@@ -66,11 +72,9 @@ const Login = (props) => {
 
     const LoginPressed = ()  => {
         console.log("Login Pressed")
+        setLoading(true)
     }
 
-    const ResetPressed = () => {
-        console.log("Reset Pressed")
-    }
 
     const onChange = e => setData({[e.target.name]: e.target.value})
 
@@ -87,14 +91,16 @@ const Login = (props) => {
         <CardContainer background={Background}>
         <form onSubmit={onSubmit} className='form'>
         <div data-cy="loginView" style={mystyle}>
+            <Loader style={{opacity: loading ? 1 : 0}} />
             <TitleText text="Login" />
             <NormalText text="Please enter your email and password" />
 
             <FormInput type='email' validation={email} value={data.email} onChange={onChange} require={true} errorText="Invalid Email" label='Email'  id='email' name='email' />
             <FormInput type='password' validation={password} value={data.password} onChange={onChange} require={true} errorText="Password Invalid" label='Password' id='password' name='password' />
+                
+            <ButtonInput onClick={LoginPressed} type='submit' primary={true} color='primary' text={ButtonText} /> 
+            <Button  onClick={LoginPressed} component={Link} to="/account/password" variant="outlined" style={buttonResetP}>Reset Password <LockIcon style={smallIcon} /> </Button>
 
-            <ButtonInput onClick={LoginPressed} type='submit' primary={true} color='primary' text={ButtonText} />
-            <Button component={Link} to="/account/password" onClick={ResetPressed} variant="outlined" style={buttonResetP}>Reset Password <LockIcon style={smallIcon} /> </Button>
         </div>
         </form>
         </CardContainer>

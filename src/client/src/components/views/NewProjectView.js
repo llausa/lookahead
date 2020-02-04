@@ -11,7 +11,7 @@ import TimeZonePicker from '../TimeZonePicker'
 import FormInput from '../FormInput'
 
 
-const NewLookaheadView = () => {
+const NewProjectView = () => {
 
     const [data, setData] = useReducer((state, newState) => (
         {...state, ...newState}
@@ -68,8 +68,8 @@ const NewLookaheadView = () => {
             <NormalText text="Please fill out all required fields" />
             <FormInput type='text' validation={basic} value={data.projectTitle} onChange={onChange} require={true} errorText="Please enter more Characters" label='Project Title' id='projectTitle' name='projectTitle'/>
             <TimeZonePicker label="Location*" id="location" name='location'/>
-            <DateInput label="Start Date" day={1} id="startDate"name='location'/>
-            <DateInput label="End Date" day={2} id="endDate" name='location' />
+            <DateInput label="Start Date" day={1} id="startDate" name='startDate'/>
+            <DateInput label="End Date" day={2} id="endDate" name='endDate' />
             <ButtonInput disabled={false} type='submit' primary={true} color='primary' text="Create" />
         </div>
         </form>
@@ -79,4 +79,4 @@ const NewLookaheadView = () => {
     )
 }
 
-export default NewLookaheadView;
+export default NewProjectView

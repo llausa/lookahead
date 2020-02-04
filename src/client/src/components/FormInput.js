@@ -33,9 +33,29 @@ const FormInput = (props) => {
     props.validation && setValid(props.validation(e.target.value))
   }
 
+  if (props.multiline) {
+    return(
+      <CssTextField
+        style={{margin: "4px", width: "100%"}}
+        required={props.require? true : undefined}
+        error={!valid}
+        name={props.name}
+        multiline
+        rows="4"
+        id={`${props.id} ${valid ? "outlined" : "outlined-error-helper-text"}`}
+        label={valid ? props.label : "Error"}
+        helperText={!valid ? `${props.errorText}` : undefined}
+        type={props.type || 'text'}
+        variant="outlined"
+        size="small"
+        onChange={validate}
+        value={props.value}
+      />
+    )
+  } else {
   return(
     <CssTextField
-      style={{margin: "4px", width: props.width}}
+      style={{margin: "4px", width: "100%"}}
       required={props.require? true : undefined}
       error={!valid}
       name={props.name}
@@ -48,7 +68,7 @@ const FormInput = (props) => {
       onChange={validate}
       value={props.value}
     />
-  )
+  )}
 }
 
 export default FormInput
