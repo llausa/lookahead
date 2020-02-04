@@ -1,6 +1,6 @@
 import React, { useReducer } from "react"
 import { Button } from '@material-ui/core'
-import axios from 'axios'
+import API from "../../axios.config"
 import MailIcon from '@material-ui/icons/Mail'
 import CardContainer from '../CardContainer'
 import Background from '../Background'
@@ -22,9 +22,10 @@ const PasswordChangeView = () => {
 
         console.log(data)
 
-        axios.post(
-        'https://vast-oasis-18718.herokuapp.com/api/auth', data)
+        API.post(
+        '/api/auth', data)
         .then(function (response) {
+            localStorage.setItem('authToken', response.data.token)
             console.log(response)
         })
         .catch(function (error) {
