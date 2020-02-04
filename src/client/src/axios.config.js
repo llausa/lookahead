@@ -1,15 +1,17 @@
 import axios from 'axios'
+import Cookies from 'js-cookie'
 
 
 
 const API = axios.create({
-    baseURL: "http://localhost:3001/"
+    baseURL: "http://localhost:3001/",
+    withCredentials: true
 })
 
-let token = localStorage.getItem('authToken')
+let token = Cookies.get('authToken')
 
 if (token) {
-  API.defaults.headers.common['Authorization'] = `Bearer ${token}`
+  API.defaults.headers.common['Authorization'] = `Bearer ${Cookies.get('authToken')}`
 }
 
 export default API

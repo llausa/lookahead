@@ -5,9 +5,11 @@ module.exports = function (req, res) {
 
   let data = res.locals
 
-  data.token = res.locals.validUser.generateAuthToken()
+  token = res.locals.validUser.generateAuthToken()
 
   delete data.validUser
+
+  res.cookie('authToken', token, { maxAge: 3600000 })
 
   res.json( data )
 

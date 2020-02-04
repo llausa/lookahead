@@ -12,6 +12,7 @@ import CardContainer from '../CardContainer'
 import Background from '../Background'
 import Loader from '../Loader'
 import NotificationMessage from '../NotificationMessage'
+import Cookies from 'js-cookie'
 
 
 const Login = (props) => {
@@ -34,23 +35,24 @@ const Login = (props) => {
     const onSubmit = e => {
         e.preventDefault()
 
-        console.log(data)
+        // console.log(data)
 
         API.post(
         '/api/auth', data)
         .then(function (response) {
-            
-            console.log(response)
+
+            // console.log(response)
             setLoading(false)
             if (response.status === 200) {
-                localStorage.setItem('authToken', response.data.token)
                 props.redirect('/projects')
             }
         })
         .catch(function (error) {
+            
+            console.log(error)
             // console.log(error.response.data)
             setLoading(false)
-            setErrorMessage(error.response.data)
+            // setErrorMessage(error.response.data)
         })
 
     }

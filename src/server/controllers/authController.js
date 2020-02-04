@@ -5,6 +5,7 @@ const _ = require('lodash')
 const Joi = require('@hapi/joi')
 
 async function login(req, res, next) {
+  console.log(req)
   const { error } = validate(req.body)
   if (error) return res.status(400).json({"message": error.details[0].message })
 
@@ -14,10 +15,10 @@ async function login(req, res, next) {
   const validPassword = await bcrypt.compare(req.body.password, user.password)
   if (!validPassword) return res.status(401).json({"message":"Invalid Email or Password."})
 
-  // const token = user.generateAuthToken()
   res.status(200)
   res.locals.validUser = user
-  // res.json({"token": token})
+  res.locals.message = "Logged in successfully."
+
   next()
 }
 

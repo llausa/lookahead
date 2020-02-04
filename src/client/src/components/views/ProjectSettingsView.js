@@ -30,7 +30,7 @@ const ProjectSettingsView = () => {
         API.post(
         '/api/users', data)
         .then(function (response) {
-            localStorage.setItem('authToken', response.data.token)
+            
             console.log(response)
         })
         .catch(function (error) {
