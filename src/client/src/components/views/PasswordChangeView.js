@@ -66,17 +66,17 @@ const PasswordChangeView = () => {
 
     // Client Validation
     const onChange = e => setData({[e.target.name]: e.target.value})
-    const email = (text) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(text)
+    const password = (text) => text.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,1024}$/)
 
     return (
         <>
-        <Nav BackButton={false} MenuButton={false}/>
+        <Nav backButtonLink = "/projects" BackButton={true} MenuButton={false}/>
         <CardContainer background={Background}>
         <form onSubmit={onSubmit} className='form'>
             <div data-cy="passwordView" style={mystyle}>
                 <TitleText text="Password Change" />
-                <FormInput type='email' validation={email} value={data.email} onChange={onChange} require={true} errorText="Invalid Email" label='Current Email'  id='currentEmail' name='currentEmail' />
-                <FormInput type='email' validation={email} value={data.email} onChange={onChange} require={true} errorText="Invalid Email" label='New Email'  id='newEmail' name='newEmail' />
+                <FormInput type='password' validation={email} value={data.currentPassword} onChange={onChange} require={true} errorText="Invalid Password" label='Current Password'  id='currentPassword' name='currentPassword' />
+                <FormInput type='password' validation={email} value={data.newPassword} onChange={onChange} require={true} errorText="Invalid Password" label='New Email'  id='newEmail' name='newEmail' />
 
                 <Button onClick={SendEmailPressed} variant="outlined" type='submit' style={buttonMain} color="primary">Send Email <MailIcon style={smallIcon} /></Button>
             </div>
