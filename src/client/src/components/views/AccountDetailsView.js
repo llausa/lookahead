@@ -9,15 +9,15 @@ import TitleText from '../TitleText'
 import NormalText from '../NormalText'
 import Loader from '../Loader'
 import { Button } from '@material-ui/core'
-
-
+import NotificationMessage from '../NotificationMessage'
 
 const AccountDetailsView = () => {
 
-  const authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODA4NzMyMjUsIl9pZCI6IjVlMzhlNDg5MjY3YzU5N2ZjZjA0MGMxMyIsImlhdCI6MTU4MDc4NjgyNX0.tdMPswUn4DD9nOE5CKQLSGY__8aKWLCU9yp2DbwoxcM'
-
   // For Loading Animation
   const [loading, setLoading] = useState(false)
+
+  // For Error Message
+  const [errorMessage, setErrorMessage] = useState(null)
 
   const [data, setData] = useReducer((state, newState) => (
     {...state, ...newState}
@@ -32,16 +32,18 @@ const AccountDetailsView = () => {
 
     console.log(data)
 
-    API.post(
-    '/api/users', data)
+    API.put(
+    '/api/users/details', data)
     .then(function (response) {
       localStorage.setItem('authToken', response.data.token)
       console.log(response)
+      setLoading(false)
     })
     .catch(function (error) {
         // add error notifications here
         console.log(error.response.data)
         setLoading(false)
+        setErrorMessage(error.response.data)
     })
 
   }
@@ -73,6 +75,8 @@ const AccountDetailsView = () => {
 
     return (
       <>
+      {errorMessage && <NotificationMessage error={errorMessage.message} onClose={() => setErrorMessage(null)} />}
+
       <Nav backButtonLink = "/projects" BackButton={true} MenuButton={false} />
       <CardContainer background={Background}>
       <form onSubmit={onSubmit} className='form'>
