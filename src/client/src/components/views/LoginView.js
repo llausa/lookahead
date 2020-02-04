@@ -48,7 +48,7 @@ const Login = (props) => {
             }
         })
         .catch(function (error) {
-            
+
             console.log(error)
             // console.log(error.response.data)
             setLoading(false)
@@ -117,8 +117,8 @@ const Login = (props) => {
 
             <FormInput type='email' validation={email} value={data.email} onChange={onChange} require={true} errorText="Invalid Email" label='Email'  id='email' name='email' />
             <FormInput type='password' validation={password} value={data.password} onChange={onChange} require={true} errorText="Password Invalid" label='Password' id='password' name='password' />
-                
-            <ButtonInput onClick={LoginPressed} type='submit' primary={true} text={ButtonText} disabled={!isValid()} /> 
+
+            <ButtonInput onClick={LoginPressed} type='submit' primary={true} text={ButtonText} disabled={!isValid()} />
             <Button onClick={LoginPressed} component={Link} to="/account/password" variant="outlined" style={buttonResetP}>Reset Password <LockIcon style={smallIcon} /> </Button>
 
         </div>

@@ -36,7 +36,7 @@ const App = () => {
   return (
     <div className="App">
       <BrowserRouter>
-        {redirect && <Redirect to={redirect} />}
+        <Redirector redirect={redirect} setRedirect={setRedirect} />
         <Switch>
           <Route exact path="/" component={HomeView} data-cy="homeView"><HomeView redirect={redirectFunc} /></Route>
           <Route exact path="/login" component={LoginView} data-cy="loginView"><LoginView redirect={redirectFunc} /></Route>
@@ -60,6 +60,20 @@ const App = () => {
         </Switch>
       </BrowserRouter>
     </div>
+  )
+}
+
+function Redirector(props) {
+
+  if(props.redirect) {
+    let redirect = props.redirect
+    props.setRedirect(null)
+    return <Redirect to={redirect} />
+  }
+
+  return (
+    <>
+    </>
   )
 }
 
