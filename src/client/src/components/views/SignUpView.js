@@ -9,7 +9,7 @@ import Nav from '../Nav'
 import TitleText from '../TitleText'
 import NormalText from '../NormalText'
 import Loader from '../Loader'
-import NotificationMessage from '../NotificationMessage'
+import ErrorMessage from '../ErrorMessage'
 
 const Signup = (props) => {
 
@@ -97,7 +97,7 @@ const Signup = (props) => {
       return (
 
         <>
-        {errorMessage && <NotificationMessage error={errorMessage.message} onClose={() => setErrorMessage(null)} />}
+        {errorMessage && <ErrorMessage msg={errorMessage.message} onClose={() => setErrorMessage(null)} />}
         <Nav backButtonLink = "/" BackButton={true} MenuButton={false} />
         <CardContainer background={Background}>
         <Loader style={{opacity: loading ? 1 : 0}} />

@@ -11,7 +11,7 @@ import NormalText from '../NormalText'
 import CardContainer from '../CardContainer'
 import Background from '../Background'
 import Loader from '../Loader'
-import NotificationMessage from '../NotificationMessage'
+import ErrorMessage from '../ErrorMessage'
 import Cookies from 'js-cookie'
 
 
@@ -48,7 +48,6 @@ const Login = (props) => {
             }
         })
         .catch(function (error) {
-
             console.log(error)
             // console.log(error.response.data)
             setLoading(false)
@@ -104,7 +103,7 @@ const Login = (props) => {
 
     return (
         <>
-        {errorMessage && <NotificationMessage error={errorMessage.message} onClose={() => setErrorMessage(null)} />}
+        {errorMessage && <ErrorMessage msg={errorMessage.message} onClose={() => setErrorMessage(null)} />}
 
         <Nav backButtonLink = "/" BackButton={true} MenuButton={false}/>
 

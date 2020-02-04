@@ -9,7 +9,7 @@ import TitleText from '../TitleText'
 import NormalText from '../NormalText'
 import Loader from '../Loader'
 import { Button } from '@material-ui/core'
-import NotificationMessage from '../NotificationMessage'
+import ErrorMessage from '../ErrorMessage'
 
 const AccountDetailsView = () => {
 
@@ -75,7 +75,7 @@ const AccountDetailsView = () => {
 
     return (
       <>
-      {errorMessage && <NotificationMessage error={errorMessage.message} onClose={() => setErrorMessage(null)} />}
+      {errorMessage && <ErrorMessage msg={errorMessage.message} onClose={() => setErrorMessage(null)} />}
 
       <Nav backButtonLink = "/projects" BackButton={true} MenuButton={false} />
       <CardContainer background={Background}>
