@@ -2,7 +2,7 @@ import React, {useReducer} from "react"
 import CardContainer from '../CardContainer'
 import Nav from '../Nav'
 import Background from '../../images/WhiteBackgroundSmall.jpg'
-import axios from 'axios'
+import API from "../../axios.config"
 import ButtonInput from '../ButtonInput'
 import FormInput from '../FormInput'
 import TitleText from '../TitleText'
@@ -24,10 +24,11 @@ const AccountDetailsView = () => {
 
     console.log(data)
 
-    axios.post(
-    'https://vast-oasis-18718.herokuapp.com/api/users', data)
+    API.post(
+    '/api/users', data)
     .then(function (response) {
-        console.log(response)
+      localStorage.setItem('authToken', response.data.token)
+      console.log(response)
     })
     .catch(function (error) {
         console.log(error.response.data)

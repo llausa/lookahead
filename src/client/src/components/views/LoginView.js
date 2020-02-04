@@ -2,7 +2,7 @@ import React, { useReducer, useState } from "react"
 import Nav from '../Nav'
 import { Link } from 'react-router-dom'
 import { Button } from '@material-ui/core'
-import axios from 'axios'
+import API from "../../axios.config"
 import LockIcon from '@material-ui/icons/Lock'
 import ButtonInput from '../ButtonInput'
 import FormInput from '../FormInput'
@@ -30,18 +30,19 @@ const Login = (props) => {
 
         console.log(data)
 
-        axios.post(
-        'https://vast-oasis-18718.herokuapp.com/api/auth', data)
+        API.post(
+        '/api/auth', data)
         .then(function (response) {
+            
             console.log(response)
             setLoading(false)
             if (response.status === 200) {
-                localStorage.setItem('authToken', response.body.token)
+                localStorage.setItem('authToken', response.data.token)
                 props.redirect('/projects')
             }
         })
         .catch(function (error) {
-            console.log(error.response.data)
+            // console.log(error.response.data)
             setLoading(false)
         })
 

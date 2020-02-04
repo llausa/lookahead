@@ -4,7 +4,7 @@ import '../grid-layout.css'
 import { Responsive as ResponsiveGridLayout, ToolBox } from 'react-grid-layout'
 import GridLayout  from 'react-grid-layout'
 import { useParams } from 'react-router-dom'
-import axios from 'axios'
+import API from "../../axios.config"
 
 export default function Grid(props) {
 
@@ -15,11 +15,11 @@ export default function Grid(props) {
   const { projectId } = useParams()
 
   useEffect(() => {
-    axios.get(
-      `http://localhost:3001/api/projects/${projectId}/`,
-      {headers: {Authorization: `Bearer ${authToken}`}}
+    API.get(
+      `api/projects/${projectId}/`
     )
     .then(res => {
+      localStorage.setItem('authToken', res.data.token)
       setLayout(fromDatabase(res.data.tasks))
     }).catch(() => {
       props.redirect('/projects')
@@ -55,12 +55,12 @@ export default function Grid(props) {
   }
 
   const updateDatabase = async (newLayout) => {
-    return axios.put(
-      `http://localhost:3001/api/projects/${projectId}/tasks/edit`,
-      {tasks: toDatabase(newLayout)},
-      {headers: {Authorization: `Bearer ${authToken}`}}
+    return API.put(
+      `/api/projects/${projectId}/tasks/edit`,
+      {tasks: toDatabase(newLayout)}
     )
-    .then(() => {
+    .then((res) => {
+      localStorage.setItem('authToken', res.data.token)
       setLayout(newLayout)
     })
     .catch(() => {

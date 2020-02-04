@@ -1,5 +1,5 @@
 import React, { useReducer, useState } from 'react'
-import axios from 'axios'
+import API from "../../axios.config"
 import ButtonInput from '../ButtonInput'
 import FormInput from '../FormInput'
 import InfoDialog from '../InfoDialog'
@@ -36,13 +36,13 @@ const Signup = (props) => {
 
         console.log(data)
 
-        axios.post(
-        'https://vast-oasis-18718.herokuapp.com/api/users', data)
+        API.post(
+        '/api/users', data)
         .then(function (response) {
             console.log(response)
             setLoading(false)
             if (response.status === 201) {
-                localStorage.setItem('authToken', response.body.token)
+                localStorage.setItem('authToken', response.data.token)
                 props.redirect('/projects')
             }
         })
