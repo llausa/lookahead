@@ -38,10 +38,10 @@ const EmailChangeView = () => {
         API.put(
         '/api/users/email', data)
         .then(function (response) {
-            
+
             console.log(response)
             setLoading(false)
-            setSuccessMessage("Your email has been changed")
+            setSuccessMessage("Your email has been changed.")
         })
         .catch(function (error) {
             console.log(error.response.data)
