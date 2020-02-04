@@ -17,7 +17,7 @@ export default function Grid(props) {
       `api/projects/${projectId}/`
     )
     .then(res => {
-      localStorage.setItem('authToken', res.data.token)
+      
       setLayout(fromDatabase(res.data.tasks))
     }).catch(() => {
       props.redirect('/projects')
@@ -58,7 +58,7 @@ export default function Grid(props) {
       {tasks: toDatabase(newLayout)}
     )
     .then((res) => {
-      localStorage.setItem('authToken', res.data.token)
+      
       setLayout(newLayout)
     })
     .catch(() => {

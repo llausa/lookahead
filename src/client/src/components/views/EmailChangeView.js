@@ -35,7 +35,7 @@ const EmailChangeView = () => {
         API.put(
         '/api/users/email', data)
         .then(function (response) {
-            localStorage.setItem('authToken', response.data.token)
+            
             console.log(response)
             setLoading(false)
         })

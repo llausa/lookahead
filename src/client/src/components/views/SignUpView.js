@@ -49,7 +49,7 @@ const Signup = (props) => {
             console.log(response)
             setLoading(false)
             if (response.status === 201) {
-                localStorage.setItem('authToken', response.data.token)
+                
                 props.redirect('/projects')
             }
         })
