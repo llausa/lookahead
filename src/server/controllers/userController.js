@@ -3,14 +3,17 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const _ = require('lodash')
 
-async function details(req, res) {
+async function details(req, res, next) {
   const user = await UserModel.findById(req.user._id).select('-password -email')
-  .catch( (err) => { return res.status(404).json(error.details[0].message) })
+  .catch( (err) => { return res.status(404).json({ "message": err.details[0].message })})
 
-  res.send(user)
+  res.status(200)
+  res.locals.user = user
+  res.locals.validUser = user
+  next()
 }
 
-async function register(req, res) {
+async function register(req, res, next) {
 
   const { error } = validateUser(req.body)
   if (error) return res.status(400).json({"message": 'Invalid user data.'})
@@ -29,15 +32,19 @@ async function register(req, res) {
   user.password = await bcrypt.hash(user.password, salt)
   await user.save()
 
-  const token = user.generateAuthToken()
+  res.status(201)
+  res.locals.validUser = user
+  res.locals.message = `User ${user.email} successfully created.`
 
-  res.status(201).json({"message":`User ${user.email} successfully created.`, "token": token})
+  next()
+
+  // res.status(201).json({"message":`User ${user.email} successfully created.`, "token": token})
 }
 
-async function updateDetails(req, res) {
+async function updateDetails(req, res, next) {
 
   let validUser = await UserModel.findById(req.user._id)
-  .catch( (err) => { return res.status(404).json(error.details[0].message) })
+  .catch( (err) => { return res.status(404).json({ "message": err.details[0].message })})
 
   if (!req.body.firstName || !req.body.lastName || !req.body.position ) {
     return res.status(400).json({"message": "Invalid user data."})
@@ -48,14 +55,19 @@ async function updateDetails(req, res) {
   validUser.position = req.body.position
 
   await validUser.save()
-  res.status(200).json({"message": "Account Details Successfully Updated"})
+
+  res.status(200)
+  res.locals.validUser = validUser
+  res.locals.message = "Account Details Successfully Updated"
+
+  next()
 
 }
 
-async function updatePassword(req, res) {
+async function updatePassword(req, res, next) {
 
   let validUser = await UserModel.findById(req.user._id)
-  .catch( (err) => { return res.status(404).json(error.details[0].message) })
+  .catch( (err) => { return res.status(404).json({ "message": err.details[0].message })})
 
   const { error } = validatePassword({password: req.body.newPassword})
   if (error) return res.status(400).json({"message": 'Invalid password.'})
@@ -67,13 +79,17 @@ async function updatePassword(req, res) {
   validUser.password = await bcrypt.hash(req.body.newPassword, salt)
 
   await validUser.save()
-  res.status(200).json({"message": "Password updated succesfully."})
+  res.status(200)
+  res.locals.validUser = validUser
+  res.locals.message = "Password updated succesfully."
+
+  next()
 }
 
-async function updateEmail(req, res) {
+async function updateEmail(req, res, next) {
 
   let validUser = await UserModel.findById(req.user._id)
-  .catch( (err) => { return res.status(404).json(error.details[0].message) })
+  .catch( (err) => { return res.status(404).json({ "message": err.details[0].message })})
 
 
 
@@ -93,7 +109,12 @@ async function updateEmail(req, res) {
   validUser.email = req.body.email
 
   await validUser.save()
-  res.status(200).json({"message": "Email updated successfully."})
+
+  res.status(200)
+  res.locals.validUser = validUser
+  res.locals.message = "Email updated successfully."
+
+  next()
 }
 
 module.exports = { register, updateDetails, updatePassword, updateEmail, details }

@@ -2,7 +2,7 @@ import React, {useReducer, useState } from "react"
 import CardContainer from '../CardContainer'
 import Nav from '../Nav'
 import Background from '../../images/WhiteBackgroundSmall.jpg'
-import axios from 'axios'
+import API from "../../axios.config"
 import ButtonInput from '../ButtonInput'
 import FormInput from '../FormInput'
 import TitleText from '../TitleText'
@@ -30,19 +30,11 @@ const AccountDetailsView = () => {
 
     console.log(data)
 
-    axios.put(
-      'http://localhost:3001/api/users/details',
-      {headers: {Authorization: `Bearer ${authToken}`}},
-      data
-    )
+    API.post(
+    '/api/users', data)
     .then(function (response) {
-        console.log(response)
-        // add success
-        setLoading(false)
-        if (response.status == 200) {
-          // Success notification
-        }
-
+      localStorage.setItem('authToken', response.data.token)
+      console.log(response)
     })
     .catch(function (error) {
         // add error notifications here

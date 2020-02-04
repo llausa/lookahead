@@ -1,5 +1,5 @@
-import React , { useReducer, useState }from "react"
-import axios from 'axios'
+import React , { useReducer }from "react"
+import API from "../../axios.config"
 import { Button } from '@material-ui/core'
 import CardContainer from '../CardContainer'
 import Background from '../Background'
@@ -28,9 +28,10 @@ const EmailChangeView = () => {
 
         console.log(data)
 
-        axios.post(
-        'https://vast-oasis-18718.herokuapp.com/api/users', data)
+        API.post(
+        '/api/users', data)
         .then(function (response) {
+            localStorage.setItem('authToken', response.data.token)
             console.log(response)
             setLoading(false)
         })

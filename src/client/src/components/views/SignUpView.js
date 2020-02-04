@@ -1,5 +1,5 @@
 import React, { useReducer, useState } from 'react'
-import axios from 'axios'
+import API from "../../axios.config"
 import ButtonInput from '../ButtonInput'
 import FormInput from '../FormInput'
 import InfoDialog from '../InfoDialog'
@@ -9,18 +9,24 @@ import Nav from '../Nav'
 import TitleText from '../TitleText'
 import NormalText from '../NormalText'
 import Loader from '../Loader'
+import NotificationMessage from '../NotificationMessage'
 
 const Signup = (props) => {
 
     // For Loading Animation
     const [loading, setLoading] = useState(false)
 
+    // For Error Message
+    const [errorMessage, setErrorMessage] = useState(null)
+
+    // for checking passwords matchy matchy
     const [passwordConfirmation, setPasswordConfirmation] = useReducer((state, newState) => (
         {...state, ...newState}
     ), {
         passwordConfirmation: '',
     })
 
+    // Data for signup submit
     const [data, setData] = useReducer((state, newState) => (
         {...state, ...newState}
     ), {
@@ -31,31 +37,34 @@ const Signup = (props) => {
         password: '',
     })
 
+    // Api call etc
     const onSubmit = e => {
         e.preventDefault()
 
         console.log(data)
 
-        axios.post(
-            'http://localhost:3001/api/users', data)
+        API.post(
+        '/api/users', data)
         .then(function (response) {
             console.log(response)
             setLoading(false)
             if (response.status === 201) {
+                localStorage.setItem('authToken', response.data.token)
                 props.redirect('/projects')
             }
         })
         .catch(function (error) {
-            console.log(error.response.data)
-            console.log(error)
+            // console.log(error.response.data)
+            // console.log(error)
             setLoading(false)
-        })
-    }
+            setErrorMessage(error.response.data)
+        }) }
 
-
+        // Updates values on change
         const onChange = e => setData({[e.target.name]: e.target.value})
         const passwordConfirmChange = e => setPasswordConfirmation({[e.target.name]: e.target.value})
 
+        // Styling
         const mystyle = {
             display: 'flex',
             flexDirection: 'column',
@@ -68,23 +77,27 @@ const Signup = (props) => {
             margin: 'auto',
         }
 
-
-
-
         // Client Validation
         const basic = (text) => text.length > 2
         const email = (text) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(text)
         const password = (text) => text.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,1000}$/)
         const passwordFinal = (text) => text === data.password
 
+        // Signup Button pressed inits loading and submits form
         const SignupPressed = ()  => {
             console.log("Signup Pressed")
             setLoading(true)
         }
 
+        // Checks all required fields are valid to enable the submit button
+        const isValid = () => {
+            return !!basic(data.lastName) && !!basic(data.lastName) && !!email(data.email) && !!password(data.password) && !!password(data.password) && !!passwordFinal(passwordConfirmation.passwordConfirmation)
+        }
+
       return (
 
         <>
+        {errorMessage && <NotificationMessage error={errorMessage.message} onClose={() => setErrorMessage(null)} />}
         <Nav backButtonLink = "/" BackButton={true} MenuButton={false} />
         <CardContainer background={Background}>
         <Loader style={{opacity: loading ? 1 : 0}} />
@@ -100,7 +113,7 @@ const Signup = (props) => {
                 <FormInput type='password' validation={password} value={data.password} onChange={onChange} require={true} errorText="Password Invalid" label='Password' id='password' name='password' />
                 <FormInput type='password' validation={passwordFinal} value={data.passwordConfirmation} onChange={passwordConfirmChange} require={true} errorText="Passwords Do Not Match" label='Confirm Password' id='passwordConfirmation' name='passwordConfirmation' />
                 <InfoDialog />
-                <ButtonInput onClick={SignupPressed} disabled={false} type='submit' primary={true} color='primary' text="Submit" />
+                <ButtonInput onClick={SignupPressed} disabled={!isValid()} type='submit' primary={true} text="Submit" />
             </div>
           </form>
           </CardContainer>

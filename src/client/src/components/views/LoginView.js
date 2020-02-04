@@ -2,7 +2,7 @@ import React, { useReducer, useState } from "react"
 import Nav from '../Nav'
 import { Link } from 'react-router-dom'
 import { Button } from '@material-ui/core'
-import axios from 'axios'
+import API from "../../axios.config"
 import LockIcon from '@material-ui/icons/Lock'
 import ButtonInput from '../ButtonInput'
 import FormInput from '../FormInput'
@@ -36,18 +36,20 @@ const Login = (props) => {
 
         console.log(data)
 
-        axios.post(
-            'http://localhost:3001/api/auth', data)
+        API.post(
+        '/api/auth', data)
         .then(function (response) {
+
             console.log(response)
             // localStorage.setItem('authToken', response.body.token)
             setLoading(false)
-            if (response.status == 200) {
+            if (response.status === 200) {
+                localStorage.setItem('authToken', response.data.token)
                 props.redirect('/projects')
             }
         })
         .catch(function (error) {
-            console.log(error.response.data)
+            // console.log(error.response.data)
             setLoading(false)
             setErrorMessage(error.response.data)
         })
@@ -93,7 +95,6 @@ const Login = (props) => {
     const password = (text) => text.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,1000}$/)
 
     let ButtonText = "Login"
-    let ButtonDisabled = false
 
     const isValid = () => {
         return !!email(data.email) && !!password(data.password)
