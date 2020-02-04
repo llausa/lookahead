@@ -5,7 +5,6 @@ const _ = require('lodash')
 const Joi = require('@hapi/joi')
 
 async function login(req, res, next) {
-  console.log(req)
   const { error } = validate(req.body)
   if (error) return res.status(400).json({"message": error.details[0].message })
 

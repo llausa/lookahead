@@ -12,7 +12,7 @@ const API = axios.create({
 let token = Cookies.get('authToken')
 
 if (token) {
-  API.defaults.headers.common['Authorization'] = `Bearer ${Cookies.get('authToken')}`
+  API.defaults.headers.common['Authorization'] = `Bearer ${token}`
 }
 
 export default API
