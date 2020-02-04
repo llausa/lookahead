@@ -66,7 +66,7 @@ export default function ProjectAddUsersView(props) {
     useEffect(() => {
         API.get(`/api/projects/${projectId}/add_users`)
         .then(res => { 
-            localStorage.setItem('authToken', response.data.token)
+            localStorage.setItem('authToken', res.data.token)
             setUsers(res.data)
         })
     }, [])
@@ -74,7 +74,7 @@ export default function ProjectAddUsersView(props) {
     const addUser = (userId) => {
         API.post(`/api/projects/${projectId}/users`, {user: userId, role: 'Read'})
         .then(res => {
-            localStorage.setItem('authToken', response.data.token)
+            localStorage.setItem('authToken', res.data.token)
             setUsers(users.filter(el => el._id !== userId))
         })
     }

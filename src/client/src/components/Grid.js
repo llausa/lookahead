@@ -4,13 +4,11 @@ import '../grid-layout.css'
 import { Responsive as ResponsiveGridLayout, ToolBox } from 'react-grid-layout'
 import GridLayout  from 'react-grid-layout'
 import { useParams } from 'react-router-dom'
-import API from "../../axios.config"
+import API from "../axios.config"
 
 export default function Grid(props) {
 
   const [layout, setLayout] = useState([])
-
-  const authToken = ''
 
   const { projectId } = useParams()
 

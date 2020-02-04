@@ -5,14 +5,14 @@ const _ = require("lodash")
 
 async function createTask(req, res, next) {
   let validUser = await UserModel.findById(req.user._id).catch(err => {
-    return res.status(404).json(error.details[0].message)
+    return res.status(404).json({"message": error.details[0].message})
   })
 
   let task = req.body
 
   let validProject = await ProjectModel.findById(req.params.projectId).catch(
     err => {
-      return res.status(404).json(error.details[0].message)
+      return res.status(404).json({"message": error.details[0].message})
     }
   )
 
@@ -28,7 +28,7 @@ async function createTask(req, res, next) {
     (validProject.end_date - validProject.start_date) / 1000 / 60 / 60 / 24
 
     const { error } = validateTask(task, projectDays)
-    if (error){return res.status(400).send(error.details[0].message)}
+    if (error){return res.status(400).json({"message":error.details[0].message})}
 
     if (!checkOverlap(task, validProject)) {
       return res.status(400).json({ "message": "Tasks cannot overlap."})
@@ -75,12 +75,12 @@ async function createTask(req, res, next) {
 
 async function updateTask(req, res, next) {
   let validUser = await UserModel.findById(req.user._id).catch(err => {
-    return res.status(404).json(error.details[0].message)
+    return res.status(404).json({"message": error.details[0].message})
   })
 
   let validProject = await ProjectModel.findById(req.params.projectId).catch(
     err => {
-      return res.status(404).json(error.details[0].message)
+      return res.status(404).json({"message": error.details[0].message})
     }
   )
 
@@ -100,7 +100,7 @@ async function updateTask(req, res, next) {
       (validProject.end_date - validProject.start_date) / 1000 / 60 / 60 / 24
 
     const { error } = validateTask(req.body, projectDays)
-    if (error) return res.status(400).send(error.details[0].message)
+    if (error) return res.status(400).json({"message": error.details[0].message})
 
     validTask.title = req.body.title
     validTask.start_time = req.body.start_time
@@ -109,7 +109,7 @@ async function updateTask(req, res, next) {
     validTask.description = req.body.description
 
     if (!checkOverlap(validTask, validProject)) {
-      return res.status(400).send("Tasks cannot overlap.")
+      return res.status(400).json({"message":"Tasks cannot overlap."})
     }
 
     await validProject.save()
@@ -128,12 +128,12 @@ async function updateTask(req, res, next) {
 
 async function removeTask(req, res, next) {
   let validUser = await UserModel.findById(req.user._id).catch(err => {
-    return res.status(404).json(error.details[0].message)
+    return res.status(404).json({"message": error.details[0].message})
   })
 
   let validProject = await ProjectModel.findById(req.params.projectId).catch(
     err => {
-      return res.status(404).json(error.details[0].message)
+      return res.status(404).json({"message": error.details[0].message})
     }
   )
 
@@ -165,12 +165,12 @@ async function removeTask(req, res, next) {
 
 async function updateAllTasks (req, res) {
   let validUser = await UserModel.findById(req.user._id).catch(err => {
-    return res.status(404).json(error.details[0].message)
+    return res.status(404).json({"message" : error.details[0].message})
   })
 
   let validProject = await ProjectModel.findById(req.params.projectId).catch(
     err => {
-      return res.status(404).json(error.details[0].message)
+      return res.status(404).json({"message": error.details[0].message})
     }
   )
 
@@ -198,12 +198,12 @@ async function updateAllTasks (req, res) {
     let strippedTask = {...task}
     delete strippedTask._id
     const { error } = validateTask(strippedTask, projectDays)
-    if (error) return res.status(400).send(error.details[0].message)
+    if (error) return res.status(400).json({"message":error.details[0].message})
   }
 
   for(let task of newTasks) {
     if(!checkOverlap(task, {tasks: newTasks})) {
-      return res.status(400).send("Tasks cannot overlap.")
+      return res.status(400).json({"message":"Tasks cannot overlap."})
     }
   }
 

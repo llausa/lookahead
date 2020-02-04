@@ -31,9 +31,13 @@ const mystyle = {
     zIndex: 10
 }
 
-let link=(
-    "https://res.cloudinary.com/djic27lvo/video/upload/v1580732432/OOOFT.mp3"
-)
+let links=[
+    "https://res.cloudinary.com/djic27lvo/video/upload/v1580790563/Sounds/Oooft.mp3",
+    "https://res.cloudinary.com/djic27lvo/video/upload/v1580790555/Sounds/Villager1.mp3",
+    "https://res.cloudinary.com/djic27lvo/video/upload/v1580790552/Sounds/Villager2.mp3",
+    "https://res.cloudinary.com/djic27lvo/video/upload/v1580790553/Sounds/Yeet.mp3",
+    "https://res.cloudinary.com/djic27lvo/video/upload/v1580791435/Sounds/Degenerate.m4a"
+]
 
 const buttonMain = {
     color: "#006EE2",
@@ -68,7 +72,11 @@ function MyLookaheadsPressed() {
     console.log("My Lookaheads Pressed")
 }
 
-let audio = new Audio(link)
+const hehe = () => {
+    let link = links[Math.floor(Math.random() * links.length)]
+    let audio = new Audio(link)
+    audio.play()
+}
 
 function EditDetailsPressed() {
     console.log("Edit Details Pressed")
@@ -77,7 +85,7 @@ function EditDetailsPressed() {
 function ChangeEmailPressed() {
     console.log("Change Email Pressed")
 }
-const hehe = () => audio.play()
+
 function ChangePasswordPressed() {
     console.log("Change Password Pressed")
 }

@@ -11,6 +11,7 @@ import NormalText from '../NormalText'
 import CardContainer from '../CardContainer'
 import Background from '../Background'
 import Loader from '../Loader'
+import NotificationMessage from '../NotificationMessage'
 
 
 const Login = (props) => {
@@ -18,6 +19,10 @@ const Login = (props) => {
     // For Loading Animation
     const [loading, setLoading] = useState(false)
 
+    // For Error Message
+    const [errorMessage, setErrorMessage] = useState(null)
+
+    // Login Data
     const [data, setData] = useReducer((state, newState) => (
         {...state, ...newState}
     ), {
@@ -25,6 +30,7 @@ const Login = (props) => {
         password: ''
     })
 
+    // Form Submit to server
     const onSubmit = e => {
         e.preventDefault()
 
@@ -44,10 +50,12 @@ const Login = (props) => {
         .catch(function (error) {
             // console.log(error.response.data)
             setLoading(false)
+            setErrorMessage(error.response.data)
         })
 
     }
 
+    // Styling
     const mystyle = {
         display: "flex",
         flexDirection: "column",
@@ -71,12 +79,14 @@ const Login = (props) => {
         margin: "4px"
     }
 
+
+    // Runs when Login Button is pressed
     const LoginPressed = ()  => {
         console.log("Login Pressed")
         setLoading(true)
     }
 
-
+    // Each change we change to login data to submit
     const onChange = e => setData({[e.target.name]: e.target.value})
 
     // Client Validation
@@ -84,11 +94,19 @@ const Login = (props) => {
     const password = (text) => text.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,1000}$/)
 
     let ButtonText = "Login"
+    let ButtonDisabled = false
+
+    const isValid = () => {
+        return !!email(data.email) && !!password(data.password)
+    }
 
 
     return (
         <>
+        {errorMessage && <NotificationMessage error={errorMessage.message} onClose={() => setErrorMessage(null)} />}
+
         <Nav backButtonLink = "/" BackButton={true} MenuButton={false}/>
+
         <CardContainer background={Background}>
         <form onSubmit={onSubmit} className='form'>
         <div data-cy="loginView" style={mystyle}>
@@ -99,8 +117,8 @@ const Login = (props) => {
             <FormInput type='email' validation={email} value={data.email} onChange={onChange} require={true} errorText="Invalid Email" label='Email'  id='email' name='email' />
             <FormInput type='password' validation={password} value={data.password} onChange={onChange} require={true} errorText="Password Invalid" label='Password' id='password' name='password' />
                 
-            <ButtonInput onClick={LoginPressed} type='submit' primary={true} color='primary' text={ButtonText} /> 
-            <Button  onClick={LoginPressed} component={Link} to="/account/password" variant="outlined" style={buttonResetP}>Reset Password <LockIcon style={smallIcon} /> </Button>
+            <ButtonInput onClick={LoginPressed} type='submit' primary={true} text={ButtonText} disabled={!isValid()} /> 
+            <Button onClick={LoginPressed} component={Link} to="/account/password" variant="outlined" style={buttonResetP}>Reset Password <LockIcon style={smallIcon} /> </Button>
 
         </div>
         </form>
