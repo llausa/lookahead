@@ -3,32 +3,38 @@ const { UserModel, addProject } = require('../models/user')
 const _  = require('lodash')
 
 // GET Projects
-async function allProjects (req, res) {
+async function allProjects (req, res, next) {
   req.body.owner = req.user._id
 
   let validUser = await UserModel.findById(req.user._id)
-  .catch( (err) => { return res.status(404).json(error.details[0].message) })
+  .catch( (err) => { return res.status(404).json({ "message": err.details[0].message })})
 
   let userProjs = validUser.projects.map(project => project.project)
 
   let projObjs = await ProjectModel.find({ _id: { $in: userProjs } })
 
-  res.status(200).json(projObjs)
+
+  res.status(200)
+  res.locals.validUser = validUser
+  res.locals.projObjs = projObjs
+
+  return next()
+
 }
 
 // POST Project
-async function create (req, res) {
+async function create (req, res, next) {
 
   req.body.owner = req.user._id
 
   const { error } = validateProject(req.body)
-  if (error) return res.status(400).send(error.details[0].message)
+  if (error) return res.status(400).json({"message": error.details[0].message })
 
   let validUser = await UserModel.findById(req.user._id)
-  .catch( (err) => { return res.status(404).json(error.details[0].message) })
+  .catch( (err) => { return res.status(404).json({ "message": err.details[0].message })})
 
   if (!validUser) {
-    return res.status(404).send('Critical Error: User does not exist in the database')
+    return res.status(404).json({"message": 'Critical Error: User does not exist in the database'})
   }
 
   req.body.owner = validUser._id
@@ -38,39 +44,50 @@ async function create (req, res) {
 
   await addProjectToUser(validUser._id, project._id, 'Owner')
 
-  res.status(201).json({"id": project._id, "message":'Project successfully created.'})
+  res.status(201)
+  res.locals.validUser = validUser
+  res.locals.id = project._id
+  res.locals.message = "Project successfully created."
+
+  return next()
 
 }
 
 // GET Project
-async function getProject (req, res) {
+async function getProject (req, res, next) {
 
   req.body.owner = req.user._id
 
   let validUser = await UserModel.findById(req.user._id)
-  .catch( (err) => { return res.status(404).json(error.details[0].message) })
+  .catch( (err) => { return res.status(404).json({ "message": err.details[0].message })})
 
   let validProject = await ProjectModel.findById((req.params.projectId))
-  .catch( (err) => { return res.status(404).json(error.details[0].message) })
+  .catch( (err) => { return res.status(404).json({ "message": err.details[0].message })})
 
   let userInProject = validProject.users.find(element => element.user == validUser._id)
 
   if ((validUser._id == String(validProject.owner)) || userInProject ) {
-    res.status(200).send(validProject)
+
+    res.status(200)
+    res.locals.validUser = validUser
+    res.locals.validProject = validProject
+    
+    return next()
+
   } else {
     res.status(401).json({"message": "You're not authorized to see this project."})
   }
 }
 
 // UPDATE Project
-async function update (req, res) {
+async function update (req, res, next) {
 
   req.body.owner = req.user._id
   let validUser = await UserModel.findById(req.user._id)
-  .catch( (err) => { return res.status(404).json(error.details[0].message) })
+  .catch( (err) => { return res.status(404).json({ "message": err.details[0].message })})
 
   let validProject = await ProjectModel.findById((req.params.projectId))
-  .catch( (err) => { return res.status(404).json(error.details[0].message) })
+  .catch( (err) => { return res.status(404).json({ "message": err.details[0].message })})
   // if (!validProject) return res.status(404).json({"message": "Couldn't find project."})
 
 
@@ -89,32 +106,41 @@ async function update (req, res) {
 
   if (validUser._id == String(validProject.owner)) {
     await validProject.save()
-    res.status(200).json({"message": "Project details successfully updated"})
+
+    res.status(200)
+    res.locals.validUser = validUser
+    res.locals.message = "Project details successfulyl updated"
+
+    return next()
+
   } else {
     res.status(401).json({"message": "You're not authorized to see this project."})
   }
 }
 
 // DELETE project
-async function remove (req, res) {
+async function remove (req, res, next) {
   req.body.owner = req.user._id
   let validUser = await UserModel.findById(req.user._id)
-  .catch( (err) => { return res.status(404).json(error.details[0].message) })
+  .catch( (err) => { return res.status(404).json({ "message": err.details[0].message })})
 
   let validProject = await ProjectModel.findById((req.params.projectId))
-  .catch( (err) => { return res.status(404).json(error.details[0].message) })
+  .catch( (err) => { return res.status(404).json({ "message": err.details[0].message })})
 
   if (validUser._id == String(validProject.owner)) {
     ProjectModel.findByIdAndRemove(req.params.projectId, async (err, project) => {
 
-    if (err) return res.status(404).send(err)
+    if (err) return res.status(404).json({"message": err})
 
     for ( let user of project.users ) {
       await removeProjectFromUser(user.user, req.params.projectId)
     }
 
-    return res.status(200).json({"message": "Project successfully deleted"})
+    res.status(200)
+    res.locals.validUser = validUser
+    res.locals.message = "Project successfully deleted."
 
+    return next()
 
   })
   } else {
@@ -125,38 +151,43 @@ async function remove (req, res) {
 }
 
 // Get Users of Project
-async function usersInProject (req, res) {
+async function usersInProject (req, res, next) {
   req.body.owner = req.user._id
 
   let validUser = await UserModel.findById(req.user._id)
-  .catch( (err) => { return res.status(404).json(error.details[0].message) })
+  .catch( (err) => { return res.status(404).json({ "message": err.details[0].message })})
 
   let validProject = await ProjectModel.findById((req.params.projectId))
-  .catch( (err) => { return res.status(404).json(error.details[0].message) })
+  .catch( (err) => { return res.status(404).json({ "message": err.details[0].message })})
 
   if (validUser._id == String(validProject.owner)) {
     let projUsers = validProject.users.map(user => user.user)
     projUsers.push(validProject.owner)
 
     let usersObjs = await UserModel.find({ _id: { $in: projUsers } })
-    .catch( (err) => { return res.status(404).json(error.details[0].message) })
+    .catch( (err) => { return res.status(404).json({ "message": err.details[0].message })})
 
-    res.status(200).json(usersObjs)
+    res.status(200)
+    res.locals.validUser = validUser
+    res.locals.usersObjs = usersObjs
+
+    return next()
+
   } else {
     res.status(401).json({"message": "You're not authorized to see this project."})
   }
 }
 
 // Get users not in project
-async function usersNotInProject (req, res) {
+async function usersNotInProject (req, res, next) {
 
   req.body.owner = req.user._id
 
   let validUser = await UserModel.findById(req.user._id)
-  .catch( (err) => { return res.status(404).json(error.details[0].message) })
+  .catch( (err) => { return res.status(404).json({ "message": err.details[0].message })})
 
   let validProject = await ProjectModel.findById((req.params.projectId))
-  .catch( (err) => { return res.status(404).json(error.details[0].message) })
+  .catch( (err) => { return res.status(404).json({ "message": err.details[0].message })})
 
 
   if (validUser._id == String(validProject.owner)) {
@@ -165,26 +196,30 @@ async function usersNotInProject (req, res) {
     projUsers.push(validProject.owner)
 
     let usersObjs = await UserModel.find({ _id: { $nin: projUsers } })
-    .catch( (err) => { return res.status(404).json(error.details[0].message) })
+    .catch( (err) => { return res.status(404).json({ "message": err.details[0].message })})
 
-    res.status(200).json(usersObjs)
+    res.status(200)
+    res.locals.validUser = validUser
+    res.locals.usersObjs = usersObjs
+    return next()
+
   } else {
     res.status(401).json({"message": "You're not authorized to see this project."})
   }
 }
 
 // Update User Role
-async function updateUser (req, res) {
+async function updateUser (req, res, next) {
 
   let validUser = await UserModel.findById(req.user._id)
-  .catch( (err) => { return res.status(404).json(error.details[0].message) })
+  .catch( (err) => { return res.status(404).json({ "message": err.details[0].message })})
 
   let validProject = await ProjectModel.findById((req.params.projectId))
-  .catch( (err) => { return res.status(404).json(error.details[0].message) })
+  .catch( (err) => { return res.status(404).json({ "message": err.details[0].message })})
 
   let changingUser = validProject.users.find(element => element.user == req.params.userId)
   if (!changingUser) {
-    return res.status(404).send('That user does not exist.')
+    return res.status(404).json({"message":'That user does not exist.'})
   }
 
   if (validUser._id == String(validProject.owner)) {
@@ -193,7 +228,12 @@ async function updateUser (req, res) {
 
   await updateUserRoleInProject(changingUser.user, req.params.projectId, req.body.role)
 
-  res.status(200).json({"message": "User updated successfully."})
+  res.status(200)
+  res.locals.validUser = validUser
+  res.locals.message = "User updated successfully."
+
+  return next()
+
   } else {
     res.status(401).json({"message": "You're not authorized to update this project."})
   }
@@ -202,7 +242,11 @@ async function updateUser (req, res) {
 
 }
 // Add User to Project
-async function addUser (req, res) {
+async function addUser (req, res, next) {
+
+  let validUser = await UserModel.findById(req.user._id)
+  .catch( (err) => { return res.status(404).json({"message": err.details[0].message }) })
+
   req.body.owner = req.user._id
 
   let role = req.body.role
@@ -216,35 +260,55 @@ async function addUser (req, res) {
     await project.save()
 
   })
-  .catch( (err) => { return res.status(404).json(error.details[0].message) })
+  .catch( (err) => { return res.status(404).json({"message": err.details[0].message }) })
 
   await addProjectToUser(id, req.params.projectId, role)
 
-  res.status(200).json("User added to Project Successfully.")
+  res.status(200)
+  res.locals.validUser = validUser
+  res.locals.message = "User added to Project Successfully."
+
+  return next()
+
 }
 
 // Remove User from Project
-async function removeUser (req, res) {
+async function removeUser (req, res, next) {
+
+  let validUser = await UserModel.findById(req.user._id)
+  .catch( (err) => { return res.status(404).json({"message": err.details[0].message }) })
+
   let validProject = await ProjectModel.findById((req.params.projectId))
-  .catch( (err) => { return res.status(404).json(error.details[0].message) })
+  .catch( (err) => { return res.status(404).json({"message": err.details[0].message }) })
+  
 
-  let oldmate = validProject.users.find(element => element.user == req.params.userId)
+  if (validUser._id == String(validProject.owner)) {
 
-  const {error} = validProject.users.pull(oldmate._id)
-  if (error) return res.status(404).end(error.details[0].message)
+    let oldmate = validProject.users.find(element => element.user == req.params.userId)
 
-  await validProject.save()
+    const {error} = validProject.users.pull(oldmate._id)
+    if (error) return res.status(404).end(error.details[0].message)
 
-  await removeProjectFromUser(oldmate.user, req.params.projectId)
+    await validProject.save()
 
-  res.status(200).json({"message": "User removed successfully."})
+    await removeProjectFromUser(oldmate.user, req.params.projectId)
+
+    res.status(200)
+    res.locals.validUser = validUser
+    res.locals.message = "User removed successfully."
+
+    return next()
+  }
+  else {
+    res.status(401).json({"message": "You're not authorized to update this project."})
+  }
 }
 
 // Remove Project from User
 async function updateUserRoleInProject (userId, projectId, role) {
 
   let user = await UserModel.findById(userId)
-  .catch( (err) => { return res.status(404).json(error.details[0].message) })
+  .catch( (err) => { return res.status(404).json({ "message": err.details[0].message })})
 
   let oldmate = user.projects.find(element => element.project == projectId)
 
@@ -255,7 +319,7 @@ async function updateUserRoleInProject (userId, projectId, role) {
 }
 async function removeProjectFromUser (userId, projectId) {
   let user = await UserModel.findById(userId)
-  .catch( (err) => { return res.status(404).json(error.details[0].message) })
+  .catch( (err) => { return res.status(404).json({ "message": err.details[0].message })})
 
   let oldmate = user.projects.find(element => element.project == projectId)
 
@@ -273,6 +337,7 @@ async function addProjectToUser (id, project, role) {
     })
     await user.save()
   })
+  
 }
 
 module.exports = { create, update, remove, updateUser, usersInProject, removeUser, addUser, allProjects, getProject, usersNotInProject }

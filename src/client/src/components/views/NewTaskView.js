@@ -1,5 +1,5 @@
 import React, {useReducer} from "react"
-import axios from 'axios'
+import API from "../../axios.config"
 import CardContainer from '../CardContainer'
 import Nav from '../Nav'
 import DateInput from '../DateInput'
@@ -27,9 +27,10 @@ const NewTaskView = () => {
     
         console.log(data)
     
-        axios.post(
-        'https://vast-oasis-18718.herokuapp.com/api/users', data)
+        API.post(
+        '/api/users', data)
         .then(function (response) {
+            localStorage.setItem('authToken', response.data.token)
             console.log(response)
         })
         .catch(function (error) {
