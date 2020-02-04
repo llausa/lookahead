@@ -94,7 +94,6 @@ const Login = (props) => {
     const password = (text) => text.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,1000}$/)
 
     let ButtonText = "Login"
-    let ButtonDisabled = false
 
     const isValid = () => {
         return !!email(data.email) && !!password(data.password)
