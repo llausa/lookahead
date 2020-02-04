@@ -9,18 +9,24 @@ import Nav from '../Nav'
 import TitleText from '../TitleText'
 import NormalText from '../NormalText'
 import Loader from '../Loader'
+import NotificationMessage from '../NotificationMessage'
 
 const Signup = (props) => {
 
     // For Loading Animation
     const [loading, setLoading] = useState(false)
 
+    // For Error Message
+    const [errorMessage, setErrorMessage] = useState(null)
+
+    // for checking passwords matchy matchy
     const [passwordConfirmation, setPasswordConfirmation] = useReducer((state, newState) => (
         {...state, ...newState}
     ), {
         passwordConfirmation: '',
     })
     
+    // Data for signup submit
     const [data, setData] = useReducer((state, newState) => (
         {...state, ...newState}
     ), {
@@ -31,6 +37,7 @@ const Signup = (props) => {
         password: '',
     })
 
+    // Api call etc
     const onSubmit = e => {
         e.preventDefault()
 
@@ -47,15 +54,17 @@ const Signup = (props) => {
             }
         })
         .catch(function (error) {
-            console.log(error.response.data)
-            console.log(error)
+            // console.log(error.response.data)
+            // console.log(error)
             setLoading(false)
+            setErrorMessage(error.response.data)
         }) }
     
-
+        // Updates values on change
         const onChange = e => setData({[e.target.name]: e.target.value})
         const passwordConfirmChange = e => setPasswordConfirmation({[e.target.name]: e.target.value})
     
+        // Styling
         const mystyle = {
             display: 'flex',
             flexDirection: 'column',
@@ -68,20 +77,19 @@ const Signup = (props) => {
             margin: 'auto',
         }
 
-
-
-
         // Client Validation
         const basic = (text) => text.length > 2
         const email = (text) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(text)
         const password = (text) => text.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,1000}$/)
         const passwordFinal = (text) => text === data.password
 
+        // Signup Button pressed inits loading and submits form
         const SignupPressed = ()  => {
             console.log("Signup Pressed")
             setLoading(true)
         }
 
+        // Checks all required fields are valid to enable the submit button
         const isValid = () => {
             return !!basic(data.lastName) && !!basic(data.lastName) && !!email(data.email) && !!password(data.password) && !!password(data.password) && !!passwordFinal(passwordConfirmation.passwordConfirmation)
         }
@@ -89,6 +97,7 @@ const Signup = (props) => {
       return (
 
         <>
+        {errorMessage && <NotificationMessage error={errorMessage.message} onClose={() => setErrorMessage(null)} />}
         <Nav backButtonLink = "/" BackButton={true} MenuButton={false} />
         <CardContainer background={Background}>
         <Loader style={{opacity: loading ? 1 : 0}} />
