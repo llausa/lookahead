@@ -1,11 +1,9 @@
 import React from 'react'
-import TextField from '@material-ui/core/TextField';
+import TextField from '@material-ui/core/TextField'
 
-export default function TextInput(props) {
+const TextInput = (props) => {
 
-
-  const multiline = props.multiline;
-  if (multiline) {
+  if (props.multiline) {
       return(
     <TextField
         style={{margin: "4px"}}
@@ -34,4 +32,6 @@ export default function TextInput(props) {
         value={props.value}
     />)
 }
+
+export default TextInput
 

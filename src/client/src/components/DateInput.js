@@ -45,7 +45,7 @@ const  MaterialUIPickers = (props) => {
   }
 
   return (
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+    <MuiPickersUtilsProvider utils={DateFnsUtils} >
         <CssKeyboardDatePicker
           disableToolbar
           required = {true}

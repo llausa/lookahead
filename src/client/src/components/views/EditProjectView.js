@@ -7,19 +7,20 @@ import ButtonInput from '../ButtonInput'
 import Background from '../Background'
 import TitleText from '../TitleText'
 import NormalText from '../NormalText'
-import DurationPicker from '../DurationPicker'
+import TimeZonePicker from '../TimeZonePicker'
 import FormInput from '../FormInput'
+import Button from '@material-ui/core/Button'
 
 
-const NewTaskView = () => {
+const EditProjectView = () => {
 
     const [data, setData] = useReducer((state, newState) => (
         {...state, ...newState}
       ), {
-        taskName: '',
-        description: '',
+        projectTitle: '',
+        location: '',
         startDate: '',
-        duration: ''
+        endDate: ''
       })
     
       const onSubmit = e => {
@@ -54,9 +55,20 @@ const NewTaskView = () => {
         maxWidth: "400px",
         margin: "auto",
     }
+
+    const buttonResetP = {
+      color: "#E24921",
+      borderColor: "#E24921",
+      margin: "10px 10px 20px 10px",
+      fontSize: "10px",
+      width: "80%",
+      alignSelf: "center"
+  }
     
     // Client Validation
     const basic = (text) => text.length > 2
+
+    let startDate = "12/02/20"
 
     return (
         <>
@@ -64,16 +76,14 @@ const NewTaskView = () => {
       <CardContainer background={Background}>
       <form onSubmit={onSubmit} className='form'>
         <div data-cy="newProjectView" style={mystyle}>
-            <TitleText text="New Task" />
+            <TitleText text="Edit Project" />
             <NormalText text="Please fill out all required fields" />
-            <FormInput type='text' validation={basic} value={data.taskName} onChange={onChange} require={true} errorText="Please enter more Characters" label='Task Name' id='taskName' name='taskName' />
-            <FormInput type='text' validation={basic} value={data.description} onChange={onChange} require={false} multiline={true} label='Task Description' id='description' name='description' />
-            
-            <DateInput label="Start Date" day={1} id="startDate" name='startDate'/>
-            
-            <DurationPicker label="Duration (hours)*" id="duration" name='duration' style={{width: "100%"}}/>
-
-            <ButtonInput disabled={false} type='submit' primary={true} color='primary' text="Create" />
+            <FormInput type='text' validation={basic} value={data.projectTitle} onChange={onChange} require={true} errorText="Please enter more Characters" label='Project Title' id='projectTitle' name='projectTitle'/>
+            <TimeZonePicker label="Location*" id="location" name='location'/>
+            <p>Start Date: {startDate}</p>
+            <DateInput label="End Date" day={2} id="endDate" name='endDate' />
+            <ButtonInput disabled={false} type='submit' primary={true} color='primary' text="Save" />
+            <Button variant="outlined" style={buttonResetP}>Delete Project</Button>
         </div>
         </form>
         </CardContainer>
@@ -82,4 +92,4 @@ const NewTaskView = () => {
     )
 }
 
-export default NewTaskView
+export default EditProjectView
