@@ -5,6 +5,7 @@ import LockIcon from '@material-ui/icons/Lock'
 import MailIcon from '@material-ui/icons/Mail'
 import EditIcon from '@material-ui/icons/Edit'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+import Cookies from 'js-cookie'
 
 const MenuHolder = {
     zIndex: 4,
@@ -92,19 +93,20 @@ function ChangePasswordPressed() {
 
 function LogoutPressed() {
     console.log("Logout Pressed")
+    Cookies.remove("authToken")
 }
 
 
 
 
 const MenuView = (props) => {
-    
+
 
     return (
         <div style={MenuHolder} className={props.className}>
             <div data-cy="MenuView" style={mystyle}>
                 <h1 style={{margin: "40px 0 10px 0", fontSize: "70px"}}>Menu</h1>
-                <Button component={Link} to="/projects" onClick={MyLookaheadsPressed} variant="outlined" style={buttonMain} color="primary">My Lookaheads</Button>
+                <Button component={Link} to="/projects" onClick={MyLookaheadsPressed} variant="outlined" style={buttonMain} color="primary">My Projects</Button>
                 <Button component={Link} to="/account/details" onClick={EditDetailsPressed} variant="outlined" style={buttonGeneral}>Edit Details <EditIcon style={smallIcon}/></Button>
                 <Button component={Link} to="/account/email" onClick={ChangeEmailPressed} variant="outlined" style={buttonGeneral}>Change Email <MailIcon style={smallIcon} /> </Button>
                 <Button component={Link} to="/account/password" onClick={ChangePasswordPressed} variant="outlined" style={buttonGeneral}>Change Password <LockIcon style={smallIcon} /> </Button>
