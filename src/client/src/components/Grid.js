@@ -18,9 +18,11 @@ export default function Grid(props) {
     )
     .then(res => {
       
-      setLayout(fromDatabase(res.data.tasks))
+      setLayout(fromDatabase(res.data.validProject.tasks))
     }).catch(() => {
-      props.redirect('/projects')
+
+      // props.redirect('/projects')
+      
     })
   }, [])
 
