@@ -47,7 +47,7 @@ const UserCard = (props) => {
         <NormalText text={"Position: " + props.userPosition} style={{margin: 0}}/>
         <NormalText text={"Email: " + props.userEmail} style={{margin: 0}}/>
         <p style={{opacity: 1, margin: 0}}>{props.userId}</p>
-        {props.userEdit ? (<ButtonUserInput text="Edit User"/>) : (<ButtonUserInput add={true} text="Add User"/>)}
+        {props.userEdit ? (<ButtonUserInput text="Edit User"/>) : (<ButtonUserInput onClick={props.onClick} add={true} text="Add User"/>)}
       </div>
     </div>
     </CardContent>
