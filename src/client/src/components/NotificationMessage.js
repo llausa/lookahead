@@ -25,10 +25,24 @@ const NotificationMessage = (props) => {
   let horizontal = 'center'
 
   return (
+
       <Snackbar key={`${vertical},${horizontal}`} anchorOrigin={{ vertical, horizontal }} open={open} autoHideDuration={6000} onClose={props.onClose} style={{top: "10vh"}}>
-        <Alert onClose={props.onClose} severity="error">
-          Error: {props.error}
+        
+        {props.success? (
+        
+        <Alert onClose={props.onClose} severity="success">
+         Success! {props.error}
         </Alert>
+        
+        ) : (
+          
+        <Alert onClose={props.onClose} severity="error">
+        Error: {props.error}
+        </Alert>
+        
+        )}
+        
+
       </Snackbar>
   )
 }
