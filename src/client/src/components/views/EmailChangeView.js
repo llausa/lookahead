@@ -8,6 +8,7 @@ import TitleText from '../TitleText'
 import FormInput from '../FormInput'
 import NormalText from '../NormalText'
 import Loader from '../Loader'
+import NotificationMessage from '../NotificationMessage'
 
 import MailIcon from '@material-ui/icons/Mail'
 
@@ -16,10 +17,13 @@ const EmailChangeView = () => {
     // For Loading Animation
     const [loading, setLoading] = useState(false)
 
+    // For Error Message
+    const [errorMessage, setErrorMessage] = useState(null)
+
     const [data, setData] = useReducer((state, newState) => (
         {...state, ...newState}
     ), {
-        emailNew: '',
+        email: '',
         password: ''
     })
 
@@ -28,8 +32,8 @@ const EmailChangeView = () => {
 
         console.log(data)
 
-        API.post(
-        '/api/users', data)
+        API.put(
+        '/api/users/email', data)
         .then(function (response) {
             localStorage.setItem('authToken', response.data.token)
             console.log(response)
@@ -38,6 +42,7 @@ const EmailChangeView = () => {
         .catch(function (error) {
             console.log(error.response.data)
             setLoading(false)
+            setErrorMessage(error.response.data)
         })
 
     }
@@ -71,25 +76,36 @@ const EmailChangeView = () => {
         setLoading(true)
     }
 
+
+
     // Client validation
     const onChange = e => setData({[e.target.name]: e.target.value})
     const email = (text) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(text)
+    const password = (text) => text.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,1000}$/)
+
+    let ButtonText = "Save Email"
+
+    const isValid = () => {
+        return !!email(data.email) && !!password(data.password)
+    }
 
     return (
         <>
+        {errorMessage && <NotificationMessage error={errorMessage.message} onClose={() => setErrorMessage(null)} />}
+
         <Nav backButtonLink = "/projects" BackButton={true} MenuButton={false}/>
         <CardContainer background={Background}>
         <form onSubmit={onSubmit} className='form'>
-        <div data-cy="emailView" style={mystyle}>
+            <div data-cy="emailView" style={mystyle}>
 
-        <TitleText text="Update Email" />
-        <NormalText text="Please enter your new email and password." />
-        <FormInput type='email' validation={email} value={data.emailNew} onChange={onChange} require={true} errorText="Invalid Email" label='Email'  id='emailNew' name='emailNew' />
-        <FormInput type='password' value={data.password} onChange={onChange} require={true} errorText="Password Invalid" label='Password' id='password' name='password' />
+                <TitleText text="Update Email" />
+                <NormalText text="Please enter your new email and password." />
+                <FormInput type='email' validation={email} value={data.email} onChange={onChange} require={true} errorText="Invalid Email" label='Email'  id='email' name='email' />
+                <FormInput type='password' value={data.password} onChange={onChange} require={true} errorText="Password Invalid" label='Password' id='password' name='password' />
 
-        <Button onClick={SendEmailPressed} variant="outlined" style={buttonMain} color="primary">Save Email <MailIcon style={smallIcon} /></Button>
+                <Button onClick={SendEmailPressed} type='submit' variant="outlined" style={buttonMain} color="primary">Save Email <MailIcon style={smallIcon} disabled={!isValid()} /></Button>
 
-        </div>
+            </div>
         </form>
         </CardContainer>
         <Background/>

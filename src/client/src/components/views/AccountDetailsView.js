@@ -8,6 +8,8 @@ import FormInput from '../FormInput'
 import TitleText from '../TitleText'
 import NormalText from '../NormalText'
 import Loader from '../Loader'
+import { Button } from '@material-ui/core'
+
 
 
 const AccountDetailsView = () => {
