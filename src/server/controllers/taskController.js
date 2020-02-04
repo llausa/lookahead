@@ -3,7 +3,7 @@ const { ProjectModel } = require("../models/project")
 const { UserModel } = require("../models/user")
 const _ = require("lodash")
 
-async function createTask(req, res) {
+async function createTask(req, res, next) {
   let validUser = await UserModel.findById(req.user._id).catch(err => {
     return res.status(404).json(error.details[0].message)
   })
@@ -47,23 +47,33 @@ async function createTask(req, res) {
       validProject.tasks.push(task, splitTask)
       await validProject.save()
 
+      res.status(201)
+      res.locals.validUser = validUser
+      res.locals.message = "Tasks successfully created."
 
-      return res.status(201).json({ message: "Tasks successfully created." })
+      return next()
+
     } else {
       validProject.tasks.push(task)
       await validProject.save()
 
+      res.status(201)
+      res.locals.validUser = validUser
+      res.locals.message = "Task successfully created."
 
-      return res.status(201).json({ message: "Task successfully created." })
+     return next()
+
     }
+
   } else {
     return res
       .status(401)
       .json({ message: "You're not authorized to edit this project." })
   }
+
 }
 
-async function updateTask(req, res) {
+async function updateTask(req, res, next) {
   let validUser = await UserModel.findById(req.user._id).catch(err => {
     return res.status(404).json(error.details[0].message)
   })
@@ -103,8 +113,12 @@ async function updateTask(req, res) {
     }
 
     await validProject.save()
+    res.status(200)
+    res.locals.validUser = validUser
+    res.locals.message = "Task successfully updated."
 
-    res.status(200).json({ message: "Task successfully updated." })
+    return next()
+
   } else {
     res
       .status(401)
@@ -112,7 +126,7 @@ async function updateTask(req, res) {
   }
 }
 
-async function removeTask(req, res) {
+async function removeTask(req, res, next) {
   let validUser = await UserModel.findById(req.user._id).catch(err => {
     return res.status(404).json(error.details[0].message)
   })
@@ -136,7 +150,12 @@ async function removeTask(req, res) {
 
     await validProject.save()
 
-    res.status(200).json({ message: "Task successfully deleted." })
+    res.status(200)
+    res.locals.validUser = validUser
+    res.locals.message = "Task successfully deleted."
+
+    return next()
+
   } else {
     res
       .status(401)
@@ -154,8 +173,6 @@ async function updateAllTasks (req, res) {
       return res.status(404).json(error.details[0].message)
     }
   )
-
-
 
   let userInProject = validProject.users.find(
     element => element.user == validUser._id
@@ -203,9 +220,12 @@ async function updateAllTasks (req, res) {
 
   await validProject.save()
 
+  res.status(200)
+  res.locals.validUser = validUser
+  res.locals.message = "Task successfully updated."
 
+  return next()
 
-  res.status(200).json({ message: "Task successfully updated." })
 }
 
 function checkOverlap(task, project) {

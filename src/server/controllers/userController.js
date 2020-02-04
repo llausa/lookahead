@@ -59,8 +59,6 @@ async function updateDetails(req, res, next) {
 
   next()
 
-  res.status(200).json({"message": "Account Details Successfully Updated"})
-
 }
 
 async function updatePassword(req, res) {
