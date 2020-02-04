@@ -10,7 +10,7 @@ export default function Grid(props) {
 
   const [layout, setLayout] = useState([])
 
-  const authToken = ''
+  const authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTM4ZDI4Y2IwOGNlODdiYzhmNzBiYjEiLCJpYXQiOjE1ODA3ODIyMjB9.PmvLfKShi-uydSxGNT08ptFYOxTl_TOgWz5wZMM3LMI'
 
   const { projectId } = useParams()
 
@@ -20,6 +20,7 @@ export default function Grid(props) {
       {headers: {Authorization: `Bearer ${authToken}`}}
     )
     .then(res => {
+      // localStorage.setItem('authToken', response.body.token)
       setLayout(fromDatabase(res.data.tasks))
     }).catch(() => {
       props.redirect('/projects')

@@ -20,7 +20,7 @@ const Signup = (props) => {
     ), {
         passwordConfirmation: '',
     })
-    
+
     const [data, setData] = useReducer((state, newState) => (
         {...state, ...newState}
     ), {
@@ -37,7 +37,7 @@ const Signup = (props) => {
         console.log(data)
 
         axios.post(
-        'https://vast-oasis-18718.herokuapp.com/api/users', data)
+            'http://localhost:3001/api/users', data)
         .then(function (response) {
             console.log(response)
             setLoading(false)
@@ -50,11 +50,11 @@ const Signup = (props) => {
             console.log(error)
             setLoading(false)
         }) }
-    
+
 
         const onChange = e => setData({[e.target.name]: e.target.value})
         const passwordConfirmChange = e => setPasswordConfirmation({[e.target.name]: e.target.value})
-    
+
         const mystyle = {
             display: 'flex',
             flexDirection: 'column',
@@ -98,8 +98,8 @@ const Signup = (props) => {
                 <FormInput type='email' validation={email} value={data.email} onChange={onChange} require={true} errorText="Invalid Email" label='Email'  id='email' name='email' />
                 <FormInput type='password' validation={password} value={data.password} onChange={onChange} require={true} errorText="Password Invalid" label='Password' id='password' name='password' />
                 <FormInput type='password' validation={passwordFinal} value={data.passwordConfirmation} onChange={passwordConfirmChange} require={true} errorText="Passwords Do Not Match" label='Confirm Password' id='passwordConfirmation' name='passwordConfirmation' />
-                <InfoDialog />  
-                <ButtonInput onClick={SignupPressed} disabled={false} type='submit' primary={true} color='primary' text="Submit" />   
+                <InfoDialog />
+                <ButtonInput onClick={SignupPressed} disabled={false} type='submit' primary={true} color='primary' text="Submit" />
             </div>
           </form>
           </CardContainer>

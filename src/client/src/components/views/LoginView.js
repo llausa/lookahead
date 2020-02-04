@@ -31,9 +31,12 @@ const Login = (props) => {
         console.log(data)
 
         axios.post(
-        'https://vast-oasis-18718.herokuapp.com/api/auth', data)
+            `http://localhost:3001/api/auth`,
+            data
+        )
         .then(function (response) {
             console.log(response)
+            // localStorage.setItem('authToken', response.body.token)
             setLoading(false)
             if (response.status === 200) {
                 props.redirect('/projects')
@@ -96,8 +99,8 @@ const Login = (props) => {
 
             <FormInput type='email' validation={email} value={data.email} onChange={onChange} require={true} errorText="Invalid Email" label='Email'  id='email' name='email' />
             <FormInput type='password' validation={password} value={data.password} onChange={onChange} require={true} errorText="Password Invalid" label='Password' id='password' name='password' />
-                
-            <ButtonInput onClick={LoginPressed} type='submit' primary={true} color='primary' text={ButtonText} /> 
+
+            <ButtonInput onClick={LoginPressed} type='submit' primary={true} color='primary' text={ButtonText} />
             <Button  onClick={LoginPressed} component={Link} to="/account/password" variant="outlined" style={buttonResetP}>Reset Password <LockIcon style={smallIcon} /> </Button>
 
         </div>

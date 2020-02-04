@@ -1,4 +1,4 @@
-import React, {useReducer} from "react"
+import React, {useReducer, useState } from "react"
 import CardContainer from '../CardContainer'
 import Nav from '../Nav'
 import Background from '../../images/WhiteBackgroundSmall.jpg'
@@ -7,9 +7,13 @@ import ButtonInput from '../ButtonInput'
 import FormInput from '../FormInput'
 import TitleText from '../TitleText'
 import NormalText from '../NormalText'
+import Loader from '../Loader'
 
 
 const AccountDetailsView = () => {
+
+  // For Loading Animation
+  const [loading, setLoading] = useState(false)
 
   const [data, setData] = useReducer((state, newState) => (
     {...state, ...newState}
@@ -25,14 +29,18 @@ const AccountDetailsView = () => {
     console.log(data)
 
     axios.post(
-    'https://vast-oasis-18718.herokuapp.com/api/users', data)
+    'http://localhost:3001/api/users', data)
     .then(function (response) {
         console.log(response)
+        // add success
+        setLoading(false)
     })
     .catch(function (error) {
+        // add error notifications here
         console.log(error.response.data)
+        setLoading(false)
     })
-    
+
   }
 
   const onChange = e => setData({[e.target.name]: e.target.value})
@@ -49,10 +57,15 @@ const AccountDetailsView = () => {
         margin: "auto",
     }
 
+    const SubmitPressed = ()  => {
+        console.log("Submit Pressed")
+        setLoading(true)
+    }
+
     // Client Validation
     const basic = (text) => text.length > 2
 
-    let ButtonText = "Save" 
+    let ButtonText = "Save"
     let ButtonDisabled = false
 
     return (
@@ -66,12 +79,12 @@ const AccountDetailsView = () => {
         <FormInput type='text' validation={basic} value={data.firstName} onChange={onChange} require={true} errorText="Please enter more Characters" label='First Name' id='firstName' name='firstName'/>
         <FormInput type='text' validation={basic} value={data.lastName} onChange={onChange} require={true} errorText="Please enter more Characters" label='Last Name' id='lastName' name='lastName' />
         <FormInput type='text' value={data.position} onChange={onChange} label='Position' id='position' name='position' />
-        <ButtonInput disabled={ButtonDisabled} type='submit' primary={true} color='primary' text={ButtonText} />
+        <ButtonInput disabled={ButtonDisabled} type='submit' onclick={SubmitPressed} primary={true} color='primary' text={ButtonText} />
         </div>
         </form>
         </CardContainer>
         </>
-    )  
+    )
 }
 
 export default AccountDetailsView
