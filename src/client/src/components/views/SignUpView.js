@@ -81,6 +81,10 @@ const Signup = (props) => {
             setLoading(true)
         }
 
+        const isValid = () => {
+            return !!basic(data.lastName) && !!basic(data.lastName) && !!email(data.email) && !!password(data.password) && !!password(data.password) && !!passwordFinal(passwordConfirmation.passwordConfirmation)
+        }
+
       return (
 
         <>
@@ -99,7 +103,7 @@ const Signup = (props) => {
                 <FormInput type='password' validation={password} value={data.password} onChange={onChange} require={true} errorText="Password Invalid" label='Password' id='password' name='password' />
                 <FormInput type='password' validation={passwordFinal} value={data.passwordConfirmation} onChange={passwordConfirmChange} require={true} errorText="Passwords Do Not Match" label='Confirm Password' id='passwordConfirmation' name='passwordConfirmation' />
                 <InfoDialog />  
-                <ButtonInput onClick={SignupPressed} disabled={false} type='submit' primary={true} color='primary' text="Submit" />   
+                <ButtonInput onClick={SignupPressed} disabled={!isValid()} type='submit' primary={true} text="Submit" />   
             </div>
           </form>
           </CardContainer>
