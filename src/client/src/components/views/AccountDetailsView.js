@@ -10,6 +10,7 @@ import NormalText from '../NormalText'
 import Loader from '../Loader'
 import { Button } from '@material-ui/core'
 import ErrorMessage from '../ErrorMessage'
+import SuccessMessage from '../SuccessMessage'
 
 const AccountDetailsView = () => {
 
@@ -18,6 +19,9 @@ const AccountDetailsView = () => {
 
   // For Error Message
   const [errorMessage, setErrorMessage] = useState(null)
+
+  // For Success Message
+  const [successMessage, setSuccessMessage] = useState(null)
 
   const [data, setData] = useReducer((state, newState) => (
     {...state, ...newState}
@@ -35,9 +39,10 @@ const AccountDetailsView = () => {
     API.put(
     '/api/users/details', data)
     .then(function (response) {
-      
+
       console.log(response)
       setLoading(false)
+      setSuccessMessage("Your details have been changed.")
     })
     .catch(function (error) {
         // add error notifications here
@@ -76,6 +81,7 @@ const AccountDetailsView = () => {
     return (
       <>
       {errorMessage && <ErrorMessage msg={errorMessage.message} onClose={() => setErrorMessage(null)} />}
+      {successMessage && <SuccessMessage msg={successMessage} onClose={() => setSuccessMessage(null)} />}
 
       <Nav backButtonLink = "/projects" BackButton={true} MenuButton={false} />
       <CardContainer background={Background}>
