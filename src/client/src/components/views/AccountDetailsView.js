@@ -12,15 +12,17 @@ import Loader from '../Loader'
 
 const AccountDetailsView = () => {
 
+  const authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODA4NzMyMjUsIl9pZCI6IjVlMzhlNDg5MjY3YzU5N2ZjZjA0MGMxMyIsImlhdCI6MTU4MDc4NjgyNX0.tdMPswUn4DD9nOE5CKQLSGY__8aKWLCU9yp2DbwoxcM'
+
   // For Loading Animation
   const [loading, setLoading] = useState(false)
 
   const [data, setData] = useReducer((state, newState) => (
     {...state, ...newState}
   ), {
-    firstName: '',
-    lastName: '',
-    position: '',
+    "firstName": '',
+    "lastName": '',
+    "position": ''
   })
 
   const onSubmit = e => {
@@ -28,12 +30,19 @@ const AccountDetailsView = () => {
 
     console.log(data)
 
-    axios.post(
-    'http://localhost:3001/api/users', data)
+    axios.put(
+      'http://localhost:3001/api/users/details',
+      {headers: {Authorization: `Bearer ${authToken}`}},
+      data
+    )
     .then(function (response) {
         console.log(response)
         // add success
         setLoading(false)
+        if (response.status == 200) {
+          // Success notification
+        }
+
     })
     .catch(function (error) {
         // add error notifications here

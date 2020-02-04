@@ -43,7 +43,6 @@ const Login = (props) => {
             // localStorage.setItem('authToken', response.body.token)
             setLoading(false)
             if (response.status == 200) {
-                console.log('Should redirect')
                 props.redirect('/projects')
             }
         })

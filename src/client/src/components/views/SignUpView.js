@@ -49,7 +49,8 @@ const Signup = (props) => {
             console.log(error.response.data)
             console.log(error)
             setLoading(false)
-        }) }
+        })
+    }
 
 
         const onChange = e => setData({[e.target.name]: e.target.value})
