@@ -4,8 +4,7 @@ const jwt = require('jsonwebtoken')
 const _ = require('lodash')
 const Joi = require('@hapi/joi')
 
-async function login(req, res) {
-  
+async function login(req, res, next) {
   const { error } = validate(req.body)
   if (error) return res.status(400).json(error.details[0].message)
 
@@ -15,9 +14,11 @@ async function login(req, res) {
   const validPassword = await bcrypt.compare(req.body.password, user.password)
   if (!validPassword) return res.status(401).json({"message":"Invalid Email or Password."})
 
-  const token = user.generateAuthToken()
-
-  res.json({"token": token})
+  // const token = user.generateAuthToken()
+  res.status(200)
+  res.locals.validUser = user
+  // res.json({"token": token})
+  next()
 }
 
 function validate(req) {

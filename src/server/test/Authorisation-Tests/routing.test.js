@@ -147,9 +147,9 @@ if (mongoose.connection.name === "lookahead-test") {
 					.end((err, res) => {
 						expect(err).to.be.null
 						expect(res).to.have.status(200)
-						expect(res.body).to.have.property("firstName", validUser.firstName)
-						expect(res.body).to.have.property("lastName", validUser.lastName)
-						expect(res.body).to.have.property("position", validUser.position)
+						expect(res.body.user).to.have.property("firstName", validUser.firstName)
+						expect(res.body.user).to.have.property("lastName", validUser.lastName)
+						expect(res.body.user).to.have.property("position", validUser.position)
 						done()
 					})
 			})
