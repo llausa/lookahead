@@ -6,7 +6,7 @@ const Joi = require('@hapi/joi')
 
 async function login(req, res) {
   const { error } = validate(req.body)
-  if (error) return res.status(400).json(error.details[0].message)
+  if (error) return res.status(400).json({"message": error.details[0].message })
 
   let user = await UserModel.findOne({ email: req.body.email })
   if(!user) return res.status(401).json({"message":"Invalid Email or Password."})
