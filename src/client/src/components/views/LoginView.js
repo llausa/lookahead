@@ -11,7 +11,8 @@ import NormalText from '../NormalText'
 import CardContainer from '../CardContainer'
 import Background from '../Background'
 import Loader from '../Loader'
-import NotificationMessage from '../NotificationMessage'
+import ErrorMessage from '../ErrorMessage'
+import Cookies from 'js-cookie'
 
 
 const Login = (props) => {
@@ -34,20 +35,20 @@ const Login = (props) => {
     const onSubmit = e => {
         e.preventDefault()
 
-        console.log(data)
+        // console.log(data)
 
         API.post(
         '/api/auth', data)
         .then(function (response) {
-            
-            console.log(response)
+
+            // console.log(response)
             setLoading(false)
             if (response.status === 200) {
-                localStorage.setItem('authToken', response.data.token)
                 props.redirect('/projects')
             }
         })
         .catch(function (error) {
+            console.log(error)
             // console.log(error.response.data)
             setLoading(false)
             setErrorMessage(error.response.data)
@@ -102,7 +103,7 @@ const Login = (props) => {
 
     return (
         <>
-        {errorMessage && <NotificationMessage error={errorMessage.message} onClose={() => setErrorMessage(null)} />}
+        {errorMessage && <ErrorMessage msg={errorMessage.message} onClose={() => setErrorMessage(null)} />}
 
         <Nav backButtonLink = "/" BackButton={true} MenuButton={false}/>
 
@@ -115,8 +116,8 @@ const Login = (props) => {
 
             <FormInput type='email' validation={email} value={data.email} onChange={onChange} require={true} errorText="Invalid Email" label='Email'  id='email' name='email' />
             <FormInput type='password' validation={password} value={data.password} onChange={onChange} require={true} errorText="Password Invalid" label='Password' id='password' name='password' />
-                
-            <ButtonInput onClick={LoginPressed} type='submit' primary={true} text={ButtonText} disabled={!isValid()} /> 
+
+            <ButtonInput onClick={LoginPressed} type='submit' primary={true} text={ButtonText} disabled={!isValid()} />
             <Button onClick={LoginPressed} component={Link} to="/account/password" variant="outlined" style={buttonResetP}>Reset Password <LockIcon style={smallIcon} /> </Button>
 
         </div>
