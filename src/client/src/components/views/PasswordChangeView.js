@@ -14,7 +14,8 @@ const PasswordChangeView = () => {
     const [data, setData] = useReducer((state, newState) => (
         {...state, ...newState}
     ), {
-        email: '',
+        currentPassword: '',
+        newPassword: ''
     })
 
     const onSubmit = e => {
@@ -22,16 +23,16 @@ const PasswordChangeView = () => {
 
         console.log(data)
 
-        API.post(
+        API.put(
         '/api/auth', data)
         .then(function (response) {
-            
+
             console.log(response)
         })
         .catch(function (error) {
             console.log(error.response.data)
         })
-        
+
     }
 
     const mystyle = {
@@ -45,20 +46,20 @@ const PasswordChangeView = () => {
         maxWidth: "400px",
         margin: "auto",
     }
-    
+
     const buttonMain = {
         color: "#006EE2",
         margin: "20px",
         border: "1px solid #006EE2"
     }
-    
+
 
     const smallIcon= {
         width: "auto",
         height: "16px",
         margin: "4px"
     }
-    
+
     function SendEmailPressed() {
         console.log("Send Email Pressed")
     }
@@ -71,13 +72,14 @@ const PasswordChangeView = () => {
         <>
         <Nav BackButton={false} MenuButton={false}/>
         <CardContainer background={Background}>
-        <form onSubmit={onSubmit} className='form'> 
-        <div data-cy="passwordView" style={mystyle}>
-        <TitleText text="Password Change" />
-        <FormInput type='email' validation={email} value={data.email} onChange={onChange} require={true} errorText="Invalid Email" label='Email'  id='email' name='email' />
-        
-        <Button onClick={SendEmailPressed} variant="outlined" style={buttonMain} color="primary">Send Email <MailIcon style={smallIcon} /></Button>
-        </div>
+        <form onSubmit={onSubmit} className='form'>
+            <div data-cy="passwordView" style={mystyle}>
+                <TitleText text="Password Change" />
+                <FormInput type='email' validation={email} value={data.email} onChange={onChange} require={true} errorText="Invalid Email" label='Current Email'  id='currentEmail' name='currentEmail' />
+                <FormInput type='email' validation={email} value={data.email} onChange={onChange} require={true} errorText="Invalid Email" label='New Email'  id='newEmail' name='newEmail' />
+
+                <Button onClick={SendEmailPressed} variant="outlined" type='submit' style={buttonMain} color="primary">Send Email <MailIcon style={smallIcon} /></Button>
+            </div>
         </form>
         </CardContainer>
         <Background/>

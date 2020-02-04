@@ -52,7 +52,7 @@ const Login = (props) => {
             console.log(error)
             // console.log(error.response.data)
             setLoading(false)
-            // setErrorMessage(error.response.data)
+            setErrorMessage(error.response.data)
         })
 
     }
