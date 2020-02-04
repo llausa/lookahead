@@ -13,7 +13,8 @@ import ProjectAddUsersView from './views/ProjectAddUsersView'
 import ProjectUserSettingsView from './views/ProjectUserSettingsView'
 import ProjectSettingsView from './views/ProjectSettingsView'
 import NewTaskView from './views/NewTaskView'
-import NewLookaheadView from './views/NewLookaheadView'
+import NewProjectView from './views/NewProjectView'
+import EditProjectView from './views/EditProjectView'
 import EmailChangeView from './views/EmailChangeView'
 import PasswordChangeView from './views/PasswordChangeView'
 
@@ -45,11 +46,11 @@ const App = () => {
           <Route exact path="/account/password" component={PasswordChangeView} data-cy="passwordView"><PasswordChangeView redirect={redirectFunc} /></Route>
           <Route exact path="/account/details" component={AccountDetailsView} data-cy="detailsView"><AccountDetailsView redirect={redirectFunc} /></Route>
           <Route exact path="/project/:projectId" component={ProjectView} data-cy="projectView" render={ props => <ProjectView {...props} projectId={projectId}/>}><ProjectView redirect={redirectFunc} /></Route>
-          <Route exact path="/projects/new" component={NewLookaheadView} data-cy="newProjectView"><NewLookaheadView redirect={redirectFunc} /></Route>
+          <Route exact path="/projects/new" component={NewProjectView} data-cy="newProjectView"><NewProjectView redirect={redirectFunc} /></Route>
           <Route exact path="/project/:projectId/users" component={ProjectUsersView} data-cy="projectUsersView" render={ props => <ProjectUsersView {...props} projectId={projectId}/>}><ProjectUsersView redirect={redirectFunc} /></Route>
           <Route exact path="/project/:projectId/users/add" component={ProjectAddUsersView} data-cy="projectAddUsersView" render={ props => <ProjectAddUsersView {...props} projectId={projectId}/>}><ProjectAddUsersView redirect={redirectFunc} /></Route>
           <Route exact path="/project/:projectId/users/:userid" component={ProjectUserSettingsView} data-cy="projectUserSettingsView" render={ props => <ProjectUserSettingsView {...props} projectId={projectId} userId={userId}/>}><ProjectUserSettingsView redirect={redirectFunc} /></Route>
-          <Route exact path="/project/:projectId/edit" component={ProjectSettingsView} data-cy="projectSettingsView" render={ props => <ProjectView {...props} projectId={projectId}/>}><ProjectSettingsView redirect={redirectFunc} /></Route>
+          <Route exact path="/project/:projectId/edit" component={ProjectSettingsView} data-cy="editProjectView" render={ props => <EditProjectView {...props} projectId={projectId}/>}><EditProjectView redirect={redirectFunc} /></Route>
           <Route exact path="/project/:projectId/newtask" component={NewTaskView} data-cy="newTaskView" render={ props => <ProjectView {...props} projectId={projectId}/>}><NewTaskView redirect={redirectFunc} /></Route>
           <Route exact path="/project/:projectId/edittask/:taskid" component={EditTaskView} data-cy="editTaskView" render={ props => <ProjectUserSettingsView {...props} projectId={projectId} taskId={taskId}/>}><EditTaskView redirect={redirectFunc} /></Route>
         </Switch>

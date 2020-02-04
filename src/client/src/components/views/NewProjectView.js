@@ -11,7 +11,7 @@ import TimeZonePicker from '../TimeZonePicker'
 import FormInput from '../FormInput'
 
 
-const NewLookaheadView = () => {
+const NewProjectView = () => {
 
     const [data, setData] = useReducer((state, newState) => (
         {...state, ...newState}
@@ -79,4 +79,4 @@ const NewLookaheadView = () => {
     )
 }
 
-export default NewLookaheadView
+export default NewProjectView
