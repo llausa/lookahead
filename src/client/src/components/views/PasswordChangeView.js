@@ -25,7 +25,7 @@ const PasswordChangeView = () => {
         API.post(
         '/api/auth', data)
         .then(function (response) {
-            localStorage.setItem('authToken', response.data.token)
+            
             console.log(response)
         })
         .catch(function (error) {
