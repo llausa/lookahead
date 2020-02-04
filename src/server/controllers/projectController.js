@@ -17,7 +17,7 @@ async function allProjects (req, res) {
 }
 
 // POST Project
-async function create (req, res) {
+async function create (req, res, next) {
 
   req.body.owner = req.user._id
 
@@ -38,7 +38,12 @@ async function create (req, res) {
 
   await addProjectToUser(validUser._id, project._id, 'Owner')
 
-  res.status(201).json({"id": project._id, "message":'Project successfully created.'})
+  res.status(201)
+  res.locals.validUser = validUser
+  res.locals.id = project._id
+  res.locals.message = "Project successfully created."
+
+  next()
 
 }
 

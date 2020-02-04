@@ -10,7 +10,7 @@ async function details(req, res) {
   res.send(user)
 }
 
-async function register(req, res) {
+async function register(req, res, next) {
 
   const { error } = validateUser(req.body)
   if (error) return res.status(400).json({"message": 'Invalid user data.'})
@@ -29,12 +29,16 @@ async function register(req, res) {
   user.password = await bcrypt.hash(user.password, salt)
   await user.save()
 
-  const token = user.generateAuthToken()
+  res.status(201)
+  res.locals.validUser = user
+  res.locals.message = `User ${user.email} successfully created.`
 
-  res.status(201).json({"message":`User ${user.email} successfully created.`, "token": token})
+  next()
+
+  // res.status(201).json({"message":`User ${user.email} successfully created.`, "token": token})
 }
 
-async function updateDetails(req, res) {
+async function updateDetails(req, res, next) {
 
   let validUser = await UserModel.findById(req.user._id)
   .catch( (err) => { return res.status(404).json(error.details[0].message) })
@@ -48,6 +52,13 @@ async function updateDetails(req, res) {
   validUser.position = req.body.position
 
   await validUser.save()
+
+  res.status(200)
+  res.locals.validUser = validUser
+  res.locals.message = "Account Details Successfully Updated"
+
+  next()
+
   res.status(200).json({"message": "Account Details Successfully Updated"})
 
 }

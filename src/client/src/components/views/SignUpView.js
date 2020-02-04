@@ -32,6 +32,7 @@ const Signup = (props) => {
         .then(function (response) {
             console.log(response)
             if (response.status == 200) {
+                localStorage.setItem('authToken', response.body.token)
                 props.redirect('/projects')
             }
         })

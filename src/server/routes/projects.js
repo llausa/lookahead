@@ -6,6 +6,7 @@ Joi.objectId = require('joi-objectid')(Joi)
 const auth = require('../middleware/auth')
 const projectController = require("../controllers/projectController")
 const taskController = require("../controllers/taskController")
+const refreshAuth = require("../middleware/refreshAuth")
 
 // Projects list route
 router.get("/", auth, projectController.allProjects) // works but if empty, returns empty array
@@ -15,7 +16,7 @@ router.get("/:projectId", auth, projectController.getProject) // works if projec
 // if projectId sent is invalid or doesnt exist in DB
 
 // create Project route
-router.post("/", auth, projectController.create ) // works
+router.post("/", auth, projectController.create, refreshAuth ) // works
 
 // update Project route
 router.put("/:projectId", auth, projectController.update) // works properly if body is correct and Id is correct. Wont work otherwise
