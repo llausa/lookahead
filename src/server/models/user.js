@@ -3,7 +3,7 @@ const Joi = require('@hapi/joi')
 const jwt = require('jsonwebtoken')
 const uniqueValidator = require('mongoose-unique-validator')
 
-const emailRegex = /^[A-z_\-.0-9+]+@[A-z_0-9]+?\.[A-z]{2,4}$/
+const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,1024}$/
 
 const UserSchema = new mongoose.Schema({
