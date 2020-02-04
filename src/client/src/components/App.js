@@ -44,12 +44,7 @@ const App = () => {
           <Route exact path="/account/email" component={EmailChangeView} data-cy="emailView"><EmailChangeView redirect={redirectFunc} /></Route>
           <Route exact path="/account/password" component={PasswordChangeView} data-cy="passwordView"><PasswordChangeView redirect={redirectFunc} /></Route>
           <Route exact path="/account/details" component={AccountDetailsView} data-cy="detailsView"><AccountDetailsView redirect={redirectFunc} /></Route>
-          <Route exact path="/project/:projectId" component={ProjectView} data-cy="projectView" 
-          
-          render={ props => <ProjectView {...props} projectId={projectId}/>}>
-            <ProjectView redirect={redirectFunc} />
-          
-          </Route>
+          <Route exact path="/project/:projectId" component={ProjectView} data-cy="projectView" render={ props => <ProjectView {...props} projectId={projectId}/>}><ProjectView redirect={redirectFunc} /></Route>
           <Route exact path="/projects/new" component={NewLookaheadView} data-cy="newProjectView"><NewLookaheadView redirect={redirectFunc} /></Route>
           <Route exact path="/project/:projectId/users" component={ProjectUsersView} data-cy="projectUsersView" render={ props => <ProjectUsersView {...props} projectId={projectId}/>}><ProjectUsersView redirect={redirectFunc} /></Route>
           <Route exact path="/project/:projectId/users/add" component={ProjectAddUsersView} data-cy="projectAddUsersView" render={ props => <ProjectAddUsersView {...props} projectId={projectId}/>}><ProjectAddUsersView redirect={redirectFunc} /></Route>
