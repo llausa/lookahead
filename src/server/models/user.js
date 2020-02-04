@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 const uniqueValidator = require('mongoose-unique-validator')
 
 const emailRegex = /^[A-z_\-.0-9+]+@[A-z_0-9]+?\.[A-z]{2,4}$/
-const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
+const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,1024}$/
 
 const UserSchema = new mongoose.Schema({
     firstName: {
