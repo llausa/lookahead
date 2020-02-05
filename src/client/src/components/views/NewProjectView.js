@@ -11,15 +11,15 @@ import TimeZonePicker from '../TimeZonePicker'
 import FormInput from '../FormInput'
 
 
-const NewProjectView = () => {
+const NewProjectView = (props) => {
 
     const [data, setData] = useReducer((state, newState) => (
         {...state, ...newState}
       ), {
         title: '',
         location: '',
-        start_date: new Date().toISOString().substring(0, 10),
-        end_date: new Date().toISOString().substring(0, 10),
+        start_date: new Date(new Date().setTime( new Date().getTime() + 1 * 86400000 )).toISOString().substring(0, 10),
+        end_date: new Date(new Date().setTime( new Date().getTime() + 2 * 86400000 )).toISOString().substring(0, 10),
         create_date: new Date().toISOString().substring(0, 10)
       })
 
@@ -28,11 +28,9 @@ const NewProjectView = () => {
 
         console.log(data)
 
-        API.post(
-        '/api/projects', data)
+        API.post('/api/projects', data)
         .then(function (response) {
-
-            console.log(response)
+          props.redirect(`/projects/${response.data.id}`)
         })
         .catch(function (error) {
             console.log(error.response.data)

@@ -82,7 +82,7 @@ const ProjectCard = (props) => {
         label={(props.location ? (`${props.location}`) : ("Brisbane, Australia"))}
       />
 
-      <Button component={Link} to={`/project/${props.link}`} onClick={(console.log("View Event Clicked"))} primary={true} color='primary' style={buttonMain} > View Project </Button>
+      <Button component={Link} to={`/projects/${props.link}`} onClick={(console.log("View Event Clicked"))} primary={true} color='primary' style={buttonMain} > View Project </Button>
     </div>
     </CardContent>
     </Card>

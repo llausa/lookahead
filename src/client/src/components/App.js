@@ -48,19 +48,19 @@ const App = () => {
           <PrivateRoute exact path="/account/password" component={PasswordChangeView} redirect={redirectFunc} data-cy="passwordView"><PasswordChangeView redirect={redirectFunc} /></PrivateRoute>
           <PrivateRoute exact path="/account/details" component={AccountDetailsView} redirect={redirectFunc} data-cy="detailsView"><AccountDetailsView redirect={redirectFunc} /></PrivateRoute>
 
-          {/* <Route exact path="/project/:projectId" component={ProjectView} data-cy="projectView" render={ props => <ProjectView {...props} projectId={projectId}/>}><ProjectView redirect={redirectFunc} /></Route> */}
-          
+          {/* <Route exact path="/projects/:projectId" component={ProjectView} data-cy="projectView" render={ props => <ProjectView {...props} projectId={projectId}/>}><ProjectView redirect={redirectFunc} /></Route> */}
 
-          <PrivateRoute exact path="/project/:projectId" component={ProjectView} redirect={redirectFunc} data-cy="projectView" projectId={projectId}> <ProjectView redirect={redirectFunc} /></PrivateRoute>
-          
-          
+
           <PrivateRoute exact path="/projects/new" component={NewProjectView} redirect={redirectFunc} data-cy="newProjectView"><NewProjectView redirect={redirectFunc} /></PrivateRoute>
-          <PrivateRoute exact path="/project/:projectId/users" component={ProjectUsersView} redirect={redirectFunc} data-cy="projectUsersView" render={ props => <ProjectUsersView {...props} projectId={projectId}/>}><ProjectUsersView redirect={redirectFunc} /></PrivateRoute>
-          <PrivateRoute exact path="/project/:projectId/users/add" component={ProjectAddUsersView} redirect={redirectFunc} data-cy="projectAddUsersView" render={ props => <ProjectAddUsersView {...props} projectId={projectId}/>}><ProjectAddUsersView redirect={redirectFunc} /></PrivateRoute>
-          <PrivateRoute exact path="/project/:projectId/users/:userid" component={ProjectUserSettingsView} redirect={redirectFunc} data-cy="projectUserSettingsView" render={ props => <ProjectUserSettingsView {...props} projectId={projectId} userId={userId}/>}><ProjectUserSettingsView redirect={redirectFunc} /></PrivateRoute>
-          <PrivateRoute exact path="/project/:projectId/edit" component={ProjectSettingsView} redirect={redirectFunc} data-cy="editProjectView" render={ props => <EditProjectView {...props} projectId={projectId}/>}><EditProjectView redirect={redirectFunc} /></PrivateRoute>
-          <PrivateRoute exact path="/project/:projectId/newtask" component={NewTaskView} redirect={redirectFunc} data-cy="newTaskView" render={ props => <ProjectView {...props} projectId={projectId}/>}><NewTaskView redirect={redirectFunc} /></PrivateRoute>
-          <PrivateRoute exact path="/project/:projectId/edittask/:taskid" component={EditTaskView} redirect={redirectFunc} data-cy="editTaskView" render={ props => <ProjectUserSettingsView {...props} projectId={projectId} taskId={taskId}/>}><EditTaskView redirect={redirectFunc} /></PrivateRoute>
+          <PrivateRoute exact path="/projects/:projectId" component={ProjectView} redirect={redirectFunc} data-cy="projectView" projectId={projectId}> <ProjectView redirect={redirectFunc} /></PrivateRoute>
+
+
+          <PrivateRoute exact path="/projects/:projectId/users" component={ProjectUsersView} redirect={redirectFunc} data-cy="projectUsersView" render={ props => <ProjectUsersView {...props} projectId={projectId}/>}><ProjectUsersView redirect={redirectFunc} /></PrivateRoute>
+          <PrivateRoute exact path="/projects/:projectId/users/add" component={ProjectAddUsersView} redirect={redirectFunc} data-cy="projectAddUsersView" render={ props => <ProjectAddUsersView {...props} projectId={projectId}/>}><ProjectAddUsersView redirect={redirectFunc} /></PrivateRoute>
+          <PrivateRoute exact path="/projects/:projectId/users/:userid" component={ProjectUserSettingsView} redirect={redirectFunc} data-cy="projectUserSettingsView" render={ props => <ProjectUserSettingsView {...props} projectId={projectId} userId={userId}/>}><ProjectUserSettingsView redirect={redirectFunc} /></PrivateRoute>
+          <PrivateRoute exact path="/projects/:projectId/edit" component={ProjectSettingsView} redirect={redirectFunc} data-cy="editProjectView" render={ props => <EditProjectView {...props} projectId={projectId}/>}><EditProjectView redirect={redirectFunc} /></PrivateRoute>
+          <PrivateRoute exact path="/projects/:projectId/newtask" component={NewTaskView} redirect={redirectFunc} data-cy="newTaskView" render={ props => <ProjectView {...props} projectId={projectId}/>}><NewTaskView redirect={redirectFunc} /></PrivateRoute>
+          <PrivateRoute exact path="/projects/:projectId/edittask/:taskid" component={EditTaskView} redirect={redirectFunc} data-cy="editTaskView" render={ props => <ProjectUserSettingsView {...props} projectId={projectId} taskId={taskId}/>}><EditTaskView redirect={redirectFunc} /></PrivateRoute>
         </Switch>
       </BrowserRouter>
     </div>
