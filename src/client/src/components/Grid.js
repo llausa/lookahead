@@ -27,6 +27,7 @@ export default function Grid(props) {
   }, [])
 
   const fromDatabase = (layout) => {
+    
     return layout.map((obj, i) => (
       {
         ...obj,
@@ -100,20 +101,53 @@ export default function Grid(props) {
     }
   }
 
+  const tableStyle = {
+
+    borderCollapse: "collapse",
+    position: "relative",
+    height: `${24*50}px`,
+    width: "1000px",
+    border: "1px solid black",
+    top: "0",
+    left: "0",
+    zIndex: "-1",
+
+  }
+
   return (
-    <GridLayout onResizeStop={stopDrag} onDragStop={stopDrag} verticalCompact={false} className="layout" cols={10} maxRows={24} rowHeight={50} width={2200}>
-      {layout.map((grid, i) => (
-        <div key={grid.i} data-grid={grid} >
-          <JoeMama {...grid} />
-        </div>
-      ))}
-    </GridLayout>
+    < div>
+      <GridLayout onResizeStop={stopDrag} onDragStop={stopDrag} verticalCompact={false} className="layout" cols={3} maxRows={24} rowHeight={50} width={1000} margin={[0, 0]}>
+        {layout.map((grid, i) => (
+          <div key={grid.i} data-grid={grid} >
+            <Formatting {...grid} />
+          </div>
+        ))}
+      </GridLayout>
+      <table border="1" style={tableStyle}>
+        {Array(24).fill().map(_ => (
+          <tr>
+            {Array(3).fill().map(_ => (
+              <td></td>
+            ))}
+          </tr>
+        ))}
+      </table>
+    </div>
   )
 }
 
-function JoeMama(props) {
+// Styling
+const completed = {
+  
+}
+
+const notComplete = {
+  
+}
+
+function Formatting(props) {
   return (
-    <div style={{backgroundColor: props.complete ? 'grren': 'red' }}>
+    <div style={props.complete ? completed : notComplete }>
       <p>title: {props.title}</p>
       <p>description: {props.description}</p>
     </div>
