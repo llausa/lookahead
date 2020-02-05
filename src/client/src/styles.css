@@ -118,4 +118,15 @@ body {
     size: 1rem;
 }
 
+.blackOverlay {
+    background-color: black;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0.6;
+    -moz-opacity: 0.6; /* Firefox and Mozilla browsers */
+   -webkit-opacity: 0.6; /* WebKit browser e.g. Safari */
+   filter: alpha(opacity=6); 
+    position: absolute;
+}
+
 
