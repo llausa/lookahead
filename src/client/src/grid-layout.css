@@ -4,6 +4,7 @@
 }
 .react-grid-item {
   transition: all 200ms ease;
+  overflow-x: scroll;
   transition-property: left, top;
   background-color: white;
   border-radius: 10px;

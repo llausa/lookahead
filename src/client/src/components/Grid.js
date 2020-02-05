@@ -17,8 +17,8 @@ export default function Grid(props) {
       `api/projects/${projectId}/`
     )
     .then(res => {
-      
       setLayout(fromDatabase(res.data.validProject.tasks))
+      console.log(fromDatabase(res.data.validProject.startDate))
     }).catch(() => {
 
       props.redirect('/projects')
@@ -55,14 +55,15 @@ export default function Grid(props) {
     ))
   }
 
+
   const updateDatabase = async (newLayout) => {
     return API.put(
       `/api/projects/${projectId}/tasks/edit`,
       {tasks: toDatabase(newLayout)}
     )
     .then((res) => {
-      
       setLayout(newLayout)
+      
     })
     .catch(() => {
       reDraw()
@@ -98,15 +99,20 @@ export default function Grid(props) {
         }
       ))
       updateDatabase(newItems)
+
     }
   }
+
+
+  let numberOfDays = 3
+  let totalWidth = ( numberOfDays * 200)
 
   const tableStyle = {
 
     borderCollapse: "collapse",
     position: "relative",
     height: `${24*50}px`,
-    width: "1000px",
+    width: `${totalWidth}px`,
     border: "1px solid black",
     top: "0",
     left: "0",
@@ -114,9 +120,38 @@ export default function Grid(props) {
 
   }
 
+  const Formatting = (props) => {
+
+    let startTime = ''
+  
+    if (props.y < 10) {
+      startTime = ("0" + props.y + ":00")
+    } else {
+      startTime = (props.y + ":00")
+    }
+  
+    return (
+      <div style={props.complete ? completed : notComplete }>
+        <p>title: {props.title}</p>
+        <p>description: {props.description}</p>
+        <p>{startTime}</p>
+        <p>{props.length} Hours</p>
+      </div>
+    )
+  }
+
+      // Styling
+    const completed = {
+      
+    }
+
+    const notComplete = {
+      
+    }
+
   return (
-    < div>
-      <GridLayout onResizeStop={stopDrag} onDragStop={stopDrag} verticalCompact={false} className="layout" cols={3} maxRows={24} rowHeight={50} width={1000} margin={[0, 0]}>
+    < div style={{position: "relative"}}>
+      <GridLayout onResizeStop={stopDrag} onDragStop={stopDrag} verticalCompact={false} className="layout" cols={numberOfDays} maxRows={24} rowHeight={50} width={totalWidth} margin={[0, 0]}>
         {layout.map((grid, i) => (
           <div key={grid.i} data-grid={grid} >
             <Formatting {...grid} />
@@ -126,7 +161,7 @@ export default function Grid(props) {
       <table border="1" style={tableStyle}>
         {Array(24).fill().map(_ => (
           <tr>
-            {Array(3).fill().map(_ => (
+            {Array(numberOfDays).fill().map(_ => (
               <td></td>
             ))}
           </tr>
@@ -136,20 +171,4 @@ export default function Grid(props) {
   )
 }
 
-// Styling
-const completed = {
-  
-}
 
-const notComplete = {
-  
-}
-
-function Formatting(props) {
-  return (
-    <div style={props.complete ? completed : notComplete }>
-      <p>title: {props.title}</p>
-      <p>description: {props.description}</p>
-    </div>
-  )
-}

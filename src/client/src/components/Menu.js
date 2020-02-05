@@ -35,8 +35,10 @@ const mystyle = {
 let links=[
     "https://res.cloudinary.com/djic27lvo/video/upload/v1580790563/Sounds/Oooft.mp3",
     "https://res.cloudinary.com/djic27lvo/video/upload/v1580790555/Sounds/Villager1.mp3",
+    "https://res.cloudinary.com/djic27lvo/video/upload/v1580790563/Sounds/Oooft.mp3",
     "https://res.cloudinary.com/djic27lvo/video/upload/v1580790552/Sounds/Villager2.mp3",
     "https://res.cloudinary.com/djic27lvo/video/upload/v1580790553/Sounds/Yeet.mp3",
+    "https://res.cloudinary.com/djic27lvo/video/upload/v1580790563/Sounds/Oooft.mp3",
     "https://res.cloudinary.com/djic27lvo/video/upload/v1580791435/Sounds/Degenerate.m4a"
 ]
 
