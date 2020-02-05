@@ -109,25 +109,41 @@ export default function Grid(props) {
     }
   }
 
-  // const addItem = () => {
-  //   API.put(
-  //     `api/projects/${projectId}/tasks`,
-  //     { 
-  //       "title": "Build House",
-  //       "start_time": 2,
-  //       "length": 4,
-  //       "day": 2,
-  //       "description": "Big Yeet"
-  //     }
-  //   )
-  //   .then(res => {
-  //     setLayout(fromDatabase(res.data.validProject.tasks))
-  //   }).catch(() => {
-  //     //flash error message
-  //     // props.redirect('/projects')
+  const addItem = () => {
+    API.put(
+      `api/projects/${projectId}/tasks`,
+      { 
+        "title": "Build House",
+        "start_time": 0,
+        "length": 1,
+        "day": 0,
+        "description": "Big Yeet"
+      }
+    )
+    .then(res => {
+      setLayout(fromDatabase(res.data.validProject.tasks))
+    }).catch((res) => {
+      console.log(res)
+      //flash error message
+      // props.redirect('/projects')
       
-  //   })
-  // }
+    })
+  }
+
+  const removeItem = (taskId) => {
+    {console.log(taskId)}
+    API.delete(
+      `api/projects/${projectId}/tasks/${taskId}`
+    )
+    .then(res => {
+      setLayout(layout.filter(el => el._id != taskId))
+    }).catch((res) => {
+      console.log(res)
+      //flash error message
+      // props.redirect('/projects')
+      
+    })
+  }
 
   const tableStyle = {
 
@@ -139,17 +155,17 @@ export default function Grid(props) {
     top: "0",
     left: "0",
     zIndex: "-1",
-
   }
 
   return (
     < div>
       {/* {errorMessage && <ErrorMessage msg={errorMessage.message} onClose={() => setErrorMessage(null)} />} */}
       {/* {successMessage && <SuccessMessage msg={successMessage} onClose={() => setSuccessMessage(null)} />} */}
-      {/* <Button onClick={addItem} /> */}
+      <Button onClick={addItem} text="Add" />
       <GridLayout onResizeStop={stopDrag} onDragStop={stopDrag} verticalCompact={false} className="layout" cols={3} maxRows={24} rowHeight={50} width={1000} margin={[0, 0]}>
         {layout.map((grid, i) => (
           <div key={grid.i} data-grid={grid} >
+            <Button onClick={() => removeItem(grid._id)} text="Delete" />
             <Formatting {...grid} />
           </div>
         ))}
