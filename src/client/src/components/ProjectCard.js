@@ -9,6 +9,7 @@ import ArrowRightIcon from '@material-ui/icons/ArrowRight'
 import LocationOnIcon from '@material-ui/icons/LocationOn'
 import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
+import Moment from 'react-moment'
 
 
 const innerDiv = {
@@ -67,13 +68,13 @@ const ProjectCard = (props) => {
       <Chip
         style={chipStyle}
         icon={<CalendarTodayIcon />}
-        label={(props.start_date ? (`${props.start_date}`) : ("01/02/20"))}
+        label={(props.start_date ? (<Moment parse="YYYY-MM-DD">`${props.start_date}`</Moment>) : ("No Start Date"))}
       />
       < ArrowRightIcon style={{fontSize: "2rem", position: "relative", top: "10px"}}/>
       <Chip
         style={chipStyle}
         icon={<EventAvailableIcon />}
-        label={(props.end_date ? (`${props.end_date}`) : ("10/02/20"))}
+        label={(props.end_date ? (<Moment parse="YYYY-MM-DD">`${props.end_date}`</Moment>) : ("No End Date"))}
       />
       </div>
       <Chip
