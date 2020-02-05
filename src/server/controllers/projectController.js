@@ -18,7 +18,7 @@ async function allProjects (req, res, next) {
   res.locals.validUser = validUser
   res.locals.projObjs = projObjs
 
-  return next()
+  next()
 
 }
 
@@ -49,7 +49,7 @@ async function create (req, res, next) {
   res.locals.id = project._id
   res.locals.message = "Project successfully created."
 
-  return next()
+  next()
 
 }
 
@@ -74,7 +74,7 @@ async function getProject (req, res, next) {
     res.locals.validUser = validUser
     res.locals.validProject = validProject
     
-    return next()
+    next()
 
   } else {
     res.status(401).json({"message": "You're not authorized to see this project."})
@@ -113,7 +113,7 @@ async function update (req, res, next) {
     res.locals.validUser = validUser
     res.locals.message = "Project details successfulyl updated"
 
-    return next()
+    next()
 
   } else {
     res.status(401).json({"message": "You're not authorized to see this project."})
@@ -142,7 +142,7 @@ async function remove (req, res, next) {
     res.locals.validUser = validUser
     res.locals.message = "Project successfully deleted."
 
-    return next()
+    next()
 
   })
   } else {
@@ -173,7 +173,7 @@ async function usersInProject (req, res, next) {
     res.locals.validUser = validUser
     res.locals.users = usersObjs
 
-    return next()
+    next()
 
   } else {
     res.status(401).json({"message": "You're not authorized to see this project."})
@@ -203,7 +203,7 @@ async function usersNotInProject (req, res, next) {
     res.status(200)
     res.locals.validUser = validUser
     res.locals.usersObjs = usersObjs
-    return next()
+    next()
 
   } else {
     res.status(401).json({"message": "You're not authorized to see this project."})
@@ -234,7 +234,7 @@ async function updateUser (req, res, next) {
   res.locals.validUser = validUser
   res.locals.message = "User updated successfully."
 
-  return next()
+  next()
 
   } else {
     res.status(401).json({"message": "You're not authorized to update this project."})
@@ -270,7 +270,7 @@ async function addUser (req, res, next) {
   res.locals.validUser = validUser
   res.locals.message = "User added to Project Successfully."
 
-  return next()
+  next()
 
 }
 
@@ -299,7 +299,7 @@ async function removeUser (req, res, next) {
     res.locals.validUser = validUser
     res.locals.message = "User removed successfully."
 
-    return next()
+    next()
   }
   else {
     res.status(401).json({"message": "You're not authorized to update this project."})

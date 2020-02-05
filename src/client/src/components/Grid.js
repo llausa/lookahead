@@ -5,10 +5,17 @@ import { Responsive as ResponsiveGridLayout, ToolBox } from 'react-grid-layout'
 import GridLayout  from 'react-grid-layout'
 import { useParams } from 'react-router-dom'
 import API from "../axios.config"
+import Button from '../components/ButtonUserInput'
+import ErrorMessage from '../components/ErrorMessage'
+import SuccessMessage from '../components/SuccessMessage'
 
 export default function Grid(props) {
 
   const [layout, setLayout] = useState([])
+
+  const [errorMessage, setErrorMessage] = useState(null)
+
+  const [successMessage, setSuccessMessage] = useState(null)
 
   const { projectId } = useParams()
 
@@ -61,11 +68,12 @@ export default function Grid(props) {
       {tasks: toDatabase(newLayout)}
     )
     .then((res) => {
-      
       setLayout(newLayout)
+      // setSuccessMessage(res.data.message)
     })
-    .catch(() => {
+    .catch((err) => {
       reDraw()
+      // setErrorMessage(err.data.message)
     })
   }
 
@@ -101,6 +109,26 @@ export default function Grid(props) {
     }
   }
 
+  // const addItem = () => {
+  //   API.put(
+  //     `api/projects/${projectId}/tasks`,
+  //     { 
+  //       "title": "Build House",
+  //       "start_time": 2,
+  //       "length": 4,
+  //       "day": 2,
+  //       "description": "Big Yeet"
+  //     }
+  //   )
+  //   .then(res => {
+  //     setLayout(fromDatabase(res.data.validProject.tasks))
+  //   }).catch(() => {
+  //     //flash error message
+  //     // props.redirect('/projects')
+      
+  //   })
+  // }
+
   const tableStyle = {
 
     borderCollapse: "collapse",
@@ -116,6 +144,9 @@ export default function Grid(props) {
 
   return (
     < div>
+      {/* {errorMessage && <ErrorMessage msg={errorMessage.message} onClose={() => setErrorMessage(null)} />} */}
+      {/* {successMessage && <SuccessMessage msg={successMessage} onClose={() => setSuccessMessage(null)} />} */}
+      {/* <Button onClick={addItem} /> */}
       <GridLayout onResizeStop={stopDrag} onDragStop={stopDrag} verticalCompact={false} className="layout" cols={3} maxRows={24} rowHeight={50} width={1000} margin={[0, 0]}>
         {layout.map((grid, i) => (
           <div key={grid.i} data-grid={grid} >
