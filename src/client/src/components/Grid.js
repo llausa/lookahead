@@ -29,6 +29,8 @@ export default function Grid(props) {
 
   const { projectId } = useParams()
 
+  const [project, setProject] = useState(null)
+
   useEffect(() => {
     scrollDiv.current.addEventListener('scroll', e => {
       fixedTable.current.style.left = `${e.target.scrollLeft}px`
@@ -37,6 +39,7 @@ export default function Grid(props) {
       `api/projects/${projectId}/`
     )
     .then(res => {
+      setProject(res.data.validProject)
       setLayout(fromDatabase(res.data.validProject.tasks))
       let projectStart = new Date(res.data.validProject.start_date)
       calculateTime(projectStart)
@@ -48,7 +51,7 @@ export default function Grid(props) {
   }, [])
 
   const fromDatabase = (layout) => {
-    
+
     return layout.map((obj, i) => (
       {
         ...obj,
@@ -128,7 +131,7 @@ export default function Grid(props) {
   const addItem = () => {
     API.put(
       `api/projects/${projectId}/tasks`,
-      { 
+      {
         "title": "Build House",
         "start_time": 0,
         "length": 1,
@@ -144,7 +147,7 @@ export default function Grid(props) {
       console.log(res)
       //flash error message
       // props.redirect('/projects')
-      
+
     })
   }
 
@@ -160,10 +163,21 @@ export default function Grid(props) {
       console.log(res)
       //flash error message
       // props.redirect('/projects')
-      
+
     })
   }
 
+  const numberOfDays = (proj) => {
+    if(!proj){return 0}
+    let end_date = new Date(proj.end_date)
+    let start_date = new Date(proj.start_date)
+
+    let differenceInTime = end_date.getTime() - start_date.getTime()
+    // To calculate the no. of days between two dates
+    let numberOfDays = differenceInTime / (1000 * 3600 * 24)
+
+    return numberOfDays
+  }
 
   function getTimeToTable(tableStart) {
     let time = new Date() - tableStart
@@ -178,7 +192,7 @@ export default function Grid(props) {
   }
 
   const sleep = time => new Promise(r => setTimeout(r, time))
-  
+
   async function calculateTime(projectStart) {
     setCurrentTimeLine(getTimeToTable(projectStart))
 
@@ -187,16 +201,11 @@ export default function Grid(props) {
     console.log(moment().format('LT'))
   }
 
-
-  let numberOfDays = 6
-  let totalWidth = (numberOfDays * 200)
-
   const tableStyle = {
-
     borderCollapse: "collapse",
     position: "relative",
     height: `${24*50}px`,
-    width: `${totalWidth}px`,
+    width: `${numberOfDays(project) * 200}px`,
     border: "1px solid black",
     top: "0",
     left: "0",
@@ -206,13 +215,13 @@ export default function Grid(props) {
   const Formatting = (props) => {
 
     let startTime = ''
-  
+
     if (props.y < 10) {
       startTime = ("0" + props.y + ":00")
     } else {
       startTime = (props.y + ":00")
     }
-  
+
     return (
       <div style={props.complete ? completed : notComplete }>
       <div className="MenuButtonStyle">
@@ -228,11 +237,11 @@ export default function Grid(props) {
 
       // Styling
     const completed = {
-      
+
     }
 
     const notComplete = {
-      
+
     }
 
     const fixedTable = useRef(null)
@@ -255,7 +264,9 @@ export default function Grid(props) {
     <div style={{position: "relative", marginLeft: "50px"}} >
       {/* {errorMessage && <ErrorMessage msg={errorMessage.message} onClose={() => setErrorMessage(null)} />} */}
       {/* {successMessage && <SuccessMessage msg={successMessage} onClose={() => setSuccessMessage(null)} />} */}
-      <GridLayout onResizeStop={stopDrag} onDragStop={stopDrag} verticalCompact={false} className="layout" cols={numberOfDays} maxRows={24} rowHeight={50} width={totalWidth} margin={[0, 0]}>
+
+      <Button onClick={addItem} text="Add" />
+      <GridLayout onResizeStop={stopDrag} onDragStop={stopDrag} verticalCompact={false} className="layout" cols={numberOfDays(project)} maxRows={24} rowHeight={50} width={numberOfDays(project) * 200} margin={[0, 0]}>
         {layout.map((grid, i) => (
           <div key={grid.i} data-grid={grid} >
           
@@ -273,7 +284,7 @@ export default function Grid(props) {
           <tbody>
           {Array(24).fill().map(_ => (
             <tr>
-              {Array(numberOfDays).fill().map(_ => (
+              {Array(numberOfDays(project)).fill().map(_ => (
                 <td>
                 </td>
               ))}
@@ -286,7 +297,7 @@ export default function Grid(props) {
           <tbody>
           {Array(24).fill().map((_, i) => (
             <tr>
-              {Array(numberOfDays).fill().map((_, j) => (
+              {Array(numberOfDays(project)).fill().map((_, j) => (
                 <td>
                   {i === currentTimeLine.hours && (
                     <div style={{height: '100%', position: 'relative'}}>
@@ -311,5 +322,3 @@ export default function Grid(props) {
     </>
   )
 }
-
-
