@@ -71,7 +71,6 @@ export default function ProjectsView(props) {
         <TitleText text="Projects" style={{ marginTop: "50px"}} />
 
         {projects.map(project => {
-            console.log(project._id)
             return <ProjectCard key={project._id} link={project._id} title={project.title}  start_date={project.start_date} end_date={project.end_date} location={project.location} />
         })}
 
