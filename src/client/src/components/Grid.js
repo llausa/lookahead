@@ -9,6 +9,8 @@ import Button from '../components/ButtonUserInput'
 import ErrorMessage from '../components/ErrorMessage'
 import SuccessMessage from '../components/SuccessMessage'
 import DeleteIcon from '@material-ui/icons/Delete'
+import QueryBuilderIcon from '@material-ui/icons/QueryBuilder'
+import Tooltip from '@material-ui/core/Tooltip'
 
 export default function Grid(props) {
 
@@ -140,6 +142,7 @@ export default function Grid(props) {
     )
     .then(res => {
       setLayout(layout.filter(el => el._id != taskId))
+      // Flash Task Deleted
     }).catch((res) => {
       console.log(res)
       //flash error message
@@ -176,10 +179,10 @@ export default function Grid(props) {
   
     return (
       <div style={props.complete ? completed : notComplete }>
-        <p>title: {props.title}</p>
-        <p>description: {props.description}</p>
-        <p>{startTime}</p>
-        <p>{props.length} Hours</p>
+        <p style={{color: "#006EE3", fontWeight: "bold"}}>{props.title}</p>
+        <p>{props.description}</p>
+        <p><QueryBuilderIcon style={{fontSize: "1rem", position: "relative", top: "2px", margin: "0 4px 0 0"}}/>{startTime}</p>
+        <p>{props.h} Hours</p>
       </div>
     )
   }
@@ -202,7 +205,9 @@ export default function Grid(props) {
       <GridLayout onResizeStop={stopDrag} onDragStop={stopDrag} verticalCompact={false} className="layout" cols={numberOfDays} maxRows={24} rowHeight={50} width={totalWidth} margin={[0, 0]}>
         {layout.map((grid, i) => (
           <div key={grid.i} data-grid={grid} >
+          <Tooltip title="Delete Task" placement="top" arrow>
             <DeleteIcon onClick={() => removeItem(grid._id)} className="deleteButton"/>
+            </Tooltip>
             <Formatting {...grid} />
           </div>
         ))}
