@@ -76,7 +76,7 @@ const actions = [
   }
 
   return (
-    <div className={classes.root} style={{position: "absolute"}}>
+    <div className={classes.root} style={{position: "absolute", zIndex: "70"}}>
       <div className={classes.exampleWrapper}>
         <SpeedDial
           ariaLabel="Menu"

@@ -66,7 +66,7 @@ export default function ProjectAddUsersView(props) {
     useEffect(() => {
         API.get(`/api/projects/${projectId}/add_users`)
         .then(res => {
-
+            console.log(res.data)
             setUsers(res.data.users)
         })
     }, [])

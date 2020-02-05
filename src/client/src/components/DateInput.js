@@ -49,6 +49,9 @@ const  MaterialUIPickers = (props) => {
     <MuiPickersUtilsProvider utils={DateFnsUtils} >
         <CssKeyboardDatePicker
           disableToolbar
+          autoOk
+          disablePast = { props.disablePast } 
+          minDate = { props.minDate }
           required = {true}
           inputVariant="outlined"
           format="dd/MM/yyyy"
