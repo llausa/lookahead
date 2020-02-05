@@ -32,6 +32,7 @@ export default function Grid(props) {
       `api/projects/${projectId}/`
     )
     .then(res => {
+      setProject(res.data.validProject)
       setLayout(fromDatabase(res.data.validProject.tasks))
       let projectStart = new Date(res.data.validProject.start_date)
       calculateTime(projectStart)
