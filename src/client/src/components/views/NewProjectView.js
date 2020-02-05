@@ -16,32 +16,34 @@ const NewProjectView = () => {
     const [data, setData] = useReducer((state, newState) => (
         {...state, ...newState}
       ), {
-        projectTitle: '',
+        title: '',
         location: '',
-        startDate: '',
-        endDate: ''
+        start_date: '',
+        end_date: '',
+        timezone: '',
+        create_date: ''
       })
-    
+
       const onSubmit = e => {
         e.preventDefault()
-    
+
         console.log(data)
-    
+
         API.post(
         '/api/users', data)
         .then(function (response) {
-            
+
             console.log(response)
         })
         .catch(function (error) {
             console.log(error.response.data)
         })
-        
+
       }
-    
+
       const onChange = e => {
         setData({[e.target.name]: e.target.value})
-        console.log(data) 
+        console.log(data)
         // setData({"location": location.value})
     }
 
@@ -55,7 +57,7 @@ const NewProjectView = () => {
         maxWidth: "400px",
         margin: "auto",
     }
-    
+
     // Client Validation
     const basic = (text) => text.length > 2
 
