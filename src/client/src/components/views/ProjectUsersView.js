@@ -6,6 +6,7 @@ import Nav from '../Nav'
 import TitleText from '../TitleText'
 import Background from '../Background'
 import { Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 const mystyle = {
     display: "flex",
@@ -47,9 +48,12 @@ function AddUserPressed() {
 
 const ProjectUsersView = () => {
 
+    const { projectId } = useParams()
+
     return (
         <>
-        <Nav MenuButton={true} />
+        <Nav backButtonLink = {`/projects/${projectId}`} BackButton={true} MenuButton={false} />
+        {/* <Nav MenuButton={true} /> */}
         <div style={page}>
 
 

@@ -81,7 +81,7 @@ export default function ProjectAddUsersView(props) {
 
     return (
         <>
-        <Nav backButtonLink = "/projects/:projectId/users" MenuButton={true} BackButton={true} />
+        <Nav backButtonLink ={`/projects/${projectId}`} MenuButton={true} BackButton={true} />
         <div style={page}>
 
 

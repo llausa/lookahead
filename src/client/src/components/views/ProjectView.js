@@ -24,6 +24,7 @@ function ProjectView(props) {
             <h1 data-cy="projectView" style={{margin: "20px", fontSize: "70px", color: "#006EE2", alignSelf:"center" }} >{props.projectName ," view"}</h1>
 
             <Button component={Link} to={`/projects/${projectId}/edit`}  color='primary' style={buttonMain} > Edit Project </Button>
+            <Button component={Link} to={`/projects/${projectId}/users`}  color='primary' style={buttonMain} > Add Users to Project </Button>
 
             <div style={{overflowX: "scroll"}}>
             <Grid redirect={props.redirect}/>
