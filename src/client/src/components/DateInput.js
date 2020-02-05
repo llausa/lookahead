@@ -35,13 +35,14 @@ const  MaterialUIPickers = (props) => {
   var tempDate = new Date()
   var date = tempDate.getFullYear() + '-' + (tempDate.getMonth()+1) + '-' + (tempDate.getDate()+ props.day) +' '+ tempDate.getHours()+':'+ tempDate.getMinutes()+':'+ tempDate.getSeconds()
   const currDate = "Current Date= "+date
-    
+
 
 
   const [selectedDate, setSelectedDate] = React.useState(new Date(currDate))
 
   const handleDateChange = date => {
     setSelectedDate(date)
+    props.onChange({target: {name: props.name, value: date}})
   }
 
   return (
@@ -54,6 +55,7 @@ const  MaterialUIPickers = (props) => {
           margin="normal"
           id={props.id}
           label={props.label}
+          name={props.name}
           size="small"
           style={{width: "100%"}}
           value={selectedDate}

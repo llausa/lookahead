@@ -18,10 +18,9 @@ const NewProjectView = () => {
       ), {
         title: '',
         location: '',
-        start_date: '',
-        end_date: '',
-        timezone: '',
-        create_date: ''
+        start_date: new Date().toISOString().substring(0, 10),
+        end_date: new Date().toISOString().substring(0, 10),
+        create_date: new Date().toISOString().substring(0, 10)
       })
 
       const onSubmit = e => {
@@ -30,7 +29,7 @@ const NewProjectView = () => {
         console.log(data)
 
         API.post(
-        '/api/users', data)
+        '/api/projects', data)
         .then(function (response) {
 
             console.log(response)
@@ -43,9 +42,17 @@ const NewProjectView = () => {
 
       const onChange = e => {
         setData({[e.target.name]: e.target.value})
+        setData({"create_date": new Date().toISOString().substring(0, 10)})
         console.log(data)
-        // setData({"location": location.value})
-    }
+      }
+
+      const onTimeZoneChange = e => {
+        setData({"location": e.target.innerText})
+      }
+
+      const onDateChange = e => {
+        setData({[e.target.name]: e.target.value.toISOString().substring(0, 10)})
+      }
 
     const mystyle = {
         display: "flex",
@@ -69,10 +76,10 @@ const NewProjectView = () => {
         <div data-cy="newProjectView" style={mystyle}>
             <TitleText text="New Project" />
             <NormalText text="Please fill out all required fields" />
-            <FormInput type='text' validation={basic} value={data.projectTitle} onChange={onChange} require={true} errorText="Please enter more Characters" label='Project Title' id='projectTitle' name='projectTitle'/>
-            <TimeZonePicker label="Location*" id="location" name='location'/>
-            <DateInput label="Start Date" day={1} id="startDate" name='startDate'/>
-            <DateInput label="End Date" day={2} id="endDate" name='endDate' />
+            <FormInput type='text' validation={basic} value={data.title} onChange={onChange} require={true} errorText="Please enter more Characters" label='Project Title' id='title' name='title'/>
+            <TimeZonePicker defaultVal={(val) => setData(val)} label="Location*" id="location" value={data.location} name='location' onChange={onTimeZoneChange} />
+            <DateInput label="Start Date" day={1} id="start_date" value={data.start_date} name='start_date' onChange={onDateChange}/>
+            <DateInput label="End Date" day={2} id="end_date" value={data.end_date} name='end_date' onChange={onDateChange} />
             <ButtonInput disabled={false} type='submit' primary={true} color='primary' text="Create" />
         </div>
         </form>

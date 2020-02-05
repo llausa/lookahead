@@ -61,7 +61,6 @@ const ProjectCard = (props) => {
   return (
     <Card  style={CardStyle}>
     <CardContent>
-    {console.log(props.link)}
     <div style={innerDiv}>
       <h1>{props.title ? (`${props.title}`) : ("Project")}</h1>
       <div>
