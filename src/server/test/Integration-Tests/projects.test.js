@@ -29,12 +29,12 @@ let validUser2 = {
 }
 
 let validProject = {
-	title: "Test Project",
-	create_date: "2020-02-01",
-	start_date: "2020-02-02",
-	end_date: "2020-02-05",
-	location: "Brisbane",
-	timezone: 10
+	"title": "Test Project",
+	"create_date": "2020-02-01",
+	"start_date": "2020-02-02",
+	"end_date": "2020-02-05",
+	"location": "Brisbane",
+	"timezone": 10
 }
 
 let invalidProject = {

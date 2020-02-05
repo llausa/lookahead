@@ -21,9 +21,9 @@ const ButtonInput = (props) => {
     border: "1px solid #C4C4C4"
   }
 
-  return (<> {props.disabled? (<Button onClick={props.onClick} variant="outlined" type={props.type} style={Disabled} color={props.color} disabled > {props.text} </Button>)
+  return (<> {props.disabled? (<Button onClick={props.onClick} variant="outlined" type={props.type} style={Disabled} color={props.color} disabled >  {props.text} </Button>)
   :
-  (<Button variant="outlined" onClick={props.onClick} type={props.type} color='primary' style={props.primary? Primary : Secondary} color={props.color}> {props.text} </Button>)}
+  (<Button variant="outlined" onClick={props.onClick} type={props.type} color='primary' style={props.primary? Primary : Secondary} color={props.color}>  {props.text} </Button>)}
   </>)
 
 }
