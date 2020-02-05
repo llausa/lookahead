@@ -50,12 +50,12 @@ if (!process.env.JWT_SECRET) {
   process.exit(1)
 }
 
-// app.use(cors({
-//   origin: "https://lookahead.netlify.com",
-//   // origin: "http://localhost:3000",
-//   preflightContinue: true,
-//   credentials: true
-// }))
+app.use(cors({
+  origin: "https://lookahead.netlify.com",
+  // origin: "http://localhost:3000",
+  preflightContinue: true,
+  credentials: true
+}))
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
