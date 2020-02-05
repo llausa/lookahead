@@ -65,8 +65,8 @@ export default function ProjectAddUsersView(props) {
 
     useEffect(() => {
         API.get(`/api/projects/${projectId}/add_users`)
-        .then(res => { 
-            
+        .then(res => {
+
             setUsers(res.data.users)
         })
     }, [])
@@ -74,20 +74,20 @@ export default function ProjectAddUsersView(props) {
     const addUser = (userId) => {
         API.post(`/api/projects/${projectId}/users`, {user: userId, role: 'Read'})
         .then(res => {
-            
+
             setUsers(users.filter(el => el._id !== userId))
         })
     }
 
     return (
         <>
-        <Nav backButtonLink = "/project/:projectId/users" MenuButton={true} BackButton={true} />
+        <Nav backButtonLink = "/projects/:projectId/users" MenuButton={true} BackButton={true} />
         <div style={page}>
 
-        
-        
+
+
         <div data-cy="projectsView" style={mystyle}>
-        
+
         <Card style={CardStyle}>
         <p style={{margin: "10px", fontWeight: "bold", fontSize: "40px"}}>Project Add Users</p>
         <div style={{margin: "20px"}}><FormInput type='text' label='Search Users' id='userSearch' name='userSearch'/> <Button variant="outlined" style={buttonMain} color="primary"><SearchIcon/></Button></div>
@@ -103,4 +103,3 @@ export default function ProjectAddUsersView(props) {
         </>
     )
 }
-

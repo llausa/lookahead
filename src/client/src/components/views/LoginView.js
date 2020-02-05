@@ -14,7 +14,6 @@ import Loader from '../Loader'
 import ErrorMessage from '../ErrorMessage'
 import Cookies from 'js-cookie'
 
-
 const Login = (props) => {
 
     // For Loading Animation
@@ -40,8 +39,6 @@ const Login = (props) => {
         API.post(
         '/api/auth', data)
         .then(function (response) {
-
-            // console.log(response)
             setLoading(false)
             if (response.status === 200) {
                 props.redirect('/projects')

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import TextField from '@material-ui/core/TextField'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import momentTZ from 'moment-timezone'
@@ -33,6 +33,10 @@ let timeZonesList = momentTZ.tz.names().map(timeZone => ({location: timeZone}))
 
 const TimeZonePicker = (props) => {
 
+  useEffect(() => {
+    props.defaultVal(defaultTimeZone)
+  }, [])
+
     return (
         <>
         <Autocomplete
@@ -43,6 +47,7 @@ const TimeZonePicker = (props) => {
       defaultValue={defaultTimeZone}
       options={timeZonesList}
       getOptionLabel={option => option.location}
+      onChange={props.onChange}
       renderInput={params => (
         <CssTextField {...params} label={props.label} variant="outlined" fullWidth style={{width: "100%"}} />
       )}
@@ -50,7 +55,7 @@ const TimeZonePicker = (props) => {
     </>
     )
 }
-    
+
 
 
 export default TimeZonePicker

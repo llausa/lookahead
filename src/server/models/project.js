@@ -8,11 +8,10 @@ Joi.objectId = require('joi-objectid')(Joi)
 
 const ProjectSchema = new mongoose.Schema({
     title: { type: String, required: true},
-    create_date: {type: Date, required: true, default: Date.now() },
+    create_date: {type: Date, default: Date.now() },
     start_date: { type: Date, required: true },
     end_date: { type: Date, required: true },
     location: { type: String, required: true },
-    timezone: { type: Number, required: true, min: -12, max: 14 },
     owner: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true},
     tasks: [TaskSchema],
     users: [
@@ -31,11 +30,10 @@ const ProjectModel = new mongoose.model('Project', ProjectSchema)
 function validateProject (project) {
   const schema = Joi.object({
       title: Joi.string().required(),
-      create_date: Joi.date().iso().required(),
-      start_date: Joi.date().iso().greater(Joi.ref('create_date')).required(),
+      create_date: Joi.date().iso(),
+      start_date: Joi.date().iso().required(),
       end_date: Joi.date().iso().greater(Joi.ref('start_date')).required(),
       location: Joi.string().required(),
-      timezone: Joi.number().min(-12).max(14).required(),
       owner: Joi.objectId().required()
   })
 

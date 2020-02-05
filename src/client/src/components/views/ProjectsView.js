@@ -50,8 +50,6 @@ function CreateNewPressed() {
 
 export default function ProjectsView(props) {
 
-    const { projectId } = useParams()
-
     const [projects, setProjects] = useState([])
 
     useEffect(() => {

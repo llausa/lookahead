@@ -39,7 +39,7 @@ async function create (req, res, next) {
 
   req.body.owner = validUser._id
 
-  let project = new ProjectModel(_.pick(req.body, ['title', 'create_date', 'start_date', 'end_date', 'timezone', 'owner', 'location']))
+  let project = new ProjectModel(_.pick(req.body, ['title', 'create_date', 'start_date', 'end_date', 'owner', 'location']))
   await project.save()
 
   await addProjectToUser(validUser._id, project._id, 'Owner')
@@ -73,7 +73,7 @@ async function getProject (req, res, next) {
     res.status(200)
     res.locals.validUser = validUser
     res.locals.validProject = validProject
-    
+
     next()
 
   } else {
@@ -98,7 +98,6 @@ async function update (req, res, next) {
   }
 
   validProject.title = req.body.title
-  validProject.timezone = req.body.timezone
   validProject.end_date = req.body.end_date
   validProject.location = req.body.location
 
@@ -282,7 +281,7 @@ async function removeUser (req, res, next) {
 
   let validProject = await ProjectModel.findById((req.params.projectId))
   .catch( (err) => { return res.status(404).json({"message": err.details[0].message }) })
-  
+
 
   if (validUser._id == String(validProject.owner)) {
 
@@ -339,7 +338,7 @@ async function addProjectToUser (id, project, role) {
     })
     await user.save()
   })
-  
+
 }
 
 module.exports = { create, update, remove, updateUser, usersInProject, removeUser, addUser, allProjects, getProject, usersNotInProject }
