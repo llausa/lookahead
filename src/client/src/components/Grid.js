@@ -13,6 +13,7 @@ import QueryBuilderIcon from '@material-ui/icons/QueryBuilder'
 import Tooltip from '@material-ui/core/Tooltip'
 import ToggleMenu from './ToggleMenu'
 import moment from 'moment-timezone'
+import TimeArrow from '../images/TimeArrow.svg'
 
 export default function Grid(props) {
 
@@ -172,6 +173,7 @@ export default function Grid(props) {
     let hours = Math.floor(time / 1000 / 60 / 60)
     time -= hours * 60 * 60 * 1000
     let mins = Math.floor(time / 1000 / 60)
+    console.log()
     return {days: days, hours: hours, mins: mins / 60 * 100}
   }
 
@@ -239,8 +241,8 @@ export default function Grid(props) {
   return (
     // Creates grid of all Project Tasks
     <>
-    <div ref={scrollDiv} style={{overflowX: "scroll", position: 'relative'}}>
-    <table border="1" ref={fixedTable} style={{...tableStyle, position: 'absolute', zIndex: 2, top: 'auto', border:'1px solid rgba(0, 0, 0, 1)', width: 'auto', backgroundColor: 'rgba(255, 255, 255, 0.3)'}}>
+    <div ref={scrollDiv} style={{overflowX: "scroll", position: 'relative', color: '#006EE2'}}>
+    <table border="1" ref={fixedTable} style={{...tableStyle, position: 'absolute', zIndex: 2, top: 'auto', border:'1px solid #006EE2', width: 'auto', backgroundColor: 'rgba(239, 239, 239, 0.9)'}}>
       <tbody>
         {Array(24).fill().map((_, i) => (
           <tr>
@@ -249,7 +251,8 @@ export default function Grid(props) {
         ))}
       </tbody>
     </table>
-    <div style={{position: "relative"}} >
+
+    <div style={{position: "relative", marginLeft: "50px"}} >
       {/* {errorMessage && <ErrorMessage msg={errorMessage.message} onClose={() => setErrorMessage(null)} />} */}
       {/* {successMessage && <SuccessMessage msg={successMessage} onClose={() => setSuccessMessage(null)} />} */}
       <GridLayout onResizeStop={stopDrag} onDragStop={stopDrag} verticalCompact={false} className="layout" cols={numberOfDays} maxRows={24} rowHeight={50} width={totalWidth} margin={[0, 0]}>
@@ -279,15 +282,21 @@ export default function Grid(props) {
           </tbody>
         </table>
          {/* Creates Red line through view to show time */}
-        <table style={{...tableStyle, border: 'none', zIndex: 69, position: 'absolute', overflow: 'hidden'}} cellspacing="0" cellpadding="0">
+        <table style={{...tableStyle, border: 'none', zIndex: 69, position: 'absolute'}} cellspacing="0" cellpadding="0">
           <tbody>
           {Array(24).fill().map((_, i) => (
             <tr>
               {Array(numberOfDays).fill().map((_, j) => (
                 <td>
                   {i === currentTimeLine.hours && (
-                    <div style={{height: '100%'}}>
+                    <div style={{height: '100%', position: 'relative'}}>
                       <div style={{top: `${currentTimeLine.mins}%`, height: '4px', opacity: '0.4', width: '100%', position: 'relative', backgroundColor: 'red'}}></div>
+                      {j === 0 && (
+                        <div style={{top: `${currentTimeLine.mins}%`, position: 'absolute', transform: 'translate(-100%, -50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}} >
+                          <img style={{width: '60px', height: 'auto', top: '2px', left: "2px", position: 'relative'}} src={TimeArrow} />
+                          <p style={{position: 'absolute', zIndex: 2, margin: 0, top: '6px', color: "white"}}>{`${currentTimeLine.hours < 10 ? '0' : ''}${Math.floor(currentTimeLine.hours)}:${currentTimeLine.mins * 60 / 100 < 10 ? '0' : ''}${Math.floor(currentTimeLine.mins * 60 / 100)}`}</p>
+                        </div>
+                      )}
                     </div>
                   )}
                 </td>
