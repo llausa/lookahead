@@ -50,7 +50,7 @@ const Nav = (props) => {
   const classes = useStyles()
 
   return (
-    <div style={{overflow: "hidden"}}>
+    <div>
     <div data-cy="navbar" className={classes.root}>
       <AppBar className={classes.pos} >
         <Toolbar>
