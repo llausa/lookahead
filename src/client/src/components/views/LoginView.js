@@ -48,10 +48,9 @@ const Login = (props) => {
             }
         })
         .catch(function (error) {
-            console.log(error)
-            // console.log(error.response.data)
+
             setLoading(false)
-            setErrorMessage(error.data)
+            setErrorMessage(error.response.data)
         })
 
     }
