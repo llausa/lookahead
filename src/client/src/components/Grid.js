@@ -11,6 +11,7 @@ import SuccessMessage from '../components/SuccessMessage'
 import DeleteIcon from '@material-ui/icons/Delete'
 import QueryBuilderIcon from '@material-ui/icons/QueryBuilder'
 import Tooltip from '@material-ui/core/Tooltip'
+import ToggleMenu from './ToggleMenu'
 
 export default function Grid(props) {
 
@@ -152,6 +153,7 @@ export default function Grid(props) {
   }
 
 
+
   let numberOfDays = 6
   let totalWidth = (numberOfDays * 200)
 
@@ -179,7 +181,10 @@ export default function Grid(props) {
   
     return (
       <div style={props.complete ? completed : notComplete }>
-        <p style={{color: "#006EE3", fontWeight: "bold"}}>{props.title}</p>
+      <div className="MenuButtonStyle">
+        <ToggleMenu onDelete={() => removeItem(props._id)} />
+        </div>
+        <p className="TaskTitle" >{props.title}</p>
         <p>{props.description}</p>
         <p><QueryBuilderIcon style={{fontSize: "1rem", position: "relative", top: "2px", margin: "0 4px 0 0"}}/>{startTime}</p>
         <p>{props.h} Hours</p>
@@ -205,9 +210,10 @@ export default function Grid(props) {
       <GridLayout onResizeStop={stopDrag} onDragStop={stopDrag} verticalCompact={false} className="layout" cols={numberOfDays} maxRows={24} rowHeight={50} width={totalWidth} margin={[0, 0]}>
         {layout.map((grid, i) => (
           <div key={grid.i} data-grid={grid} >
-          <Tooltip title="Delete Task" placement="top" arrow>
+          
+          {/* <Tooltip title="Delete Task" placement="top" arrow>
             <DeleteIcon onClick={() => removeItem(grid._id)} className="deleteButton"/>
-            </Tooltip>
+            </Tooltip> */}
             <Formatting {...grid} />
           </div>
         ))}
