@@ -112,7 +112,7 @@ const MenuView = (props) => {
                 <Button component={Link} to="/account/details" onClick={EditDetailsPressed} variant="outlined" style={buttonGeneral}>Edit Details <EditIcon style={smallIcon}/></Button>
                 <Button component={Link} to="/account/email" onClick={ChangeEmailPressed} variant="outlined" style={buttonGeneral}>Change Email <MailIcon style={smallIcon} /> </Button>
                 <Button component={Link} to="/account/password" onClick={ChangePasswordPressed} variant="outlined" style={buttonGeneral}>Change Password <LockIcon style={smallIcon} /> </Button>
-                <Button component={Link} to="/" variant="outlined" onClick={LogoutPressed} style={buttonGeneral}>Logout <ExitToAppIcon style={smallIcon} /></Button>
+                <Button component={Link} variant="outlined" onClick={LogoutPressed} style={buttonGeneral}>Logout <ExitToAppIcon style={smallIcon} /></Button>
                 <button onClick={hehe} style={VersionText}>lookahead v1.0.0 2020</button>
             </div>
         </div>

@@ -11,10 +11,13 @@ import SuccessMessage from '../components/SuccessMessage'
 import DeleteIcon from '@material-ui/icons/Delete'
 import QueryBuilderIcon from '@material-ui/icons/QueryBuilder'
 import Tooltip from '@material-ui/core/Tooltip'
+import moment from 'moment-timezone'
 
 export default function Grid(props) {
 
   const [layout, setLayout] = useState([])
+
+  const [currentTimeLine, setCurrentTimeLine] = useState({days: -1, hours: -1, mins: -1})
 
   const [errorMessage, setErrorMessage] = useState(null)
 
@@ -22,16 +25,14 @@ export default function Grid(props) {
 
   const { projectId } = useParams()
 
-  let projectStart
-
   useEffect(() => {
     API.get(
       `api/projects/${projectId}/`
     )
     .then(res => {
       setLayout(fromDatabase(res.data.validProject.tasks))
-      projectStart = res.data.validProject.start_date
-      console.log(projectStart)
+      let projectStart = new Date(res.data.validProject.start_date)
+      calculateTime(projectStart)
 
     }).catch((err) => {
       console.log(err)
@@ -159,19 +160,20 @@ export default function Grid(props) {
 
   function getTimeToTable(tableStart) {
     let time = new Date() - tableStart
+    time -= new Date(time).getTimezoneOffset() * 60 * 1000
     let days = Math.floor(time / 1000 / 60 / 60 / 24)
     time -= days * 24 * 60 * 60 * 1000
     let hours = Math.floor(time / 1000 / 60 / 60)
     time -= hours * 60 * 60 * 1000
     let mins = Math.floor(time / 1000 / 60)
-    return {days: days, hours: hours, mins: mins / 60}
+    return {days: days, hours: hours, mins: mins / 60 * 100}
   }
 
   const sleep = time => new Promise(r => setTimeout(r, time))
   
   async function calculateTime(projectStart) {
-    let {days, hours, mins} = getTimeToTable(projectStart)
-    // do something with stater or something IDK
+    setCurrentTimeLine(getTimeToTable(projectStart))
+
     await sleep(1000 * 60)
     calculateTime(projectStart)
   }
@@ -237,15 +239,33 @@ export default function Grid(props) {
           </div>
         ))}
       </GridLayout>
-      <table border="1" style={tableStyle}>
-        {Array(24).fill().map(_ => (
-          <tr>
-            {Array(numberOfDays).fill().map(_ => (
-              <td></td>
-            ))}
-          </tr>
-        ))}
-      </table>
+      <div style={{position: 'relative', pointerEvents: 'none'}}>
+        <table border="1" style={tableStyle}>
+          {Array(24).fill().map(_ => (
+            <tr>
+              {Array(numberOfDays).fill().map(_ => (
+                <td>
+                </td>
+              ))}
+            </tr>
+          ))}
+        </table>
+        <table style={{...tableStyle, border: 'none', zIndex: 9999, position: 'absolute'}} cellspacing="0" cellpadding="0">
+          {Array(24).fill().map((_, i) => (
+            <tr>
+              {Array(numberOfDays).fill().map((_, j) => (
+                <td>
+                  {i === currentTimeLine.hours && j === currentTimeLine.days && (
+                    <div style={{height: '100%'}}>
+                      <div style={{top: `${currentTimeLine.mins}%`, height: '2px', opacity: '0.7', width: '100%', position: 'relative', backgroundColor: 'red'}}></div>
+                    </div>
+                  )}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </table>
+      </div>
     </div>
   )
 }
