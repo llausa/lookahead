@@ -58,7 +58,7 @@ export default function ProjectsView(props) {
         API.get(`api/projects`)
         .then(res => {
             setProjects(res.data.projObjs)
-            console.log(res.data.projObjs)
+            // console.log(res.data.projObjs)
         })
     }, [])
 
@@ -71,8 +71,8 @@ export default function ProjectsView(props) {
         <TitleText text="Projects" style={{ marginTop: "50px"}} />
 
         {projects.map(project => {
-            console.log(project)
-            return <ProjectCard key={project._id} title={project.title}  start_date={project.startDate} end_date={project.endDate} location={project.location}/>
+            console.log(project._id)
+            return <ProjectCard key={project._id} link={project._id} title={project.title}  start_date={project.start_date} end_date={project.end_date} location={project.location} />
         })}
 
         <Button component={Link} to="/projects/new" onClick={CreateNewPressed} variant="outlined" style={buttonMain} color="primary">Create New <AddIcon style={smallIcon} /></Button>
