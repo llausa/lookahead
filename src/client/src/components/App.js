@@ -48,12 +48,8 @@ const App = () => {
           <PrivateRoute exact path="/account/password" component={PasswordChangeView} redirect={redirectFunc} data-cy="passwordView"><PasswordChangeView redirect={redirectFunc} /></PrivateRoute>
           <PrivateRoute exact path="/account/details" component={AccountDetailsView} redirect={redirectFunc} data-cy="detailsView"><AccountDetailsView redirect={redirectFunc} /></PrivateRoute>
 
-          {/* <Route exact path="/projects/:projectId" component={ProjectView} data-cy="projectView" render={ props => <ProjectView {...props} projectId={projectId}/>}><ProjectView redirect={redirectFunc} /></Route> */}
-
-
           <PrivateRoute exact path="/projects/new" component={NewProjectView} redirect={redirectFunc} data-cy="newProjectView"><NewProjectView redirect={redirectFunc} /></PrivateRoute>
           <PrivateRoute exact path="/projects/:projectId" component={ProjectView} redirect={redirectFunc} data-cy="projectView" projectId={projectId}> <ProjectView redirect={redirectFunc} /></PrivateRoute>
-
 
           <PrivateRoute exact path="/projects/:projectId/users" component={ProjectUsersView} redirect={redirectFunc} data-cy="projectUsersView" render={ props => <ProjectUsersView {...props} projectId={projectId}/>}><ProjectUsersView redirect={redirectFunc} /></PrivateRoute>
           <PrivateRoute exact path="/projects/:projectId/users/add" component={ProjectAddUsersView} redirect={redirectFunc} data-cy="projectAddUsersView" render={ props => <ProjectAddUsersView {...props} projectId={projectId}/>}><ProjectAddUsersView redirect={redirectFunc} /></PrivateRoute>
