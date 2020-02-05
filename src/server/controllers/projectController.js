@@ -201,7 +201,7 @@ async function usersNotInProject (req, res, next) {
 
     res.status(200)
     res.locals.validUser = validUser
-    res.locals.usersObjs = usersObjs
+    res.locals.users = usersObjs
     next()
 
   } else {
