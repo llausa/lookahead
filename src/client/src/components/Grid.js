@@ -11,10 +11,13 @@ import SuccessMessage from '../components/SuccessMessage'
 import DeleteIcon from '@material-ui/icons/Delete'
 import QueryBuilderIcon from '@material-ui/icons/QueryBuilder'
 import Tooltip from '@material-ui/core/Tooltip'
+import moment from 'moment-timezone'
 
 export default function Grid(props) {
 
   const [layout, setLayout] = useState([])
+
+  const [currentTimeLine, setCurrentTimeLine] = useState({days: -1, hours: -1, mins: -1})
 
   const [errorMessage, setErrorMessage] = useState(null)
 
@@ -30,7 +33,9 @@ export default function Grid(props) {
     )
     .then(res => {
       setLayout(fromDatabase(res.data.validProject.tasks))
-      setProject(res.data.validProject)
+      let projectStart = new Date(res.data.validProject.start_date)
+      calculateTime(projectStart)
+
     }).catch((err) => {
       console.log(err)
       props.redirect('/projects')
@@ -128,7 +133,7 @@ export default function Grid(props) {
     )
     .then(res => {
       let newTask = fromDatabase([res.data.newTask])[0]
-      newTask.i = layout.reduce((acc, val) => val.i > acc ? val.i : acc, 0) + 1
+      newTask.i = (layout.reduce((acc, val) => val.i > acc ? val.i : acc, 0) + 1).toString()
       setLayout([...layout, newTask])
     }).catch((res) => {
       console.log(res)
@@ -160,6 +165,31 @@ export default function Grid(props) {
     let start_date = new Date(proj.start_date)
 
     let differenceInTime = end_date.getTime() - start_date.getTime()
+  }
+
+  function getTimeToTable(tableStart) {
+    let time = new Date() - tableStart
+    time -= new Date(time).getTimezoneOffset() * 60 * 1000
+    let days = Math.floor(time / 1000 / 60 / 60 / 24)
+    time -= days * 24 * 60 * 60 * 1000
+    let hours = Math.floor(time / 1000 / 60 / 60)
+    time -= hours * 60 * 60 * 1000
+    let mins = Math.floor(time / 1000 / 60)
+    return {days: days, hours: hours, mins: mins / 60 * 100}
+  }
+
+  const sleep = time => new Promise(r => setTimeout(r, time))
+
+  async function calculateTime(projectStart) {
+    setCurrentTimeLine(getTimeToTable(projectStart))
+
+    await sleep(1000 * 60)
+    calculateTime(projectStart)
+  }
+
+
+  let numberOfDays = 6
+  let totalWidth = (numberOfDays * 200)
 
     // To calculate the no. of days between two dates
     let numberOfDays = differenceInTime / (1000 * 3600 * 24)
@@ -225,15 +255,33 @@ export default function Grid(props) {
           </div>
         ))}
       </GridLayout>
-      <table border="1" style={tableStyle}>
-        {Array(24).fill().map(_ => (
-          <tr>
-            {Array(numberOfDays(project)).fill().map(_ => (
-              <td></td>
-            ))}
-          </tr>
-        ))}
-      </table>
+      <div style={{position: 'relative', pointerEvents: 'none'}}>
+        <table border="1" style={tableStyle}>
+          {Array(24).fill().map(_ => (
+            <tr>
+              {Array(numberOfDays).fill().map(_ => (
+                <td>
+                </td>
+              ))}
+            </tr>
+          ))}
+        </table>
+        <table style={{...tableStyle, border: 'none', zIndex: 9999, position: 'absolute'}} cellspacing="0" cellpadding="0">
+          {Array(24).fill().map((_, i) => (
+            <tr>
+              {Array(numberOfDays).fill().map((_, j) => (
+                <td>
+                  {i === currentTimeLine.hours && j === currentTimeLine.days && (
+                    <div style={{height: '100%'}}>
+                      <div style={{top: `${currentTimeLine.mins}%`, height: '2px', opacity: '0.7', width: '100%', position: 'relative', backgroundColor: 'red'}}></div>
+                    </div>
+                  )}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </table>
+      </div>
     </div>
     ) : (<></>)
   )
