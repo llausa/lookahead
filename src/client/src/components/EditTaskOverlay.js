@@ -1,4 +1,4 @@
-import React, {useReducer} from "react"
+import React, {useReducer, useEffect, useState } from "react"
 import API from "../axios.config"
 import CardContainer from './CardContainer'
 import DateInput from './DateInput'
@@ -20,6 +20,25 @@ const EditTaskOverlay = (props) => {
         startDate: '',
         duration: ''
       })
+
+      
+      useEffect(() => {
+        API.get(
+          `api/projects/${projectId}/tasks/${props.taskId}`
+        )
+        .then(res => {
+          setProject(res.data.validProject)
+          setLayout(fromDatabase(res.data.validProject.tasks))
+          let projectStart = new Date(res.data.validProject.start_date)
+          calculateTime(projectStart)
+    
+        }).catch((err) => {
+          console.log(err)
+          props.redirect('/projects')
+        })
+      }, [])
+
+      
     
       const onSubmit = e => {
         e.preventDefault()

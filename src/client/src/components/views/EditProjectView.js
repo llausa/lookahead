@@ -36,7 +36,7 @@ const EditProjectView = () => {
     useEffect(() => {
       API.get(`api/projects/${projectId}`)
       .then(res => {
-          console.log(res.data.validProject)
+        setData(res.data.validProject)
       })
     }, [])
 
