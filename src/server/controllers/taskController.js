@@ -49,7 +49,7 @@ async function createTask(req, res, next) {
 
       res.status(201)
       res.locals.validUser = validUser
-      res.local.validProject = validProject
+      res.locals.validProject = validProject
       res.locals.message = "Tasks successfully created."
 
       next()
@@ -60,7 +60,7 @@ async function createTask(req, res, next) {
 
       res.status(201)
       res.locals.validUser = validUser
-      res.local.validProject = validProject
+      res.locals.validProject = validProject
       res.locals.message = "Task successfully created."
 
      next()
@@ -117,7 +117,7 @@ async function updateTask(req, res, next) {
     await validProject.save()
     res.status(200)
     res.locals.validUser = validUser
-    res.local.validProject = validProject
+    res.locals.validProject = validProject
     res.locals.message = "Task successfully updated."
 
     next()
@@ -155,7 +155,7 @@ async function removeTask(req, res, next) {
 
     res.status(200)
     res.locals.validUser = validUser
-    res.local.validProject = validProject
+    res.locals.validProject = validProject
     res.locals.message = "Task successfully deleted."
 
     next()
