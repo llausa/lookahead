@@ -1,4 +1,4 @@
-import React, {useReducer} from "react"
+import React, {useReducer, useState} from "react"
 import API from "../../axios.config"
 import CardContainer from '../CardContainer'
 import Nav from '../Nav'
@@ -11,10 +11,13 @@ import TimeZonePicker from '../TimeZonePicker'
 import FormInput from '../FormInput'
 import Button from '@material-ui/core/Button'
 import { useParams } from 'react-router-dom'
+import ErrorMessage from '../ErrorMessage'
 
 
 const EditProjectView = () => {
 
+    // For Error Message
+    const [errorMessage, setErrorMessage] = useState(null)
 
     const [data, setData] = useReducer((state, newState) => (
         {...state, ...newState}
@@ -39,6 +42,7 @@ const EditProjectView = () => {
         })
         .catch(function (error) {
             console.log(error.response.data)
+            setErrorMessage(error.response.data)
         })
 
         }
@@ -78,6 +82,8 @@ const EditProjectView = () => {
 
     return (
         <>
+        {errorMessage && <ErrorMessage msg={errorMessage.message} onClose={() => setErrorMessage(null)} />}
+
           <Nav backButtonLink = {`/projects/${projectId}`} BackButton={true} MenuButton={false} />
           <CardContainer background={Background}>
           <form onSubmit={onSubmit} className='form'>

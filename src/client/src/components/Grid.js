@@ -22,12 +22,15 @@ export default function Grid(props) {
 
   const { projectId } = useParams()
 
+  const [project, setProject] = useState(null)
+
   useEffect(() => {
     API.get(
       `api/projects/${projectId}/`
     )
     .then(res => {
       setLayout(fromDatabase(res.data.validProject.tasks))
+      setProject(res.data.validProject)
     }).catch((err) => {
       console.log(err)
       props.redirect('/projects')
@@ -35,7 +38,7 @@ export default function Grid(props) {
   }, [])
 
   const fromDatabase = (layout) => {
-    
+
     return layout.map((obj, i) => (
       {
         ...obj,
@@ -115,7 +118,7 @@ export default function Grid(props) {
   const addItem = () => {
     API.put(
       `api/projects/${projectId}/tasks`,
-      { 
+      {
         "title": "Build House",
         "start_time": 0,
         "length": 1,
@@ -131,7 +134,7 @@ export default function Grid(props) {
       console.log(res)
       //flash error message
       // props.redirect('/projects')
-      
+
     })
   }
 
@@ -147,20 +150,28 @@ export default function Grid(props) {
       console.log(res)
       //flash error message
       // props.redirect('/projects')
-      
+
     })
   }
 
+  const numberOfDays = (proj) => {
+    if(!proj){return 0}
+    let end_date = new Date(proj.end_date)
+    let start_date = new Date(proj.start_date)
 
-  let numberOfDays = 6
-  let totalWidth = (numberOfDays * 200)
+    let differenceInTime = end_date.getTime() - start_date.getTime()
+
+    // To calculate the no. of days between two dates
+    let numberOfDays = differenceInTime / (1000 * 3600 * 24)
+
+    return numberOfDays
+  }
 
   const tableStyle = {
-
     borderCollapse: "collapse",
     position: "relative",
     height: `${24*50}px`,
-    width: `${totalWidth}px`,
+    width: `${numberOfDays(project) * 200}px`,
     border: "1px solid black",
     top: "0",
     left: "0",
@@ -170,13 +181,13 @@ export default function Grid(props) {
   const Formatting = (props) => {
 
     let startTime = ''
-  
+
     if (props.y < 10) {
       startTime = ("0" + props.y + ":00")
     } else {
       startTime = (props.y + ":00")
     }
-  
+
     return (
       <div style={props.complete ? completed : notComplete }>
         <p style={{color: "#006EE3", fontWeight: "bold"}}>{props.title}</p>
@@ -189,20 +200,22 @@ export default function Grid(props) {
 
       // Styling
     const completed = {
-      
+
     }
 
     const notComplete = {
-      
+
     }
 
   return (
-    
+
+      project ? (
        < div style={{position: "relative"}}>
+        {console.log(numberOfDays(project) * 200)}
       {/* {errorMessage && <ErrorMessage msg={errorMessage.message} onClose={() => setErrorMessage(null)} />} */}
       {/* {successMessage && <SuccessMessage msg={successMessage} onClose={() => setSuccessMessage(null)} />} */}
       <Button onClick={addItem} text="Add" />
-      <GridLayout onResizeStop={stopDrag} onDragStop={stopDrag} verticalCompact={false} className="layout" cols={numberOfDays} maxRows={24} rowHeight={50} width={totalWidth} margin={[0, 0]}>
+      <GridLayout onResizeStop={stopDrag} onDragStop={stopDrag} verticalCompact={false} className="layout" cols={numberOfDays(project)} maxRows={24} rowHeight={50} width={numberOfDays(project) * 200} margin={[0, 0]}>
         {layout.map((grid, i) => (
           <div key={grid.i} data-grid={grid} >
           <Tooltip title="Delete Task" placement="top" arrow>
@@ -215,14 +228,13 @@ export default function Grid(props) {
       <table border="1" style={tableStyle}>
         {Array(24).fill().map(_ => (
           <tr>
-            {Array(numberOfDays).fill().map(_ => (
+            {Array(numberOfDays(project)).fill().map(_ => (
               <td></td>
             ))}
           </tr>
         ))}
       </table>
     </div>
+    ) : (<></>)
   )
 }
-
-
