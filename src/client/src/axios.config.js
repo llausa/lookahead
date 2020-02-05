@@ -1,5 +1,6 @@
 import axios from 'axios'
 import Cookies from 'js-cookie'
+import JWT from 'jsonwebtoken'
 
 
 
@@ -9,9 +10,10 @@ const API = axios.create({
     withCredentials: true
 })
 
+
 let token = Cookies.get('authToken')
 
-if (Cookies.get('authToken')) {
+if (token) {
   API.defaults.headers.common['Authorization'] = `Bearer ${Cookies.get('authToken')}`
 }
 

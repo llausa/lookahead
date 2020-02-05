@@ -67,7 +67,7 @@ export default function ProjectAddUsersView(props) {
         API.get(`/api/projects/${projectId}/add_users`)
         .then(res => { 
             
-            setUsers(res.data)
+            setUsers(res.data.users)
         })
     }, [])
 
