@@ -155,7 +155,6 @@ async function removeTask(req, res, next) {
 
     res.status(200)
     res.locals.validUser = validUser
-    res.locals.validProject = validProject
     res.locals.message = "Task successfully deleted."
 
     next()
