@@ -5,10 +5,17 @@ import { Responsive as ResponsiveGridLayout, ToolBox } from 'react-grid-layout'
 import GridLayout  from 'react-grid-layout'
 import { useParams } from 'react-router-dom'
 import API from "../axios.config"
+import Button from '../components/ButtonUserInput'
+import ErrorMessage from '../components/ErrorMessage'
+import SuccessMessage from '../components/SuccessMessage'
 
 export default function Grid(props) {
 
   const [layout, setLayout] = useState([])
+
+  const [errorMessage, setErrorMessage] = useState(null)
+
+  const [successMessage, setSuccessMessage] = useState(null)
 
   const { projectId } = useParams()
 
@@ -63,10 +70,11 @@ export default function Grid(props) {
     )
     .then((res) => {
       setLayout(newLayout)
-      
+      // setSuccessMessage(res.data.message)
     })
-    .catch(() => {
+    .catch((err) => {
       reDraw()
+      // setErrorMessage(err.data.message)
     })
   }
 
@@ -106,6 +114,25 @@ export default function Grid(props) {
 
   let numberOfDays = 3
   let totalWidth = ( numberOfDays * 200)
+  // const addItem = () => {
+  //   API.put(
+  //     `api/projects/${projectId}/tasks`,
+  //     { 
+  //       "title": "Build House",
+  //       "start_time": 2,
+  //       "length": 4,
+  //       "day": 2,
+  //       "description": "Big Yeet"
+  //     }
+  //   )
+  //   .then(res => {
+  //     setLayout(fromDatabase(res.data.validProject.tasks))
+  //   }).catch(() => {
+  //     //flash error message
+  //     // props.redirect('/projects')
+      
+  //   })
+  // }
 
   const tableStyle = {
 

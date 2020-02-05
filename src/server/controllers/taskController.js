@@ -49,9 +49,10 @@ async function createTask(req, res, next) {
 
       res.status(201)
       res.locals.validUser = validUser
+      res.locals.validProject = validProject
       res.locals.message = "Tasks successfully created."
 
-      return next()
+      next()
 
     } else {
       validProject.tasks.push(task)
@@ -59,9 +60,10 @@ async function createTask(req, res, next) {
 
       res.status(201)
       res.locals.validUser = validUser
+      res.locals.validProject = validProject
       res.locals.message = "Task successfully created."
 
-     return next()
+     next()
 
     }
 
@@ -115,9 +117,10 @@ async function updateTask(req, res, next) {
     await validProject.save()
     res.status(200)
     res.locals.validUser = validUser
+    res.locals.validProject = validProject
     res.locals.message = "Task successfully updated."
 
-    return next()
+    next()
 
   } else {
     res
@@ -152,9 +155,10 @@ async function removeTask(req, res, next) {
 
     res.status(200)
     res.locals.validUser = validUser
+    res.locals.validProject = validProject
     res.locals.message = "Task successfully deleted."
 
-    return next()
+    next()
 
   } else {
     res
@@ -163,7 +167,7 @@ async function removeTask(req, res, next) {
   }
 }
 
-async function updateAllTasks (req, res) {
+async function updateAllTasks (req, res, next) {
   let validUser = await UserModel.findById(req.user._id).catch(err => {
     return res.status(404).json({"message" : error.details[0].message})
   })
@@ -222,9 +226,10 @@ async function updateAllTasks (req, res) {
 
   res.status(200)
   res.locals.validUser = validUser
+  res.locals.validProject = validProject
   res.locals.message = "Task successfully updated."
 
-  return next()
+  next()
 
 }
 
