@@ -27,10 +27,10 @@ function ProjectView(props) {
 
             <div style={{overflowX: "scroll"}}>
             <Grid redirect={props.redirect}/>
-            </div>
 
             </div>
             <Background/>
+            </div>
             </>
         )
 }

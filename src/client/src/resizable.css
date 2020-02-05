@@ -13,6 +13,11 @@
   background-position: bottom right;
   padding: 0 5px 5px 0;
 }
+
+.react-resizable-handle:hover {
+  background-image: url('https://i.ibb.co/f9xjT7s/Scale-Icon-Blue.png');
+}
+
 .react-resizable-handle-sw {
   bottom: 10;
   left: 10;

@@ -118,6 +118,7 @@ body {
     size: 1rem;
 }
 
+/* Backdrop cover */
 .blackOverlay {
     background-color: black;
     width: 100vw;
@@ -129,4 +130,25 @@ body {
     position: absolute;
 }
 
+/* Task menu style overrides */
+.MuiFab-root {
+    width: 36px!important;
+    height: 36px!important;
+}
 
+.makeStyles-speedDial-109.MuiSpeedDial-directionDown, .makeStyles-speedDial-109.MuiSpeedDial-directionRight {
+    top: -18px!important;
+    left: 5px!important;
+}
+
+.MuiFab-primary {
+    color: #fff;
+    background-color: #006EE2!important;
+}
+
+.MenuButtonStyle:hover ~ .TaskTitle {  color: rgb(255, 255, 255); }
+
+.TaskTitle {
+    color: #006EE3;
+    font-weight: bold;
+}
