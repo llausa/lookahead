@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import '../resizable.css'
 import '../grid-layout.css'
 import { Responsive as ResponsiveGridLayout, ToolBox } from 'react-grid-layout'
@@ -20,6 +20,8 @@ export default function Grid(props) {
 
   const [currentTimeLine, setCurrentTimeLine] = useState({days: -1, hours: -1, mins: -1})
 
+  const [currentTime, setCurrentTime] = useState('')
+
   const [errorMessage, setErrorMessage] = useState(null)
 
   const [successMessage, setSuccessMessage] = useState(null)
@@ -27,6 +29,9 @@ export default function Grid(props) {
   const { projectId } = useParams()
 
   useEffect(() => {
+    scrollDiv.current.addEventListener('scroll', e => {
+      fixedTable.current.style.left = `${e.target.scrollLeft}px`
+    })
     API.get(
       `api/projects/${projectId}/`
     )
@@ -177,6 +182,7 @@ export default function Grid(props) {
 
     await sleep(1000 * 60)
     calculateTime(projectStart)
+    console.log(moment().format('LT'))
   }
 
 
@@ -227,12 +233,25 @@ export default function Grid(props) {
       
     }
 
+    const fixedTable = useRef(null)
+    const scrollDiv = useRef(null)
+
   return (
-    
-       < div style={{position: "relative"}}>
+    // Creates grid of all Project Tasks
+    <>
+    <div ref={scrollDiv} style={{overflowX: "scroll", position: 'relative'}}>
+    <table border="1" ref={fixedTable} style={{...tableStyle, position: 'absolute', zIndex: 2, top: 'auto', border:'1px solid rgba(0, 0, 0, 1)', width: 'auto', backgroundColor: 'rgba(255, 255, 255, 0.3)'}}>
+      <tbody>
+        {Array(24).fill().map((_, i) => (
+          <tr>
+            <td>{`${i < 10 ? '0' : ''}${i}:00`}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    <div style={{position: "relative"}} >
       {/* {errorMessage && <ErrorMessage msg={errorMessage.message} onClose={() => setErrorMessage(null)} />} */}
       {/* {successMessage && <SuccessMessage msg={successMessage} onClose={() => setSuccessMessage(null)} />} */}
-      <Button onClick={addItem} text="Add" />
       <GridLayout onResizeStop={stopDrag} onDragStop={stopDrag} verticalCompact={false} className="layout" cols={numberOfDays} maxRows={24} rowHeight={50} width={totalWidth} margin={[0, 0]}>
         {layout.map((grid, i) => (
           <div key={grid.i} data-grid={grid} >
@@ -244,8 +263,11 @@ export default function Grid(props) {
           </div>
         ))}
       </GridLayout>
+
+      {/* Creates Faded Background Grid */}
       <div style={{position: 'relative', pointerEvents: 'none'}}>
         <table border="1" style={tableStyle}>
+          <tbody>
           {Array(24).fill().map(_ => (
             <tr>
               {Array(numberOfDays).fill().map(_ => (
@@ -254,8 +276,11 @@ export default function Grid(props) {
               ))}
             </tr>
           ))}
+          </tbody>
         </table>
+         {/* Creates Red line through view to show time */}
         <table style={{...tableStyle, border: 'none', zIndex: 69, position: 'absolute', overflow: 'hidden'}} cellspacing="0" cellpadding="0">
+          <tbody>
           {Array(24).fill().map((_, i) => (
             <tr>
               {Array(numberOfDays).fill().map((_, j) => (
@@ -269,9 +294,12 @@ export default function Grid(props) {
               ))}
             </tr>
           ))}
+          </tbody>
         </table>
       </div>
     </div>
+    </div>
+    </>
   )
 }
 
