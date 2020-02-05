@@ -1,5 +1,5 @@
 import 'date-fns'
-import React from 'react'
+import React, {useEffect} from "react"
 import DateFnsUtils from '@date-io/date-fns'
 import {
   MuiPickersUtilsProvider,
@@ -38,7 +38,11 @@ const  MaterialUIPickers = (props) => {
 
 
 
-  const [selectedDate, setSelectedDate] = React.useState(new Date(currDate))
+  const [selectedDate, setSelectedDate] = React.useState(props.value || new Date(currDate))
+
+  useEffect(() => {
+    setSelectedDate(props.value)
+  }, [props])
 
   const handleDateChange = date => {
     setSelectedDate(date)
@@ -50,7 +54,7 @@ const  MaterialUIPickers = (props) => {
         <CssKeyboardDatePicker
           disableToolbar
           autoOk
-          disablePast = { props.disablePast } 
+          disablePast = { props.disablePast }
           minDate = { props.minDate }
           required = {true}
           inputVariant="outlined"
