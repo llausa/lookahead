@@ -8,8 +8,8 @@ import TitleText from '../TitleText'
 import FormInput from '../FormInput'
 import NormalText from '../NormalText'
 import Loader from '../Loader'
-import NotificationMessage from '../NotificationMessage'
-
+import ErrorMessage from '../ErrorMessage'
+import SuccessMessage from '../SuccessMessage'
 import MailIcon from '@material-ui/icons/Mail'
 
 const EmailChangeView = () => {
@@ -19,6 +19,9 @@ const EmailChangeView = () => {
 
     // For Error Message
     const [errorMessage, setErrorMessage] = useState(null)
+
+    // For Success Message
+    const [successMessage, setSuccessMessage] = useState(null)
 
     const [data, setData] = useReducer((state, newState) => (
         {...state, ...newState}
@@ -35,9 +38,10 @@ const EmailChangeView = () => {
         API.put(
         '/api/users/email', data)
         .then(function (response) {
-            
+
             console.log(response)
             setLoading(false)
+            setSuccessMessage("Your email has been changed.")
         })
         .catch(function (error) {
             console.log(error.response.data)
@@ -83,15 +87,14 @@ const EmailChangeView = () => {
     const email = (text) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(text)
     const password = (text) => text.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,1000}$/)
 
-    let ButtonText = "Save Email"
-
     const isValid = () => {
         return !!email(data.email) && !!password(data.password)
     }
 
     return (
         <>
-        {errorMessage && <NotificationMessage error={errorMessage.message} onClose={() => setErrorMessage(null)} />}
+        {errorMessage && <ErrorMessage msg={errorMessage.message} onClose={() => setErrorMessage(null)} />}
+        {successMessage && <SuccessMessage msg={successMessage} onClose={() => setSuccessMessage(null)} />}
 
         <Nav backButtonLink = "/projects" BackButton={true} MenuButton={false}/>
         <CardContainer background={Background}>

@@ -1,5 +1,4 @@
 import React from 'react'
-import Button from '@material-ui/core/Button'
 import Snackbar from '@material-ui/core/Snackbar'
 import MuiAlert from '@material-ui/lab/Alert'
 import { makeStyles } from '@material-ui/core/styles'
@@ -17,7 +16,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const NotificationMessage = (props) => {
+const SuccessMessage = (props) => {
   const classes = useStyles()
   const [open, setOpen] = React.useState(true)
 
@@ -25,12 +24,13 @@ const NotificationMessage = (props) => {
   let horizontal = 'center'
 
   return (
-      <Snackbar key={`${vertical},${horizontal}`} anchorOrigin={{ vertical, horizontal }} open={open} autoHideDuration={6000} onClose={props.onClose} style={{top: "10vh"}}>
-        <Alert onClose={props.onClose} severity="error">
-          Error: {props.error}
+
+    <Snackbar key={`${vertical},${horizontal}`} anchorOrigin={{ vertical, horizontal }} open={open} autoHideDuration={6000} onClose={props.onClose} style={{top: "10vh"}}>
+      <Alert onClose={props.onClose} severity="success">
+         Success! {props.msg}
         </Alert>
-      </Snackbar>
+    </Snackbar>
   )
 }
 
-export default NotificationMessage
+export default SuccessMessage
