@@ -124,7 +124,9 @@ export default function Grid(props) {
       }
     )
     .then(res => {
-      setLayout(fromDatabase(res.data.validProject.tasks))
+      let newTask = fromDatabase([res.data.newTask])[0]
+      newTask.i = layout.reduce((acc, val) => val.i > acc ? val.i : acc, 0) + 1
+      setLayout([...layout, newTask])
     }).catch((res) => {
       console.log(res)
       //flash error message

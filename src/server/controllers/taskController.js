@@ -60,7 +60,7 @@ async function createTask(req, res, next) {
 
       res.status(201)
       res.locals.validUser = validUser
-      res.locals.validProject = validProject
+      res.locals.newTask = validProject.tasks[validProject.tasks.length - 1]
       res.locals.message = "Task successfully created."
 
      next()
