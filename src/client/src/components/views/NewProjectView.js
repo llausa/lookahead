@@ -14,6 +14,9 @@ import ErrorMessage from '../ErrorMessage'
 
 const NewProjectView = (props) => {
 
+    let today = new Date()
+    let minDate = today.setDate(today.getDate() + 1)
+
     const [data, setData] = useReducer((state, newState) => (
         {...state, ...newState}
       ), {
@@ -83,8 +86,8 @@ const NewProjectView = (props) => {
               <NormalText text="Please fill out all required fields" />
               <FormInput type='text' validation={basic} value={data.title} onChange={onChange} require={true} errorText="Please enter more Characters" label='Project Title' id='title' name='title'/>
               <TimeZonePicker defaultVal={(val) => setData(val)} label="Location*" id="location" value={data.location} name='location' onChange={onTimeZoneChange} />
-              <DateInput label="Start Date" day={1} id="start_date" value={data.start_date} name='start_date' onChange={onDateChange}/>
-              <DateInput label="End Date" day={2} id="end_date" value={data.end_date} name='end_date' onChange={onDateChange} />
+              <DateInput disablePast label="Start Date" day={1} id="start_date" value={data.start_date} name='start_date' onChange={onDateChange}/>
+              <DateInput disablePast minDate={today} label="End Date" day={2} id="end_date" value={data.end_date} name='end_date' onChange={onDateChange} />
               <ButtonInput disabled={false} type='submit' primary={true} color='primary' text="Create" />
           </div>
           </form>

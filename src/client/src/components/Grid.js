@@ -20,12 +20,17 @@ export default function Grid(props) {
 
   const { projectId } = useParams()
 
+  let projectStart
+
   useEffect(() => {
     API.get(
       `api/projects/${projectId}/`
     )
     .then(res => {
       setLayout(fromDatabase(res.data.validProject.tasks))
+      projectStart = res.data.validProject.start_date
+      console.log(projectStart)
+
     }).catch((err) => {
       console.log(err)
       props.redirect('/projects')
@@ -123,7 +128,7 @@ export default function Grid(props) {
     )
     .then(res => {
       let newTask = fromDatabase([res.data.newTask])[0]
-      newTask.i = layout.reduce((acc, val) => val.i > acc ? val.i : acc, 0) + 1
+      newTask.i = (layout.reduce((acc, val) => val.i > acc ? val.i : acc, 0) + 1).toString()
       setLayout([...layout, newTask])
     }).catch((res) => {
       console.log(res)
@@ -146,6 +151,26 @@ export default function Grid(props) {
       // props.redirect('/projects')
       
     })
+  }
+
+
+  function getTimeToTable(tableStart) {
+    let time = new Date() - tableStart
+    let days = Math.floor(time / 1000 / 60 / 60 / 24)
+    time -= days * 24 * 60 * 60 * 1000
+    let hours = Math.floor(time / 1000 / 60 / 60)
+    time -= hours * 60 * 60 * 1000
+    let mins = Math.floor(time / 1000 / 60)
+    return {days: days, hours: hours, mins: mins / 60}
+  }
+
+  const sleep = time => new Promise(r => setTimeout(r, time))
+  
+  async function calculateTime(projectStart) {
+    let {days, hours, mins} = getTimeToTable(projectStart)
+    // do something with stater or something IDK
+    await sleep(1000 * 60)
+    calculateTime(projectStart)
   }
 
 
