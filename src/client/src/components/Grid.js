@@ -109,28 +109,45 @@ export default function Grid(props) {
     }
   }
 
-
-  let numberOfDays = 3
-  let totalWidth = ( numberOfDays * 200)
-  // const addItem = () => {
-  //   API.put(
-  //     `api/projects/${projectId}/tasks`,
-  //     { 
-  //       "title": "Build House",
-  //       "start_time": 2,
-  //       "length": 4,
-  //       "day": 2,
-  //       "description": "Big Yeet"
-  //     }
-  //   )
-  //   .then(res => {
-  //     setLayout(fromDatabase(res.data.validProject.tasks))
-  //   }).catch(() => {
-  //     //flash error message
-  //     // props.redirect('/projects')
+  const addItem = () => {
+    API.put(
+      `api/projects/${projectId}/tasks`,
+      { 
+        "title": "Build House",
+        "start_time": 0,
+        "length": 1,
+        "day": 0,
+        "description": "Big Yeet"
+      }
+    )
+    .then(res => {
+      setLayout(fromDatabase(res.data.validProject.tasks))
+    }).catch((res) => {
+      console.log(res)
+      //flash error message
+      // props.redirect('/projects')
       
-  //   })
-  // }
+    })
+  }
+
+  const removeItem = (taskId) => {
+    {console.log(taskId)}
+    API.delete(
+      `api/projects/${projectId}/tasks/${taskId}`
+    )
+    .then(res => {
+      setLayout(layout.filter(el => el._id != taskId))
+    }).catch((res) => {
+      console.log(res)
+      //flash error message
+      // props.redirect('/projects')
+      
+    })
+  }
+
+
+  let numberOfDays = 4
+  let totalWidth = (numberOfDays * 200)
 
   const tableStyle = {
 
@@ -142,7 +159,6 @@ export default function Grid(props) {
     top: "0",
     left: "0",
     zIndex: "-1",
-
   }
 
   const Formatting = (props) => {
@@ -175,10 +191,15 @@ export default function Grid(props) {
     }
 
   return (
-    < div style={{position: "relative"}}>
+    
+       < div style={{position: "relative"}}>
+      {/* {errorMessage && <ErrorMessage msg={errorMessage.message} onClose={() => setErrorMessage(null)} />} */}
+      {/* {successMessage && <SuccessMessage msg={successMessage} onClose={() => setSuccessMessage(null)} />} */}
+      <Button onClick={addItem} text="Add" />
       <GridLayout onResizeStop={stopDrag} onDragStop={stopDrag} verticalCompact={false} className="layout" cols={numberOfDays} maxRows={24} rowHeight={50} width={totalWidth} margin={[0, 0]}>
         {layout.map((grid, i) => (
           <div key={grid.i} data-grid={grid} >
+            <Button onClick={() => removeItem(grid._id)} text="Delete" />
             <Formatting {...grid} />
           </div>
         ))}
