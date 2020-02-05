@@ -104,3 +104,18 @@ body {
     left: 100vw;
 }
 
+.deleteButton {
+    color: rgb(139, 132, 131);
+    position: fixed;
+    size: 1rem;
+    left: 8px;
+    top: 13px;
+    cursor: pointer;
+}
+
+.deleteButton :hover {
+    color: rgb(226, 73, 33);
+    size: 1rem;
+}
+
+

@@ -12,8 +12,10 @@ function ProjectView(props) {
             <Nav backButtonLink = "/" BackButton={true} MenuButton={false}/>
             <h1 data-cy="projectView" style={{margin: "20px", fontSize: "70px", color: "#006EE2", alignSelf:"center" }} >{props.projectName ," view"}</h1>
 
+            <div style={{overflowX: "scroll"}}>
             <Grid redirect={props.redirect}/>
-            
+            </div>
+
             </div>
             <Background/>
             </>

@@ -7,6 +7,9 @@ import CalendarTodayIcon from '@material-ui/icons/CalendarToday'
 import EventAvailableIcon from '@material-ui/icons/EventAvailable'
 import ArrowRightIcon from '@material-ui/icons/ArrowRight'
 import LocationOnIcon from '@material-ui/icons/LocationOn'
+import { Link } from 'react-router-dom'
+import Button from '@material-ui/core/Button'
+import Moment from 'react-moment'
 
 
 const innerDiv = {
@@ -46,27 +49,32 @@ const chipStyle2 = {
   color: "#006EE2",
 }
 
+const buttonMain = {
+    color: "#006EE2",
+    margin: "20px",
+    border: "1px solid #006EE2",
+}
+
 
 const ProjectCard = (props) => {
-
-  
 
   return (
     <Card  style={CardStyle}>
     <CardContent>
+    {console.log(props.link)}
     <div style={innerDiv}>
       <h1>{props.title ? (`${props.title}`) : ("Project")}</h1>
       <div>
       <Chip
         style={chipStyle}
         icon={<CalendarTodayIcon />}
-        label={(props.startDate ? (`${props.startDate}`) : ("01/02/20"))}
+        label={(props.start_date ? (<Moment parse="YYYY-MM-DD">`${props.start_date}`</Moment>) : ("No Start Date"))}
       />
       < ArrowRightIcon style={{fontSize: "2rem", position: "relative", top: "10px"}}/>
       <Chip
         style={chipStyle}
         icon={<EventAvailableIcon />}
-        label={(props.endDate ? (`${props.endDate}`) : ("10/02/20"))}
+        label={(props.end_date ? (<Moment parse="YYYY-MM-DD">`${props.end_date}`</Moment>) : ("No End Date"))}
       />
       </div>
       <Chip
@@ -74,7 +82,8 @@ const ProjectCard = (props) => {
         icon={<LocationOnIcon />}
         label={(props.location ? (`${props.location}`) : ("Brisbane, Australia"))}
       />
-      <ButtonInput onClick={console.log("Event Clicked")} primary={true} color='primary' text="View" />
+
+      <Button component={Link} to={`/project/${props.link}`} onClick={(console.log("View Event Clicked"))} primary={true} color='primary' style={buttonMain} > View Project </Button>
     </div>
     </CardContent>
     </Card>
