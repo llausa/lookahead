@@ -14,8 +14,6 @@ import Loader from '../Loader'
 import ErrorMessage from '../ErrorMessage'
 import Cookies from 'js-cookie'
 
-const sleep = (time) => new Promise(r => setTimeout(r, time))
-
 const Login = (props) => {
 
     // For Loading Animation
@@ -40,17 +38,9 @@ const Login = (props) => {
 
         API.post(
         '/api/auth', data)
-        .then(async function (response) {
-
-            // console.log(response)
+        .then(function (response) {
             setLoading(false)
             if (response.status === 200) {
-                // await sleep(1000)
-                let token = Cookies.get('authToken')
-
-                if (token) {
-                    API.defaults.headers.common['Authorization'] = `Bearer ${Cookies.get('authToken')}`
-                }
                 props.redirect('/projects')
             }
         })
