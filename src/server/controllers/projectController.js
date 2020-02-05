@@ -56,6 +56,8 @@ async function create (req, res, next) {
 // GET Project
 async function getProject (req, res, next) {
 
+  console.log(req)
+
   req.body.owner = req.user._id
 
   let validUser = await UserModel.findById(req.user._id)
@@ -169,7 +171,7 @@ async function usersInProject (req, res, next) {
 
     res.status(200)
     res.locals.validUser = validUser
-    res.locals.usersObjs = usersObjs
+    res.locals.users = usersObjs
 
     return next()
 
