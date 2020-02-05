@@ -165,6 +165,10 @@ export default function Grid(props) {
     let start_date = new Date(proj.start_date)
 
     let differenceInTime = end_date.getTime() - start_date.getTime()
+    // To calculate the no. of days between two dates
+    let numberOfDays = differenceInTime / (1000 * 3600 * 24)
+
+    return numberOfDays
   }
 
   function getTimeToTable(tableStart) {
@@ -185,16 +189,6 @@ export default function Grid(props) {
 
     await sleep(1000 * 60)
     calculateTime(projectStart)
-  }
-
-
-  let numberOfDays = 6
-  let totalWidth = (numberOfDays * 200)
-
-    // To calculate the no. of days between two dates
-    let numberOfDays = differenceInTime / (1000 * 3600 * 24)
-
-    return numberOfDays
   }
 
   const tableStyle = {
