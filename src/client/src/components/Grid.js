@@ -8,6 +8,7 @@ import API from "../axios.config"
 import Button from '../components/ButtonUserInput'
 import ErrorMessage from '../components/ErrorMessage'
 import SuccessMessage from '../components/SuccessMessage'
+import DeleteIcon from '@material-ui/icons/Delete'
 
 export default function Grid(props) {
 
@@ -146,7 +147,7 @@ export default function Grid(props) {
   }
 
 
-  let numberOfDays = 4
+  let numberOfDays = 6
   let totalWidth = (numberOfDays * 200)
 
   const tableStyle = {
@@ -199,7 +200,7 @@ export default function Grid(props) {
       <GridLayout onResizeStop={stopDrag} onDragStop={stopDrag} verticalCompact={false} className="layout" cols={numberOfDays} maxRows={24} rowHeight={50} width={totalWidth} margin={[0, 0]}>
         {layout.map((grid, i) => (
           <div key={grid.i} data-grid={grid} >
-            <Button onClick={() => removeItem(grid._id)} text="Delete" />
+            <DeleteIcon onClick={() => removeItem(grid._id)} className="deleteButton"/>
             <Formatting {...grid} />
           </div>
         ))}
