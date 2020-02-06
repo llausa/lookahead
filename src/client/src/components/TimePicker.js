@@ -26,6 +26,7 @@ const CssTextField= withStyles({
 })(TextField)
 
 let TimesList = [
+  {time: "00:00"},
   {time: "01:00"},
   {time: "02:00"},
   {time: "03:00"},
@@ -48,8 +49,7 @@ let TimesList = [
   {time: "20:00"},
   {time: "21:00"},
   {time: "22:00"},
-  {time: "23:00"},
-  {time: "24:00"},
+  {time: "23:00"}
 ]
 
 const TimePicker = (props) => {

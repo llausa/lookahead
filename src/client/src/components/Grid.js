@@ -267,6 +267,10 @@ export default function Grid(props) {
     borderRadius: "10px"
   }
 
+  const editTask = (taskId) => {
+    props.redirect(`/projects/${projectId}/tasks/${taskId}`)
+  }
+
   const Formatting = (props) => {
 
     let startTime = ''
@@ -280,7 +284,7 @@ export default function Grid(props) {
     return (
       <div style={props.complete ? completed : notComplete }>
       <div className="MenuButtonStyle">
-        <ToggleMenu onDelete={() => removeItem(props._id)} />
+        <ToggleMenu redirect={props.redirect} onDelete={() => removeItem(props._id)} onEdit={() => editTask(props._id)} />
         </div>
         <p className="TaskTitle" >{props.title}</p>
         <p>{props.description}</p>

@@ -5,7 +5,7 @@ const _ = require('lodash')
 
 async function details(req, res, next) {
   const user = await UserModel.findById(req.user._id).select('-password -email')
-  .catch( (err) => { return res.status(404).json({ "message": err.details[0].message })})
+  .catch( (err) => { return res.status(404).json({ "message": err.message })})
 
   res.status(200)
   res.locals.user = user
@@ -44,7 +44,7 @@ async function register(req, res, next) {
 async function updateDetails(req, res, next) {
 
   let validUser = await UserModel.findById(req.user._id)
-  .catch( (err) => { return res.status(404).json({ "message": err.details[0].message })})
+  .catch( (err) => { return res.status(404).json({ "message": err.message })})
 
   if (!req.body.firstName || !req.body.lastName || !req.body.position ) {
     return res.status(400).json({"message": "Invalid user data."})
@@ -67,7 +67,7 @@ async function updateDetails(req, res, next) {
 async function updatePassword(req, res, next) {
 
   let validUser = await UserModel.findById(req.user._id)
-  .catch( (err) => { return res.status(404).json({ "message": err.details[0].message })})
+  .catch( (err) => { return res.status(404).json({ "message": err.message })})
 
   const { error } = validatePassword({password: req.body.newPassword})
   if (error) return res.status(400).json({"message": 'Invalid password.'})
@@ -89,7 +89,7 @@ async function updatePassword(req, res, next) {
 async function updateEmail(req, res, next) {
 
   let validUser = await UserModel.findById(req.user._id)
-  .catch( (err) => { return res.status(404).json({ "message": err.details[0].message })})
+  .catch( (err) => { return res.status(404).json({ "message": err.message })})
 
 
 

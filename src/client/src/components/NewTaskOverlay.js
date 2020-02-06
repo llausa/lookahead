@@ -12,8 +12,8 @@ import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 import { useParams } from 'react-router-dom'
-
-
+import ErrorMessage from '../components/ErrorMessage'
+import Loader from '../components/Loader'
 
 const useStyles = makeStyles(theme => ({
   backdrop: {
@@ -24,6 +24,10 @@ const useStyles = makeStyles(theme => ({
 
 const EditTaskOverlay = (props) => {
     const classes = useStyles();
+
+    const [loading, setLoading] = useState(false)
+
+    const [errorMessage, setErrorMessage] = useState(null)
 
     const { projectId, taskId } = useParams()
 
@@ -43,18 +47,19 @@ const EditTaskOverlay = (props) => {
     useEffect(() => {
 
         API.get(
-          `api/projects/${projectId}/tasks/${taskId}`
+          `api/projects/${projectId}/tasks/${props.taskId}`
         )
         .then(res => {
           
           setEdit(props.edit)
-          setData(res.data.validTask)
-          
+          setData(res.data.task)
     
         }).catch((err) => {
 
           setEdit(props.edit)
 
+          console.log(err)
+          // props.redirect('/projects')
         })
       }, [])
 
@@ -62,24 +67,34 @@ const EditTaskOverlay = (props) => {
 
     const onSubmit = e => {
 
-        delete(data._id)
-        delete(data.complete)
-       
+        setLoading(true)
+
+        // setData(data)
         e.preventDefault()
-       
+
+        data.day = (new Date(data.day).getTime() - new Date(props.project.start_date).getTime()) / (1000 * 3600 * 24)
+
+        console.log(data.day)
+        console.log(props.project.start_date)
+
+        // data.day = data.day - project.start_date
 
         console.log(data)
 
         API.put(
-        `/api/projects/${projectId}/tasks/${taskId}`, data)
+        `/api/projects/${projectId}/tasks`, data)
         .then(function (response) {
-         
-          console.log(response)
+          setLoading(false)
+          props.handleToggle(false)
+          
+          props.redirect(`/projects/${projectId}`)
 
-            props.redirect(`/projects/${projectId}`)
 
         })
         .catch(function (error) {
+          setLoading(false)
+
+          setErrorMessage(error.response.data)
 
             console.log(error.response.data)
         })
@@ -88,8 +103,23 @@ const EditTaskOverlay = (props) => {
 
     const onChange = e => {
         setData({[e.target.name]: e.target.value})
-        console.log(data)
+        // console.log(data)
+        // setData({"location": location.value})
     }
+
+    const onTimeChange = e => {
+      console.log(e.target)
+      setData({'start_time': parseInt(e.target.innerHTML)})
+    }
+
+    const onDurationChange = e => {
+      console.log(e.target)
+    setData({'length': parseInt(e.target.innerHTML)})
+    }
+
+    const onDateChange = e => {
+      setData({[e.target.name]: e.target.value.toISOString().substring(0, 10)})
+  }
 
     const mystyle = {
         display: "flex",
@@ -107,17 +137,25 @@ const EditTaskOverlay = (props) => {
 
     return (
         <>
+        <Loader style={{opacity: loading ? 1 : 0}} />
+      {errorMessage && <ErrorMessage msg={errorMessage.message} onClose={() => setErrorMessage(null)} />}
       <div style={props.style}>
       <Backdrop className={classes.backdrop} open={true}>
       <div style={{position: "absolute", zIndex: "6", height: "100vh", width: "100vw"}}>
       <CardContainer style={{zIndex: "6"}} >
       <form onSubmit={onSubmit} className='form'>
         <div data-cy="newProjectView" style={mystyle}>
-            <TitleText text="Edit Task" />
+            <TitleText text={ edit ? ("Edit Task") : ("New Task")  } />
             <NormalText text="Please fill out all required fields" />
             <FormInput type='text' validation={basic} value={data.title} onChange={onChange} require={true} errorText="Please enter more Characters" label='Task Name' id='title' name='title' />
             <FormInput type='text' validation={basic} value={data.description} onChange={onChange} require={false} multiline={true} label='Task Description' id='description' name='description' />
-            <ButtonInput disabled={false} type='submit' primary={true} color='primary' text="Save" />
+
+            <DateInput minDate={props.project.start_date} maxDate={props.project.end_date} value={data.day} label="End Date" day={1} id="end_date" onChange={onDateChange} name='day' />
+
+            <TimePicker  onChange={onTimeChange} value={data.start_time} label="Start Time*" id="start_time" name='start_time' style={{width: "100%"}}/>
+            <DurationPicker  onChange={onDurationChange} value={data.length} label="Duration (hours)*" id="length" name='length' style={{width: "100%"}}/>
+
+            <ButtonInput disabled={false} type='submit' primary={true} color='primary' text={ props.edit? ("Save") : ("Create") } />
         </div>
         </form>
         </CardContainer>
