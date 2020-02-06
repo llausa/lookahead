@@ -23,12 +23,12 @@ API.interceptors.request.use(function (config)  {
 
 API.interceptors.response.use(function (response) {
 
-  
-  let token = response.data.token 
+
+  let token = response.data.token
 
   Cookies.set('authToken', token, { expires: 1/24 })
 
-  return response 
+  return response
 
 }
 )
