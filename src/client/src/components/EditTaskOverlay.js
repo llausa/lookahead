@@ -8,10 +8,20 @@ import NormalText from './NormalText'
 import DurationPicker from './DurationPicker'
 import TimePicker from './TimePicker'
 import FormInput from './FormInput'
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { makeStyles } from '@material-ui/core/styles';
 import { useParams } from 'react-router-dom'
 
+const useStyles = makeStyles(theme => ({
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: '#fff',
+  },
+}));
 
 const EditTaskOverlay = (props) => {
+    const classes = useStyles();
 
   const { projectId, taskId } = useParams()
 
@@ -20,12 +30,12 @@ const EditTaskOverlay = (props) => {
       ), {
         title: '',
         description: '',
-        start_date: '',
+        day: '',
         duration: ''
       })
 
 
-      useEffect(() => {
+    useEffect(() => {
         API.get(
           `api/projects/${projectId}/tasks/${taskId}`
         )
@@ -33,34 +43,39 @@ const EditTaskOverlay = (props) => {
           setData(res.data.task)
     
         }).catch((err) => {
-          props.redirect('/projects')
+          console.log(err)
+          // props.redirect('/projects')
         })
       }, [])
 
-      
-    
-      const onSubmit = e => {
+
+
+    const onSubmit = e => {
         e.preventDefault()
-    
+
         console.log(data)
-    
-        API.post(
-        '/api/users', data)
+
+        API.put(
+        `/api/projects/${projectId}/tasks`, data)
         .then(function (response) {
-            
+
             console.log(response)
         })
         .catch(function (error) {
             console.log(error.response.data)
         })
-        
-      }
-    
-      const onChange = e => {
+
+    }
+
+    const onChange = e => {
         setData({[e.target.name]: e.target.value})
-        console.log(data) 
+        console.log(data)
         // setData({"location": location.value})
     }
+
+    const onDateChange = e => {
+      setData({[e.target.name]: e.target.value.toISOString().substring(0, 10)})
+  }
 
     const mystyle = {
         display: "flex",
@@ -72,25 +87,28 @@ const EditTaskOverlay = (props) => {
         maxWidth: "400px",
         margin: "auto",
     }
-    
+
     // Client Validation
     const basic = (text) => text.length > 2
 
     return (
         <>
+      <div style={props.style}>
+      <Backdrop className={classes.backdrop} open={true}>
       <div style={{position: "absolute", zIndex: "6", height: "100vh", width: "100vw"}}>
       <CardContainer style={{zIndex: "6"}} >
       <form onSubmit={onSubmit} className='form'>
         <div data-cy="newProjectView" style={mystyle}>
             <TitleText text={ props.edit? ("Edit Task") : ("New Task")  } />
             <NormalText text="Please fill out all required fields" />
-            <FormInput type='text' validation={basic} value={data.title} onChange={onChange} require={true} errorText="Please enter more Characters" label='Task Name' id='taskName' name='taskName' />
+            <FormInput type='text' validation={basic} value={data.title} onChange={onChange} require={true} errorText="Please enter more Characters" label='Task Name' id='title' name='title' />
             <FormInput type='text' validation={basic} value={data.description} onChange={onChange} require={false} multiline={true} label='Task Description' id='description' name='description' />
-            
-            <DateInput label="Start Date" day={1} id="startDate" name='startDate'/>
-            
-            <TimePicker label="Start Time*" id="startTime" name='startTime' style={{width: "100%"}}/>
-            <DurationPicker label="Duration (hours)*" id="duration" name='duration' style={{width: "100%"}}/>
+
+            {/* <DateInput label="Start Date" day={1} id="startDate" name='startDate'/> */}
+            <DateInput disablePast value={data.day} label="End Date" day={2} id="end_date" onChange={onDateChange} name='day' />
+
+            <TimePicker value={data.start_time} label="Start Time*" id="startTime" name='startTime' style={{width: "100%"}}/>
+            <DurationPicker value={data.length} label="Duration (hours)*" id="duration" name='duration' style={{width: "100%"}}/>
 
             <ButtonInput disabled={false} type='submit' primary={true} color='primary' text={ props.edit? ("Save") : ("Create") } />
         </div>
@@ -98,8 +116,10 @@ const EditTaskOverlay = (props) => {
         </CardContainer>
         </div>
         <div className="blackOverlay" ></div>
+        </Backdrop>
+        </div>
         </>
-       
+
     )
 }
 

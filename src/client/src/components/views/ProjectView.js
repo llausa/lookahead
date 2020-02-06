@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState} from "react"
 import Grid from "../Grid"
 import Nav from '../Nav'
 import Background from '../Background'
@@ -6,6 +6,8 @@ import TitleText from '../TitleText'
 import Button from '@material-ui/core/Button'
 import { Link } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
+import EditTaskOverlay from '../EditTaskOverlay'
+import Loader from '../Loader'
 
 const buttonMain = {
     color: "#006EE2",
@@ -15,25 +17,41 @@ const buttonMain = {
 
 function ProjectView(props) {
 
+
+    let taskEdit = false
+
+    // Makes Form Popup
+    const [editTaskForm, setEditTaskForm] = useState(false)
+
     const { projectId } = useParams()
 
-        return (
-            <>
-            <div style={{position: "absolute", display: "flex", flexDirection: "column", width: "100vw", height: "100vh", overflowX: "hidden"}}>
-            <Nav backButtonLink ='/projects' BackButton={true} MenuButton={false}/>
-            <h1 data-cy="projectView" style={{margin: "20px", fontSize: "70px", color: "#006EE2", alignSelf:"center" }} >{props.projectName ," view"}</h1>
+    const handleToggle = () => {
+        // setOpen(!open)
+        setEditTaskForm(true)
+    }
 
-            <Button component={Link} to={`/projects/${projectId}/edit`}  color='primary' style={buttonMain} > Edit Project </Button>
-            <Button component={Link} to={`/projects/${projectId}/users`}  color='primary' style={buttonMain} > Add Users to Project </Button>
+    const handleClose = () => {
+        // setOpen(false)
+    }
 
-            <div style={{overflowX: "scroll"}}>
-            <Grid redirect={props.redirect}/>
+    return (
+        <>
+        <EditTaskOverlay edit={taskEdit} redirect={props.redirect} style={{opacity: editTaskForm ? 1 : 0}}/>
+        <div style={{position: "absolute", display: "flex", flexDirection: "column", width: "100vw", height: "100vh", overflowX: "hidden"}}>
+        <Nav backButtonLink ='/projects' BackButton={true} MenuButton={true}/>
+        <h1 data-cy="projectView" style={{margin: "20px", fontSize: "70px", color: "#006EE2", alignSelf:"center" }} >{props.projectName ," view"}</h1>
 
-            </div>
-            <Background/>
-            </div>
-            </>
-        )
+        <Button component={Link} to={`/projects/${projectId}/edit`}  color='primary' style={buttonMain} > Edit Project </Button>
+        <Button component={Link} to={`/projects/${projectId}/users`}  color='primary' style={buttonMain} > Add Users to Project </Button>
+        <Button color='primary' style={buttonMain} onClick={handleToggle} > Add Tasks to Project </Button>
+
+        <div style={{overflowX: "scroll"}}>
+        <Grid redirect={props.redirect}/>
+        </div>
+        <Background/>
+        </div>
+        </>
+    )
 }
 
 export default ProjectView;
