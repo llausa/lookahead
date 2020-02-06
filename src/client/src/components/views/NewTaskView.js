@@ -23,27 +23,27 @@ const NewTaskView = () => {
         startDate: '',
         duration: ''
       })
-    
+
       const onSubmit = e => {
         e.preventDefault()
-    
+
         console.log(data)
-    
+
         API.post(
         '/api/users', data)
         .then(function (response) {
-            
+
             console.log(response)
         })
         .catch(function (error) {
             console.log(error.response.data)
         })
-        
+
       }
-    
+
       const onChange = e => {
         setData({[e.target.name]: e.target.value})
-        console.log(data) 
+        console.log(data)
         // setData({"location": location.value})
     }
 
@@ -57,30 +57,30 @@ const NewTaskView = () => {
         maxWidth: "400px",
         margin: "auto",
     }
-    
+
     // Client Validation
     const basic = (text) => text.length > 2
 
     return (
         <>
-        
+
       <Nav backButtonLink = "/projects" BackButton={true} MenuButton={false} />
-      {/* <CardContainer background={Background}>
+      <CardContainer background={Background}>
       <form onSubmit={onSubmit} className='form'>
         <div data-cy="newProjectView" style={mystyle}>
             <TitleText text="New Task" />
             <NormalText text="Please fill out all required fields" />
             <FormInput type='text' validation={basic} value={data.taskName} onChange={onChange} require={true} errorText="Please enter more Characters" label='Task Name' id='taskName' name='taskName' />
             <FormInput type='text' validation={basic} value={data.description} onChange={onChange} require={false} multiline={true} label='Task Description' id='description' name='description' />
-            
+
             <DateInput label="Start Date" day={1} id="startDate" name='startDate'/>
-            
+
             <DurationPicker label="Duration (hours)*" id="duration" name='duration' style={{width: "100%"}}/>
 
             <ButtonInput disabled={false} type='submit' primary={true} color='primary' text="Create" />
         </div>
         </form>
-        </CardContainer> */}
+        </CardContainer>
         <EditTaskOverlay edit />
         <Background/>
         </>

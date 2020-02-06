@@ -3,6 +3,37 @@ const { ProjectModel } = require("../models/project")
 const { UserModel } = require("../models/user")
 const _ = require("lodash")
 
+
+// GET Task
+async function getTask (req, res, next) {
+
+  let validUser = await UserModel.findById(req.user._id).catch(err => {
+    return res.status(404).json({"message": error.details[0].message})
+  })
+
+  let validProject = await ProjectModel.findById(req.params.projectId).catch(
+    err => {
+      return res.status(404).json({"message": error.details[0].message})
+    }
+  )
+
+  let userInProject = validProject.users.find(
+    element => element.user == validUser._id
+  )
+
+  let validTask = validProject.tasks.find(
+      val => (val._id = req.params.taskId)
+  )
+
+  res.status(200)
+  res.locals.validTask = validTask
+  res.locals.validUser = validUser
+
+  next()
+}
+
+
+
 async function createTask(req, res, next) {
   let validUser = await UserModel.findById(req.user._id).catch(err => {
     return res.status(404).json({"message": error.details[0].message})
@@ -233,7 +264,7 @@ async function updateAllTasks (req, res, next) {
 }
 
 function checkOverlap(task, project) {
- 
+
   taskStart = new Date(0, 0, task.day, task.start_time)
   taskFinish = new Date(0, 0, task.day, task.start_time + task.length)
 
@@ -245,8 +276,8 @@ function checkOverlap(task, project) {
       projTask.day,
       projTask.start_time + projTask.length
     )
-    
-    
+
+
     if (
       (task._id != projTask._id) &&
       (((taskStart > projTaskStart && taskStart < projTaskFinish) ||
@@ -260,4 +291,4 @@ function checkOverlap(task, project) {
   return true
 }
 
-module.exports = { createTask, updateTask, removeTask, updateAllTasks }
+module.exports = { createTask, updateTask, removeTask, updateAllTasks, getTask }
