@@ -35,6 +35,8 @@ export default function Grid(props) {
   useEffect(() => {
     scrollDiv.current.addEventListener('scroll', e => {
       fixedTable.current.style.left = `${e.target.scrollLeft}px`
+      fixedArrow.current.style.left = `${e.target.scrollLeft + 4}px`
+      fixedTime.current.style.left = `${e.target.scrollLeft + 8}px`
     })
     API.get(
       `api/projects/${projectId}/`
@@ -277,6 +279,8 @@ export default function Grid(props) {
 
     const fixedTable = useRef(null)
     const scrollDiv = useRef(null)
+    const fixedArrow = useRef(null)
+    const fixedTime = useRef(null)
 
   return (
     // Creates grid of all Project Tasks
@@ -293,17 +297,10 @@ export default function Grid(props) {
     </table>
 
     <div style={{position: "relative", marginLeft: "50px"}} >
-      {/* {errorMessage && <ErrorMessage msg={errorMessage.message} onClose={() => setErrorMessage(null)} />} */}
-      {/* {successMessage && <SuccessMessage msg={successMessage} onClose={() => setSuccessMessage(null)} />} */}
-
       <Button onClick={addItem} text="Add" />
       <GridLayout onResizeStop={stopDrag} onDragStop={stopDrag} verticalCompact={false} className="layout" cols={numberOfDays(project)} maxRows={24} rowHeight={50} width={numberOfDays(project) * 200} margin={[0, 0]}>
         {layout.map((grid, i) => (
           <div key={grid.i} data-grid={grid} >
-          
-          {/* <Tooltip title="Delete Task" placement="top" arrow>
-            <DeleteIcon onClick={() => removeItem(grid._id)} className="deleteButton"/>
-            </Tooltip> */}
             <Formatting {...grid} />
           </div>
         ))}
@@ -332,13 +329,14 @@ export default function Grid(props) {
                 <td>
                   {i === currentTimeLine.hours && (
                     <div style={{height: '100%', position: 'relative'}}>
-                      <div style={{top: `${currentTimeLine.mins}%`, height: '4px', opacity: '0.4', width: '100%', position: 'relative', backgroundColor: 'red'}}></div>
-                      {j === 0 && (
+                    {j === 0 && (
                         <div style={{top: `${currentTimeLine.mins}%`, position: 'absolute', transform: 'translate(-100%, -50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}} >
-                          <img style={{width: '60px', height: 'auto', top: '2px', left: "2px", position: 'relative'}} src={TimeArrow} />
-                          <p style={{position: 'absolute', zIndex: 2, margin: 0, top: '6px', color: "white"}}>{`${currentTimeLine.hours < 10 ? '0' : ''}${Math.floor(currentTimeLine.hours)}:${currentTimeLine.mins * 60 / 100 < 10 ? '0' : ''}${Math.floor(currentTimeLine.mins * 60 / 100)}`}</p>
+                          <img ref={fixedArrow} style={{width: '60px', height: 'auto', zIndex: 90, top: '2px', left: "2px", position: 'relative'}} src={TimeArrow} />
+                          <p ref={fixedTime} style={{position: 'absolute', zIndex: 100, margin: 0, top: '6px', color: "white"}}>{`${currentTimeLine.hours < 10 ? '0' : ''}${Math.floor(currentTimeLine.hours)}:${currentTimeLine.mins * 60 / 100 < 10 ? '0' : ''}${Math.floor(currentTimeLine.mins * 60 / 100)}`}</p>
                         </div>
                       )}
+                      <div style={{top: `${currentTimeLine.mins}%`, height: '4px', opacity: '0.4', width: '100%', position: 'relative', backgroundColor: 'red'}}></div>
+                      
                     </div>
                   )}
                 </td>
