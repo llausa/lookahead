@@ -179,6 +179,7 @@ export default function Grid(props) {
     // To calculate the no. of days between two dates
     let numberOfDays = differenceInTime / (1000 * 3600 * 24)
 
+    console.log()
     return numberOfDays
   }
 

@@ -1,4 +1,4 @@
-import React, {useReducer} from "react"
+import React, {useReducer, useEffect, useState } from "react"
 import API from "../axios.config"
 import CardContainer from './CardContainer'
 import DateInput from './DateInput'
@@ -8,9 +8,12 @@ import NormalText from './NormalText'
 import DurationPicker from './DurationPicker'
 import TimePicker from './TimePicker'
 import FormInput from './FormInput'
+import { useParams } from 'react-router-dom'
 
 
 const EditTaskOverlay = (props) => {
+
+  const { projectId } = useParams()
 
     const [data, setData] = useReducer((state, newState) => (
         {...state, ...newState}
@@ -20,6 +23,22 @@ const EditTaskOverlay = (props) => {
         startDate: '',
         duration: ''
       })
+
+
+      useEffect(() => {
+        API.get(
+          `api/projects/${projectId}/tasks/${props.taskId}`
+        )
+        .then(res => {
+         
+    
+        }).catch((err) => {
+          console.log(err)
+          props.redirect('/projects')
+        })
+      }, [])
+
+      
     
       const onSubmit = e => {
         e.preventDefault()
