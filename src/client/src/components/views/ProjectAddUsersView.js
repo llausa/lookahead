@@ -90,7 +90,7 @@ export default function ProjectAddUsersView(props) {
 
         <Card style={CardStyle}>
         <p style={{margin: "10px", fontWeight: "bold", fontSize: "40px"}}>Project Add Users</p>
-        <div style={{margin: "20px"}}><FormInput type='text' label='Search Users' id='userSearch' name='userSearch'/> <Button variant="outlined" style={buttonMain} color="primary"><SearchIcon/></Button></div>
+
         </Card>
 
         {users.map(user => {

@@ -78,7 +78,7 @@ const ProjectUsersView = () => {
         {/* <UserCard user="Elon Musk" userPrivilege="Owner" userPosition="Genius" userEmail="Elon@Musk.com" userEdit={true}/> */}
         {/* <UserCard user="Steve Jobs" userPrivilege="Read/Write" userPosition="Remote Worker" userEmail="Steve@apple.com" userEdit={true}/> */}
 
-        <Button component={Link} to="/projects/:id/users/add" onClick={AddUserPressed} variant="outlined" style={buttonMain} color="primary">Add User<AddIcon style={smallIcon} /></Button>
+        <Button component={Link} to={`/projects/${projectId}/users/add`} onClick={AddUserPressed} variant="outlined" style={buttonMain} color="primary">Add User<AddIcon style={smallIcon} /></Button>
         </div>
         </div>
         <Background/>
