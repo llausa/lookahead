@@ -44,6 +44,7 @@ router.put("/:projectId/users/:userId", auth, projectController.updateUser, refr
 
 router.put("/:projectId/tasks", auth, taskController.createTask, refreshAuth ) // we're not figuring out dates correctly
 
+router.get("/:projectId/tasks/:taskId", auth, taskController.getTask, refreshAuth) // building now
 
 router.put("/:projectId/tasks/edit", auth, taskController.updateAllTasks, refreshAuth ) // havent tested yet bc cant create tasks
 
