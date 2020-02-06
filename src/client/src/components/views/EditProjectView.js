@@ -52,23 +52,18 @@ const EditProjectView = (props) => {
     const onSubmit = e => {
       e.preventDefault()
 
-      console.log(data)
-
       API.put(
       `/api/projects/${projectId}`, data)
       .then(function (response) {
-          console.log(response)
           setSuccessMessage("Your project has been changed.")
       })
       .catch(function (error) {
-          console.log(error.response.data)
           setErrorMessage(error.response.data)
       })
     }
 
     const onChange = e => {
       setData({[e.target.name]: e.target.value})
-      console.log(data)
     }
 
     const onTimeZoneChange = e => {
@@ -85,11 +80,9 @@ const EditProjectView = (props) => {
       API.delete(
       `/api/projects/${projectId}`)
       .then(function (response) {
-          console.log(response)
           props.redirect(`/projects`)
       })
       .catch(function (error) {
-          console.log(error.response.data)
           setErrorMessage(error.response.data)
       })
     }

@@ -33,18 +33,15 @@ const PasswordChangeView = () => {
     const onSubmit = e => {
         e.preventDefault()
 
-        console.log(data)
-
         API.put(
         '/api/users/password', data)
         .then(function (response) {
 
-            console.log(response)
             setLoading(false)
             setSuccessMessage("Your password has been changed.")
         })
         .catch(function (error) {
-            console.log(error.response.data)
+
             setLoading(false)
             setErrorMessage(error.response.data)
         })
@@ -77,7 +74,6 @@ const PasswordChangeView = () => {
     }
 
     function SendPasswordPressed() {
-        console.log("Send Email Pressed")
         setLoading(true)
     }
 

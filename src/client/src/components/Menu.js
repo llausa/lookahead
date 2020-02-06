@@ -71,30 +71,13 @@ const VersionText = {
     border: "none"
 }
 
-function MyLookaheadsPressed() {
-    console.log("My Lookaheads Pressed")
-}
 
 const hehe = () => {
     let link = links[Math.floor(Math.random() * links.length)]
     let audio = new Audio(link)
     audio.play()
 }
-
-function EditDetailsPressed() {
-    console.log("Edit Details Pressed")
-}
-
-function ChangeEmailPressed() {
-    console.log("Change Email Pressed")
-}
-
-function ChangePasswordPressed() {
-    console.log("Change Password Pressed")
-}
-
 function LogoutPressed() {
-    console.log("Logout Pressed")
     Cookies.remove("authToken")
 }
 
@@ -108,10 +91,10 @@ const MenuView = (props) => {
         <div style={MenuHolder} className={props.className}>
             <div data-cy="MenuView" style={mystyle}>
                 <h1 style={{margin: "40px 0 10px 0", fontSize: "70px"}}>Menu</h1>
-                <Button component={Link} to="/projects" onClick={MyLookaheadsPressed} variant="outlined" style={buttonMain} color="primary">My Projects</Button>
-                <Button component={Link} to="/account/details" onClick={EditDetailsPressed} variant="outlined" style={buttonGeneral}>Edit Details <EditIcon style={smallIcon}/></Button>
-                <Button component={Link} to="/account/email" onClick={ChangeEmailPressed} variant="outlined" style={buttonGeneral}>Change Email <MailIcon style={smallIcon} /> </Button>
-                <Button component={Link} to="/account/password" onClick={ChangePasswordPressed} variant="outlined" style={buttonGeneral}>Change Password <LockIcon style={smallIcon} /> </Button>
+                <Button component={Link} to="/projects" variant="outlined" style={buttonMain} color="primary">My Projects</Button>
+                <Button component={Link} to="/account/details"  variant="outlined" style={buttonGeneral}>Edit Details <EditIcon style={smallIcon}/></Button>
+                <Button component={Link} to="/account/email"  variant="outlined" style={buttonGeneral}>Change Email <MailIcon style={smallIcon} /> </Button>
+                <Button component={Link} to="/account/password"  variant="outlined" style={buttonGeneral}>Change Password <LockIcon style={smallIcon} /> </Button>
                 <Button component={Link} variant="outlined" onClick={LogoutPressed} style={buttonGeneral}>Logout <ExitToAppIcon style={smallIcon} /></Button>
                 <button onClick={hehe} style={VersionText}>lookahead v1.0.0 2020</button>
             </div>

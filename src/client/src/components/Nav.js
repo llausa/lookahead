@@ -35,10 +35,6 @@ const Invisible = {
   pointerEvents: "none",
 }
 
-const HandleBack = () => {
-  console.log("We going back boi")
-}
-
 const Nav = (props) => {
 
   const [open, setOpen] = React.useState(false)
@@ -55,7 +51,7 @@ const Nav = (props) => {
       <AppBar className={classes.pos} >
         <Toolbar>
         {props.BackButton ? (
-          <IconButton component={Link} to={props.backButtonLink} onClick={HandleBack} className={classes.menuButton} color="inherit" aria-label="Back">
+          <IconButton component={Link} to={props.backButtonLink} className={classes.menuButton} color="inherit" aria-label="Back">
             <KeyboardBackspaceIcon/>
           </IconButton>) : (
             <IconButton className={classes.menuButton} style={Invisible} color="inherit">

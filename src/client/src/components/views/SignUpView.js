@@ -41,12 +41,9 @@ const Signup = (props) => {
     const onSubmit = e => {
         e.preventDefault()
 
-        console.log(data)
-
         API.post(
         '/api/users', data)
         .then(function (response) {
-            console.log(response)
             setLoading(false)
             if (response.status === 201) {
                 props.redirect('/projects')

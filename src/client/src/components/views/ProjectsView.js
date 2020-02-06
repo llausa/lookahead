@@ -43,11 +43,6 @@ const page ={
     justifyContent: "center",
 }
 
-
-function CreateNewPressed() {
-    console.log("Create New Pressed")
-}
-
 export default function ProjectsView(props) {
 
     const [projects, setProjects] = useState([])
@@ -59,7 +54,7 @@ export default function ProjectsView(props) {
             setProjects(res.data.projects)
 
         }).catch(err => {
-            console.log(err)
+
         })
     }, [])
 
@@ -75,7 +70,7 @@ export default function ProjectsView(props) {
             return <ProjectCard key={project._id} link={project._id} title={project.title}  start_date={project.start_date} end_date={project.end_date} location={project.location} />
         })}
 
-        <Button component={Link} to="/projects/new" onClick={CreateNewPressed} variant="outlined" style={buttonMain} color="primary">Create New <AddIcon style={smallIcon} /></Button>
+        <Button component={Link} to="/projects/new" variant="outlined" style={buttonMain} color="primary">Create New <AddIcon style={smallIcon} /></Button>
         </div>
         </div>
         <Background/>

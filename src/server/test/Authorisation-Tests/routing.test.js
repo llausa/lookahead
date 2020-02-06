@@ -41,8 +41,7 @@ let validProject = {
 	create_date: "2020-02-01",
 	start_date: "2020-02-02",
 	end_date: "2020-02-05",
-	location: "Brisbane",
-	timezone: 10
+	location: "Brisbane"
 }
 
 let authToken
@@ -134,7 +133,7 @@ if (mongoose.connection.name === "lookahead-test") {
 					.end((err, res) => {
 						expect(err).to.be.null
 						expect(res).to.have.status(200)
-						expect(res.body.projObjs).to.be.an("array")
+						expect(res.body.projects).to.be.an("array")
 						done()
 					})
 			})
@@ -162,7 +161,7 @@ if (mongoose.connection.name === "lookahead-test") {
 					.end((err, res) => {
 						expect(err).to.be.null
 						expect(res).to.have.status(200)
-						expect(res.body.usersObjs).to.be.an("array")
+						expect(res.body.users).to.be.an("array")
 						done()
 					})
 			})
@@ -175,7 +174,7 @@ if (mongoose.connection.name === "lookahead-test") {
 					.end((err, res) => {
 						expect(err).to.be.null
 						expect(res).to.have.status(200)
-						expect(res.body.usersObjs).to.be.an("array")
+						expect(res.body.users).to.be.an("array")
 						done()
 					})
 			})

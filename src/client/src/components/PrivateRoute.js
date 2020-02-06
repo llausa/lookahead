@@ -13,7 +13,6 @@ export default function PrivateRoute(props) {
     if (authToken) {
 
     let decoded = JWT.decode(authToken)
-    console.log('decoded',decoded)
 
       if (decoded._id) {
         return true

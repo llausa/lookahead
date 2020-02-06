@@ -53,7 +53,6 @@ function ProjectView(props) {
             setProject(res.data.validProject)
             setLoading(false)
         }).catch((err) => {
-            console.log(err)
             setLoading(false)
             props.redirect('/projects')
           })

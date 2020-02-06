@@ -42,7 +42,8 @@ const Login = (props) => {
                 props.redirect('/projects')
             }
         })
-        .catch(function (error) {
+        .catch(function (error) {  
+            console.log(error)
 
             setLoading(false)
             setErrorMessage(error.response.data)
