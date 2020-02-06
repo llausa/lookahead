@@ -44,6 +44,7 @@ export default function SpeedDials(props) {
 
     const EditClicked = () => {
         props.onEdit && props.onEdit()
+        console.log("Edit CLicked")
         setOpen(false)
     }
 

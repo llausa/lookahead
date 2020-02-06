@@ -18,6 +18,8 @@ import EditProjectView from './views/EditProjectView'
 import EmailChangeView from './views/EmailChangeView'
 import PasswordChangeView from './views/PasswordChangeView'
 import PrivateRoute from '../components/PrivateRoute'
+import EditTaskOverlay from '../components/EditTaskOverlay'
+import RedirectPage from '../components/views/RedirectPage'
 
 
 const App = () => {
@@ -56,7 +58,8 @@ const App = () => {
           <PrivateRoute exact path="/projects/:projectId/users/:userid" component={ProjectUserSettingsView} redirect={redirectFunc} data-cy="projectUserSettingsView" render={ props => <ProjectUserSettingsView {...props} projectId={projectId} userId={userId}/>}><ProjectUserSettingsView redirect={redirectFunc} /></PrivateRoute>
           <PrivateRoute exact path="/projects/:projectId/edit" component={ProjectSettingsView} redirect={redirectFunc} data-cy="editProjectView" render={ props => <EditProjectView {...props} projectId={projectId}/>}><EditProjectView redirect={redirectFunc} /></PrivateRoute>
           <PrivateRoute exact path="/projects/:projectId/newtask" component={NewTaskView} redirect={redirectFunc} data-cy="newTaskView" render={ props => <ProjectView {...props} projectId={projectId}/>}><NewTaskView redirect={redirectFunc} /></PrivateRoute>
-          <PrivateRoute exact path="/projects/:projectId/edittask/:taskid" component={EditTaskView} redirect={redirectFunc} data-cy="editTaskView" render={ props => <ProjectUserSettingsView {...props} projectId={projectId} taskId={taskId}/>}><EditTaskView redirect={redirectFunc} /></PrivateRoute>
+          <PrivateRoute exact path="/projects/:projectId/tasks/:taskId" component={EditTaskOverlay} redirect={redirectFunc} data-cy="editTaskView" render={ props => <EditTaskOverlay {...props} projectId={projectId} taskId={taskId}/>}><EditTaskOverlay redirect={redirectFunc} /></PrivateRoute>
+          <PrivateRoute component={RedirectPage} redirect={redirectFunc} data-cy="loginView"><RedirectPage redirect={redirectFunc} /></PrivateRoute>
         </Switch>
       </BrowserRouter>
     </div>
