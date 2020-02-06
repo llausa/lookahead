@@ -12,9 +12,10 @@ import FormInput from '../FormInput'
 import Button from '@material-ui/core/Button'
 import { useParams } from 'react-router-dom'
 import ErrorMessage from '../ErrorMessage'
+import SuccessMessage from '../SuccessMessage'
 
 
-const EditProjectView = () => {
+const EditProjectView = (props) => {
     let today = new Date()
     let minDate = today.setDate(today.getDate() + 1)
 
@@ -22,6 +23,9 @@ const EditProjectView = () => {
 
     // For Error Message
     const [errorMessage, setErrorMessage] = useState(null)
+
+    // For Success Message
+    const [successMessage, setSuccessMessage] = useState(null)
 
     const [data, setData] = useReducer((state, newState) => (
         {...state, ...newState}
@@ -52,12 +56,12 @@ const EditProjectView = () => {
       `/api/projects/${projectId}`, data)
       .then(function (response) {
           console.log(response)
+          setSuccessMessage("Your project has been changed.")
       })
       .catch(function (error) {
           console.log(error.response.data)
           setErrorMessage(error.response.data)
       })
-
     }
 
     const onChange = e => {
@@ -71,6 +75,21 @@ const EditProjectView = () => {
 
     const onDateChange = e => {
         setData({[e.target.name]: e.target.value.toISOString().substring(0, 10)})
+    }
+
+    const onDeleteClick = e => {
+      e.preventDefault()
+
+      API.delete(
+      `/api/projects/${projectId}`)
+      .then(function (response) {
+          console.log(response)
+          props.redirect(`/projects`)
+      })
+      .catch(function (error) {
+          console.log(error.response.data)
+          setErrorMessage(error.response.data)
+      })
     }
 
     const mystyle = {
@@ -99,6 +118,7 @@ const EditProjectView = () => {
     return (
         <>
         {errorMessage && <ErrorMessage msg={errorMessage.message} onClose={() => setErrorMessage(null)} />}
+        {successMessage && <SuccessMessage msg={successMessage} onClose={() => setSuccessMessage(null)} />}
 
           <Nav backButtonLink = {`/projects/${projectId}`} BackButton={true} MenuButton={false} />
           <CardContainer background={Background}>
