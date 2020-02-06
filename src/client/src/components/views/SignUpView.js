@@ -57,7 +57,7 @@ const Signup = (props) => {
             // console.log(error.response.data)
             // console.log(error)
             setLoading(false)
-            setErrorMessage(error.data)
+            setErrorMessage(error.response.data)
         }) }
 
         // Updates values on change

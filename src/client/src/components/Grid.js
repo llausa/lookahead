@@ -265,6 +265,10 @@ export default function Grid(props) {
     borderRadius: "10px"
   }
 
+  const editTask = (taskId) => {
+    props.redirect(`/projects/${projectId}/tasks/${taskId}`)
+  }
+
   const HighlightStyle = {
     borderCollapse: "collapse",
     position: "absolute",
@@ -295,7 +299,7 @@ export default function Grid(props) {
     return (
       <div style={props.complete ? completed : notComplete }>
       <div className="MenuButtonStyle" style={{position: "absolute", top: "-8px"}}>
-        <ToggleMenu onDelete={() => removeItem(props._id)} />
+        <ToggleMenu redirect={props.redirect} onDelete={() => removeItem(props._id)} onEdit={() => editTask(props._id)} />
         </div>
         <p className="TaskTitle" >{props.title}</p>
         <p>{props.description}</p>

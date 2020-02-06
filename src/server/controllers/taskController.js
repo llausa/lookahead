@@ -8,18 +8,15 @@ const _ = require("lodash")
 async function getTask (req, res, next) {
 
   let validUser = await UserModel.findById(req.user._id).catch(err => {
-    return res.status(404).json({"message": error.details[0].message})
+    return res.status(404).json({"message": error.message})
   })
 
   let validProject = await ProjectModel.findById(req.params.projectId).catch(
     err => {
-      return res.status(404).json({"message": error.details[0].message})
+      return res.status(404).json({"message": error.message})
     }
   )
 
-  let userInProject = validProject.users.find(
-    element => element.user == validUser._id
-  )
 
   let validTask = validProject.tasks.find(
       val => (val._id = req.params.taskId)
@@ -36,14 +33,14 @@ async function getTask (req, res, next) {
 
 async function createTask(req, res, next) {
   let validUser = await UserModel.findById(req.user._id).catch(err => {
-    return res.status(404).json({"message": error.details[0].message})
+    return res.status(404).json({"message": error.message})
   })
 
   let task = req.body
 
   let validProject = await ProjectModel.findById(req.params.projectId).catch(
     err => {
-      return res.status(404).json({"message": error.details[0].message})
+      return res.status(404).json({"message": error.message})
     }
   )
 
@@ -108,12 +105,12 @@ async function createTask(req, res, next) {
 
 async function updateTask(req, res, next) {
   let validUser = await UserModel.findById(req.user._id).catch(err => {
-    return res.status(404).json({"message": error.details[0].message})
+    return res.status(404).json({"message": error.message})
   })
 
   let validProject = await ProjectModel.findById(req.params.projectId).catch(
     err => {
-      return res.status(404).json({"message": error.details[0].message})
+      return res.status(404).json({"message": error.message})
     }
   )
 
@@ -162,12 +159,12 @@ async function updateTask(req, res, next) {
 
 async function removeTask(req, res, next) {
   let validUser = await UserModel.findById(req.user._id).catch(err => {
-    return res.status(404).json({"message": error.details[0].message})
+    return res.status(404).json({"message": error.message})
   })
 
   let validProject = await ProjectModel.findById(req.params.projectId).catch(
     err => {
-      return res.status(404).json({"message": error.details[0].message})
+      return res.status(404).json({"message": error.message})
     }
   )
 
@@ -199,12 +196,12 @@ async function removeTask(req, res, next) {
 
 async function updateAllTasks (req, res, next) {
   let validUser = await UserModel.findById(req.user._id).catch(err => {
-    return res.status(404).json({"message" : error.details[0].message})
+    return res.status(404).json({"message" : error.message})
   })
 
   let validProject = await ProjectModel.findById(req.params.projectId).catch(
     err => {
-      return res.status(404).json({"message": error.details[0].message})
+      return res.status(404).json({"message": error.message})
     }
   )
 
