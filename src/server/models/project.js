@@ -5,7 +5,7 @@ const Joi = require('@hapi/joi')
       .extend(require('@hapi/joi-date'))
 Joi.objectId = require('joi-objectid')(Joi)
 
-
+// Schema for Project Objects -> includes TaskSchema which is a "child" of Projects
 const ProjectSchema = new mongoose.Schema({
     title: { type: String, required: true},
     create_date: {type: Date, default: Date.now() },
@@ -25,8 +25,10 @@ const ProjectSchema = new mongoose.Schema({
     ]
 })
 
+// Creation of Project Model with Mongoose
 const ProjectModel = new mongoose.model('Project', ProjectSchema)
 
+// Validating that whenever a Project Object is created it has the values below
 function validateProject (project) {
   const schema = Joi.object({
       title: Joi.string().required(),

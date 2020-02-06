@@ -9,7 +9,7 @@ const authController = require('../controllers/authController')
 const refreshAuth = require('../middleware/refreshAuth')
 
 
-// Login
+// Login Page -> Sending Login details to auth the user
 router.post('/', authController.login, refreshAuth)
 
 

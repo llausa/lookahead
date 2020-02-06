@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 const Joi = require('@hapi/joi')
 
 
-
+// Task Object Schema
 const TaskSchema = new mongoose.Schema({
   title: { type: String, required: true  },
   start_time: { type: Number, required: true, min: 0, max: 23 },
@@ -12,7 +12,7 @@ const TaskSchema = new mongoose.Schema({
   complete: { type: Boolean, default: false }
 })
 
-
+// Validate Task for these objects whenever they are created
 function validateTask (task, projectDays) {
 
 

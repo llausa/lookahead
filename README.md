@@ -1,6 +1,8 @@
-﻿# T3A2 Part A | Alex Leybourne, Ben Ulcoq, Santiago Chamon :sweet_potato: ⚛️
+﻿# T3A2 Part B | Alex Leybourne, Ben Ulcoq, Santiago Chamon :sweet_potato: ⚛️
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/1f4244b9-9651-47ce-997d-365175476ab1/deploy-status)](https://app.netlify.com/sites/lookahead/deploys)
+
+Deployed Site: [Lookahead App](https://lookahead.netlify.com/)
 
 Backend Server: [Server](https://vast-oasis-18718.herokuapp.com)
 
@@ -79,6 +81,30 @@ Given the fact that the development team and the client were working in differen
 
 Based on the information provided to the team by the client, preliminary research into what was expected to be achievable in the given timeframe was conducted. Features and functionality were broken down at a high level to help with prioritisation and time management. Once the team had agreed on a MVP functionality, the client was consulted for feedback. The client was happy to proceed with how features had been scoped, and so the team set about planning the project.
 
+The application was built utilising the agile project management methodology. We carried out 3 sprints, where tasks were allocated according to skill and skill comfort levels between all team members of the group.
+
+These were the self-diagnosed comfort levels that each member of the group had with the technologies we were working with:
+- Alex:
+
+  - React/Front-end: Very comfortable and very experienced
+
+  - Node/Express/Back-end: Not comfortable and medium experience
+
+- Santiago:
+
+  - React/Front-end: Not comfortable and little experience
+
+  - Node/Express/Back-end: Very comfortable and medium experience
+
+- Ben:
+
+  - React/Front-end: Comfortable and medium experience
+
+  - Node/Express/Back-end: Very comfortable and high experience
+
+  Taking this feedback into account, tasks were created and divvied by Ben, with authentication and user crud functionality tasked to Santiago, Front-end structural setup (components and views) assigned to Alex and Ben with Testing and then jumping onto the Backend to work with Santiago on Projects Crud.
+
+  Once Santiago and Ben completed the Backend, they were tasked with helping Alex connect the Backend with the Frontend.
 
 ### Project Timeline
 
@@ -175,7 +201,73 @@ The team conducted a final review of all aspects of the documentation that each 
 
 </details>
 
+### Development Team Progress
+
+<details>
+  <summary>Sprint 1 (20/1 - 26/1)</summary>
+
+    Accordingly, the tasks for the sprints were divided along front-end and back-end line. Alex focused on the front-end throughout the project, Ben focused on writing tests for the first sprint and Santiago began buiding the Back-end with TDD.
+
+    There were some challenges with building the User Crud during week one, primarily with the use of tokens. This was solved by both Ben and Santiago. Test Driven Development was utilised heavily throught this first sprint. With a big push by Ben to create the tests that would shape the product in the following weeks, the entire group was able to conceptualize how the app would work.
+
+    This feedback was shared with the client and we were able to clarify on items such as the below:
+  ![client_feedback_1](docs/client_feedback_1.png)
+
+    Here are some screenshots of the sprints board at the beggining and end of the week.
+
+    Beginning of the week:
+
+  ![sprint_1_1](docs/sprint_1_1.png)
+
+    End of the week:
+![sprint_1_2](docs/sprint_1_2.png)
+</details>
+
+<details>
+<summary>Sprint 2 (27/1 - 2/2)</summary>
+
+    The second sprint saw Ben jump into the back-end with Santiago and work on the Projects Crud that encapsulated Tasks Crud as well. Some items began making their way onto the backlog column as client feedback came in and scope creep was managed.
+
+    Alex had a productive week connecting some of the main pages of the frontend together with menus and back buttons. Alex also redesigned and refactored all of the views during this week. This occured after he watched some tutorials on how to write higher quality React code.
+
+    Ben finished working on tests, where he brushed up on his async javascript knowledge. This came up when he was doing tests and this was key for his tests to work.
+
+    Santiago continued working on the API endpoints, including the logic within them. This included a refactor of the backend to create controllers. He utilised Ben's tests to make sure that the code did what was expected.
+
+    Beginning of the week:
+![sprint_2_1](docs/sprint_2_1.png)
+
+    End of the week:
+![sprint_2_2](docs/sprint_2_2.png)
+</details>
+
+<details>
+<summary>Sprint 3 (3/2 - 6/2)</summary>
+
+    This was by far the busiest week. A lot of coding and testing was carried out in the days prior to submitting the assignment. The group acknowledges that the app has quite a bit of technical debt but this is the end result to our commitment to deliver the exact requirements requested by the client.
+
+    We feel we have achieved this, even delivering on things that would've been nice-to-haves, as shown in the feedback from the client below:
+![client_feedback_2](docs/client_feedback_2.png)
+
+    A lot of testing was done during this week. The above reflects comments of the client after seeing the application. We have 70 (65 backend + 5 frontend) tests on the app and were passing all of them until we had to develop in a more "agile" manner to finish the application. We also carried out extensive testing in development as can be seen in the images below:
+- ![testing_1](docs/testing_1.png)
+- ![testing_2](docs/testing_2.png)
+- ![testing_3](docs/testing_3.png)
+- ![testing_4](docs/testing_4.png)
+- ![testing_5](docs/testing_5.png)
+    You can see these comments on src/server/routes/projects.js.
+
+    The team definitely felt pressed for time, and added any rabbitholes we encountered to the nice-to-have/extensible features category so that we could deliver on time.
+
+    The main challenges revolved around Cookies, specifically Cookies based authorization. Cross-domain cookies also played a part in our list of challenges.
+    Essentially, cookies had to be set up just right along with JWT so that the browser would know who was visiting the app.
+
+    Ben probably spent the 3/2-5/2 working through issues to do with the cookies and JWT token.
+
+</details>
+
 Trello Board can be found here: https://trello.com/b/lCfavHOS/sprint-board
+This Trello Board contains all planning, including Documentation and App Sprints.
 
 ## Wireframes
 
@@ -237,3 +329,17 @@ This folder contains the stages of refinement for the wireframes based on client
   ![Trello Board Day 5](./docs/trello_history/trello-day5.png?raw=true)
 
 </details>
+
+## Extensible Features of the Project
+
+Listed below are some of the additional features we feel would bring our application to a world-class standard:
+- Assign roles to users
+- Invite external users to the application
+- Email/password reset from Login
+- Categories for Tasks
+- Importance levels for distinguishing critical Tasks
+
+## Status
+
+The project is complete and live! You can visit it here:
+[Lookahead App](https://lookahead.netlify.com/)
