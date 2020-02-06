@@ -15,8 +15,8 @@ import ErrorMessage from '../ErrorMessage'
 
 
 const EditProjectView = () => {
-
-  let startDate
+    let today = new Date()
+    let minDate = today.setDate(today.getDate() + 1)
 
     const { projectId } = useParams()
 
@@ -36,7 +36,10 @@ const EditProjectView = () => {
     useEffect(() => {
       API.get(`api/projects/${projectId}`)
       .then(res => {
-        setData(res.data.validProject)
+        console.log('Setting')
+          setData(res.data.validProject)
+          console.log(data)
+    
       })
     }, [])
 
@@ -103,10 +106,13 @@ const EditProjectView = () => {
             <div data-cy="newProjectView" style={mystyle}>
                 <TitleText text="Edit Project" />
                 <NormalText text="Please fill out all required fields" />
-                <FormInput type='text' validation={basic} value={data.projectTitle} onChange={onChange} require={true} errorText="Please enter more Characters" label='Project Title' id='title' name='title'/>
-                <TimeZonePicker defaultVal={(val) => setData(val)} label="Location*" onChange={onTimeZoneChange} id="location" name='location'/>
-                <DateInput value={data.start_date} label="Start Date" day={2} id="start_date" onChange={onDateChange} name='start_date' />
-                <DateInput value={data.end_date} label="End Date" day={2} id="end_date" onChange={onDateChange} name='end_date' />
+                <FormInput type='text' validation={basic} value={data.title} onChange={onChange} require={true} errorText="Please enter more Characters" label='Project Title' id='title' name='title'/>
+                <TimeZonePicker defaultVal={(val) => setData(val)} value={data.location} label="Location*" onChange={onTimeZoneChange} id="location" name='location'/>
+
+                {/* <DateInput value={data.start_date} label="Start Date" day={2} id="start_date" onChange={onDateChange} name='start_date' /> */}
+                <p>Start Date: {data.start_date.substring(0, 10)}</p>
+                <DateInput disablePast minDate={today} value={data.end_date} label="End Date" day={2} id="end_date" onChange={onDateChange} name='end_date' />
+
                 <ButtonInput disabled={false} type='submit' primary={true} color='primary' text="Save" />
                 <Button variant="outlined" style={buttonResetP}>Delete Project</Button>
             </div>

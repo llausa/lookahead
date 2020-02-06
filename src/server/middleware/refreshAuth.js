@@ -9,8 +9,8 @@ module.exports = function (req, res) {
 
   delete data.validUser
 
-  res.cookie('authToken', token, { maxAge: 3600000, domain: "https://lookahead.netlify.com" })
-
+  data.token = token
+  
   res.json( data )
 
 }

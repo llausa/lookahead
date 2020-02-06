@@ -26,12 +26,12 @@ const CssTextField= withStyles({
   },
 })(TextField)
 
-const defaultTimeZone = ({location: momentTZ.tz.guess()})
-console.log(defaultTimeZone)
-
-let timeZonesList = momentTZ.tz.names().map(timeZone => ({location: timeZone}))
-
 const TimeZonePicker = (props) => {
+  
+  let timeZonesList = momentTZ.tz.names().map(timeZone => ({location: timeZone}))
+
+  const defaultTimeZone = ({location: momentTZ.tz.guess()})
+  
 
   useEffect(() => {
     props.defaultVal(defaultTimeZone)

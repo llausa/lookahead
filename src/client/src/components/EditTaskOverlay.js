@@ -8,9 +8,12 @@ import NormalText from './NormalText'
 import DurationPicker from './DurationPicker'
 import TimePicker from './TimePicker'
 import FormInput from './FormInput'
+import { useParams } from 'react-router-dom'
 
 
 const EditTaskOverlay = (props) => {
+
+  const { projectId } = useParams()
 
     const [data, setData] = useReducer((state, newState) => (
         {...state, ...newState}
@@ -21,16 +24,13 @@ const EditTaskOverlay = (props) => {
         duration: ''
       })
 
-      
+
       useEffect(() => {
         API.get(
           `api/projects/${projectId}/tasks/${props.taskId}`
         )
         .then(res => {
-          setProject(res.data.validProject)
-          setLayout(fromDatabase(res.data.validProject.tasks))
-          let projectStart = new Date(res.data.validProject.start_date)
-          calculateTime(projectStart)
+         
     
         }).catch((err) => {
           console.log(err)

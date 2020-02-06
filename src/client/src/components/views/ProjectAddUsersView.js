@@ -69,6 +69,9 @@ export default function ProjectAddUsersView(props) {
             console.log(res.data)
             setUsers(res.data.users)
         })
+        .catch(err => {
+            
+        })
     }, [])
 
     const addUser = (userId) => {
