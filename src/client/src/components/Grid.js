@@ -187,8 +187,8 @@ export default function Grid(props) {
 
   function calculateTimeZone(ProjectTimeZone){
     console.log(moment.tz(ProjectTimeZone).format())
-    NewTime = parseInt(moment.tz(ProjectTimeZone).format('Z'))
-    OffSet = NewTime.substring(0, 3)
+    NewTime = parseInt(moment.tz(ProjectTimeZone).format('Z').substr(0, 3))
+    OffSet = NewTime
     console.log(OffSet)
     console.log(NewTime)
   }
@@ -210,7 +210,7 @@ export default function Grid(props) {
 
     let time = calcTime(OffSet) - tableStart
 
-    time -= new Date(time)  * 60 * 1000
+    time -= new Date(time).getTimezoneOffset()  * 60 * 1000
     console.log(time)
     let days = Math.floor(time / 1000 / 60 / 60 / 24)
     time -= days * 24 * 60 * 60 * 1000
