@@ -24,7 +24,7 @@ const EditTaskOverlay = (props) => {
     const classes = useStyles();
 
 
-  const { projectId } = useParams()
+    const { projectId } = useParams()
 
     const [data, setData] = useReducer((state, newState) => (
         {...state, ...newState}
@@ -36,22 +36,22 @@ const EditTaskOverlay = (props) => {
       })
 
 
-      useEffect(() => {
+    useEffect(() => {
         API.get(
-          `api/projects/${projectId}/tasks/${props.taskId}`
+          `api/projects/${projectId}/tasks/` //${proptaskId}
         )
         .then(res => {
 
 
         }).catch((err) => {
           console.log(err)
-          props.redirect('/projects')
+          // props.redirect('/projects')
         })
       }, [])
 
 
 
-      const onSubmit = e => {
+    const onSubmit = e => {
         e.preventDefault()
 
         console.log(data)
@@ -66,9 +66,9 @@ const EditTaskOverlay = (props) => {
             console.log(error.response.data)
         })
 
-      }
+    }
 
-      const onChange = e => {
+    const onChange = e => {
         setData({[e.target.name]: e.target.value})
         console.log(data)
         // setData({"location": location.value})
