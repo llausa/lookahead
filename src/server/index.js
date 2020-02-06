@@ -48,7 +48,7 @@ else {
 if (!process.env.JWT_SECRET) {
   console.error('FATAL ERROR: jwtPrivateKey is not defined.')
   process.exit(1)
-}
+} 
 
 app.use(cors({
   // origin: "https://lookahead.netlify.com",
