@@ -32,6 +32,8 @@ export default function Grid(props) {
 
   const [project, setProject] = useState(null)
 
+  let projectStart = ''
+
   useEffect(() => {
     scrollDiv.current.addEventListener('scroll', e => {
       fixedTable.current.style.left = `${e.target.scrollLeft}px`
@@ -44,8 +46,9 @@ export default function Grid(props) {
     .then(res => {
       setProject(res.data.validProject)
       setLayout(fromDatabase(res.data.validProject.tasks))
-      let projectStart = new Date(res.data.validProject.start_date)
+      projectStart = new Date(res.data.validProject.start_date)
       console.log("PROJECT START: " + (projectStart))
+      console.log(moment(projectStart).format("dddd, MMMM Do"))
       let ProjectTimeZone = res.data.validProject.location
       calculateTimeZone(ProjectTimeZone)
       calculateTime(projectStart)
@@ -173,10 +176,13 @@ export default function Grid(props) {
     })
   }
 
+   let end_date = ''
+   let start_date = ''
+
   const numberOfDays = (proj) => {
     if(!proj){return 0}
-    let end_date = new Date(proj.end_date)
-    let start_date = new Date(proj.start_date)
+    end_date = new Date(proj.end_date)
+    start_date = new Date(proj.start_date)
 
     let differenceInTime = end_date.getTime() - start_date.getTime()
     // To calculate the no. of days between two dates
@@ -256,7 +262,8 @@ export default function Grid(props) {
     left: "50px",
     zIndex: "2",
     textAlign: "center",
-    marginBottom: "5px"
+    marginBottom: "5px",
+    borderRadius: "10px"
   }
 
   const Formatting = (props) => {
@@ -315,15 +322,11 @@ export default function Grid(props) {
   {/* Dates along top */}
     <table border="1" style={datesStyle} >
           <tbody>
-          {Array(1).fill().map(_ => (
             <tr>
-              {Array(numberOfDays(project)).fill().map(_ => (
-                <td>
-                <p>Date</p>
-                </td>
+              {Array(numberOfDays(project)).fill().map((_, i )=> (
+                <td style={{width: "200px"}}><p style={{fontSize:"12px", fontWeight: "bold"}} > {(moment(start_date).add(i, 'd').format("dddd, MMMM Do")) } </p></td>
               ))}
             </tr>
-          ))}
           </tbody>
         </table>
 
