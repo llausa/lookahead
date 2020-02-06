@@ -1,4 +1,4 @@
-import React, { useState} from "react"
+import React, { useState, useEffect} from "react"
 import Grid from "../Grid"
 import Nav from '../Nav'
 import Background from '../Background'
@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import EditTaskOverlay from '../EditTaskOverlay'
 import Loader from '../Loader'
+import API from '../../axios.config'
 
 const buttonMain = {
     color: "#006EE2",
@@ -23,6 +24,8 @@ function ProjectView(props) {
     // Makes Form Popup
     const [editTaskForm, setEditTaskForm] = useState(false)
 
+    const [project, setProject] = useState(false)
+
     const { projectId } = useParams()
 
     const handleToggle = () => {
@@ -30,13 +33,26 @@ function ProjectView(props) {
         setEditTaskForm(true)
     }
 
+    useEffect(() => {
+        API.get(
+            `api/projects/${projectId}/`
+        )
+        .then(res => { 
+            setProject(res.data.validProject)
+            
+        }).catch((err) => {
+            console.log(err)
+            props.redirect('/projects')
+          })
+        }, [])
+
     const handleClose = () => {
         // setOpen(false)
     }
 
     return (
         <>
-        <EditTaskOverlay edit={taskEdit} redirect={props.redirect} style={{opacity: editTaskForm ? 1 : 0}}/>
+        <EditTaskOverlay edit={taskEdit} project={project} redirect={props.redirect} style={{opacity: editTaskForm ? 1 : 0}}/>
         <div style={{position: "absolute", display: "flex", flexDirection: "column", width: "100vw", height: "100vh", overflowX: "hidden"}}>
         <Nav backButtonLink ='/projects' BackButton={true} MenuButton={true}/>
         <h1 data-cy="projectView" style={{margin: "20px", fontSize: "70px", color: "#006EE2", alignSelf:"center" }} >{props.projectName ," view"}</h1>

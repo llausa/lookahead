@@ -54,6 +54,7 @@ const  MaterialUIPickers = (props) => {
           autoOk
           disablePast = { props.disablePast }
           minDate = { props.minDate }
+          maxDate = { props.maxDate }
           required = {true}
           inputVariant="outlined"
           format="dd/MM/yyyy"

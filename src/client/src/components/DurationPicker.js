@@ -60,12 +60,13 @@ const DurationPicker = (props) => {
       id={props.id}
       style={{margin: "4px", width: "100%"}}
       size="small"
+      onChange={props.onChange}
       disableClearable
       defaultValue= {{hours: "1"}}
       options={TimesList}
       getOptionLabel={option => option.hours}
       renderInput={params => (
-        <CssTextField {...params} label={props.label} variant="outlined" fullWidth />
+        <CssTextField {...params} label={props.label} variant="outlined" fullWidth value = {props.value}/>
       )}
     />
     </>

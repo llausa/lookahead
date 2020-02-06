@@ -13,6 +13,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 import { useParams } from 'react-router-dom'
 
+
 const useStyles = makeStyles(theme => ({
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
@@ -23,7 +24,9 @@ const useStyles = makeStyles(theme => ({
 const EditTaskOverlay = (props) => {
     const classes = useStyles();
 
-  const { projectId, taskId } = useParams()
+    const { projectId, taskId } = useParams()
+
+    const [edit, setEdit ] = useState()
 
     const [data, setData] = useReducer((state, newState) => (
         {...state, ...newState}
@@ -31,7 +34,8 @@ const EditTaskOverlay = (props) => {
         title: '',
         description: '',
         day: '',
-        duration: ''
+        length: '',
+        start_time: ''
       })
 
 
@@ -40,9 +44,14 @@ const EditTaskOverlay = (props) => {
           `api/projects/${projectId}/tasks/${taskId}`
         )
         .then(res => {
+          
+          setEdit(props.edit)
           setData(res.data.task)
     
         }).catch((err) => {
+
+          setEdit(props.edit)
+
           console.log(err)
           // props.redirect('/projects')
         })
@@ -51,7 +60,16 @@ const EditTaskOverlay = (props) => {
 
 
     const onSubmit = e => {
+
+        // setData(data)
         e.preventDefault()
+
+        data.day = (new Date(data.day).getTime() - new Date(props.project.start_date).getTime()) / (1000 * 3600 * 24) + 1
+
+        console.log(data.day)
+        console.log(props.project.start_date)
+
+        // data.day = data.day - project.start_date
 
         console.log(data)
 
@@ -69,8 +87,18 @@ const EditTaskOverlay = (props) => {
 
     const onChange = e => {
         setData({[e.target.name]: e.target.value})
-        console.log(data)
+        // console.log(data)
         // setData({"location": location.value})
+    }
+
+    const onTimeChange = e => {
+      console.log(e.target)
+      setData({'start_time': parseInt(e.target.innerHTML)})
+    }
+
+    const onDurationChange = e => {
+      console.log(e.target)
+    setData({'length': parseInt(e.target.innerHTML)})
     }
 
     const onDateChange = e => {
@@ -99,16 +127,15 @@ const EditTaskOverlay = (props) => {
       <CardContainer style={{zIndex: "6"}} >
       <form onSubmit={onSubmit} className='form'>
         <div data-cy="newProjectView" style={mystyle}>
-            <TitleText text={ props.edit? ("Edit Task") : ("New Task")  } />
+            <TitleText text={ edit ? ("Edit Task") : ("New Task")  } />
             <NormalText text="Please fill out all required fields" />
             <FormInput type='text' validation={basic} value={data.title} onChange={onChange} require={true} errorText="Please enter more Characters" label='Task Name' id='title' name='title' />
             <FormInput type='text' validation={basic} value={data.description} onChange={onChange} require={false} multiline={true} label='Task Description' id='description' name='description' />
 
-            {/* <DateInput label="Start Date" day={1} id="startDate" name='startDate'/> */}
-            <DateInput disablePast value={data.day} label="End Date" day={2} id="end_date" onChange={onDateChange} name='day' />
+            <DateInput minDate={props.project.start_date} maxDate={props.project.end_date} value={data.day} label="End Date" day={1} id="end_date" onChange={onDateChange} name='day' />
 
-            <TimePicker value={data.start_time} label="Start Time*" id="startTime" name='startTime' style={{width: "100%"}}/>
-            <DurationPicker value={data.length} label="Duration (hours)*" id="duration" name='duration' style={{width: "100%"}}/>
+            <TimePicker  onChange={onTimeChange} value={data.start_time} label="Start Time*" id="start_time" name='start_time' style={{width: "100%"}}/>
+            <DurationPicker  onChange={onDurationChange} value={data.length} label="Duration (hours)*" id="length" name='length' style={{width: "100%"}}/>
 
             <ButtonInput disabled={false} type='submit' primary={true} color='primary' text={ props.edit? ("Save") : ("Create") } />
         </div>
