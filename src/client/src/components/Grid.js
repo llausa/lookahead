@@ -304,12 +304,15 @@ export default function Grid(props) {
     const fixedArrow = useRef(null)
     const fixedTime = useRef(null)
 
+    // Calculate position to highlight day
+    let DayPosition = ''
+
   return (
     // Creates grid of all Project Tasks
     <>
     <Button onClick={addItem} text="Add" />
     {/* Times Down left side */}
-    <div ref={scrollDiv} style={{overflowX: "scroll", position: 'relative', color: '#006EE2'}}>
+    <div ref={scrollDiv} style={{overflowX: "scroll", overflowY: "hidden", position: 'relative', color: '#006EE2'}}>
     <table border="1" ref={fixedTable} style={{...tableStyle, position: 'absolute', zIndex: 2, top: '57px', border:'1px solid #006EE2', width: 'auto', backgroundColor: 'rgba(239, 239, 239, 0.9)'}}>
       <tbody>
         {Array(24).fill().map((_, i) => (
@@ -330,7 +333,7 @@ export default function Grid(props) {
             </tr>
           </tbody>
         </table>
-
+{/* Events */}
     <div style={{position: "relative", marginLeft: "50px"}} >
       <GridLayout onResizeStop={stopDrag} onDragStop={stopDrag} verticalCompact={false} className="layout" cols={numberOfDays(project)} maxRows={24} rowHeight={50} width={numberOfDays(project) * 200} margin={[0, 0]}>
         {layout.map((grid, i) => (
@@ -342,7 +345,20 @@ export default function Grid(props) {
 
       {/* Creates Faded Background Grid */}
       <div style={{position: 'relative', pointerEvents: 'none'}}>
-        <table border="1" style={tableStyle}>
+
+      <table border="1" style={{...tableStyle, backgroundColor: "#006EE3", width: "200px", position: "absolute", opacity: 0.5,left: `${DayPosition}px` }}>
+          <tbody>
+          {Array(24).fill().map(_ => (
+            <tr>
+            <td>
+                </td>
+            </tr>
+          ))}
+          </tbody>
+      </table>
+
+
+        <table border="1" style={{...tableStyle, zIndex: -2, opacity: 0.1}}>
           <tbody>
           {Array(24).fill().map(_ => (
             <tr>

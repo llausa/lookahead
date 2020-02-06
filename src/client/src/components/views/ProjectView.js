@@ -21,7 +21,7 @@ function ProjectView(props) {
             <>
             <div style={{position: "absolute", display: "flex", flexDirection: "column", width: "100vw", height: "100vh", overflowX: "hidden"}}>
             <Nav backButtonLink ='/projects' BackButton={true} MenuButton={true}/>
-            <h1 data-cy="projectView" style={{margin: "20px", fontSize: "70px", color: "#006EE2", alignSelf:"center" }} >{props.projectName ," view"}</h1>
+            <h1 data-cy="projectView" style={{margin: "20px", fontSize: "70px", color: "#006EE2", alignSelf:"center" }} > View </h1>
 
             <Button component={Link} to={`/projects/${projectId}/edit`}  color='primary' style={buttonMain} classnName="EditProjectButton"> Edit Project </Button>
             <Button component={Link} to={`/projects/${projectId}/users`}  color='primary' style={buttonMain} > Add Users to Project </Button>
