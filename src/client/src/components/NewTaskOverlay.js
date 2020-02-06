@@ -9,7 +9,6 @@ import DurationPicker from './DurationPicker'
 import TimePicker from './TimePicker'
 import FormInput from './FormInput'
 import Backdrop from '@material-ui/core/Backdrop';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 import { useParams } from 'react-router-dom'
 import ErrorMessage from '../components/ErrorMessage'

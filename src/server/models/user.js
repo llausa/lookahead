@@ -3,9 +3,11 @@ const Joi = require('@hapi/joi')
 const jwt = require('jsonwebtoken')
 const uniqueValidator = require('mongoose-unique-validator')
 
+// Email and Password Regex for input validation
 const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,1024}$/
 
+// User Schema with specifications to other related objects included
 const UserSchema = new mongoose.Schema({
     firstName: {
         type: String,
@@ -46,14 +48,18 @@ const UserSchema = new mongoose.Schema({
         ]
 })
 
+// Generates authToken based on the ID of the User Object
 UserSchema.methods.generateAuthToken = function() {
     const token = jwt.sign({exp: Math.floor(Date.now() / 1000) + (60 * 60), _id: this._id }, process.env.JWT_SECRET)
     return token
 }
 
+// Plugin for Unique email
 UserSchema.plugin(uniqueValidator)
+// Create User Model in mongoose
 const UserModel = mongoose.model('User', UserSchema)
 
+// Validate user creation with the following requirements
 function validateUser(user) {
     const schema = Joi.object({
         firstName: Joi.string()
@@ -76,6 +82,7 @@ function validateUser(user) {
     return schema.validate(user)
 }
 
+// Validate Email for the following requirements
 function validateEmail(email) {
     const schema = Joi.object({
         email: Joi.string()
@@ -88,6 +95,7 @@ function validateEmail(email) {
     return schema.validate(email)
 }
 
+// Validate Password for the following requirements
 function validatePassword(password) {
     const schema = Joi.object({
         password: Joi.string()

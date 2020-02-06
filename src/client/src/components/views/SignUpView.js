@@ -46,7 +46,6 @@ const Signup = (props) => {
         .then(function (response) {
             setLoading(false)
             if (response.status === 201) {
-                
                 props.redirect('/projects')
             }
         })

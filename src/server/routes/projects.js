@@ -8,6 +8,7 @@ const projectController = require("../controllers/projectController")
 const taskController = require("../controllers/taskController")
 const refreshAuth = require("../middleware/refreshAuth")
 
+
 // Projects list route
 router.get("/", auth, projectController.allProjects, refreshAuth) // works but if empty, returns empty array
 
@@ -40,16 +41,22 @@ router.post("/:projectId/users", auth, projectController.addUser, refreshAuth ) 
 router.delete("/:projectId/users/:userId", auth, projectController.removeUser, refreshAuth ) // works correctly - dont send body, send if of
 // user you want to delete in request url. If you try to delete a user that's not in the project the request hangs with
 
+// Update user within a project aka adding them
 router.put("/:projectId/users/:userId", auth, projectController.updateUser, refreshAuth ) // works correctly
 
+// Add Task to Project Path
 router.put("/:projectId/tasks", auth, taskController.createTask, refreshAuth ) // we're not figuring out dates correctly
 
+// Get Single Task based on Id
 router.get("/:projectId/tasks/:taskId", auth, taskController.getTask, refreshAuth) // building now
 
-router.put("/:projectId/tasks/edit", auth, taskController.updateAllTasks, refreshAuth ) // havent tested yet bc cant create tasks
+// Update all tasks in Projects -> used in Grid.js
+router.put("/:projectId/tasks/edit", auth, taskController.updateAllTasks, refreshAuth ) // works
 
-router.put("/:projectId/tasks/:taskId", auth, taskController.updateTask, refreshAuth ) // havent tested yet bc cant create tasks
+// Edit Task Route
+router.put("/:projectId/tasks/:taskId", auth, taskController.updateTask, refreshAuth ) // works
 
+// Delete Task Route
 router.delete("/:projectId/tasks/:taskId", auth, taskController.removeTask, refreshAuth ) // works
 
 

@@ -13,6 +13,8 @@ import Button from '@material-ui/core/Button'
 import { useParams } from 'react-router-dom'
 import ErrorMessage from '../ErrorMessage'
 import SuccessMessage from '../SuccessMessage'
+import CloseIcon from '@material-ui/icons/Close'
+import { Link } from 'react-router-dom'
 
 
 const EditProjectView = (props) => {
@@ -115,8 +117,12 @@ const EditProjectView = (props) => {
 
           <Nav backButtonLink = {`/projects/${projectId}`} BackButton={true} MenuButton={false} />
           <CardContainer background={Background}>
+
           <form onSubmit={onSubmit} className='form'>
             <div data-cy="newProjectView" style={mystyle}>
+
+            <CloseIcon className="ExitButton" component={Link} to={`/projects/${projectId}`} />
+
                 <TitleText text="Edit Project" />
                 <NormalText text="Please fill out all required fields" />
                 <FormInput type='text' validation={basic} value={data.title} onChange={onChange} require={true} errorText="Please enter more Characters" label='Project Title' id='title' name='title'/>

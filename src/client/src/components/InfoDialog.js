@@ -18,7 +18,7 @@ const InfoDialog = () => {
   }
 
   const SmallText = {
-    color: "#C4C4C4",
+    color: "#777777",
     fontSize: "12px",
     fontWeight: "strong",
     cursor: "pointer",
@@ -28,9 +28,9 @@ const InfoDialog = () => {
 
   return (
     <div>
-      <p style={SmallText} onClick={handleClickOpen}>
+      <a style={SmallText} onClick={handleClickOpen}>
         Password Requirements
-        </p>
+        </a>
       <Dialog
         open={open}
         onClose={handleClose}

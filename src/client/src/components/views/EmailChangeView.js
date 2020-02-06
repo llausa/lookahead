@@ -93,6 +93,7 @@ const EmailChangeView = () => {
         {successMessage && <SuccessMessage msg={successMessage} onClose={() => setSuccessMessage(null)} />}
 
         <Nav backButtonLink = "/projects" BackButton={true} MenuButton={false}/>
+        <Loader style={{opacity: loading ? 1 : 0}} />
         <CardContainer background={Background}>
         <form onSubmit={onSubmit} className='form'>
             <div data-cy="emailView" style={mystyle}>
