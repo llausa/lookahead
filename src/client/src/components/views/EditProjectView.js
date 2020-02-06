@@ -15,7 +15,7 @@ import ErrorMessage from '../ErrorMessage'
 import SuccessMessage from '../SuccessMessage'
 
 
-const EditProjectView = () => {
+const EditProjectView = (props) => {
     let today = new Date()
     let minDate = today.setDate(today.getDate() + 1)
 
@@ -59,7 +59,6 @@ const EditProjectView = () => {
           console.log(error.response.data)
           setErrorMessage(error.response.data)
       })
-
     }
 
     const onChange = e => {
@@ -73,6 +72,21 @@ const EditProjectView = () => {
 
     const onDateChange = e => {
         setData({[e.target.name]: e.target.value.toISOString().substring(0, 10)})
+    }
+
+    const onDeleteClick = e => {
+      e.preventDefault()
+
+      API.delete(
+      `/api/projects/${projectId}`)
+      .then(function (response) {
+          console.log(response)
+          props.redirect(`/projects`)
+      })
+      .catch(function (error) {
+          console.log(error.response.data)
+          setErrorMessage(error.response.data)
+      })
     }
 
     const mystyle = {
