@@ -10,7 +10,7 @@ module.exports = function (req, res) {
   delete data.validUser
 
   res.cookie('authToken', token, { maxAge: 3600000, secure: true, sameSite: "None" }) //secure: true, sameSite: "None"
-  res.setHeader('Access-Control-Allow-Headers', 'Set-Cookie')
+  // res.setHeader('Access-Control-Allow-Headers', 'Set-Cookie')
 
   res.json( data )
 
