@@ -40,10 +40,10 @@ const EditProjectView = (props) => {
     useEffect(() => {
       API.get(`api/projects/${projectId}`)
       .then(res => {
-        console.log('Setting')
           setData(res.data.validProject)
-          console.log(data)
     
+      }).catch((err) => {
+        props.redirect('/projects')
       })
     }, [])
 

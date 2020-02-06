@@ -13,27 +13,26 @@ import { useParams } from 'react-router-dom'
 
 const EditTaskOverlay = (props) => {
 
-  const { projectId } = useParams()
+  const { projectId, taskId } = useParams()
 
     const [data, setData] = useReducer((state, newState) => (
         {...state, ...newState}
       ), {
-        taskName: '',
+        title: '',
         description: '',
-        startDate: '',
+        start_date: '',
         duration: ''
       })
 
 
       useEffect(() => {
         API.get(
-          `api/projects/${projectId}/tasks/${props.taskId}`
+          `api/projects/${projectId}/tasks/${taskId}`
         )
         .then(res => {
-         
+          setData(res.data.task)
     
         }).catch((err) => {
-          console.log(err)
           props.redirect('/projects')
         })
       }, [])
@@ -85,7 +84,7 @@ const EditTaskOverlay = (props) => {
         <div data-cy="newProjectView" style={mystyle}>
             <TitleText text={ props.edit? ("Edit Task") : ("New Task")  } />
             <NormalText text="Please fill out all required fields" />
-            <FormInput type='text' validation={basic} value={data.taskName} onChange={onChange} require={true} errorText="Please enter more Characters" label='Task Name' id='taskName' name='taskName' />
+            <FormInput type='text' validation={basic} value={data.title} onChange={onChange} require={true} errorText="Please enter more Characters" label='Task Name' id='taskName' name='taskName' />
             <FormInput type='text' validation={basic} value={data.description} onChange={onChange} require={false} multiline={true} label='Task Description' id='description' name='description' />
             
             <DateInput label="Start Date" day={1} id="startDate" name='startDate'/>
