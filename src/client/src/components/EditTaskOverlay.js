@@ -8,9 +8,20 @@ import NormalText from './NormalText'
 import DurationPicker from './DurationPicker'
 import TimePicker from './TimePicker'
 import FormInput from './FormInput'
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { makeStyles } from '@material-ui/core/styles';
 
+const useStyles = makeStyles(theme => ({
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: '#fff',
+  },
+}));
 
 const EditTaskOverlay = (props) => {
+    const classes = useStyles();
+
 
     const [data, setData] = useReducer((state, newState) => (
         {...state, ...newState}
@@ -20,27 +31,27 @@ const EditTaskOverlay = (props) => {
         startDate: '',
         duration: ''
       })
-    
+
       const onSubmit = e => {
         e.preventDefault()
-    
+
         console.log(data)
-    
+
         API.post(
         '/api/users', data)
         .then(function (response) {
-            
+
             console.log(response)
         })
         .catch(function (error) {
             console.log(error.response.data)
         })
-        
+
       }
-    
+
       const onChange = e => {
         setData({[e.target.name]: e.target.value})
-        console.log(data) 
+        console.log(data)
         // setData({"location": location.value})
     }
 
@@ -54,12 +65,14 @@ const EditTaskOverlay = (props) => {
         maxWidth: "400px",
         margin: "auto",
     }
-    
+
     // Client Validation
     const basic = (text) => text.length > 2
 
     return (
         <>
+      <div style={props.style}>
+      <Backdrop className={classes.backdrop} open={true}>
       <div style={{position: "absolute", zIndex: "6", height: "100vh", width: "100vw"}}>
       <CardContainer style={{zIndex: "6"}} >
       <form onSubmit={onSubmit} className='form'>
@@ -68,9 +81,9 @@ const EditTaskOverlay = (props) => {
             <NormalText text="Please fill out all required fields" />
             <FormInput type='text' validation={basic} value={data.taskName} onChange={onChange} require={true} errorText="Please enter more Characters" label='Task Name' id='taskName' name='taskName' />
             <FormInput type='text' validation={basic} value={data.description} onChange={onChange} require={false} multiline={true} label='Task Description' id='description' name='description' />
-            
+
             <DateInput label="Start Date" day={1} id="startDate" name='startDate'/>
-            
+
             <TimePicker label="Start Time*" id="startTime" name='startTime' style={{width: "100%"}}/>
             <DurationPicker label="Duration (hours)*" id="duration" name='duration' style={{width: "100%"}}/>
 
@@ -80,8 +93,10 @@ const EditTaskOverlay = (props) => {
         </CardContainer>
         </div>
         <div className="blackOverlay" ></div>
+        </Backdrop>
+        </div>
         </>
-       
+
     )
 }
 
