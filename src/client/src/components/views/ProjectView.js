@@ -18,7 +18,6 @@ const buttonMain = {
 
 function ProjectView(props) {
 
-
     let taskEdit = false
 
     // Makes Form Popup

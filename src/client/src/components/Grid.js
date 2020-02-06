@@ -32,9 +32,13 @@ export default function Grid(props) {
 
   const [project, setProject] = useState(null)
 
+  let projectStart = ''
+
   useEffect(() => {
     scrollDiv.current.addEventListener('scroll', e => {
       fixedTable.current.style.left = `${e.target.scrollLeft}px`
+      fixedArrow.current.style.left = `${e.target.scrollLeft + 4}px`
+      fixedTime.current.style.left = `${e.target.scrollLeft + 8}px`
     })
     API.get(
       `api/projects/${projectId}/`
@@ -42,7 +46,9 @@ export default function Grid(props) {
     .then(res => {
       setProject(res.data.validProject)
       setLayout(fromDatabase(res.data.validProject.tasks))
-      let projectStart = new Date(res.data.validProject.start_date)
+      projectStart = new Date(res.data.validProject.start_date)
+      console.log("PROJECT START: " + (projectStart))
+      console.log(moment(projectStart).format("dddd, MMMM Do"))
       let ProjectTimeZone = res.data.validProject.location
       calculateTimeZone(ProjectTimeZone)
       calculateTime(projectStart)
@@ -170,10 +176,13 @@ export default function Grid(props) {
     })
   }
 
+   let end_date = ''
+   let start_date = ''
+
   const numberOfDays = (proj) => {
     if(!proj){return 0}
-    let end_date = new Date(proj.end_date)
-    let start_date = new Date(proj.start_date)
+    end_date = new Date(proj.end_date)
+    start_date = new Date(proj.start_date)
 
     let differenceInTime = end_date.getTime() - start_date.getTime()
     // To calculate the no. of days between two dates
@@ -244,6 +253,20 @@ export default function Grid(props) {
     zIndex: "-1",
   }
 
+  const datesStyle = {
+    borderCollapse: "collapse",
+    position: "relative",
+    height: `50px`,
+    width: `${numberOfDays(project) * 200}px`,
+    border: "1px solid #006EE2",
+    top: "0",
+    left: "50px",
+    zIndex: "2",
+    textAlign: "center",
+    marginBottom: "5px",
+    borderRadius: "10px"
+  }
+
   const Formatting = (props) => {
 
     let startTime = ''
@@ -278,14 +301,21 @@ export default function Grid(props) {
 
     const fixedTable = useRef(null)
     const scrollDiv = useRef(null)
+    const fixedArrow = useRef(null)
+    const fixedTime = useRef(null)
+
+    // Calculate position to highlight day
+    let DayPosition = ''
 
   return (
     // Creates grid of all Project Tasks
     <>
-    <div ref={scrollDiv} style={{overflowX: "scroll", position: 'relative', color: '#006EE2'}}>
-    <table border="1" ref={fixedTable} style={{...tableStyle, position: 'absolute', zIndex: 2, top: 'auto', border:'1px solid #006EE2', width: 'auto', backgroundColor: 'rgba(239, 239, 239, 0.9)'}}>
+    <Button onClick={addItem} text="Add" />
+    {/* Times Down left side */}
+    <div ref={scrollDiv} style={{overflowX: "scroll", overflowY: "hidden", position: 'relative', color: '#006EE2'}}>
+    <table border="1" ref={fixedTable} style={{...tableStyle, position: 'absolute', zIndex: 2, top: '57px', border:'1px solid #006EE2', width: 'auto', backgroundColor: 'rgba(239, 239, 239, 0.9)'}}>
       <tbody>
-        {Array(25).fill().map((_, i) => (
+        {Array(24).fill().map((_, i) => (
           <tr>
             <td>{`${i < 10 ? '0' : ''}${i}:00`}</td>
           </tr>
@@ -293,18 +323,21 @@ export default function Grid(props) {
       </tbody>
     </table>
 
+  {/* Dates along top */}
+    <table border="1" style={datesStyle} >
+          <tbody>
+            <tr>
+              {Array(numberOfDays(project)).fill().map((_, i )=> (
+                <td style={{width: "200px"}}><p style={{fontSize:"12px", fontWeight: "bold"}} > {(moment(start_date).add(i, 'd').format("dddd, MMMM Do")) } </p></td>
+              ))}
+            </tr>
+          </tbody>
+        </table>
+{/* Events */}
     <div style={{position: "relative", marginLeft: "50px"}} >
-      {/* {errorMessage && <ErrorMessage msg={errorMessage.message} onClose={() => setErrorMessage(null)} />} */}
-      {/* {successMessage && <SuccessMessage msg={successMessage} onClose={() => setSuccessMessage(null)} />} */}
-
-      <Button onClick={addItem} text="Add" />
       <GridLayout onResizeStop={stopDrag} onDragStop={stopDrag} verticalCompact={false} className="layout" cols={numberOfDays(project)} maxRows={24} rowHeight={50} width={numberOfDays(project) * 200} margin={[0, 0]}>
         {layout.map((grid, i) => (
           <div key={grid.i} data-grid={grid} >
-          
-          {/* <Tooltip title="Delete Task" placement="top" arrow>
-            <DeleteIcon onClick={() => removeItem(grid._id)} className="deleteButton"/>
-            </Tooltip> */}
             <Formatting {...grid} />
           </div>
         ))}
@@ -312,7 +345,20 @@ export default function Grid(props) {
 
       {/* Creates Faded Background Grid */}
       <div style={{position: 'relative', pointerEvents: 'none'}}>
-        <table border="1" style={tableStyle}>
+
+      <table border="1" style={{...tableStyle, backgroundColor: "#006EE3", width: "200px", position: "absolute", opacity: 0.5,left: `${DayPosition}px` }}>
+          <tbody>
+          {Array(24).fill().map(_ => (
+            <tr>
+            <td>
+                </td>
+            </tr>
+          ))}
+          </tbody>
+      </table>
+
+
+        <table border="1" style={{...tableStyle, zIndex: -2, opacity: 0.1}}>
           <tbody>
           {Array(24).fill().map(_ => (
             <tr>
@@ -324,6 +370,8 @@ export default function Grid(props) {
           ))}
           </tbody>
         </table>
+
+
          {/* Creates Red line through view to show time */}
         <table style={{...tableStyle, border: 'none', zIndex: 69, position: 'absolute'}} cellspacing="0" cellpadding="0">
           <tbody>
@@ -333,13 +381,14 @@ export default function Grid(props) {
                 <td>
                   {i === currentTimeLine.hours && (
                     <div style={{height: '100%', position: 'relative'}}>
-                      <div style={{top: `${currentTimeLine.mins}%`, height: '4px', opacity: '0.4', width: '100%', position: 'relative', backgroundColor: 'red'}}></div>
-                      {j === 0 && (
+                    {j === 0 && (
                         <div style={{top: `${currentTimeLine.mins}%`, position: 'absolute', transform: 'translate(-100%, -50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}} >
-                          <img style={{width: '60px', height: 'auto', top: '2px', left: "2px", position: 'relative'}} src={TimeArrow} />
-                          <p style={{position: 'absolute', zIndex: 2, margin: 0, top: '6px', color: "white"}}>{`${currentTimeLine.hours < 10 ? '0' : ''}${Math.floor(currentTimeLine.hours)}:${currentTimeLine.mins * 60 / 100 < 10 ? '0' : ''}${Math.floor(currentTimeLine.mins * 60 / 100)}`}</p>
+                          <img ref={fixedArrow} style={{width: '60px', height: 'auto', zIndex: 90, top: '2px', left: "2px", position: 'relative'}} src={TimeArrow} />
+                          <p ref={fixedTime} style={{position: 'absolute', zIndex: 100, margin: 0, top: '6px', color: "white"}}>{`${currentTimeLine.hours < 10 ? '0' : ''}${Math.floor(currentTimeLine.hours)}:${currentTimeLine.mins * 60 / 100 < 10 ? '0' : ''}${Math.floor(currentTimeLine.mins * 60 / 100)}`}</p>
                         </div>
                       )}
+                      <div style={{top: `${currentTimeLine.mins}%`, height: '4px', opacity: '0.4', width: '100%', position: 'relative', backgroundColor: 'red'}}></div>
+                      
                     </div>
                   )}
                 </td>
