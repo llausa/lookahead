@@ -12,7 +12,8 @@ import DeleteIcon from '@material-ui/icons/Delete'
 import QueryBuilderIcon from '@material-ui/icons/QueryBuilder'
 import Tooltip from '@material-ui/core/Tooltip'
 import ToggleMenu from './ToggleMenu'
-import moment from 'moment-timezone'
+import momenttimezone from 'moment-timezone'
+import moment from 'moment'
 import TimeArrow from '../images/TimeArrow.svg'
 
 
@@ -33,6 +34,7 @@ export default function Grid(props) {
   const [project, setProject] = useState(null)
 
   let projectStart = ''
+  let ProjectTimeZone = ''
 
   useEffect(() => {
     scrollDiv.current.addEventListener('scroll', e => {
@@ -47,9 +49,7 @@ export default function Grid(props) {
       setProject(res.data.validProject)
       setLayout(fromDatabase(res.data.validProject.tasks))
       projectStart = new Date(res.data.validProject.start_date)
-      console.log("PROJECT START: " + (projectStart))
-      console.log(moment(projectStart).format("dddd, MMMM Do"))
-      let ProjectTimeZone = res.data.validProject.location
+      ProjectTimeZone = res.data.validProject.location
       calculateTimeZone(ProjectTimeZone)
       calculateTime(projectStart)
 
@@ -154,8 +154,6 @@ export default function Grid(props) {
       setLayout([...layout, newTask])
     }).catch((res) => {
       console.log(res)
-      //flash error message
-      // props.redirect('/projects')
 
     })
   }
@@ -167,11 +165,9 @@ export default function Grid(props) {
     )
     .then(res => {
       setLayout(layout.filter(el => el._id != taskId))
-      // Flash Task Deleted
+      
     }).catch((res) => {
       console.log(res)
-      //flash error message
-      // props.redirect('/projects')
 
     })
   }
@@ -195,14 +191,13 @@ export default function Grid(props) {
   let NewTime = ''
   let OffSet = ''
 
+  // Gets current time and converts
   function calculateTimeZone(ProjectTimeZone){
-    console.log(moment.tz(ProjectTimeZone).format())
     NewTime = parseInt(moment.tz(ProjectTimeZone).format('Z').substr(0, 3))
     OffSet = NewTime
-    console.log(OffSet)
-    console.log(NewTime)
   }
 
+  // Calculates offset
   function calcTime(offset) {
 
     // create Date object for current location
@@ -216,6 +211,7 @@ export default function Grid(props) {
     return nd
   }
 
+  // Creates timer line that is aware of timezone
   function getTimeToTable(tableStart) {
 
     let time = calcTime(OffSet) - tableStart
@@ -233,6 +229,7 @@ export default function Grid(props) {
     return {days: days, hours: hours, mins: mins / 60 * 100}
   }
 
+  // Updates every minute for posiiton of red line
   const sleep = time => new Promise(r => setTimeout(r, time))
 
   async function calculateTime(projectStart) {
@@ -242,6 +239,7 @@ export default function Grid(props) {
     calculateTime(projectStart)
   }
 
+  // Styles
   const tableStyle = {
     borderCollapse: "collapse",
     position: "relative",
@@ -267,6 +265,22 @@ export default function Grid(props) {
     borderRadius: "10px"
   }
 
+  const HighlightStyle = {
+    borderCollapse: "collapse",
+    position: "absolute",
+    opacity: 0.5,
+    height: `${26 * 50}px`,
+    width: `200px`,
+    border: "1px solid #006EE2",
+    top: "-60px",
+    left: "50px",
+    zIndex: "-2",
+    textAlign: "center",
+    marginBottom: "5px",
+    backgroundColor: "#006EE3", 
+  }
+
+  // Formats Time
   const Formatting = (props) => {
 
     let startTime = ''
@@ -277,9 +291,10 @@ export default function Grid(props) {
       startTime = (props.y + ":00")
     }
 
+    // Task Card Layout
     return (
       <div style={props.complete ? completed : notComplete }>
-      <div className="MenuButtonStyle">
+      <div className="MenuButtonStyle" style={{position: "absolute", top: "-8px"}}>
         <ToggleMenu onDelete={() => removeItem(props._id)} />
         </div>
         <p className="TaskTitle" >{props.title}</p>
@@ -292,11 +307,11 @@ export default function Grid(props) {
 
       // Styling
     const completed = {
-
+      // Future Feature
     }
 
     const notComplete = {
-
+      // Future Feature
     }
 
     const fixedTable = useRef(null)
@@ -305,7 +320,20 @@ export default function Grid(props) {
     const fixedTime = useRef(null)
 
     // Calculate position to highlight day
-    let DayPosition = ''
+    let StartDateValue = moment(start_date)
+    let CurrentDateValue = moment.tz(ProjectTimeZone)
+    console.log("Project Start Date: " + StartDateValue )
+    console.log("Current Date: " + CurrentDateValue)
+    let difference = moment.duration(CurrentDateValue.diff(StartDateValue))
+    // Gets the difference
+    let days = difference.asDays()
+    let round = Math.round(days)
+    // Rounds to Value
+    console.log("difference: " + round)
+    let DaysDifference = round * 200
+    let DayPosition = DaysDifference
+
+    // .format("dddd, MMMM Do")
 
   return (
     // Creates grid of all Project Tasks
@@ -346,9 +374,9 @@ export default function Grid(props) {
       {/* Creates Faded Background Grid */}
       <div style={{position: 'relative', pointerEvents: 'none'}}>
 
-      <table border="1" style={{...tableStyle, backgroundColor: "#006EE3", width: "200px", position: "absolute", opacity: 0.5,left: `${DayPosition}px` }}>
+      <table border="1" style={{...HighlightStyle, left: `${DayPosition}px` }}>
           <tbody>
-          {Array(24).fill().map(_ => (
+          {Array(25).fill().map(_ => (
             <tr>
             <td>
                 </td>
