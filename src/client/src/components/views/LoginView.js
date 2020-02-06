@@ -12,7 +12,6 @@ import CardContainer from '../CardContainer'
 import Background from '../Background'
 import Loader from '../Loader'
 import ErrorMessage from '../ErrorMessage'
-import Cookies from 'js-cookie'
 
 const Login = (props) => {
 
@@ -34,8 +33,7 @@ const Login = (props) => {
     const onSubmit = e => {
         e.preventDefault()
 
-        // console.log(data)
-
+        // Sends login data
         API.post(
         '/api/auth', data)
         .then(function (response) {
@@ -79,7 +77,6 @@ const Login = (props) => {
 
     // Runs when Login Button is pressed
     const LoginPressed = ()  => {
-        console.log("Login Pressed")
         setLoading(true)
     }
 

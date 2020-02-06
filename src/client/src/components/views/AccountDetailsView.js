@@ -8,7 +8,6 @@ import FormInput from '../FormInput'
 import TitleText from '../TitleText'
 import NormalText from '../NormalText'
 import Loader from '../Loader'
-import { Button } from '@material-ui/core'
 import ErrorMessage from '../ErrorMessage'
 import SuccessMessage from '../SuccessMessage'
 
@@ -97,6 +96,7 @@ const AccountDetailsView = (props) => {
 
       <Nav backButtonLink = "/projects" BackButton={true} MenuButton={false} />
       <CardContainer background={Background}>
+      <Loader style={{opacity: loading ? 1 : 0}} />
       <form onSubmit={onSubmit} className='form'>
         <div data-cy="detailsView" style={mystyle}>
         <TitleText text="Account Details" />
