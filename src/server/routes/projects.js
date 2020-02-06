@@ -46,9 +46,9 @@ router.put("/:projectId/tasks", auth, taskController.createTask, refreshAuth ) /
 
 router.get("/:projectId/tasks/:taskId", auth, taskController.getTask, refreshAuth) // building now
 
-router.put("/:projectId/tasks/edit", auth, taskController.updateAllTasks, refreshAuth ) // havent tested yet bc cant create tasks
+router.put("/:projectId/tasks/edit", auth, taskController.updateAllTasks, refreshAuth ) // works
 
-router.put("/:projectId/tasks/:taskId", auth, taskController.updateTask, refreshAuth ) // havent tested yet bc cant create tasks
+router.put("/:projectId/tasks/:taskId", auth, taskController.updateTask, refreshAuth ) // works
 
 router.delete("/:projectId/tasks/:taskId", auth, taskController.removeTask, refreshAuth ) // works
 
