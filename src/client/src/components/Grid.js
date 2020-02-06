@@ -5,14 +5,9 @@ import { Responsive as ResponsiveGridLayout, ToolBox } from 'react-grid-layout'
 import GridLayout  from 'react-grid-layout'
 import { useParams } from 'react-router-dom'
 import API from "../axios.config"
-import Button from '../components/ButtonUserInput'
-import ErrorMessage from '../components/ErrorMessage'
-import SuccessMessage from '../components/SuccessMessage'
-import DeleteIcon from '@material-ui/icons/Delete'
 import QueryBuilderIcon from '@material-ui/icons/QueryBuilder'
-import Tooltip from '@material-ui/core/Tooltip'
 import ToggleMenu from './ToggleMenu'
-import momenttimezone from 'moment-timezone'
+import momenttimezone from 'moment-timezone' 
 import moment from 'moment'
 import TimeArrow from '../images/TimeArrow.svg'
 
@@ -22,12 +17,6 @@ export default function Grid(props) {
   const [layout, setLayout] = useState([])
 
   const [currentTimeLine, setCurrentTimeLine] = useState({days: -1, hours: -1, mins: -1})
-
-  const [currentTime, setCurrentTime] = useState('')
-
-  const [errorMessage, setErrorMessage] = useState(null)
-
-  const [successMessage, setSuccessMessage] = useState(null)
 
   const { projectId } = useParams()
 
@@ -137,27 +126,6 @@ export default function Grid(props) {
     }
   }
 
-  const addItem = () => {
-    API.put(
-      `api/projects/${projectId}/tasks`,
-      {
-        "title": "Build House",
-        "start_time": 0,
-        "length": 1,
-        "day": 0,
-        "description": "Big Yeet"
-      }
-    )
-    .then(res => {
-      let newTask = fromDatabase([res.data.newTask])[0]
-      newTask.i = (layout.reduce((acc, val) => val.i > acc ? val.i : acc, 0) + 1).toString()
-      setLayout([...layout, newTask])
-    }).catch((res) => {
-      console.log(res)
-
-    })
-  }
-
   const removeItem = (taskId) => {
     {console.log(taskId)}
     API.delete(
@@ -265,10 +233,6 @@ export default function Grid(props) {
     borderRadius: "10px"
   }
 
-  const editTask = (taskId) => {
-    props.redirect(`/projects/${projectId}/tasks/${taskId}`)
-  }
-
   const HighlightStyle = {
     borderCollapse: "collapse",
     position: "absolute",
@@ -282,6 +246,11 @@ export default function Grid(props) {
     textAlign: "center",
     marginBottom: "5px",
     backgroundColor: "#006EE3", 
+  }
+
+   // Editing Task Function
+   const editTask = (taskId) => {
+    props.redirect(`/projects/${projectId}/tasks/${taskId}`)
   }
 
   // Formats Time
@@ -342,7 +311,6 @@ export default function Grid(props) {
   return (
     // Creates grid of all Project Tasks
     <>
-    <Button onClick={addItem} text="Add" />
     {/* Times Down left side */}
     <div ref={scrollDiv} style={{overflowX: "scroll", overflowY: "hidden", position: 'relative', color: '#006EE2'}}>
     <table border="1" ref={fixedTable} style={{...tableStyle, position: 'absolute', zIndex: 2, top: '57px', border:'1px solid #006EE2', width: 'auto', backgroundColor: 'rgba(239, 239, 239, 0.9)'}}>

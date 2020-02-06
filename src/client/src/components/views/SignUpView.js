@@ -49,13 +49,10 @@ const Signup = (props) => {
             console.log(response)
             setLoading(false)
             if (response.status === 201) {
-                
                 props.redirect('/projects')
             }
         })
         .catch(function (error) {
-            // console.log(error.response.data)
-            // console.log(error)
             setLoading(false)
             setErrorMessage(error.response.data)
         }) }
@@ -85,7 +82,6 @@ const Signup = (props) => {
 
         // Signup Button pressed inits loading and submits form
         const SignupPressed = ()  => {
-            console.log("Signup Pressed")
             setLoading(true)
         }
 
