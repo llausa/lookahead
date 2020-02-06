@@ -5,8 +5,8 @@ import JWT from 'jsonwebtoken'
 
 
 const API = axios.create({
-  // baseURL: "https://vast-oasis-18718.herokuapp.com/",
-    baseURL: "http://localhost:3001/",
+  baseURL: "https://vast-oasis-18718.herokuapp.com/",
+    // baseURL: "http://localhost:3001/",
     withCredentials: true
 })
 
@@ -23,12 +23,12 @@ API.interceptors.request.use(function (config)  {
 
 API.interceptors.response.use(function (response) {
 
-  
-  let token = response.data.token 
+
+  let token = response.data.token
 
   Cookies.set('authToken', token, { expires: 1/24 })
 
-  return response 
+  return response
 
 }
 )
