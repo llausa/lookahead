@@ -15,6 +15,7 @@ import ToggleMenu from './ToggleMenu'
 import moment from 'moment-timezone'
 import TimeArrow from '../images/TimeArrow.svg'
 
+
 export default function Grid(props) {
 
   const [layout, setLayout] = useState([])
@@ -42,6 +43,8 @@ export default function Grid(props) {
       setProject(res.data.validProject)
       setLayout(fromDatabase(res.data.validProject.tasks))
       let projectStart = new Date(res.data.validProject.start_date)
+      let ProjectTimeZone = res.data.validProject.location
+      calculateTimeZone(ProjectTimeZone)
       calculateTime(projectStart)
 
     }).catch((err) => {
@@ -179,13 +182,42 @@ export default function Grid(props) {
     return numberOfDays
   }
 
+  let NewTime = ''
+  let OffSet = ''
+
+  function calculateTimeZone(ProjectTimeZone){
+    console.log(moment.tz(ProjectTimeZone).format())
+    NewTime = parseInt(moment.tz(ProjectTimeZone).format('Z'))
+    OffSet = NewTime.substring(0, 3)
+    console.log(OffSet)
+    console.log(NewTime)
+  }
+
+  function calcTime(offset) {
+
+    // create Date object for current location
+    var d = new Date()
+    // get UTC time in msec
+    var utc = d.getTime() + (d.getTimezoneOffset() * 60000)
+
+    // using supplied offset
+    var nd = new Date(utc + (3600000*offset))
+    // return time as a string
+    return nd
+  }
+
   function getTimeToTable(tableStart) {
-    let time = new Date() - tableStart
-    time -= new Date(time).getTimezoneOffset() * 60 * 1000
+
+    let time = calcTime(OffSet) - tableStart
+
+    time -= new Date(time)  * 60 * 1000
+    console.log(time)
     let days = Math.floor(time / 1000 / 60 / 60 / 24)
     time -= days * 24 * 60 * 60 * 1000
     let hours = Math.floor(time / 1000 / 60 / 60)
     time -= hours * 60 * 60 * 1000
+
+
     let mins = Math.floor(time / 1000 / 60)
     console.log()
     return {days: days, hours: hours, mins: mins / 60 * 100}
@@ -198,7 +230,6 @@ export default function Grid(props) {
 
     await sleep(1000 * 60)
     calculateTime(projectStart)
-    console.log(moment().format('LT'))
   }
 
   const tableStyle = {
@@ -253,7 +284,7 @@ export default function Grid(props) {
     <div ref={scrollDiv} style={{overflowX: "scroll", position: 'relative', color: '#006EE2'}}>
     <table border="1" ref={fixedTable} style={{...tableStyle, position: 'absolute', zIndex: 2, top: 'auto', border:'1px solid #006EE2', width: 'auto', backgroundColor: 'rgba(239, 239, 239, 0.9)'}}>
       <tbody>
-        {Array(24).fill().map((_, i) => (
+        {Array(25).fill().map((_, i) => (
           <tr>
             <td>{`${i < 10 ? '0' : ''}${i}:00`}</td>
           </tr>
