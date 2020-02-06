@@ -1,4 +1,4 @@
-import React, {useReducer, useState } from "react"
+import React, {useReducer, useState, useEffect } from "react"
 import CardContainer from '../CardContainer'
 import Nav from '../Nav'
 import Background from '../../images/WhiteBackgroundSmall.jpg'
@@ -12,7 +12,8 @@ import { Button } from '@material-ui/core'
 import ErrorMessage from '../ErrorMessage'
 import SuccessMessage from '../SuccessMessage'
 
-const AccountDetailsView = () => {
+
+const AccountDetailsView = (props) => {
 
   // For Loading Animation
   const [loading, setLoading] = useState(false)
@@ -23,13 +24,24 @@ const AccountDetailsView = () => {
   // For Success Message
   const [successMessage, setSuccessMessage] = useState(null)
 
+
+
   const [data, setData] = useReducer((state, newState) => (
     {...state, ...newState}
   ), {
-    "firstName": '',
-    "lastName": '',
-    "position": ''
+    firstName: '',
+    lastName: '',
+    position: ''
   })
+
+  useEffect(() => {
+    API.get(`api/users/details`)
+    .then(res => {
+        setData(res.data.user)
+    }).catch((err) => {
+      props.redirect('/projects')
+    })
+  }, [])
 
   const onSubmit = e => {
     e.preventDefault()
