@@ -40,7 +40,10 @@ const EditProjectView = (props) => {
     useEffect(() => {
       API.get(`api/projects/${projectId}`)
       .then(res => {
-          setData({'start_date': res.data.validProject.start_date})
+        console.log('Setting')
+          setData(res.data.validProject)
+          console.log(data)
+    
       })
     }, [])
 
@@ -124,7 +127,7 @@ const EditProjectView = (props) => {
                 <TitleText text="Edit Project" />
                 <NormalText text="Please fill out all required fields" />
                 <FormInput type='text' validation={basic} value={data.title} onChange={onChange} require={true} errorText="Please enter more Characters" label='Project Title' id='title' name='title'/>
-                <TimeZonePicker defaultVal={(val) => setData(val)} label="Location*" onChange={onTimeZoneChange} id="location" name='location'/>
+                <TimeZonePicker defaultVal={(val) => setData(val)} value={data.location} label="Location*" onChange={onTimeZoneChange} id="location" name='location'/>
 
                 {/* <DateInput value={data.start_date} label="Start Date" day={2} id="start_date" onChange={onDateChange} name='start_date' /> */}
                 <p>Start Date: {data.start_date.substring(0, 10)}</p>

@@ -16,7 +16,7 @@ async function allProjects (req, res, next) {
 
   res.status(200)
   res.locals.validUser = validUser
-  res.locals.projObjs = projObjs
+  res.locals.projects = projObjs
 
   next()
 

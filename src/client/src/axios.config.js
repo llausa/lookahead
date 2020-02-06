@@ -11,11 +11,26 @@ const API = axios.create({
 })
 
 
-API.interceptors.request.use(function(config, request) {
+API.interceptors.request.use(function (config)  {
 
+  if (Cookies.get('authToken')) {
   config.headers.common['Authorization'] = `Bearer ${Cookies.get('authToken')}`
+  }
   return config
 
 })
+
+
+API.interceptors.response.use(function (response) {
+
+  
+  let token = response.data.token 
+
+  Cookies.set('authToken', token, { expires: 1/24 })
+
+  return response 
+
+}
+)
 
 export default API

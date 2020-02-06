@@ -36,8 +36,6 @@ const  MaterialUIPickers = (props) => {
   var date = tempDate.getFullYear() + '-' + (tempDate.getMonth()+1) + '-' + (tempDate.getDate()+ props.day) +' '+ tempDate.getHours()+':'+ tempDate.getMinutes()+':'+ tempDate.getSeconds()
   const currDate = "Current Date= "+date
 
-
-
   const [selectedDate, setSelectedDate] = React.useState(props.value || new Date(currDate))
 
   useEffect(() => {
