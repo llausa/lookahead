@@ -34,8 +34,6 @@ const Login = (props) => {
     const onSubmit = e => {
         e.preventDefault()
 
-        // console.log(data)
-
         API.post(
         '/api/auth', data)
         .then(function (response) {
@@ -44,7 +42,8 @@ const Login = (props) => {
                 props.redirect('/projects')
             }
         })
-        .catch(function (error) {
+        .catch(function (error) {  
+            console.log(error)
 
             setLoading(false)
             setErrorMessage(error.response.data)
@@ -79,7 +78,6 @@ const Login = (props) => {
 
     // Runs when Login Button is pressed
     const LoginPressed = ()  => {
-        console.log("Login Pressed")
         setLoading(true)
     }
 

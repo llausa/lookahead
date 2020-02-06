@@ -46,19 +46,14 @@ const AccountDetailsView = (props) => {
   const onSubmit = e => {
     e.preventDefault()
 
-    console.log(data)
-
     API.put(
     '/api/users/details', data)
     .then(function (response) {
 
-      console.log(response)
       setLoading(false)
       setSuccessMessage("Your details have been changed.")
     })
     .catch(function (error) {
-        // add error notifications here
-        console.log(error.response.data)
         setLoading(false)
         setErrorMessage(error.response.data)
     })
@@ -80,7 +75,6 @@ const AccountDetailsView = (props) => {
     }
 
     const SubmitPressed = ()  => {
-        console.log("Submit Pressed")
         setLoading(true)
     }
 

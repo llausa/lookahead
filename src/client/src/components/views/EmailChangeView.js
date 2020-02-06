@@ -33,18 +33,15 @@ const EmailChangeView = () => {
     const onSubmit = e => {
         e.preventDefault()
 
-        console.log(data)
-
         API.put(
         '/api/users/email', data)
         .then(function (response) {
 
-            console.log(response)
             setLoading(false)
             setSuccessMessage("Your email has been changed.")
         })
         .catch(function (error) {
-            console.log(error.response.data)
+
             setLoading(false)
             setErrorMessage(error.response.data)
         })
@@ -76,7 +73,6 @@ const EmailChangeView = () => {
     }
 
     function SendEmailPressed() {
-        console.log("Send Email Pressed")
         setLoading(true)
     }
 

@@ -41,12 +41,9 @@ const Signup = (props) => {
     const onSubmit = e => {
         e.preventDefault()
 
-        console.log(data)
-
         API.post(
         '/api/users', data)
         .then(function (response) {
-            console.log(response)
             setLoading(false)
             if (response.status === 201) {
                 
@@ -54,8 +51,6 @@ const Signup = (props) => {
             }
         })
         .catch(function (error) {
-            // console.log(error.response.data)
-            // console.log(error)
             setLoading(false)
             setErrorMessage(error.response.data)
         }) }
@@ -85,7 +80,6 @@ const Signup = (props) => {
 
         // Signup Button pressed inits loading and submits form
         const SignupPressed = ()  => {
-            console.log("Signup Pressed")
             setLoading(true)
         }
 

@@ -54,7 +54,6 @@ export default function Grid(props) {
       calculateTime(projectStart)
 
     }).catch((err) => {
-      console.log(err)
       props.redirect('/projects')
     })
   }, [])
@@ -153,13 +152,11 @@ export default function Grid(props) {
       newTask.i = (layout.reduce((acc, val) => val.i > acc ? val.i : acc, 0) + 1).toString()
       setLayout([...layout, newTask])
     }).catch((res) => {
-      console.log(res)
 
     })
   }
 
   const removeItem = (taskId) => {
-    {console.log(taskId)}
     API.delete(
       `api/projects/${projectId}/tasks/${taskId}`
     )
@@ -167,7 +164,7 @@ export default function Grid(props) {
       setLayout(layout.filter(el => el._id != taskId))
       
     }).catch((res) => {
-      console.log(res)
+
 
     })
   }
@@ -184,7 +181,6 @@ export default function Grid(props) {
     // To calculate the no. of days between two dates
     let numberOfDays = differenceInTime / (1000 * 3600 * 24)
 
-    console.log()
     return numberOfDays
   }
 
@@ -217,7 +213,6 @@ export default function Grid(props) {
     let time = calcTime(OffSet) - tableStart
 
     time -= new Date(time).getTimezoneOffset()  * 60 * 1000
-    console.log(time)
     let days = Math.floor(time / 1000 / 60 / 60 / 24)
     time -= days * 24 * 60 * 60 * 1000
     let hours = Math.floor(time / 1000 / 60 / 60)
@@ -225,7 +220,6 @@ export default function Grid(props) {
 
 
     let mins = Math.floor(time / 1000 / 60)
-    console.log()
     return {days: days, hours: hours, mins: mins / 60 * 100}
   }
 
@@ -326,14 +320,11 @@ export default function Grid(props) {
     // Calculate position to highlight day
     let StartDateValue = moment(start_date)
     let CurrentDateValue = moment.tz(ProjectTimeZone)
-    console.log("Project Start Date: " + StartDateValue )
-    console.log("Current Date: " + CurrentDateValue)
     let difference = moment.duration(CurrentDateValue.diff(StartDateValue))
     // Gets the difference
     let days = difference.asDays()
     let round = Math.round(days)
     // Rounds to Value
-    console.log("difference: " + round)
     let DaysDifference = round * 200
     let DayPosition = DaysDifference
 
