@@ -45,6 +45,7 @@ export default function Grid(props) {
       setProject(res.data.validProject)
       setLayout(fromDatabase(res.data.validProject.tasks))
       let projectStart = new Date(res.data.validProject.start_date)
+      console.log("PROJECT START: " + (projectStart))
       let ProjectTimeZone = res.data.validProject.location
       calculateTimeZone(ProjectTimeZone)
       calculateTime(projectStart)
@@ -245,6 +246,19 @@ export default function Grid(props) {
     zIndex: "-1",
   }
 
+  const datesStyle = {
+    borderCollapse: "collapse",
+    position: "relative",
+    height: `50px`,
+    width: `${numberOfDays(project) * 200}px`,
+    border: "1px solid #006EE2",
+    top: "0",
+    left: "50px",
+    zIndex: "2",
+    textAlign: "center",
+    marginBottom: "5px"
+  }
+
   const Formatting = (props) => {
 
     let startTime = ''
@@ -285,10 +299,12 @@ export default function Grid(props) {
   return (
     // Creates grid of all Project Tasks
     <>
+    <Button onClick={addItem} text="Add" />
+    {/* Times Down left side */}
     <div ref={scrollDiv} style={{overflowX: "scroll", position: 'relative', color: '#006EE2'}}>
-    <table border="1" ref={fixedTable} style={{...tableStyle, position: 'absolute', zIndex: 2, top: 'auto', border:'1px solid #006EE2', width: 'auto', backgroundColor: 'rgba(239, 239, 239, 0.9)'}}>
+    <table border="1" ref={fixedTable} style={{...tableStyle, position: 'absolute', zIndex: 2, top: '57px', border:'1px solid #006EE2', width: 'auto', backgroundColor: 'rgba(239, 239, 239, 0.9)'}}>
       <tbody>
-        {Array(25).fill().map((_, i) => (
+        {Array(24).fill().map((_, i) => (
           <tr>
             <td>{`${i < 10 ? '0' : ''}${i}:00`}</td>
           </tr>
@@ -296,8 +312,22 @@ export default function Grid(props) {
       </tbody>
     </table>
 
+  {/* Dates along top */}
+    <table border="1" style={datesStyle} >
+          <tbody>
+          {Array(1).fill().map(_ => (
+            <tr>
+              {Array(numberOfDays(project)).fill().map(_ => (
+                <td>
+                <p>Date</p>
+                </td>
+              ))}
+            </tr>
+          ))}
+          </tbody>
+        </table>
+
     <div style={{position: "relative", marginLeft: "50px"}} >
-      <Button onClick={addItem} text="Add" />
       <GridLayout onResizeStop={stopDrag} onDragStop={stopDrag} verticalCompact={false} className="layout" cols={numberOfDays(project)} maxRows={24} rowHeight={50} width={numberOfDays(project) * 200} margin={[0, 0]}>
         {layout.map((grid, i) => (
           <div key={grid.i} data-grid={grid} >
@@ -320,6 +350,8 @@ export default function Grid(props) {
           ))}
           </tbody>
         </table>
+
+
          {/* Creates Red line through view to show time */}
         <table style={{...tableStyle, border: 'none', zIndex: 69, position: 'absolute'}} cellspacing="0" cellpadding="0">
           <tbody>
