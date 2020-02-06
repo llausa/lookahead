@@ -1,5 +1,4 @@
 require('dotenv').config()
-// require('./models/connect.js')
 const express = require("express")
 const mongoose = require('mongoose')
 const Joi = require('@hapi/joi')
@@ -20,22 +19,21 @@ if (process.env.NODE_ENV == 'production') {
   mongoose.connect(process.env.DB_HOST, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
   .then(mongoose.connection
     .once('open', () => {
-      console.log('Connected')
+
     })
     .on('error', (error) => {
-        console.warn('Error : ', error)
+
     }))
-  .catch(err => console.error('Could not connect to MongoDB...', err))
+  .catch(err => console.error('Could not connect to the database.', err))
 }
 else if (process.env.NODE_ENV == 'test') {
   mongoose.connect('mongodb://localhost/lookahead-test', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
   .then(mongoose.connection
     .once('open', () => {
-      console.log('Connected to the Test Database')
     }
     )
     .on('error', (error) => {
-        console.warn('Error : ',error)
+
     }))
   .catch(err => console.error('Could not connect to MongoDB...', err))
 }
@@ -51,8 +49,8 @@ if (!process.env.JWT_SECRET) {
 }
 
 app.use(cors({
-  origin: "https://lookahead.netlify.com",
-  // origin: "http://localhost:3000",
+  // origin: "https://lookahead.netlify.com",
+  origin: "http://localhost:3000",
   // preflightContinue: true,
   credentials: true
 }))
