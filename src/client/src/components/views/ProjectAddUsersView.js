@@ -9,6 +9,7 @@ import FormInput from '../FormInput'
 import SearchIcon from '@material-ui/icons/Search'
 import { useParams } from 'react-router-dom'
 import API from "../../axios.config"
+import SuccessMessage from '../SuccessMessage'
 
 const mystyle = {
     display: "flex",
@@ -57,7 +58,8 @@ const CardStyle = {
 
 
 export default function ProjectAddUsersView(props) {
-
+    // For Success Message
+    const [successMessage, setSuccessMessage] = useState(null)
 
     const { projectId } = useParams()
 
@@ -69,19 +71,27 @@ export default function ProjectAddUsersView(props) {
             console.log(res.data)
             setUsers(res.data.users)
         })
+        .catch(function (error) {
+          console.log(error.response.data)
+      })
     }, [])
 
     const addUser = (userId) => {
         API.post(`/api/projects/${projectId}/users`, {user: userId, role: 'Read'})
         .then(res => {
-
             setUsers(users.filter(el => el._id !== userId))
+            setSuccessMessage("User has been added to the project.")
         })
+        .catch(function (error) {
+          console.log(error.response.data)
+      })
     }
 
     return (
         <>
-        <Nav backButtonLink ={`/projects/${projectId}`} MenuButton={true} BackButton={true} />
+        {successMessage && <SuccessMessage msg={successMessage} onClose={() => setSuccessMessage(null)} />}
+
+        <Nav backButtonLink ={`/projects/${projectId}/users`} MenuButton={true} BackButton={true} />
         <div style={page}>
 
 
@@ -89,7 +99,7 @@ export default function ProjectAddUsersView(props) {
         <div data-cy="projectsView" style={mystyle}>
 
         <Card style={CardStyle}>
-        <p style={{margin: "10px", fontWeight: "bold", fontSize: "40px"}}>Project Add Users</p>
+        <p style={{margin: "10px", fontWeight: "bold", fontSize: "40px"}}>Add Users to Project</p>
 
         </Card>
 
