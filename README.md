@@ -2,6 +2,8 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/1f4244b9-9651-47ce-997d-365175476ab1/deploy-status)](https://app.netlify.com/sites/lookahead/deploys)
 
+Deployed Site: [Lookahead App](https://lookahead.netlify.com/)
+
 Backend Server: [Server](https://vast-oasis-18718.herokuapp.com)
 
 ## Purpose
