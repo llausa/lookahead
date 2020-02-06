@@ -55,10 +55,9 @@ export default function ProjectsView(props) {
     useEffect(() => {
         API.get(`api/projects`)
         .then(res => {
-            console.log(res)
-            // setUsers(res.data.users)
-            // setProjects(res.data.projects)
-            // console.log(res.data.projObjs)
+
+            setProjects(res.data.projects)
+
         }).catch(err => {
             console.log(err)
         })
