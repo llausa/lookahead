@@ -16,8 +16,8 @@ import SuccessMessage from '../SuccessMessage'
 
 
 const EditProjectView = (props) => {
-    let today = new Date()
-    let minDate = today.setDate(today.getDate() + 1)
+
+    let minDate 
 
     const { projectId } = useParams()
 
@@ -40,10 +40,10 @@ const EditProjectView = (props) => {
     useEffect(() => {
       API.get(`api/projects/${projectId}`)
       .then(res => {
-        console.log('Setting')
           setData(res.data.validProject)
-          console.log(data)
-    
+          minDate = (res.data.validProject.end_date)
+      }).catch((err) => {
+        props.redirect('/projects')
       })
     }, [])
 
@@ -131,7 +131,7 @@ const EditProjectView = (props) => {
 
                 {/* <DateInput value={data.start_date} label="Start Date" day={2} id="start_date" onChange={onDateChange} name='start_date' /> */}
                 <p>Start Date: {data.start_date.substring(0, 10)}</p>
-                <DateInput disablePast minDate={today} value={data.end_date} label="End Date" day={2} id="end_date" onChange={onDateChange} name='end_date' />
+                <DateInput disablePast minDate={data.end_date} value={data.end_date} label="End Date" day={2} id="end_date" onChange={onDateChange} name='end_date' />
 
                 <ButtonInput disabled={false} type='submit' primary={true} color='primary' text="Save" />
                 <Button variant="outlined" style={buttonResetP}>Delete Project</Button>

@@ -61,11 +61,13 @@ const TimePicker = (props) => {
       style={{margin: "4px", width: "100%"}}
       size="small"
       disableClearable
+      // value={props.value}
       defaultValue= {{time: "1"}}
       options={TimesList}
       getOptionLabel={option => option.time}
+      onChange={props.onChange}
       renderInput={params => (
-        <CssTextField {...params} label={props.label} variant="outlined" fullWidth />
+        <CssTextField {...params} label={props.label} variant="outlined" fullWidth value = {props.value} />
       )}
     />
     </>
