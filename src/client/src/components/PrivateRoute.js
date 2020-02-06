@@ -5,15 +5,15 @@ import Cookies from 'js-cookie'
 
 
 export default function PrivateRoute(props) {
-
-  let token = Cookies.get("authToken")
-
+  
   const verifyToken = (cookieToken) => {
+
     let authToken = Cookies.get(cookieToken)
 
     if (authToken) {
+
     let decoded = JWT.decode(authToken)
-    console.log('decoded:', decoded)
+    console.log('decoded',decoded)
 
       if (decoded._id) {
         return true

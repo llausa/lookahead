@@ -1,4 +1,4 @@
-import React, {useReducer} from "react"
+import React, {useReducer, useEffect, useState } from "react"
 import API from "../axios.config"
 import CardContainer from './CardContainer'
 import DateInput from './DateInput'
@@ -11,6 +11,7 @@ import FormInput from './FormInput'
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
+import { useParams } from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
   backdrop: {
@@ -23,6 +24,8 @@ const EditTaskOverlay = (props) => {
     const classes = useStyles();
 
 
+  const { projectId } = useParams()
+
     const [data, setData] = useReducer((state, newState) => (
         {...state, ...newState}
       ), {
@@ -31,6 +34,22 @@ const EditTaskOverlay = (props) => {
         startDate: '',
         duration: ''
       })
+
+
+      useEffect(() => {
+        API.get(
+          `api/projects/${projectId}/tasks/${props.taskId}`
+        )
+        .then(res => {
+
+
+        }).catch((err) => {
+          console.log(err)
+          props.redirect('/projects')
+        })
+      }, [])
+
+
 
       const onSubmit = e => {
         e.preventDefault()
