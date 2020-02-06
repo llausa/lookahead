@@ -12,6 +12,7 @@ import FormInput from '../FormInput'
 import Button from '@material-ui/core/Button'
 import { useParams } from 'react-router-dom'
 import ErrorMessage from '../ErrorMessage'
+import SuccessMessage from '../SuccessMessage'
 
 
 const EditProjectView = (props) => {
@@ -22,6 +23,9 @@ const EditProjectView = (props) => {
 
     // For Error Message
     const [errorMessage, setErrorMessage] = useState(null)
+
+    // For Success Message
+    const [successMessage, setSuccessMessage] = useState(null)
 
     const [data, setData] = useReducer((state, newState) => (
         {...state, ...newState}
@@ -49,6 +53,7 @@ const EditProjectView = (props) => {
       `/api/projects/${projectId}`, data)
       .then(function (response) {
           console.log(response)
+          setSuccessMessage("Your project has been changed.")
       })
       .catch(function (error) {
           console.log(error.response.data)
@@ -108,29 +113,30 @@ const EditProjectView = (props) => {
     const basic = (text) => text.length > 2
 
     return (
-      <>
-      {errorMessage && <ErrorMessage msg={errorMessage.message} onClose={() => setErrorMessage(null)} />}
+        <>
+        {errorMessage && <ErrorMessage msg={errorMessage.message} onClose={() => setErrorMessage(null)} />}
+        {successMessage && <SuccessMessage msg={successMessage} onClose={() => setSuccessMessage(null)} />}
 
-        <Nav backButtonLink = {`/projects/${projectId}`} BackButton={true} MenuButton={false} />
-        <CardContainer background={Background}>
-        <form onSubmit={onSubmit} className='form'>
-          <div data-cy="newProjectView" style={mystyle}>
-              <TitleText text="Edit Project" />
-              <NormalText text="Please fill out all required fields" />
-              <FormInput type='text' validation={basic} value={data.title} onChange={onChange} require={true} errorText="Please enter more Characters" label='Project Title' id='title' name='title'/>
-              <TimeZonePicker defaultVal={(val) => setData(val)} label="Location*" onChange={onTimeZoneChange} id="location" name='location'/>
+          <Nav backButtonLink = {`/projects/${projectId}`} BackButton={true} MenuButton={false} />
+          <CardContainer background={Background}>
+          <form onSubmit={onSubmit} className='form'>
+            <div data-cy="newProjectView" style={mystyle}>
+                <TitleText text="Edit Project" />
+                <NormalText text="Please fill out all required fields" />
+                <FormInput type='text' validation={basic} value={data.title} onChange={onChange} require={true} errorText="Please enter more Characters" label='Project Title' id='title' name='title'/>
+                <TimeZonePicker defaultVal={(val) => setData(val)} label="Location*" onChange={onTimeZoneChange} id="location" name='location'/>
 
-              {/* <DateInput value={data.start_date} label="Start Date" day={2} id="start_date" onChange={onDateChange} name='start_date' /> */}
-              <p>Start Date: {data.start_date.substring(0, 10)}</p>
-              <DateInput disablePast minDate={today} value={data.end_date} label="End Date" day={2} id="end_date" onChange={onDateChange} name='end_date' />
+                {/* <DateInput value={data.start_date} label="Start Date" day={2} id="start_date" onChange={onDateChange} name='start_date' /> */}
+                <p>Start Date: {data.start_date.substring(0, 10)}</p>
+                <DateInput disablePast minDate={today} value={data.end_date} label="End Date" day={2} id="end_date" onChange={onDateChange} name='end_date' />
 
-              <ButtonInput disabled={false} type='submit' primary={true} color='primary' text="Save" />
-              <Button variant="outlined" onClick={onDeleteClick} style={buttonResetP}>Delete Project</Button>
-          </div>
-          </form>
-          </CardContainer>
-          <Background/>
-      </>
+                <ButtonInput disabled={false} type='submit' primary={true} color='primary' text="Save" />
+                <Button variant="outlined" style={buttonResetP}>Delete Project</Button>
+            </div>
+            </form>
+            </CardContainer>
+            <Background/>
+        </>
     )
 }
 

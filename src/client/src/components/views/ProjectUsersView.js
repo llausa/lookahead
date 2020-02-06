@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from 'react'
 import Button from '@material-ui/core/Button'
 import AddIcon from '@material-ui/icons/Add'
 import UserCard from '../UserCard'
@@ -6,6 +6,8 @@ import Nav from '../Nav'
 import TitleText from '../TitleText'
 import Background from '../Background'
 import { Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
+import API from "../../axios.config"
 
 const mystyle = {
     display: "flex",
@@ -47,9 +49,21 @@ function AddUserPressed() {
 
 const ProjectUsersView = () => {
 
+    const { projectId } = useParams()
+
+    const [users, setUsers] = useState([])
+
+    useEffect(() => {
+      API.get(`api/projects/${projectId}/users`)
+      .then(res => {
+          console.log(res)
+          setUsers(res.data.users)
+      })
+    }, [])
+
     return (
         <>
-        <Nav MenuButton={true} />
+        <Nav backButtonLink = {`/projects/${projectId}`} BackButton={true} MenuButton={false} />
         <div style={page}>
 
 
@@ -57,10 +71,14 @@ const ProjectUsersView = () => {
         <div data-cy="projectsView" style={mystyle}>
         <TitleText text="Project Users" style={{ marginTop: "50px"}} />
 
-        <UserCard user="Elon Musk" userPrivilege="Owner" userPosition="Genius" userEmail="Elon@Musk.com" userEdit={true}/>
-        <UserCard user="Steve Jobs" userPrivilege="Read/Write" userPosition="Remote Worker" userEmail="Steve@apple.com" userEdit={true}/>
+        {users.map(user => {
+            return <UserCard user={user.name} userPrivilege={user.role} userPosition={user.position} userEmail={user.email} userEdit={true}/>
+        })}
 
-        <Button component={Link} to="/projects/:id/users/add" onClick={AddUserPressed} variant="outlined" style={buttonMain} color="primary">Add User<AddIcon style={smallIcon} /></Button>
+        {/* <UserCard user="Elon Musk" userPrivilege="Owner" userPosition="Genius" userEmail="Elon@Musk.com" userEdit={true}/> */}
+        {/* <UserCard user="Steve Jobs" userPrivilege="Read/Write" userPosition="Remote Worker" userEmail="Steve@apple.com" userEdit={true}/> */}
+
+        <Button component={Link} to={`/projects/${projectId}/users/add`} onClick={AddUserPressed} variant="outlined" style={buttonMain} color="primary">Add User<AddIcon style={smallIcon} /></Button>
         </div>
         </div>
         <Background/>
