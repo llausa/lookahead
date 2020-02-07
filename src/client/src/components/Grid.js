@@ -45,7 +45,6 @@ export default function Grid(props) {
       calculateTime(projectStart)
 
     }).catch((err) => {
-      console.log(err)
       props.redirect('/projects')
     })
   }, [])
@@ -129,7 +128,6 @@ export default function Grid(props) {
   }
 
   const removeItem = (taskId) => {
-    {console.log(taskId)}
     API.delete(
       `api/projects/${projectId}/tasks/${taskId}`
     )
@@ -137,7 +135,7 @@ export default function Grid(props) {
       setLayout(layout.filter(el => el._id != taskId))
       
     }).catch((res) => {
-      console.log(res)
+
 
     })
   }
@@ -154,7 +152,6 @@ export default function Grid(props) {
     // To calculate the no. of days between two dates
     let numberOfDays = differenceInTime / (1000 * 3600 * 24)
 
-    console.log()
     return numberOfDays
   }
 
@@ -187,7 +184,6 @@ export default function Grid(props) {
     let time = calcTime(OffSet) - tableStart
 
     time -= new Date(time).getTimezoneOffset()  * 60 * 1000
-    console.log(time)
     let days = Math.floor(time / 1000 / 60 / 60 / 24)
     time -= days * 24 * 60 * 60 * 1000
     let hours = Math.floor(time / 1000 / 60 / 60)
@@ -195,7 +191,6 @@ export default function Grid(props) {
 
 
     let mins = Math.floor(time / 1000 / 60)
-    console.log()
     return {days: days, hours: hours, mins: mins / 60 * 100}
   }
 

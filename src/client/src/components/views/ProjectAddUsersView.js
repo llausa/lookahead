@@ -68,11 +68,9 @@ export default function ProjectAddUsersView(props) {
     useEffect(() => {
         API.get(`/api/projects/${projectId}/add_users`)
         .then(res => {
-            console.log(res.data)
             setUsers(res.data.users)
         })
         .catch(function (error) {
-          console.log(error.response.data)
       })
     }, [])
 
@@ -83,7 +81,7 @@ export default function ProjectAddUsersView(props) {
             setSuccessMessage("User has been added to the project.")
         })
         .catch(function (error) {
-          console.log(error.response.data)
+
       })
     }
 

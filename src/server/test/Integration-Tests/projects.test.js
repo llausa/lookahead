@@ -33,8 +33,7 @@ let validProject = {
 	"create_date": "2020-02-01",
 	"start_date": "2020-02-02",
 	"end_date": "2020-02-05",
-	"location": "Brisbane",
-	"timezone": 10
+	"location": "Brisbane"
 }
 
 let invalidProject = {
@@ -42,8 +41,7 @@ let invalidProject = {
 	create_date: "2020-02-01",
 	start_date: "2020-02-05",
 	end_date: "2020-02-03",
-	location: "Brisbane",
-	timezone: 10
+	location: "Brisbane"
 }
 
 let validTask = {
@@ -165,7 +163,6 @@ if (mongoose.connection.name === "lookahead-test") {
 						.set("Authorization", `Bearer ${authToken}`)
 						.send({
 							end_date: "2020-02-10",
-							timezone: -4,
 							title: "Real Project",
 							location: 'yeet'
 						})
@@ -173,7 +170,6 @@ if (mongoose.connection.name === "lookahead-test") {
 							await ProjectModel.findById(projectId, function(err, project) {
 								expect(res).to.have.status(200)
 								expect(project.title).to.equal("Real Project")
-								expect(project.timezone).to.equal(-4)
 								expect(project.end_date).to.deep.equal(new Date("2020-02-10"))
 								done()
 							})
@@ -189,7 +185,7 @@ if (mongoose.connection.name === "lookahead-test") {
 						.send()
 						.end(async (err, res) => {
 							await ProjectModel.findById(projectId, function(err, project) {
-								// expect(err).to.exist
+
 								// expect(project).to.not.exist
 								expect(res).to.have.status(200)
 								done()
@@ -223,8 +219,8 @@ if (mongoose.connection.name === "lookahead-test") {
 								err,
 								project
 							) {
-								console.log('validTask', validTask)
-								console.log('created', project[0].tasks)
+
+
 								expect(project[0].tasks[0]._id).to.exist
 								expect(res).to.have.status(201)
 								done()
@@ -280,22 +276,24 @@ if (mongoose.connection.name === "lookahead-test") {
 								title: "Build Apartment",
 								start_time: 3,
 								length: 3,
-								day: 3,
+								day: 2,
 								description: "Bigger Yeetimus"
 							})
 							.end(async (err, res) => {
 
+								console.log(res)
 								await ProjectModel.find({ title: "Test Project" }, function(
 									err,
 									project
 								) {
+
 									expect(project[0].tasks[0]).to.have.property(
 										"title",
 										"Build Apartment"
 									)
 									expect(project[0].tasks[0]).to.have.property("start_time", 3)
 									expect(project[0].tasks[0]).to.have.property("length", 3)
-									expect(project[0].tasks[0]).to.have.property("day", 3)
+									expect(project[0].tasks[0]).to.have.property("day", 2)
 									expect(project[0].tasks[0]).to.have.property(
 										"description",
 										"Bigger Yeetimus"
@@ -461,6 +459,7 @@ if (mongoose.connection.name === "lookahead-test") {
 										.set("Authorization", `Bearer ${authToken}`)
 										.send(validProject)
 										.end(async (oof, yeet) => {
+
 											await ProjectModel.find(
 												{ title: "Test Project" },
 												function(error, project) {
@@ -537,30 +536,30 @@ if (mongoose.connection.name === "lookahead-test") {
 							})
 						})
 					
-
-					it("Overflowing Task should save both", done => {
-						chai
-							.request(app)
-							.put(`/api/projects/${projectId}/tasks`)
-							.type("form")
-							.set("Authorization", `Bearer ${authToken}`)
-							.send(overflowTask)
-							.end(async (err, res) => {
-								await ProjectModel.find({ title: "Test Project" }, function(
-									err,
-									project
-								) {
-									expect(project[0].tasks[1]._id).to.exist
-									// expect(project[0].tasks[2]._id).to.exist
-									expect(res).to.have.status(201)
-									expect(res.body.message).to.equal(
-										"Tasks successfully created."
-									)
-									expect()
-									done()
-								})
-							})
-					})
+					// Old test
+					// it("Overflowing Task should save both", done => {
+					// 	chai
+					// 		.request(app)
+					// 		.put(`/api/projects/${projectId}/tasks`)
+					// 		.type("form")
+					// 		.set("Authorization", `Bearer ${authToken}`)
+					// 		.send(overflowTask)
+					// 		.end(async (err, res) => {
+					// 			await ProjectModel.find({ title: "Test Project" }, function(
+					// 				err,
+					// 				project
+					// 			) {
+					// 				expect(project[0].tasks[1]._id).to.exist
+					// 				// expect(project[0].tasks[2]._id).to.exist
+					// 				expect(res).to.have.status(201)
+					// 				expect(res.body.message).to.equal(
+					// 					"Tasks successfully created."
+					// 				)
+					// 				expect()
+					// 				done()
+					// 			})
+					// 		})
+					// })
 				})
 			})
 		})

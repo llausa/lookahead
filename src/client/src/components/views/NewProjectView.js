@@ -33,14 +33,11 @@ const NewProjectView = (props) => {
       const onSubmit = e => {
         e.preventDefault()
 
-        console.log(data)
-
         API.post('/api/projects', data)
         .then(function (response) {
           props.redirect(`/projects/${response.data.id}`)
         })
         .catch(function (error) {
-            console.log(error.response.data)
             setErrorMessage(error.response.data)
         })
 
@@ -49,7 +46,6 @@ const NewProjectView = (props) => {
       const onChange = e => {
         setData({[e.target.name]: e.target.value})
         setData({"create_date": new Date().toISOString().substring(0, 10)})
-        console.log(data)
       }
 
       const onTimeZoneChange = e => {

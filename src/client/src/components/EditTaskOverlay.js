@@ -66,29 +66,22 @@ const EditTaskOverlay = (props) => {
         delete(data.complete)
        
         e.preventDefault()
-       
-
-        console.log(data)
 
         API.put(
         `/api/projects/${projectId}/tasks/${taskId}`, data)
         .then(function (response) {
          
-          console.log(response)
-
             props.redirect(`/projects/${projectId}`)
 
         })
         .catch(function (error) {
 
-            console.log(error.response.data)
         })
 
     }
 
     const onChange = e => {
         setData({[e.target.name]: e.target.value})
-        console.log(data)
     }
 
     const mystyle = {

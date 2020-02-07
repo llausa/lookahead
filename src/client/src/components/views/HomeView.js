@@ -39,26 +39,14 @@ const HomeView = () => {
         margin: "30px 0"
     }
 
-    const LoginPressed = () => {
-        console.log("Login Pressed")
-    }
-
-    const SignupPressed = () => {
-        console.log("Signup Pressed")
-    }
-
-    const ResetPressed = () => {
-        console.log("Reset Pressed")
-    }
-
     return (
         <>
         <CardContainer>
         
         <Zoom><img src={Logo} alt="Logo" style={logoStyle}  aria-label="logo"/></Zoom>
-                    <Button component={Link} to="/login" onClick={LoginPressed} variant="outlined" style={buttonMain} color="primary">Login</Button>
-                    <Button component={Link} to="/signup" onClick={SignupPressed} variant="outlined" style={{margin: "0 20px"}}>Signup</Button>
-                    <Button component={Link} to="/account/password" onClick={ResetPressed} variant="outlined" style={buttonResetP}>Reset Password <LockIcon style={smallIcon} /> </Button>
+                    <Button component={Link} to="/login" variant="outlined" style={buttonMain} color="primary">Login</Button>
+                    <Button component={Link} to="/signup" variant="outlined" style={{margin: "0 20px"}}>Signup</Button>
+                    <Button component={Link} to="/account/password" variant="outlined" style={buttonResetP}>Reset Password <LockIcon style={smallIcon} /> </Button>
         </CardContainer>
         <Background blue={true} background2={true}/>
             </>

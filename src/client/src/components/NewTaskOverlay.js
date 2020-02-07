@@ -57,8 +57,6 @@ const EditTaskOverlay = (props) => {
 
           setEdit(props.edit)
 
-          console.log(err)
-          // props.redirect('/projects')
         })
       }, [])
 
@@ -68,17 +66,9 @@ const EditTaskOverlay = (props) => {
 
         setLoading(true)
 
-        // setData(data)
         e.preventDefault()
 
         data.day = (new Date(data.day).getTime() - new Date(props.project.start_date).getTime()) / (1000 * 3600 * 24)
-
-        console.log(data.day)
-        console.log(props.project.start_date)
-
-        // data.day = data.day - project.start_date
-
-        console.log(data)
 
         API.put(
         `/api/projects/${projectId}/tasks`, data)
@@ -95,24 +85,20 @@ const EditTaskOverlay = (props) => {
 
           setErrorMessage(error.response.data)
 
-            console.log(error.response.data)
         })
 
     }
 
     const onChange = e => {
         setData({[e.target.name]: e.target.value})
-        // console.log(data)
-        // setData({"location": location.value})
+
     }
 
     const onTimeChange = e => {
-      console.log(e.target)
       setData({'start_time': parseInt(e.target.innerHTML)})
     }
 
     const onDurationChange = e => {
-      console.log(e.target)
     setData({'length': parseInt(e.target.innerHTML)})
     }
 
