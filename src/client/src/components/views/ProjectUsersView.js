@@ -68,7 +68,7 @@ const ProjectUsersView = () => {
         <TitleText text="Project Users" style={{ marginTop: "50px"}} />
 
         {users.map(user => {
-            return <UserCard user={user.name} userPrivilege={user.role} userPosition={user.position} userEmail={user.email} userEdit={true}/>
+            return <UserCard user={user.firstName + ' ' + user.lastName} userPrivilege={user.role} userPosition={user.position} userEmail={user.email} userEdit={true}/>
         })}
 
         {/* <UserCard user="Elon Musk" userPrivilege="Owner" userPosition="Genius" userEmail="Elon@Musk.com" userEdit={true}/> */}
