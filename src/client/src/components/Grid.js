@@ -30,6 +30,8 @@ export default function Grid(props) {
       fixedTable.current.style.left = `${e.target.scrollLeft}px`
       fixedArrow.current.style.left = `${e.target.scrollLeft + 4}px`
       fixedTime.current.style.left = `${e.target.scrollLeft + 8}px`
+      fixedDate.current.style.top = `${e.target.scrollTop}px`
+      
     })
     API.get(
       `api/projects/${projectId}/`
@@ -225,7 +227,6 @@ export default function Grid(props) {
     height: `50px`,
     width: `${numberOfDays(project) * 200}px`,
     border: "1px solid #006EE2",
-    top: "0",
     left: "50px",
     zIndex: "2",
     textAlign: "center",
@@ -291,18 +292,16 @@ export default function Grid(props) {
     const scrollDiv = useRef(null)
     const fixedArrow = useRef(null)
     const fixedTime = useRef(null)
+    const fixedDate = useRef(null)
 
     // Calculate position to highlight day
     let StartDateValue = moment(start_date)
     let CurrentDateValue = moment.tz(ProjectTimeZone)
-    console.log("Project Start Date: " + StartDateValue )
-    console.log("Current Date: " + CurrentDateValue)
     let difference = moment.duration(CurrentDateValue.diff(StartDateValue))
     // Gets the difference
     let days = difference.asDays()
     let round = Math.round(days)
     // Rounds to Value
-    console.log("difference: " + round)
     let DaysDifference = round * 200
     let DayPosition = DaysDifference
 
@@ -324,7 +323,7 @@ export default function Grid(props) {
     </table>
 
   {/* Dates along top */}
-    <table border="1" style={datesStyle} >
+    <table ref={fixedDate} border="1" style={{...datesStyle, top: '0px'}} >
           <tbody>
             <tr>
               {Array(numberOfDays(project)).fill().map((_, i )=> (

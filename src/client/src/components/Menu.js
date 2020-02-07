@@ -8,7 +8,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import Cookies from 'js-cookie'
 
 const MenuHolder = {
-    zIndex: 4,
+    zIndex: 400,
     display: "flex",
     flexDirection: "column",
     alignitems: "center",
