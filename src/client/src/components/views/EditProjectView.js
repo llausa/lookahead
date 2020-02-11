@@ -15,9 +15,13 @@ import ErrorMessage from '../ErrorMessage'
 import SuccessMessage from '../SuccessMessage'
 import CloseIcon from '@material-ui/icons/Close'
 import { Link } from 'react-router-dom'
+import Loader from '../Loader'
 
 
 const EditProjectView = (props) => {
+
+  // For Loading Animation
+  const [loading, setLoading] = useState(false)
 
     let minDate 
 
@@ -40,25 +44,30 @@ const EditProjectView = (props) => {
     })
 
     useEffect(() => {
+      setLoading(true)
       API.get(`api/projects/${projectId}`)
       .then(res => {
           setData(res.data.validProject)
           minDate = (res.data.validProject.end_date)
+          setLoading(false)
       }).catch((err) => {
         props.redirect('/projects')
+        setLoading(false)
       })
     }, [])
 
     const onSubmit = e => {
       e.preventDefault()
-
+      setLoading(true)
       API.put(
       `/api/projects/${projectId}`, data)
       .then(function (response) {
           setSuccessMessage("Your project has been changed.")
+          setLoading(false)
       })
       .catch(function (error) {
           setErrorMessage(error.response.data)
+          setLoading(false)
       })
     }
 
@@ -117,7 +126,7 @@ const EditProjectView = (props) => {
 
           <Nav backButtonLink = {`/projects/${projectId}`} BackButton={true} MenuButton={false} />
           <CardContainer background={Background}>
-
+          <Loader style={{opacity: loading ? 1 : 0}} />
           <form onSubmit={onSubmit} className='form'>
             <div data-cy="newProjectView" style={mystyle}>
 
