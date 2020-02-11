@@ -1,4 +1,4 @@
-import React, {useReducer} from "react"
+import React, {useReducer, useState} from "react"
 import API from "../../axios.config"
 import CardContainer from '../CardContainer'
 import Nav from '../Nav'
@@ -9,11 +9,14 @@ import TitleText from '../TitleText'
 import NormalText from '../NormalText'
 import DurationPicker from '../DurationPicker'
 import FormInput from '../FormInput'
-
+import Loader from '../Loader'
 import EditTaskOverlay from '../EditTaskOverlay'
 
 
 const NewTaskView = () => {
+
+  // For Loading Animation
+  const [loading, setLoading] = useState(false)
 
     const [data, setData] = useReducer((state, newState) => (
         {...state, ...newState}
@@ -26,14 +29,14 @@ const NewTaskView = () => {
 
       const onSubmit = e => {
         e.preventDefault()
-
+        setLoading(true)
         API.post(
         '/api/users', data)
         .then(function (response) {
-
+          setLoading(false)
         })
         .catch(function (error) {
-
+          setLoading(false)
         })
 
       }
@@ -62,6 +65,7 @@ const NewTaskView = () => {
 
       <Nav backButtonLink = "/projects" BackButton={true} MenuButton={false} />
       <CardContainer background={Background}>
+      <Loader style={{opacity: loading ? 1 : 0}} />
       <form onSubmit={onSubmit} className='form'>
         <div data-cy="newProjectView" style={mystyle}>
             <TitleText text="New Task" />
