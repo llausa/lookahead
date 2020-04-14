@@ -10,9 +10,11 @@ import TimePicker from './TimePicker'
 import FormInput from './FormInput'
 import Backdrop from '@material-ui/core/Backdrop';
 import { makeStyles } from '@material-ui/core/styles';
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import ErrorMessage from '../components/ErrorMessage'
 import Loader from '../components/Loader'
+import { IconButton } from '@material-ui/core'
+import CloseIcon from '@material-ui/icons/Close'
 
 const useStyles = makeStyles(theme => ({
   backdrop: {
@@ -21,7 +23,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const EditTaskOverlay = (props) => {
+const NewTaskOverlay = (props) => {
     const classes = useStyles();
 
     const [loading, setLoading] = useState(false)
@@ -49,10 +51,10 @@ const EditTaskOverlay = (props) => {
           `api/projects/${projectId}/tasks/${props.taskId}`
         )
         .then(res => {
-          
+
           setEdit(props.edit)
           setData(res.data.task)
-    
+
         }).catch((err) => {
 
           setEdit(props.edit)
@@ -75,7 +77,7 @@ const EditTaskOverlay = (props) => {
         .then(function (response) {
           setLoading(false)
           props.handleToggle(false)
-          
+
           props.redirect(`/projects/${projectId}`)
 
 
@@ -104,7 +106,7 @@ const EditTaskOverlay = (props) => {
 
     const onDateChange = e => {
       setData({[e.target.name]: e.target.value.toISOString().substring(0, 10)})
-  }
+    }
 
     const mystyle = {
         display: "flex",
@@ -130,6 +132,7 @@ const EditTaskOverlay = (props) => {
       <CardContainer style={{zIndex: "6"}} >
       <form onSubmit={onSubmit} className='form'>
         <div data-cy="newProjectView" style={mystyle}>
+            <IconButton component={Link} to={props.projectLink} color="inherit" aria-label="Close"><CloseIcon/></IconButton>
             <TitleText text={ edit ? ("Edit Task") : ("New Task")  } />
             <NormalText text="Please fill out all required fields" />
             <FormInput type='text' validation={basic} value={data.title} onChange={onChange} require={true} errorText="Please enter more Characters" label='Task Name' id='title' name='title' />
@@ -153,4 +156,4 @@ const EditTaskOverlay = (props) => {
     )
 }
 
-export default EditTaskOverlay
+export default NewTaskOverlay

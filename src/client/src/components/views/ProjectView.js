@@ -49,7 +49,7 @@ function ProjectView(props) {
         API.get(
             `api/projects/${projectId}/`
         )
-        .then(res => { 
+        .then(res => {
             setProject(res.data.validProject)
             setLoading(false)
         }).catch((err) => {
@@ -61,6 +61,8 @@ function ProjectView(props) {
     return (
         <>
         <Loader style={{opacity: loading ? 1 : 0}} />
+        Need to figure out how to grab project ID and then pass it as link to NewTaskOverlay in order for close button to redirect to project page.
+        Alternatively, figure out way to dismiss NewTaskOverlay somehow...
         <NewTaskOverlay handleToggle={() => handleToggle(false)} edit={taskEdit} project={project} redirect={props.redirect} style={{opacity: editTaskForm ? 1 : 0}}/>
         <div style={{position: "absolute", display: "flex", flexDirection: "column", width: "100vw", height: "100vh", overflowX: "hidden"}}>
         <Nav backButtonLink ='/projects' BackButton={true} MenuButton={true}/>
@@ -68,11 +70,11 @@ function ProjectView(props) {
 
         <div style={{display: "flex", justifyContent: "space-around"}}>
 
-        <Tooltip title="Edit Project" placement="top" arrow> 
+        <Tooltip title="Edit Project" placement="top" arrow>
             <Button component={Link} to={`/projects/${projectId}/edit`}  color='primary' style={buttonMain} > <EditIcon/> </Button>
         </Tooltip>
 
-        <Tooltip title="Add User" placement="top" arrow> 
+        <Tooltip title="Add User" placement="top" arrow>
             <Button component={Link} to={`/projects/${projectId}/users`}  color='primary' style={buttonMain} > <PersonAddIcon/> </Button>
         </Tooltip>
 
