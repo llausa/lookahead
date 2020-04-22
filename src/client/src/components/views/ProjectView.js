@@ -61,7 +61,8 @@ function ProjectView(props) {
     return (
         <>
         <Loader style={{opacity: loading ? 1 : 0}} />
-        <NewTaskOverlay handleToggle={() => handleToggle(false)} edit={taskEdit} project={project} redirect={props.redirect} style={{opacity: editTaskForm ? 1 : 0}}/>
+        { project ? <NewTaskOverlay handleToggle={() => handleToggle(false)} close={setEditTaskForm} edit={taskEdit} project={project} redirect={props.redirect} style={{opacity: editTaskForm ? 1 : 0}}/> : null}
+        
         <div style={{position: "absolute", display: "flex", flexDirection: "column", width: "100vw", height: "100vh", overflowX: "hidden"}}>
         <Nav backButtonLink ='/projects' BackButton={true} MenuButton={true}/>
         <h1 data-cy="projectView" style={{margin: "20px", fontSize: "70px", color: "#006EE2", alignSelf:"center" }} >{project.title}</h1>

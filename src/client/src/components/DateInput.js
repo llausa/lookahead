@@ -36,7 +36,7 @@ const  MaterialUIPickers = (props) => {
   var date = tempDate.getFullYear() + '-' + (tempDate.getMonth()+1) + '-' + (tempDate.getDate()+ props.day) +' '+ tempDate.getHours()+':'+ tempDate.getMinutes()+':'+ tempDate.getSeconds()
   const currDate = "Current Date= "+date
 
-  const [selectedDate, setSelectedDate] = React.useState(props.value || new Date(currDate))
+  const [selectedDate, setSelectedDate] = React.useState(props.value || props.minDate )
 
   useEffect(() => {
     setSelectedDate(props.value)
@@ -52,7 +52,6 @@ const  MaterialUIPickers = (props) => {
         <CssKeyboardDatePicker
           disableToolbar
           autoOk
-          disablePast = { props.disablePast }
           minDate = { props.minDate }
           maxDate = { props.maxDate }
           required = {true}

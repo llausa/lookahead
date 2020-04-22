@@ -13,6 +13,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useParams } from 'react-router-dom'
 import ErrorMessage from '../components/ErrorMessage'
 import Loader from '../components/Loader'
+import { IconButton } from "@material-ui/core"
+import CloseIcon from '@material-ui/icons/Close'
 
 const useStyles = makeStyles(theme => ({
   backdrop: {
@@ -22,6 +24,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const EditTaskOverlay = (props) => {
+
+  console.log(props.project.start_date)
+
     const classes = useStyles();
 
     const [loading, setLoading] = useState(false)
@@ -37,42 +42,49 @@ const EditTaskOverlay = (props) => {
       ), {
         title: '',
         description: '',
-        day: '',
-        length: '',
-        start_time: ''
+        day: (new Date(props.project.start_date).toISOString()),
+        length: 1,
+        start_time: 0
       })
 
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        API.get(
-          `api/projects/${projectId}/tasks/${props.taskId}`
-        )
-        .then(res => {
+    //     API.get(
+    //       `api/projects/${projectId}/tasks/${props.taskId}`
+    //     )
+    //     .then(res => {
           
-          setEdit(props.edit)
-          setData(res.data.task)
+    //       setEdit(props.edit)
+    //       setData(res.data.task)
     
-        }).catch((err) => {
+    //     }).catch((err) => {
 
-          setEdit(props.edit)
+    //       setEdit(props.edit)
 
-        })
-      }, [])
+    //     })
+    //   }, [])
 
 
 
     const onSubmit = e => {
 
+        data.day = (new Date(data.day).getTime() - new Date(props.project.start_date).getTime()) / (1000 * 3600 * 24)
+
         setLoading(true)
 
         e.preventDefault()
 
-        data.day = (new Date(data.day).getTime() - new Date(props.project.start_date).getTime()) / (1000 * 3600 * 24)
+        
 
         API.put(
         `/api/projects/${projectId}/tasks`, data)
         .then(function (response) {
+          setData({ title: '',
+          description: '',
+          day: (new Date(props.project.start_date).toISOString()),
+          length: 1,
+          start_time: 0 })
           setLoading(false)
           props.handleToggle(false)
           
@@ -81,6 +93,8 @@ const EditTaskOverlay = (props) => {
 
         })
         .catch(function (error) {
+          setData({
+          day: (new Date(props.project.start_date).toISOString())})
           setLoading(false)
 
           setErrorMessage(error.response.data)
@@ -103,6 +117,8 @@ const EditTaskOverlay = (props) => {
     }
 
     const onDateChange = e => {
+      console.log(e.target)
+      console.log(data)
       setData({[e.target.name]: e.target.value.toISOString().substring(0, 10)})
   }
 
@@ -130,6 +146,7 @@ const EditTaskOverlay = (props) => {
       <CardContainer style={{zIndex: "6"}} >
       <form onSubmit={onSubmit} className='form'>
         <div data-cy="newProjectView" style={mystyle}>
+            <IconButton style={{width: "50px", margin: "auto"}} disabled={false} primary={true} color='primary' icon={true} onClick={() => props.close(false)}><CloseIcon/></IconButton>
             <TitleText text={ edit ? ("Edit Task") : ("New Task")  } />
             <NormalText text="Please fill out all required fields" />
             <FormInput type='text' validation={basic} value={data.title} onChange={onChange} require={true} errorText="Please enter more Characters" label='Task Name' id='title' name='title' />

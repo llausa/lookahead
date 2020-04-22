@@ -62,7 +62,7 @@ const TimePicker = (props) => {
       size="small"
       disableClearable
       // value={props.value}
-      defaultValue= {{time: "1"}}
+      defaultValue= {{time: "00:00"}}
       options={TimesList}
       getOptionLabel={option => option.time}
       onChange={props.onChange}
