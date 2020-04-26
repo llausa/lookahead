@@ -49,7 +49,7 @@ if (!process.env.JWT_SECRET) {
 }
 
 app.use(cors({
-  origin: "https://lookahead.netlify.app/",
+  origin: "https://lookahead.netlify.app",
   // origin: "http://localhost:3000",
   // preflightContinue: true,
   credentials: true
