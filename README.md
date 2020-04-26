@@ -30,6 +30,8 @@ To get the dev version of Lookahead working locally, make sure you:
 
   ### Deploying the Backend
   - Merge your changes onto the repo's master then push the `server` sub-folder to Heroku
+    - You can use the following command if you're in the project root directory:
+      `git subtree push --prefix src/server heroku master`
 
   ### Deploying the Frontend
   - Merging your changes onto the repo's master should automatically trigger a new Netlify build.
