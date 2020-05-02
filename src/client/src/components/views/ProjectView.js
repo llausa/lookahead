@@ -17,8 +17,8 @@ import AddAlarmIcon from '@material-ui/icons/AddAlarm';
 // Main Button Styling
 const buttonMain = {
     color: "#006EE2",
-    margin: "20px",
-    border: "1px solid #006EE2",
+    margin: "2px",
+    border: "1px solid #006EE2"
 }
 
 
@@ -49,7 +49,7 @@ function ProjectView(props) {
         API.get(
             `api/projects/${projectId}/`
         )
-        .then(res => { 
+        .then(res => {
             setProject(res.data.validProject)
             setLoading(false)
         }).catch((err) => {
@@ -62,23 +62,23 @@ function ProjectView(props) {
         <>
         <Loader style={{opacity: loading ? 1 : 0}} />
         { project ? <NewTaskOverlay handleToggle={() => handleToggle(false)} close={setEditTaskForm} edit={taskEdit} project={project} redirect={props.redirect} style={{opacity: editTaskForm ? 1 : 0}}/> : null}
-        
+
         <div style={{position: "absolute", display: "flex", flexDirection: "column", width: "100vw", height: "100vh", overflowX: "hidden"}}>
         <Nav backButtonLink ='/projects' BackButton={true} MenuButton={true}/>
-        <h1 data-cy="projectView" style={{margin: "20px", fontSize: "70px", color: "#006EE2", alignSelf:"center" }} >{project.title}</h1>
+        <h1 data-cy="projectView" style={{fontSize: "30px", color: "#006EE2", alignSelf:"center" }} >{project.title}</h1>
 
         <div style={{display: "flex", justifyContent: "space-around"}}>
 
-        <Tooltip title="Edit Project" placement="top" arrow> 
-            <Button component={Link} to={`/projects/${projectId}/edit`}  color='primary' style={buttonMain} > <EditIcon/> </Button>
+        <Tooltip title="Edit Project" placement="top" arrow>
+            <Button component={Link} to={`/projects/${projectId}/edit`}  color='primary' style={buttonMain} size='small' > <EditIcon/> </Button>
         </Tooltip>
 
-        <Tooltip title="Add User" placement="top" arrow> 
-            <Button component={Link} to={`/projects/${projectId}/users`}  color='primary' style={buttonMain} > <PersonAddIcon/> </Button>
+        <Tooltip title="Add User" placement="top" arrow>
+            <Button component={Link} to={`/projects/${projectId}/users`}  color='primary' style={buttonMain} size='small' > <PersonAddIcon/> </Button>
         </Tooltip>
 
         <Tooltip title="Add Task" placement="top" arrow>
-            <Button onClick={() => handleToggle(true)} color='primary' style={buttonMain} > <AddAlarmIcon/> </Button>
+            <Button onClick={() => handleToggle(true)} color='primary' style={buttonMain} size='small' > <AddAlarmIcon/> </Button>
         </Tooltip>
 
         </div>
