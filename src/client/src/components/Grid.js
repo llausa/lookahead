@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom'
 import API from "../axios.config"
 import QueryBuilderIcon from '@material-ui/icons/QueryBuilder'
 import ToggleMenu from './ToggleMenu'
-import momenttimezone from 'moment-timezone' 
+import momenttimezone from 'moment-timezone'
 import moment from 'moment'
 import TimeArrow from '../images/TimeArrow.svg'
 
@@ -31,7 +31,7 @@ export default function Grid(props) {
       fixedArrow.current.style.left = `${e.target.scrollLeft + 4}px`
       fixedTime.current.style.left = `${e.target.scrollLeft + 8}px`
       fixedDate.current.style.top = `${e.target.scrollTop}px`
-      
+
     })
     API.get(
       `api/projects/${projectId}/`
@@ -133,7 +133,7 @@ export default function Grid(props) {
     )
     .then(res => {
       setLayout(layout.filter(el => el._id != taskId))
-      
+
     }).catch((res) => {
 
 
@@ -241,7 +241,7 @@ export default function Grid(props) {
     zIndex: "-2",
     textAlign: "center",
     marginBottom: "5px",
-    backgroundColor: "#006EE3", 
+    backgroundColor: "#006EE3",
   }
 
    // Editing Task Function
@@ -382,7 +382,7 @@ export default function Grid(props) {
                         </div>
                       )}
                       <div style={{top: `${currentTimeLine.mins}%`, height: '4px', opacity: '0.4', width: '100%', position: 'relative', backgroundColor: 'red'}}></div>
-                      
+
                     </div>
                   )}
                 </td>
