@@ -12,13 +12,15 @@ import API from '../../axios.config'
 import Tooltip from '@material-ui/core/Tooltip'
 import EditIcon from '@material-ui/icons/Edit'
 import PersonAddIcon from '@material-ui/icons/PersonAdd'
-import AddAlarmIcon from '@material-ui/icons/AddAlarm';
+import AddAlarmIcon from '@material-ui/icons/AddAlarm'
+import AddIcon from '@material-ui/icons/Add'
 
 // Main Button Styling
 const buttonMain = {
     color: "#006EE2",
     margin: "2px",
-    border: "1px solid #006EE2"
+    border: "1px solid #006EE2",
+    fontSize: "small"
 }
 
 
@@ -70,15 +72,15 @@ function ProjectView(props) {
         <div style={{display: "flex", justifyContent: "space-around"}}>
 
         <Tooltip title="Edit Project" placement="top" arrow>
-            <Button component={Link} to={`/projects/${projectId}/edit`}  color='primary' style={buttonMain} size='small' > <EditIcon/> </Button>
+            <Button component={Link} to={`/projects/${projectId}/edit`}  color='primary' style={buttonMain} > <EditIcon/> </Button>
         </Tooltip>
 
         <Tooltip title="Add User" placement="top" arrow>
-            <Button component={Link} to={`/projects/${projectId}/users`}  color='primary' style={buttonMain} size='small' > <PersonAddIcon/> </Button>
+            <Button component={Link} to={`/projects/${projectId}/users`}  color='primary' style={buttonMain} > <PersonAddIcon/> </Button>
         </Tooltip>
 
         <Tooltip title="Add Task" placement="top" arrow>
-            <Button onClick={() => handleToggle(true)} color='primary' style={buttonMain} size='small' > <AddAlarmIcon/> </Button>
+            <Button onClick={() => handleToggle(true)} color='primary' style={buttonMain} > <AddIcon/> </Button>
         </Tooltip>
 
         </div>
