@@ -8,6 +8,7 @@ import TitleText from '../TitleText'
 import Background from '../Background'
 import { useParams } from 'react-router-dom'
 import API from "../../axios.config"
+import Loader from '../Loader'
 
 const mystyle = {
     display: "flex",
@@ -45,16 +46,18 @@ const page ={
 
 export default function ProjectsView(props) {
 
+    const [loading, setLoading] = useState(false)
     const [projects, setProjects] = useState([])
 
     useEffect(() => {
+        setLoading(true)
         API.get(`api/projects`)
         .then(res => {
-
+            setLoading(false)
             setProjects(res.data.projects)
 
         }).catch(err => {
-
+            setLoading(false)
         })
     }, [])
 
@@ -64,6 +67,7 @@ export default function ProjectsView(props) {
         <div style={page}>
 
         <div data-cy="projectsView" style={mystyle}>
+        <Loader style={{opacity: loading ? 1 : 0}} />
         <TitleText text="Projects" style={{ marginTop: "50px"}} />
 
         {projects.map(project => {

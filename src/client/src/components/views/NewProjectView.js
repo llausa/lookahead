@@ -10,6 +10,7 @@ import NormalText from '../NormalText'
 import TimeZonePicker from '../TimeZonePicker'
 import FormInput from '../FormInput'
 import ErrorMessage from '../ErrorMessage'
+import Loader from '../Loader'
 
 
 const NewProjectView = (props) => {
@@ -30,14 +31,19 @@ const NewProjectView = (props) => {
       // For Error Message
       const [errorMessage, setErrorMessage] = useState(null)
 
+      // For Loading
+      const [loading, setLoading] = useState(false)
+
       const onSubmit = e => {
         e.preventDefault()
-
+        setLoading(true)
         API.post('/api/projects', data)
         .then(function (response) {
+          setLoading(false)
           props.redirect(`/projects/${response.data.id}`)
         })
         .catch(function (error) {
+            setLoading(false)
             setErrorMessage(error.response.data)
         })
 

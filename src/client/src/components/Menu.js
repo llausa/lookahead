@@ -77,12 +77,10 @@ const hehe = () => {
     let audio = new Audio(link)
     audio.play()
 }
+
 function LogoutPressed() {
     Cookies.remove("authToken")
 }
-
-
-
 
 const MenuView = (props) => {
 
@@ -91,7 +89,7 @@ const MenuView = (props) => {
         <div style={MenuHolder} className={props.className}>
             <div data-cy="MenuView" style={mystyle}>
                 <h1 style={{margin: "40px 0 10px 0", fontSize: "70px"}}>Menu</h1>
-                <Button component={Link} to="/projects" variant="outlined" style={buttonMain} color="primary">My Projects</Button>
+                {(window.location.pathname === "/projects") ? null : (<Button component={Link} to="/projects" variant="outlined" style={buttonMain} color="primary">My Projects</Button>)}
                 <Button component={Link} to="/account/details"  variant="outlined" style={buttonGeneral}>Edit Details <EditIcon style={smallIcon}/></Button>
                 <Button component={Link} to="/account/email"  variant="outlined" style={buttonGeneral}>Change Email <MailIcon style={smallIcon} /> </Button>
                 <Button component={Link} to="/account/password"  variant="outlined" style={buttonGeneral}>Change Password <LockIcon style={smallIcon} /> </Button>
